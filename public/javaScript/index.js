@@ -375,8 +375,8 @@ exports.logger = _logger2['default'];
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(5);
-var index = __webpack_require__(6);
-$('body').html(index);
+//index.js-药品目录
+__webpack_require__(6);
 
 /***/ }),
 /* 5 */
@@ -388,33 +388,12 @@ $('body').html(index);
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-//index.js-药品目录
-var footer = __webpack_require__(7);
-var header = __webpack_require__(25);
-var tabBar = __webpack_require__(27);
-var homeTpl = __webpack_require__(29);
-var data = {
-  header: header,
-  footer: footer,
-  tabBar: tabBar,
-  name: 'home',
-  content: "content"
-};
-var _html = homeTpl(data);
-module.exports = _html;
+__webpack_require__(32);
+__webpack_require__(33);
+__webpack_require__(34);
 
 /***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var footerTel = __webpack_require__(8);
-var data = {
-  name: '页面底部'
-};
-var footer = footerTel(data);
-module.exports = footer;
-
-/***/ }),
+/* 7 */,
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -423,9 +402,9 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "<div class=\"footer\">\r\n    "
+  return "<div class=\"footer\">\n    "
     + container.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"name","hash":{},"data":data}) : helper)))
-    + "\r\n</div>";
+    + "\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -1366,7 +1345,38 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 25 */
+/* 25 */,
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div class=\"header-right\">\n    当前用户 : &nbsp; "
+    + alias4(((helper = (helper = helpers.gly || (depth0 != null ? depth0.gly : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gly","hash":{},"data":data}) : helper)))
+    + "\n    <span class=\"time\">今天是 :  &nbsp;"
+    + alias4(((helper = (helper = helpers.time || (depth0 != null ? depth0.time : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"time","hash":{},"data":data}) : helper)))
+    + "</span>\n    <a href=\"javascript:void(0)\" class=\"loginOut\">注销</a>\n</div>\n";
+},"useData":true});
+
+/***/ }),
+/* 27 */,
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"tabBar-box\">\n    <ul class=\"tabBar\">\n        <li class=\"tabBar-item active\"><a href=\"javascript:void(0)\">化学药／中成药</a></li>\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">中药饮片</a></li>\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">医院制剂</a></li>\n    </ul>\n</div>";
+},"useData":true});
+
+/***/ }),
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1377,27 +1387,27 @@ var data = {
   gly: 'gly',
   time: '2017年8月9日星期三'
 };
-var header = headerTel(data);
-module.exports = header;
+
+$('#header').html(headerTel(data));
+
+setTimeout(function () {
+  data.gly = 'gly2';
+  $('.header').html(headerTel(data));
+}, 2000);
 
 /***/ }),
-/* 26 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+var footerTel = __webpack_require__(8);
+var data = {
+  name: '页面底部'
+};
 
-  return "<div class=\"header\">\r\n    <div class=\"header-right\">\r\n        当前用户 : &nbsp; "
-    + alias4(((helper = (helper = helpers.gly || (depth0 != null ? depth0.gly : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gly","hash":{},"data":data}) : helper)))
-    + "\r\n        <span class=\"time\">今天是 :  &nbsp;"
-    + alias4(((helper = (helper = helpers.time || (depth0 != null ? depth0.time : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"time","hash":{},"data":data}) : helper)))
-    + "</span>\r\n        <a href=\"javascript:void(0)\" class=\"loginOut\">注销</a>\r\n    </div>\r\n</div>";
-},"useData":true});
+$('.footer').html(footerTel(data));
 
 /***/ }),
-/* 27 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1409,36 +1419,7 @@ var data = {
   gly: 'gly',
   time: '2017年8月9日星期三'
 };
-var tabBar = tabBarTel(data);
-module.exports = tabBar;
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"tabBar-box\">\r\n    <ul class=\"tabBar\">\r\n        <li class=\"tabBar-item active\"><a href=\"javascript:void(0)\">化学药／中成药</a></li>\r\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">中药饮片</a></li>\r\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">医院制剂</a></li>\r\n    </ul>\r\n</div>";
-},"useData":true});
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "<div id=\"home\">\r\n    "
-    + ((stack1 = ((helper = (helper = helpers.header || (depth0 != null ? depth0.header : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"header","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\r\n        <div class=\"content\">\r\n            "
-    + ((stack1 = ((helper = (helper = helpers.tabBar || (depth0 != null ? depth0.tabBar : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tabBar","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\r\n            <table class=\"table\">\r\n                \r\n            </table>\r\n        </div>\r\n    "
-    + ((stack1 = ((helper = (helper = helpers.footer || (depth0 != null ? depth0.footer : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"footer","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\r\n</div>";
-},"useData":true});
+$('.tabBar').html(tabBarTel(data));
 
 /***/ })
 /******/ ]);

@@ -1,3 +1,3 @@
 require('../public/index.scss');
-var index =  require('./page/index/index.js');
-$('body').html(index) ;
+//index.js-药品目录
+require('./page/index');
