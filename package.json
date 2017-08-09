@@ -16,6 +16,11 @@
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "handlebars": "^4.0.10",
     "handlebars-loader": "^1.5.0",
-    "webpack": "^3.5.1"
+    "webpack": "^3.5.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "url-loader": "^0.5.9"
   }
 }

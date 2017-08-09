@@ -257,7 +257,7 @@ module.exports = exports['default'];
 
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
-module.exports = __webpack_require__(8)['default'];
+module.exports = __webpack_require__(9)['default'];
 
 /***/ }),
 /* 3 */
@@ -280,11 +280,11 @@ var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _helpers = __webpack_require__(9);
+var _helpers = __webpack_require__(10);
 
-var _decorators = __webpack_require__(17);
+var _decorators = __webpack_require__(18);
 
-var _logger = __webpack_require__(19);
+var _logger = __webpack_require__(20);
 
 var _logger2 = _interopRequireDefault(_logger);
 
@@ -374,20 +374,29 @@ exports.logger = _logger2['default'];
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var index = __webpack_require__(5);
+__webpack_require__(5);
+var index = __webpack_require__(6);
 $('body').html(index);
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //index.js-药品目录
-var footer = __webpack_require__(6);
-var header = __webpack_require__(24);
-var homeTpl = __webpack_require__(26);
+var footer = __webpack_require__(7);
+var header = __webpack_require__(25);
+var tabBar = __webpack_require__(27);
+var homeTpl = __webpack_require__(29);
 var data = {
   header: header,
   footer: footer,
+  tabBar: tabBar,
   name: 'home',
   content: "content"
 };
@@ -395,10 +404,10 @@ var _html = homeTpl(data);
 module.exports = _html;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var footerTel = __webpack_require__(7);
+var footerTel = __webpack_require__(8);
 var data = {
   name: '页面底部'
 };
@@ -406,7 +415,7 @@ var footer = footerTel(data);
 module.exports = footer;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(2);
@@ -420,7 +429,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 },"useData":true});
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -454,7 +463,7 @@ var base = _interopRequireWildcard(_handlebarsBase);
 // Each of these augment the Handlebars object. No need to setup here.
 // (This is done to easily share code between commonjs and browse envs)
 
-var _handlebarsSafeString = __webpack_require__(20);
+var _handlebarsSafeString = __webpack_require__(21);
 
 var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
@@ -466,11 +475,11 @@ var _handlebarsUtils = __webpack_require__(0);
 
 var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-var _handlebarsRuntime = __webpack_require__(21);
+var _handlebarsRuntime = __webpack_require__(22);
 
 var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-var _handlebarsNoConflict = __webpack_require__(22);
+var _handlebarsNoConflict = __webpack_require__(23);
 
 var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -503,7 +512,7 @@ exports['default'] = inst;
 module.exports = exports['default'];
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -517,31 +526,31 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _helpersBlockHelperMissing = __webpack_require__(10);
+var _helpersBlockHelperMissing = __webpack_require__(11);
 
 var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-var _helpersEach = __webpack_require__(11);
+var _helpersEach = __webpack_require__(12);
 
 var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-var _helpersHelperMissing = __webpack_require__(12);
+var _helpersHelperMissing = __webpack_require__(13);
 
 var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-var _helpersIf = __webpack_require__(13);
+var _helpersIf = __webpack_require__(14);
 
 var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-var _helpersLog = __webpack_require__(14);
+var _helpersLog = __webpack_require__(15);
 
 var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-var _helpersLookup = __webpack_require__(15);
+var _helpersLookup = __webpack_require__(16);
 
 var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-var _helpersWith = __webpack_require__(16);
+var _helpersWith = __webpack_require__(17);
 
 var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -556,7 +565,7 @@ function registerDefaultHelpers(instance) {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -600,7 +609,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -701,7 +710,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -733,7 +742,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -767,7 +776,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -798,7 +807,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -815,7 +824,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -853,7 +862,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -867,7 +876,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _decoratorsInline = __webpack_require__(18);
+var _decoratorsInline = __webpack_require__(19);
 
 var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -876,7 +885,7 @@ function registerDefaultDecorators(instance) {
 }
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -910,7 +919,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -962,7 +971,7 @@ exports['default'] = logger;
 module.exports = exports['default'];
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -982,7 +991,7 @@ exports['default'] = SafeString;
 module.exports = exports['default'];
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1306,7 +1315,7 @@ function executeDecorators(fn, prog, container, depths, data, blockParams) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1329,10 +1338,10 @@ exports['default'] = function (Handlebars) {
 };
 
 module.exports = exports['default'];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1357,32 +1366,19 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Created by Administrator on 2017/8/8.
- */
-var headerTel = __webpack_require__(25);
-var data = {
-  name: '页面头部'
-};
-var header = headerTel(data);
-module.exports = header;
-
-/***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper;
-
-  return "<div class=\"header\">\r\n    "
-    + container.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"name","hash":{},"data":data}) : helper)))
-    + "\r\n</div>";
-},"useData":true});
+/**
+ *页面头部
+ */
+var headerTel = __webpack_require__(26);
+var data = {
+  gly: 'gly',
+  time: '2017年8月9日星期三'
+};
+var header = headerTel(data);
+module.exports = header;
 
 /***/ }),
 /* 26 */
@@ -1391,24 +1387,58 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div id=\"home\">\r\n    "
-    + ((stack1 = alias1((depth0 != null ? depth0.header : depth0), depth0)) != null ? stack1 : "")
-    + "\r\n        <div class=\"content\">\r\n           "
-    + container.escapeExpression(__default(__webpack_require__(27)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.content : depth0),{"name":"title","hash":{},"data":data}))
-    + "\r\n        </div>\r\n    "
-    + ((stack1 = alias1((depth0 != null ? depth0.footer : depth0), depth0)) != null ? stack1 : "")
-    + "\r\n</div>";
+  return "<div class=\"header\">\r\n    <div class=\"header-right\">\r\n        当前用户 : &nbsp; "
+    + alias4(((helper = (helper = helpers.gly || (depth0 != null ? depth0.gly : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gly","hash":{},"data":data}) : helper)))
+    + "\r\n        <span class=\"time\">今天是 :  &nbsp;"
+    + alias4(((helper = (helper = helpers.time || (depth0 != null ? depth0.time : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"time","hash":{},"data":data}) : helper)))
+    + "</span>\r\n        <a href=\"javascript:void(0)\" class=\"loginOut\">注销</a>\r\n    </div>\r\n</div>";
 },"useData":true});
 
 /***/ }),
 /* 27 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = function (_this) {
-  return _this;
+/**
+ * Created by Administrator on 2017/8/8.
+ */
+var tabBarTel = __webpack_require__(28);
+var data = {
+  name: '页面头部',
+  gly: 'gly',
+  time: '2017年8月9日星期三'
 };
+var tabBar = tabBarTel(data);
+module.exports = tabBar;
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"tabBar-box\">\r\n    <ul class=\"tabBar\">\r\n        <li class=\"tabBar-item active\"><a href=\"javascript:void(0)\">化学药／中成药</a></li>\r\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">中药饮片</a></li>\r\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">医院制剂</a></li>\r\n    </ul>\r\n</div>";
+},"useData":true});
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "<div id=\"home\">\r\n    "
+    + ((stack1 = ((helper = (helper = helpers.header || (depth0 != null ? depth0.header : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"header","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\r\n        <div class=\"content\">\r\n            "
+    + ((stack1 = ((helper = (helper = helpers.tabBar || (depth0 != null ? depth0.tabBar : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tabBar","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\r\n            <table class=\"table\">\r\n                \r\n            </table>\r\n        </div>\r\n    "
+    + ((stack1 = ((helper = (helper = helpers.footer || (depth0 != null ? depth0.footer : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"footer","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\r\n</div>";
+},"useData":true});
 
 /***/ })
 /******/ ]);
