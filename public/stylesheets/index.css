@@ -77,6 +77,108 @@ a {
         float: left;
         padding: 0 10px; }
 
+.table-diff {
+  position: relative; }
+  .table-diff .table-diff-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background-color: #d2eefd;
+    display: inline-block; }
+    .table-diff .table-diff-bar a {
+      padding: 10px;
+      display: inline-block; }
+  .table-diff .table-diff-header {
+    background-color: #2d8cc0; }
+  .table-diff .table-diff tr:nth-child(2n) td {
+    background-color: #fafafa; }
+  .table-diff .table-diff td, .table-diff .table-diff th {
+    padding: 0;
+    white-space: nowrap; }
+    .table-diff .table-diff td > div, .table-diff .table-diff th > div {
+      display: block;
+      width: 100px;
+      overflow: hidden;
+      padding: 5px 0; }
+  .table-diff .table-diff th {
+    background-color: #2d8cc0;
+    color: #fff;
+    padding: 5px 0; }
+  .table-diff .table-diff-left {
+    float: left;
+    padding-top: 34px;
+    position: relative;
+    z-index: 9; }
+    .table-diff .table-diff-left td > div, .table-diff .table-diff-left th > div {
+      width: 70.42px; }
+    .table-diff .table-diff-left .table-diff-header {
+      position: absolute;
+      width: 500px;
+      top: 0;
+      left: 0px;
+      z-index: 2; }
+    .table-diff .table-diff-left .table-diff-data {
+      overflow-x: hidden;
+      overflow-y: hidden;
+      height: 150px; }
+      .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
+        overflow-y: auto; }
+    .table-diff .table-diff-left .table-diff-data-content {
+      padding-bottom: 20px; }
+  .table-diff .table-diff-right {
+    position: relative;
+    padding-top: 34px;
+    margin-left: 505px; }
+    .table-diff .table-diff-right .table-diff-right-single {
+      display: none; }
+      .table-diff .table-diff-right .table-diff-right-single.active {
+        display: block; }
+      .table-diff .table-diff-right .table-diff-right-single .table-diff-single-title {
+        line-height: 33px;
+        border-bottom: 1px solid #d9d9d9;
+        position: absolute;
+        text-align: center;
+        font-size: 12px;
+        top: 0;
+        left: 0;
+        background-color: #2d8cc0;
+        color: #fff;
+        width: 100%; }
+      .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content {
+        height: 150px;
+        background-color: #fff;
+        overflow-y: scroll; }
+    .table-diff .table-diff-right .table-diff-right-all {
+      display: none; }
+      .table-diff .table-diff-right .table-diff-right-all.active {
+        display: block; }
+    .table-diff .table-diff-right .table-diff-header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      left: 0px;
+      z-index: 2; }
+      .table-diff .table-diff-right .table-diff-header .table-diff-header-content {
+        overflow-x: hidden; }
+        .table-diff .table-diff-right .table-diff-header .table-diff-header-content table {
+          padding-right: 20px; }
+    .table-diff .table-diff-right .table-diff-data {
+      overflow-y: scroll;
+      width: auto;
+      height: 150px; }
+  .table-diff table {
+    background-color: #d9d9d9; }
+    .table-diff table td, .table-diff table th {
+      background-color: #fff; }
+  .table-diff .table-diff-data {
+    margin-top: -1px; }
+    .table-diff .table-diff-data td {
+      line-height: 20px; }
+    .table-diff .table-diff-data tr.active td {
+      background-color: #d2eefd; }
+
 /*页面底部样式*/
 .footer {
   height: 30px;
