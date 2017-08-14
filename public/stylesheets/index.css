@@ -91,6 +91,8 @@ a {
       display: inline-block; }
   .table-diff .table-diff-header {
     background-color: #2d8cc0; }
+  .table-diff .table-diff-data tr.hover input, .table-diff .table-diff-data tr.active input {
+    border: 1px solid #d9d9d9; }
   .table-diff .table-diff tr:nth-child(2n) td {
     background-color: #fafafa; }
   .table-diff .table-diff td, .table-diff .table-diff th {

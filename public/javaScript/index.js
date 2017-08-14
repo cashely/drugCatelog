@@ -1695,10 +1695,23 @@ $('.table-diff-right .table-diff-data').on('scroll', function () {
 });
 $('.table-diff-data tr').on('click', function () {
     var _index = $(this).prevAll().length;
-    console.log();
     var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
     for (var i = 0; i < _tables; i++) {
         $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
+    }
+});
+
+$('.table-diff-data tr').hover(function () {
+    var _index = $(this).prevAll().length;
+    var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+    for (var i = 0; i < _tables; i++) {
+        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('active');
+    }
+}, function () {
+    var _index = $(this).prevAll().length;
+    var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+    for (var i = 0; i < _tables; i++) {
+        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
     }
 });
 
@@ -1762,9 +1775,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "                                    <tr>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.bbm || (depth0 != null ? depth0.bbm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"bbm","hash":{},"data":data}) : helper)))
-    + "</div></td>\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div><input value="
     + alias4(((helper = (helper = helpers.blx || (depth0 != null ? depth0.blx : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"blx","hash":{},"data":data}) : helper)))
-    + "</div></td>\n                                        <td><div>"
+    + " /></div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.bypmc || (depth0 != null ? depth0.bypmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"bypmc","hash":{},"data":data}) : helper)))
     + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.bjx || (depth0 != null ? depth0.bjx : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"bjx","hash":{},"data":data}) : helper)))
