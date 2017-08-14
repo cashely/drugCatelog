@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -196,6 +196,14 @@ function appendContextPath(contextPath, id) {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// Create a simple path alias to allow browserify to resolve
+// the runtime on a supported path.
+module.exports = __webpack_require__(12)['default'];
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -252,15 +260,42 @@ exports['default'] = Exception;
 module.exports = exports['default'];
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// Create a simple path alias to allow browserify to resolve
-// the runtime on a supported path.
-module.exports = __webpack_require__(9)['default'];
+var Handlebars = __webpack_require__(1);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "    <lable class=\"input-group\">\n        "
+    + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
+    + "\n        <input type=\"text\" class=\"input  "
+    + alias2(alias1((depth0 != null ? depth0.inputClass : depth0), depth0))
+    + "\">\n    </lable>\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "<a href=\"javaScript:void(0)\" class=\"btn\">查找</a>\n<div class=\"search-box-rt\">\n    <a href=\"javaScript:void(0)\" class=\"btn create-btn\">生成新药分类</a>\n    <a href=\"javaScript:void(0)\" class=\"btn\">启用新药规则</a>\n</div>\n<div class=\"search-data\">\n    共查找出 "
+    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
+    + " 条数据：\n    基药(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + alias4(((helper = (helper = helpers.finish || (depth0 != null ? depth0.finish : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"finish","hash":{},"data":data}) : helper)))
+    + "</a>)&nbsp;\n    医保(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + alias4(((helper = (helper = helpers.finish || (depth0 != null ? depth0.finish : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"finish","hash":{},"data":data}) : helper)))
+    + "</a>)&nbsp;&nbsp;\n    问题数据(<a href=\"javaScript:void(0)\" class=\"color-red\">"
+    + alias4(((helper = (helper = helpers.finish || (depth0 != null ? depth0.finish : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"finish","hash":{},"data":data}) : helper)))
+    + "</a>)&nbsp;\n    未比对(<a href=\"javaScript:void(0)\" class=\"color-red\">"
+    + alias4(((helper = (helper = helpers.finish || (depth0 != null ? depth0.finish : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"finish","hash":{},"data":data}) : helper)))
+    + "</a>)&nbsp;\n    已比对(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + alias4(((helper = (helper = helpers.finish || (depth0 != null ? depth0.finish : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"finish","hash":{},"data":data}) : helper)))
+    + "</a>)&nbsp;&nbsp;\n    妊娠用药(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + alias4(((helper = (helper = helpers.finish || (depth0 != null ? depth0.finish : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"finish","hash":{},"data":data}) : helper)))
+    + "</a>)\n    <a href=\"javaScript:void(0)\" class=\"download color-blue\"><img src=\"./images/icon-download.png\" class=\"icon-download\">下载</a>\n</div>";
+},"useData":true});
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -276,15 +311,15 @@ function _interopRequireDefault(obj) {
 
 var _utils = __webpack_require__(0);
 
-var _exception = __webpack_require__(1);
+var _exception = __webpack_require__(2);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _helpers = __webpack_require__(10);
+var _helpers = __webpack_require__(13);
 
-var _decorators = __webpack_require__(18);
+var _decorators = __webpack_require__(21);
 
-var _logger = __webpack_require__(20);
+var _logger = __webpack_require__(23);
 
 var _logger2 = _interopRequireDefault(_logger);
 
@@ -371,36 +406,81 @@ exports.createFrame = _utils.createFrame;
 exports.logger = _logger2['default'];
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(5);
-//index.js-药品目录
-__webpack_require__(6);
+var footerTel = __webpack_require__(28);
+var data = {
+  name: '页面底部'
+};
 
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
+$('.footer').html(footerTel(data));
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(7);
-__webpack_require__(25);
-__webpack_require__(27);
-__webpack_require__(29);
+var Handlebars = __webpack_require__(1);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    return "                <td><div class=\"table-text\">"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</div></td>\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "               <tr>\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "               </tr>\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "                       <td><div class=\"table-text\">"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</div></td>\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "<div class=\"title\">标准数据比对\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\n    </a>\n</div>\n<div class=\"than-content\">\n    <div class=\"search-than\">\n        <lable class=\"input-group\">\n            国管平台ID:\n            <input type=\"text\" class=\"input\">\n        </lable>\n        <lable class=\"input-group\">\n            省采购平台ID:\n            <input type=\"text\" class=\"input\">\n        </lable>\n        <lable class=\"input-group\">\n            药品名称/商品名:\n            <input type=\"text\" class=\"input\">\n        </lable>\n        <lable class=\"input-group\">\n            生产企业:\n            <input type=\"text\" class=\"input\">\n        </lable>\n        <lable class=\"input-group\">\n            批准文号/注册证号:\n            <input type=\"text\" class=\"input\">\n        </lable>\n        <lable class=\"input-group\">\n            人社分类:\n            <input type=\"text\" class=\"input\">\n        </lable>\n        <lable class=\"input-group\">\n            药理分类:\n            <input type=\"text\" class=\"input\">\n        </lable>\n        <a href=\"javaScript:void(0)\" class=\"btn\">查找</a>\n    </div>\n    <table class=\"table\">\n        <tr class=\"thead\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "        </tr>\n    </table>\n   <div>\n       <table class=\"table\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "       </table>\n   </div>\n    <div class=\"no-than\">\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\n    </div>\n</div>";
+},"useData":true});
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(8);
+//index.js-药品目录
+__webpack_require__(9);
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(10);
+__webpack_require__(5);
+__webpack_require__(29);
+__webpack_require__(31);
+__webpack_require__(32);
+__webpack_require__(34);
+__webpack_require__(35);
+__webpack_require__(5);
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /**
  *页面头部
  */
-var headerTel = __webpack_require__(8);
+var headerTel = __webpack_require__(11);
 var data = {
   gly: 'gly',
   time: '2017年8月9日星期三'
@@ -414,10 +494,10 @@ setTimeout(function () {
 }, 2000);
 
 /***/ }),
-/* 8 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(2);
+var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -426,11 +506,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias4(((helper = (helper = helpers.gly || (depth0 != null ? depth0.gly : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gly","hash":{},"data":data}) : helper)))
     + "\n    <span class=\"time\">今天是 :  &nbsp;"
     + alias4(((helper = (helper = helpers.time || (depth0 != null ? depth0.time : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"time","hash":{},"data":data}) : helper)))
-    + "</span>\n    <a href=\"javascript:void(0)\" class=\"loginOut\">注销</a>\n</div>\n";
+    + "</span>\n    <a href=\"javascript:void(0)\" class=\"login-out\">注销</a>\n</div>\n";
 },"useData":true});
 
 /***/ }),
-/* 9 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -457,18 +537,18 @@ function _interopRequireWildcard(obj) {
   }
 }
 
-var _handlebarsBase = __webpack_require__(3);
+var _handlebarsBase = __webpack_require__(4);
 
 var base = _interopRequireWildcard(_handlebarsBase);
 
 // Each of these augment the Handlebars object. No need to setup here.
 // (This is done to easily share code between commonjs and browse envs)
 
-var _handlebarsSafeString = __webpack_require__(21);
+var _handlebarsSafeString = __webpack_require__(24);
 
 var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
-var _handlebarsException = __webpack_require__(1);
+var _handlebarsException = __webpack_require__(2);
 
 var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
@@ -476,11 +556,11 @@ var _handlebarsUtils = __webpack_require__(0);
 
 var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-var _handlebarsRuntime = __webpack_require__(22);
+var _handlebarsRuntime = __webpack_require__(25);
 
 var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-var _handlebarsNoConflict = __webpack_require__(23);
+var _handlebarsNoConflict = __webpack_require__(26);
 
 var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -513,7 +593,7 @@ exports['default'] = inst;
 module.exports = exports['default'];
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -527,31 +607,31 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _helpersBlockHelperMissing = __webpack_require__(11);
+var _helpersBlockHelperMissing = __webpack_require__(14);
 
 var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-var _helpersEach = __webpack_require__(12);
+var _helpersEach = __webpack_require__(15);
 
 var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-var _helpersHelperMissing = __webpack_require__(13);
+var _helpersHelperMissing = __webpack_require__(16);
 
 var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-var _helpersIf = __webpack_require__(14);
+var _helpersIf = __webpack_require__(17);
 
 var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-var _helpersLog = __webpack_require__(15);
+var _helpersLog = __webpack_require__(18);
 
 var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-var _helpersLookup = __webpack_require__(16);
+var _helpersLookup = __webpack_require__(19);
 
 var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-var _helpersWith = __webpack_require__(17);
+var _helpersWith = __webpack_require__(20);
 
 var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -566,7 +646,7 @@ function registerDefaultHelpers(instance) {
 }
 
 /***/ }),
-/* 11 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -610,7 +690,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 12 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -625,7 +705,7 @@ function _interopRequireDefault(obj) {
 
 var _utils = __webpack_require__(0);
 
-var _exception = __webpack_require__(1);
+var _exception = __webpack_require__(2);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -711,7 +791,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 13 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -724,7 +804,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _exception = __webpack_require__(1);
+var _exception = __webpack_require__(2);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -743,7 +823,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 14 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -777,7 +857,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -808,7 +888,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 16 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -825,7 +905,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 17 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -863,7 +943,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 18 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -877,7 +957,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _decoratorsInline = __webpack_require__(19);
+var _decoratorsInline = __webpack_require__(22);
 
 var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -886,7 +966,7 @@ function registerDefaultDecorators(instance) {
 }
 
 /***/ }),
-/* 19 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -920,7 +1000,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -972,7 +1052,7 @@ exports['default'] = logger;
 module.exports = exports['default'];
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -992,7 +1072,7 @@ exports['default'] = SafeString;
 module.exports = exports['default'];
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1029,11 +1109,11 @@ var _utils = __webpack_require__(0);
 
 var Utils = _interopRequireWildcard(_utils);
 
-var _exception = __webpack_require__(1);
+var _exception = __webpack_require__(2);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _base = __webpack_require__(3);
+var _base = __webpack_require__(4);
 
 function checkRevision(compilerInfo) {
   var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -1316,7 +1396,7 @@ function executeDecorators(fn, prog, container, depths, data, blockParams) {
 }
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1339,10 +1419,10 @@ exports['default'] = function (Handlebars) {
 };
 
 module.exports = exports['default'];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(24)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(27)))
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1367,60 +1447,105 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var footerTel = __webpack_require__(26);
-var data = {
-  name: '页面底部'
-};
-
-$('.footer').html(footerTel(data));
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(2);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper;
-
-  return "<div class=\"footer\">\n    "
-    + container.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"name","hash":{},"data":data}) : helper)))
-    + "\n</div>";
-},"useData":true});
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Created by Administrator on 2017/8/8.
- */
-var tabBarTel = __webpack_require__(28);
-var data = {
-  name: '页面头部',
-  gly: 'gly',
-  time: '2017年8月9日星期三'
-};
-$('.tabBar').html(tabBarTel(data));
-
-/***/ }),
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(2);
+var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"tabBar-box\">\n    <ul class=\"tabBar\">\n        <li class=\"tabBar-item active\"><a href=\"javascript:void(0)\">化学药／中成药</a></li>\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">中药饮片</a></li>\n        <li class=\"tabBar-item\"><a href=\"javascript:void(0)\">医院制剂</a></li>\n    </ul>\n</div>";
+    return "<span class=\"footer-item\">版权所有 医睦科技</span>\n<span class=\"footer-item\">客服:020-12345678</span>\n<span class=\"footer-item\">商务:020-12345678</span>";
 },"useData":true});
 
 /***/ }),
 /* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var tableDiff = __webpack_require__(30);
+/**
+ * Created by Administrator on 2017/8/8.
+ */
+var tabBarTel = __webpack_require__(30);
+var searchTel = __webpack_require__(3);
+var standardThanTel = __webpack_require__(6);
+var data = {
+  name: '页面切换条',
+  gly: 'gly',
+  content: [{ text: '化学药／中成药', id: "medicine", active: "active" }, { text: '中药饮片', id: "slices" }, { text: '医院制剂', id: "potion" }]
+};
+$('.tabs-box').html(tabBarTel(data));
+
+$(function () {
+  $('.tabs .tabs-item').on('click', function (e) {
+    var $_content = $('.content .content-box');
+    if ($(this).hasClass("active")) return false;
+    $(this).addClass("active").siblings().removeClass("active");
+    $_content.removeClass("active");
+    switch ($(this).index()) {
+      case 1:
+        $_content.hide();
+        if ($('.content').children('.' + $(this).data('id')).length <= 0) {
+          var data = { input: [{ text: '医院药品ID:' }, { text: '药品名称:', inputClass: 'drug-name' }, { text: ' 规格/厂家:' }] };
+          var searchHTMl = '<div class="search-box">' + searchTel(data) + '</div>';
+          var standardThanHTMl = '<div class="standard-than">' + standardThanTel(data) + '</div>';
+          $('.content').append('<div class="content-box active ' + $(this).data("id") + '">' + searchHTMl + standardThanHTMl + '</div>');
+          return;
+        }
+        $_content.eq($(this).index()).show();
+        break;
+      case 2:
+        $_content.hide();$_content.eq($(this).index()).show();break;
+      default:
+        $_content.hide().first().show();
+    }
+  });
+});
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(1);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "        <li class=\"tabs-item "
+    + alias2(alias1((depth0 != null ? depth0.active : depth0), depth0))
+    + " "
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "\" data-id=\""
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "\"><a href=\"javascript:void(0)\">"
+    + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
+    + "</a></li>\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<ul class=\"tabs\">\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.content : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</ul>";
+},"useData":true});
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * 搜索区
+ */
+var searchBoxTel = __webpack_require__(3);
+var data = {
+  total: '1234',
+  finish: '1029',
+  not: '206',
+  input: [{ text: '医院药品ID:' }, { text: '药品名称:', inputClass: 'drug-name' }, { text: '规格/厂家:' }]
+};
+$('.search-box').html(searchBoxTel(data));
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var tableDiff = __webpack_require__(33);
 var data = {
     ydata: [{
         id: 1,
@@ -1700,12 +1825,13 @@ $('.table-diff-data tr').on('click', function () {
         $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
     }
 });
-
 $('.table-diff-data tr').hover(function () {
     var _index = $(this).prevAll().length;
+
     var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+
     for (var i = 0; i < _tables; i++) {
-        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('active');
+        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('hover');
     }
 }, function () {
     var _index = $(this).prevAll().length;
@@ -1714,7 +1840,6 @@ $('.table-diff-data tr').hover(function () {
         $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
     }
 });
-
 $('.table-diff-left .table-diff-data tr').on('mouseover', function (e) {
     var _tr = $(this);
     $('.table-diff-bar').css({
@@ -1743,12 +1868,18 @@ function showDetail(e) {
     $('.table-diff-right-single').toggleClass('active');
     e.preventDefault();
 }
+//绑定比对
+$('#showThan').on('click', showThan);
+
+function showThan() {
+    $('.standard-than').show();
+}
 
 /***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(2);
+var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -1821,11 +1952,72 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\n    <div class=\"table-diff-content\">\n        <div class=\"table-diff-bar\">\n            <a href=\"#\">比对</a>|<a href=\"javascript:void(0)\" id=\"showDetail\">查看详情</a>|<a href=\"#\">取消比对</a>\n        </div>\n        <div class=\"table-diff-header\">\n            <div class=\"table-diff-left\">\n                <div class=\"table-diff-header\">\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                        <thead>\n                            <tr>\n                                <th><div>医院药品ID</div></th>\n                                <th><div>药品名称</div></th>\n                                <th><div>规格厂家</div></th>\n                                <th><div>转换比</div></th>\n                                <th><div>门诊/住院单位</div></th>\n                                <th><div>是否停用</div></th>\n                                <th><div>修订时间</div></th>\n                            </tr>\n                        </thead>\n                    </table>\n                </div>\n                <div class=\"table-diff-data\">\n                    <div class=\"table-diff-data-content\">\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                            <tbody>\n"
+  return "<div class=\"table-diff\">\n    <div class=\"table-diff-content\">\n        <div class=\"table-diff-bar\">\n            <a href=\"#\" id=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" id=\"showDetail\">查看详情</a>|<a href=\"#\">取消比对</a>\n        </div>\n        <div class=\"table-diff-header\">\n            <div class=\"table-diff-left\">\n                <div class=\"table-diff-header\">\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                        <thead>\n                            <tr>\n                                <th><div>医院药品ID</div></th>\n                                <th><div>药品名称</div></th>\n                                <th><div>规格厂家</div></th>\n                                <th><div>转换比</div></th>\n                                <th><div>门诊/住院单位</div></th>\n                                <th><div>是否停用</div></th>\n                                <th><div>修订时间</div></th>\n                            </tr>\n                        </thead>\n                    </table>\n                </div>\n                <div class=\"table-diff-data\">\n                    <div class=\"table-diff-data-content\">\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n            </div>\n            <div class=\"table-diff-right\">\n                <div class=\"table-diff-right-all active\">\n                    <div class=\"table-diff-header\">\n                        <div class=\"table-diff-header-content\">\n                            <table cellspacing=\"1\" border=\"0\">\n                                <thead>\n                                    <tr>\n                                        <th><div>药品编码</div></th>\n                                        <th><div>药品类型</div></th>\n                                        <th><div>药品名称</div></th>\n                                        <th><div>剂型</div></th>\n                                        <th><div>规格</div></th>\n                                        <th><div>转换比</div></th>\n                                        <th><div>企业简称</div></th>\n                                        <th><div>批准文号/注册证号</div></th>\n                                        <th><div>基药</div></th>\n                                        <th><div>重点药物监控</div></th>\n                                        <th><div>营养用药</div></th>\n                                        <th><div>中成药注射剂</div></th>\n                                        <th><div>精麻毒放</div></th>\n                                        <th><div>妊娠用药</div></th>\n                                        <th><div>抗菌药物</div></th>\n                                        <th><div>DDD值</div></th>\n                                        <th><div>给药途径(不计算强度)</div></th>\n                                        <th><div>是否计算强度</div></th>\n                                        <th><div>分级</div></th>\n                                        <th><div>人社分类</div></th>\n                                        <th><div>药理分类</div></th>\n                                        <th><div>是否PPI</div></th>\n                                    </tr>\n                                </thead>\n                            </table>\n                        </div>\n                    </div>\n                    <div class=\"table-diff-data\">\n                        <table cellspacing=\"1\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.bdata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <p>\n                            药品名称:12121\n                        </p>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
+    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <ul class=\"content-list\">\n                            <li>药品名称：甲泼尼龙片</li>\n                            <li>剂型：素片</li>\n                            <li>规格：mg</li>\n                            <li>转换比：24</li>\n                            <li>药品编码：X120100-100101-A644-01-21-0004920-01</li>\n                            <li>含量：4mg</li>\n                            <li>装量：无</li>\n                            <li>最小使用单位：mg</li>\n                            <li>最小包装单位：盒</li>\n                            <li>说明书：有</li>\n                            <li>说明书版本：2007-01-09</li>\n                            <li>中成药注射剂：否</li>\n                            <li>企业简称：天津天药</li>\n                            <li>批准文号/注册证号：国药准字H20020224</li>\n                        </ul>\n                        <ul class=\"content-list\">\n                            <li class=\"input-group\">药品类型: <input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">医保: <input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">医保编码:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">基药:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">重点监控药物:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">营养用药:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">血液制品:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">糖皮质激素:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">能量用药:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">PPI（质子泵抑制剂）:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">中成药注射剂:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">精麻毒放:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">妊娠用药:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">抗菌药物:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">抗菌药物分级:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">抗菌药物分类:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">DDD值:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">给药途径不计算强度:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">是否计算强度:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">YPID:<input type=\"text\" class=\"input\"></li>\n                            <li class=\"input-group\">品种代码:<input type=\"text\" class=\"input\"></li>\n                        </ul>\n                        <ul class=\"content-list\">\n                            <li>人社分类：系统性激素制剂，不含性激素和胰岛素-全身用皮质激素类-全身用皮质激素的单方制剂-糖皮质激素类</li>\n                            <li>药理分类：内分泌系统用药-肾上腺皮质激素-糖皮质激素-中效糖皮质激素</li>\n                        </ul>\n                        <div class=\"tool\">\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\">切换</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\n                        </div>\n                        <div class=\"pagination\">\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\n                            <a href=\"javaScript:void(0)\">下一条</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
+},"useData":true});
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Created by Administrator on 2017/8/8.
+ */
+var standardThanTel = __webpack_require__(6);
+var data = {
+  name: '标准比对',
+  gly: 'gly',
+  time: '2017年8月9日星期三',
+  input: [],
+  thead: ['国管平台ID', '省采购平台ID', '药品编码', '药品类型', '药品名称', '商品名', '剂型', '规格', '生产企业', '批准文号/注册证号', '人社分类', '药理分类', '操作'],
+  tbody: [['114040080106', '138571', 'X120100-100101-A6', '化学药', '甲泼尼龙片', '尤金', '素片', '4mg*24片/盒', '天津天药药', '国药准字H2002022', '系统性激素制', '内分泌系统', '选择'], ['114040080106', '138571', 'X120100-100101-A6', '化学药', '甲泼尼龙片', '尤金', '素片', '4mg*24片/盒', '天津天药药', '国药准字H2002022', '系统性激素制', '内分泌系统', '选择'], ['114040080106', '138571', 'X120100-100101-A6', '化学药', '甲泼尼龙片', '尤金', '素片', '4mg*24片/盒', '天津天药药', '国药准字H2002022', '系统性激素制', '内分泌系统', '选择']]
+};
+$('.standard-than').html(standardThanTel(data));
+
+$('.add-than').on('click', function () {
+  $('.content  .content-box-main').hide();
+  $('.content .add-data').show();
+});
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * 添加对比数据
+ */
+var addData = __webpack_require__(36);
+var searchBox = __webpack_require__(3);
+
+var searchBoxData = {
+  input: [{ text: '医院药品ID:' }, { text: '药品名称:', inputClass: 'drug-name' }, { text: '规格/厂家:' }]
+};
+var data = {
+  searchBox: '<div class="search-box">' + searchBox(searchBoxData) + '</div>'
+};
+
+$('.add-data').html(addData(data));
+
+$('.add-data .goback').on('click', function () {
+  $('.content .add-data').hide();
+  $('.content  .content-box-main').show();
+});
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(1);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "<a href=\"javascript:void(0)\" class=\"goback\">返回</a>\n"
+    + ((stack1 = ((helper = (helper = helpers.searchBox || (depth0 != null ? depth0.searchBox : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"searchBox","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n<div class=\"popup popup-add-info\">\n    <div class=\"popup-title\">\n        新增信息 <span class=\"popup-close\">关闭</span>\n    </div>\n    <div class=\"popup-content\">\n        <ul class=\"content-lf\">\n            <li>药品名称：甲泼尼龙片</li>\n            <li>规格：4mg</li>\n            <li class=\"input-group\">包装(转化比):<input type=\"text\" class=\"input\"></li>\n            <li class=\"input-group\">包装单位:<input type=\"text\" class=\"input\"></li>\n        </ul>\n        <ul class=\"content-rt\">\n            <li> 生产企业：天津天药药业股份有限公司</li>\n            <li>批准文号：国药准字H20020224</li>\n            <li class=\"input-group\">最小使用单位:<input type=\"text\" class=\"input\"></li>\n        </ul>\n        <div class=\"popup-btn\">\n            <a href=\"javaScript:void(0)\" class=\"btn\">保存并比对</a>\n        </div>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ })

@@ -4,7 +4,7 @@ html {
 
 body {
   font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif;
-  color: #333;
+  color: #666;
   margin: 0;
   padding: 0;
   width: 100%; }
@@ -22,7 +22,7 @@ img {
   border: none; }
 
 a {
-  color: #333;
+  color: #666;
   text-decoration: none; }
 
 /*页面头部样式*/
@@ -34,7 +34,7 @@ a {
   background-color: #2d8cc0; }
   .header .header-right {
     text-align: right; }
-  .header .loginOut {
+  .header .login-out {
     color: #fff;
     background: #72C5F2;
     border-radius: 4px;
@@ -43,143 +43,306 @@ a {
   .header .time {
     margin-left: 12px; }
 
+/*页面切换条样式*/
+.tabs-box {
+  width: 96.43%;
+  height: 30px;
+  margin: 18px auto 16px;
+  background: #fafafa;
+  border-bottom: 1px solid #4EAADC; }
+  .tabs-box .tabs {
+    height: 31px;
+    line-height: 30px;
+    margin: 0 10px;
+    overflow: hidden; }
+    .tabs-box .tabs .tabs-item {
+      float: left;
+      height: 30px;
+      padding: 0 20px;
+      background: #fafafa; }
+    .tabs-box .tabs .active {
+      border-bottom: 0;
+      color: #2D8CC0;
+      background: #fff;
+      line-height: 27px;
+      border-top: 3px solid #4EAADC;
+      border-left: 2px solid #4EAADC;
+      border-right: 2px solid #4EAADC; }
+
 /*页面内容样式*/
 .content {
   width: 96.43%;
   margin: 18px auto;
-  text-align: center;
-  height: 520px; }
-
-/*页面切换条样式*/
-.tabBar-box {
-  height: 30px;
-  background: #fafafa;
-  border-bottom: 1px solid #4EAADC; }
-  .tabBar-box .tabBar {
-    line-height: 30px;
-    overflow: hidden; }
-    .tabBar-box .tabBar .tabBar-item {
-      float: left;
-      height: 30px;
-      padding: 0 10px;
-      color: #666;
-      background: #fafafa;
-      border-bottom: 1px solid #4EAADC; }
-    .tabBar-box .tabBar .active {
-      border-bottom: 0;
-      color: #2D8CC0; }
-      .tabBar-box .tabBar .active a {
-        border-top: 3px solid #4EAADC;
-        border-left: 2px solid #4EAADC;
-        border-right: 2px solid #4EAADC;
-        display: block;
-        background: #fff;
-        float: left;
-        padding: 0 10px; }
-
-.table-diff {
-  position: relative; }
-  .table-diff .table-diff-bar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    background-color: #d2eefd;
-    display: inline-block; }
-    .table-diff .table-diff-bar a {
-      padding: 10px;
-      display: inline-block; }
-  .table-diff .table-diff-header {
-    background-color: #2d8cc0; }
-  .table-diff .table-diff-data tr.hover input, .table-diff .table-diff-data tr.active input {
-    border: 1px solid #d9d9d9; }
-  .table-diff .table-diff tr:nth-child(2n) td {
-    background-color: #fafafa; }
-  .table-diff .table-diff td, .table-diff .table-diff th {
-    padding: 0;
+  /*输入框样式*/
+  /*按钮样式*/
+  /*查找药品数据*/ }
+  .content .content-box {
+    display: none; }
+  .content .active {
+    display: block; }
+  .content .input-group {
+    margin-right: 20px;
     white-space: nowrap; }
-    .table-diff .table-diff td > div, .table-diff .table-diff th > div {
-      display: block;
-      width: 100px;
-      overflow: hidden;
+    .content .input-group .input {
+      width: 108px;
+      height: 24px;
+      margin: 0 0 10px 8px;
+      padding: 1px 5px;
+      border: 1px solid #CACACA; }
+  .content .btn {
+    display: inline-block;
+    padding: 8px 18px;
+    color: #FFFFFF;
+    background: #2D8CC0;
+    border-radius: 4px; }
+  .content .popup {
+    width: 482px;
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+    border-radius: 2px; }
+    .content .popup .popup-title {
+      height: 28px;
+      line-height: 28px;
+      color: #fff;
+      text-align: center;
+      background: #4EAADC;
+      border-radius: 2px 2px 0 0; }
+      .content .popup .popup-title .popup-close {
+        float: right; }
+  .content .table-diff-data tr input {
+    border: 1px solid transparent;
+    background-color: transparent; }
+  .content .table-diff-data tr.hover input, .content .table-diff-data tr.active input {
+    border-color: #d9d9d9;
+    background-color: #fff; }
+  .content .search-box .input-group .drug-name {
+    width: 72px; }
+  .content .search-box .search-box-rt {
+    float: right; }
+    .content .search-box .search-box-rt .create-btn {
+      margin-right: 10px; }
+  .content .search-box .search-data {
+    margin-top: 8px;
+    line-height: 16px; }
+    .content .search-box .search-data .color-blue {
+      color: #2D8CC0; }
+    .content .search-box .search-data .color-red {
+      color: red; }
+    .content .search-box .search-data .download {
+      float: right;
+      line-height: 16px; }
+      .content .search-box .search-data .download .icon-download {
+        vertical-align: top;
+        margin-right: 4px; }
+  .content .table-diff {
+    margin-top: 10px;
+    position: relative; }
+    .content .table-diff .table-diff-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      background-color: #d2eefd;
+      display: inline-block; }
+      .content .table-diff .table-diff-bar a {
+        padding: 10px;
+        display: inline-block; }
+    .content .table-diff .table-diff tr:nth-child(2n) td {
+      background-color: #fafafa; }
+    .content .table-diff .table-diff td, .content .table-diff .table-diff th {
+      padding: 0;
+      white-space: nowrap; }
+      .content .table-diff .table-diff td > div, .content .table-diff .table-diff th > div {
+        display: block;
+        width: 100px;
+        overflow: hidden;
+        padding: 5px 0; }
+    .content .table-diff .table-diff th {
+      background-color: #2d8cc0;
+      color: #fff;
       padding: 5px 0; }
-  .table-diff .table-diff th {
-    background-color: #2d8cc0;
-    color: #fff;
-    padding: 5px 0; }
-  .table-diff .table-diff-left {
-    float: left;
-    padding-top: 34px;
-    position: relative;
-    z-index: 9; }
-    .table-diff .table-diff-left td > div, .table-diff .table-diff-left th > div {
-      width: 70.42px; }
-    .table-diff .table-diff-left .table-diff-header {
-      position: absolute;
-      width: 500px;
-      top: 0;
-      left: 0px;
-      z-index: 2; }
-    .table-diff .table-diff-left .table-diff-data {
-      overflow-x: hidden;
-      overflow-y: hidden;
-      height: 150px; }
-      .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
-        overflow-y: auto; }
-    .table-diff .table-diff-left .table-diff-data-content {
-      padding-bottom: 20px; }
-  .table-diff .table-diff-right {
-    position: relative;
-    padding-top: 34px;
-    margin-left: 505px; }
-    .table-diff .table-diff-right .table-diff-right-single {
-      display: none; }
-      .table-diff .table-diff-right .table-diff-right-single.active {
-        display: block; }
-      .table-diff .table-diff-right .table-diff-right-single .table-diff-single-title {
-        line-height: 33px;
-        border-bottom: 1px solid #d9d9d9;
+    .content .table-diff .table-diff-left {
+      float: left;
+      padding-top: 34px;
+      position: relative;
+      z-index: 9; }
+      .content .table-diff .table-diff-left td > div, .content .table-diff .table-diff-left th > div {
+        width: 70.42px; }
+      .content .table-diff .table-diff-left .table-diff-header {
         position: absolute;
-        text-align: center;
-        font-size: 12px;
+        width: 500px;
         top: 0;
-        left: 0;
-        background-color: #2d8cc0;
-        color: #fff;
-        width: 100%; }
-      .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content {
-        height: 150px;
-        background-color: #fff;
-        overflow-y: scroll; }
-    .table-diff .table-diff-right .table-diff-right-all {
-      display: none; }
-      .table-diff .table-diff-right .table-diff-right-all.active {
-        display: block; }
-    .table-diff .table-diff-right .table-diff-header {
-      position: absolute;
-      top: 0;
+        left: 0px;
+        z-index: 2; }
+      .content .table-diff .table-diff-left .table-diff-data {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        height: 350px; }
+        .content .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
+          overflow-y: auto; }
+      .content .table-diff .table-diff-left .table-diff-data-content {
+        padding-bottom: 20px; }
+    .content .table-diff .table-diff-right {
+      position: relative;
+      padding-top: 34px;
+      margin-left: 505px; }
+      .content .table-diff .table-diff-right .table-diff-right-single {
+        display: none; }
+        .content .table-diff .table-diff-right .table-diff-right-single.active {
+          display: block; }
+        .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-title {
+          line-height: 33px;
+          border-bottom: 1px solid #d9d9d9;
+          position: absolute;
+          text-align: center;
+          font-size: 12px;
+          top: 0;
+          left: 0;
+          background-color: #2d8cc0;
+          color: #fff;
+          width: 100%; }
+        .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content {
+          height: 350px;
+          overflow-y: scroll;
+          background: #F0FAFF;
+          border: 1px solid #D8D8D8;
+          padding: 10px 10px 20px; }
+          .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .content-list {
+            display: block;
+            overflow: hidden; }
+            .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .content-list li {
+              float: left;
+              margin-right: 30px;
+              margin-bottom: 10px; }
+            .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .content-list .input-group .input {
+              margin-bottom: 0; }
+          .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool {
+            position: relative;
+            text-align: center;
+            height: 28px;
+            padding: 30px 0 20px; }
+            .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool .btn-toggle {
+              float: left;
+              padding-top: 8px;
+              color: #2D8CC0; }
+            .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool .btn-record {
+              float: right;
+              padding-top: 8px;
+              color: #2D8CC0; }
+            .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool .btn-cancel {
+              position: absolute;
+              left: 50%;
+              margin-left: -42px; }
+          .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .pagination {
+            text-align: center; }
+            .content .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .pagination .pagination-prev {
+              margin-right: 30px; }
+      .content .table-diff .table-diff-right .table-diff-right-all {
+        display: none; }
+        .content .table-diff .table-diff-right .table-diff-right-all.active {
+          display: block; }
+      .content .table-diff .table-diff-right .table-diff-header {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        overflow: hidden;
+        left: 0px;
+        z-index: 2; }
+        .content .table-diff .table-diff-right .table-diff-header .table-diff-header-content {
+          overflow-x: hidden; }
+          .content .table-diff .table-diff-right .table-diff-header .table-diff-header-content table {
+            padding-right: 20px; }
+            .content .table-diff .table-diff-right .table-diff-header .table-diff-header-content table th {
+              background: #4EAADC; }
+      .content .table-diff .table-diff-right .table-diff-data {
+        overflow-y: scroll;
+        width: auto;
+        height: 350px; }
+    .content .table-diff table {
+      background-color: #d9d9d9; }
+      .content .table-diff table td, .content .table-diff table th {
+        background-color: #fff; }
+    .content .table-diff .table-diff-data {
+      margin-top: -1px; }
+      .content .table-diff .table-diff-data td {
+        line-height: 20px; }
+      .content .table-diff .table-diff-data tr.active {
+        display: table-row; }
+        .content .table-diff .table-diff-data tr.active td {
+          background-color: #d2eefd; }
+  .content .standard-than {
+    display: none;
+    margin-top: 30px;
+    border: 1px solid #D8D8D8; }
+    .content .standard-than .title {
+      height: 30px;
+      line-height: 30px;
+      padding: 0 12px;
+      color: #2D8CC0;
+      background: #FAFAFA;
+      border-bottom: 1px solid #D8D8D8; }
+      .content .standard-than .title .toggle {
+        float: right; }
+        .content .standard-than .title .toggle .icon-arrow {
+          display: inline-block;
+          width: 10px;
+          height: 6px;
+          vertical-align: 2px;
+          margin-left: 4px;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAABGdBTUEAALGPC/xhBQAAAJxJREFUCB1jYEADer0H5+j1HpiNJszAhCyg23uwA8jnBGJuoOI2ZDm4Qr2eg/lACSNWHu4EVh6e+P//GUyBivNgisEK9foORfxnYIgW5hAJOptu8huEhTlFA///Z4zR7z0YDlLMqNd7yPn///+TGLlZHC9lWr+CmQCi9aYfFfv/9c9+RkbGPKb/DP+bGJiZfNEVgRSCxNjYWPxAagAUxjTY/FktpQAAAABJRU5ErkJggg==) center center no-repeat; }
+        .content .standard-than .title .toggle .icon-arrow-down {
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAABGdBTUEAALGPC/xhBQAAAJRJREFUCB1j1O09eJSBiSn2cqHtPQYsQLf/sBLDv3+LmRgZGOsY/v7brDf9qBi6OrAYUA6khulSsd1eoOqm/1//bHGYepUHphjEBokxMjE2g9QwwiT0eg/k/Wdg9GHj4fYGif368nUr43+GrZdK7CeC+HCFIA5QcRuQUgAK///PyPDocpF9JUgcKwAqnq3Xe3AOuiQAW8w5UkDrKnkAAAAASUVORK5CYII=) center center no-repeat; }
+    .content .standard-than .search-than {
+      padding: 10px 12px 0; }
+    .content .standard-than .table {
       width: 100%;
-      overflow: hidden;
-      left: 0px;
-      z-index: 2; }
-      .table-diff .table-diff-right .table-diff-header .table-diff-header-content {
-        overflow-x: hidden; }
-        .table-diff .table-diff-right .table-diff-header .table-diff-header-content table {
-          padding-right: 20px; }
-    .table-diff .table-diff-right .table-diff-data {
-      overflow-y: scroll;
-      width: auto;
-      height: 150px; }
-  .table-diff table {
-    background-color: #d9d9d9; }
-    .table-diff table td, .table-diff table th {
-      background-color: #fff; }
-  .table-diff .table-diff-data {
-    margin-top: -1px; }
-    .table-diff .table-diff-data td {
-      line-height: 20px; }
-    .table-diff .table-diff-data tr.active td {
-      background-color: #d2eefd; }
+      text-align: left;
+      border-collapse: collapse;
+      border-spacing: 0; }
+      .content .standard-than .table .thead {
+        color: #fff;
+        background: #4EAADC; }
+      .content .standard-than .table tr td {
+        padding: 9px 7px;
+        white-space: nowrap;
+        overflow: hidden;
+        border: 1px solid #D8D8D8; }
+      .content .standard-than .table .table-text {
+        width: 70px; }
+    .content .standard-than .no-than {
+      height: 28px;
+      line-height: 28px;
+      text-align: center; }
+      .content .standard-than .no-than .add-than {
+        color: #2D8CC0;
+        text-decoration: underline; }
+  .content .add-data {
+    display: none;
+    margin-top: -8px; }
+    .content .add-data .goback {
+      color: #2D8CC0;
+      margin-bottom: 20px; }
+    .content .add-data .popup-add-info .popup-content {
+      padding: 30px;
+      overflow: hidden; }
+      .content .add-data .popup-add-info .popup-content .content-lf {
+        float: left;
+        width: 212px; }
+      .content .add-data .popup-add-info .popup-content .content-right {
+        float: left; }
+      .content .add-data .popup-add-info .popup-content .input-group .input {
+        width: 60px;
+        margin-bottom: 0; }
+      .content .add-data .popup-add-info .popup-content li {
+        margin-bottom: 10px; }
+      .content .add-data .popup-add-info .popup-content .popup-btn {
+        float: left;
+        width: 100%;
+        margin-top: 20px;
+        text-align: center; }
+  .content .popup-company {
+    width: 320px; }
 
 /*页面底部样式*/
 .footer {
@@ -187,3 +350,5 @@ a {
   line-height: 30px;
   text-align: center;
   background: #f1f1f1; }
+  .footer .footer-item {
+    margin: 30px; }

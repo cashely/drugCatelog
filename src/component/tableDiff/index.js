@@ -258,7 +258,7 @@ var data = {
         bylfl:'abc',
         bppi:'abc'
     }]
-}
+};
 var singleData = {
     id:null,
     index:null
@@ -278,12 +278,13 @@ $('.table-diff-data tr').on('click',function(){
         $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
     }
 });
-
 $('.table-diff-data tr').hover(function(){
     var _index = $(this).prevAll().length;
+
     var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+
     for(var i=0;i<_tables;i++){
-        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('active');
+        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('hover');
     }
 },function(){
     var _index = $(this).prevAll().length;
@@ -292,7 +293,6 @@ $('.table-diff-data tr').hover(function(){
         $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
     }
 });
-
 $('.table-diff-left .table-diff-data tr').on('mouseover',function(e){
     var _tr = $(this);
     $('.table-diff-bar').css({
@@ -320,4 +320,10 @@ function showDetail(e){
     $('.table-diff-right-all').toggleClass('active');
     $('.table-diff-right-single').toggleClass('active');
     e.preventDefault();
+}
+//绑定比对
+$('#showThan').on('click',showThan);
+
+function showThan(){
+    $('.standard-than').show()
 }

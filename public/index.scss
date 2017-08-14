@@ -4,7 +4,7 @@ html{
 }
 body{
     font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif;
-    color:#333;
+    color:#666;
     margin:0;
     padding:0;
     width: 100%;
@@ -18,7 +18,7 @@ ul,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd{
 input{border:none;}
 img{border: none;}
 a{
-    color:#333;
+    color:#666;
     text-decoration:none;
 }
 
@@ -32,7 +32,7 @@ a{
     .header-right{
         text-align: right;
     }
-    .loginOut{
+    .login-out{
         color: #fff;
         background: #72C5F2;
         border-radius: 4px;
@@ -43,201 +43,435 @@ a{
         margin-left: 12px;
     }
 }
-
-/*页面内容样式*/
-.content{
-    width: 96.43%;
-    margin: 18px auto;
-    text-align: center;
-    height: 520px;
-}
-
 /*页面切换条样式*/
-.tabBar-box{
+.tabs-box{
+    width: 96.43%;
     height: 30px;
+    margin: 18px auto 16px;
     background: #fafafa;
     border-bottom: 1px solid #4EAADC;
-    .tabBar{
+    .tabs{
+        height: 31px;
         line-height: 30px;
+        margin: 0 10px;
         overflow: hidden;
-        .tabBar-item{
+        .tabs-item{
             float: left;
             height: 30px;
-            padding: 0 10px;
-            color: #666;
+            padding: 0 20px;
             background: #fafafa;
-            border-bottom: 1px solid #4EAADC;
         }
         .active{
             border-bottom: 0;
             color: #2D8CC0;
-            a{
-                border-top: 3px solid #4EAADC;
-                border-left: 2px solid #4EAADC;
-                border-right: 2px solid #4EAADC;
-                display: block;
-                background: #fff;
-                float: left;
-                padding: 0 10px;
-            }
+            background: #fff;
+            line-height: 27px;
+            border-top: 3px solid #4EAADC;
+            border-left: 2px solid #4EAADC;
+            border-right: 2px solid #4EAADC;
         }
     }
 }
-.table-diff{
-    position: relative;
-    .table-diff-bar{
-        position: absolute;
-        left:0;
-        top:0;
-        z-index: 10;
-        background-color: #d2eefd;
-        display: inline-block;
-        a{
-            padding:10px;
-            display: inline-block;
+/*页面内容样式*/
+.content{
+    width: 96.43%;
+    margin: 18px auto;
+    .content-box{
+        display: none;
+    }
+    .active{
+        display: block;
+    }
+    /*输入框样式*/
+    .input-group{
+        margin-right: 20px;
+        white-space: nowrap;
+        .input{
+            width: 108px;
+            height: 24px;
+            margin: 0 0 10px 8px;
+            padding: 1px 5px;
+            border: 1px solid #CACACA;
         }
     }
-    .table-diff-header{
-        background-color: #2d8cc0;
+    /*按钮样式*/
+    .btn{
+        display: inline-block;
+        padding: 8px 18px;
+        color: #FFFFFF;
+        background: #2D8CC0;
+        border-radius: 4px;
+    }
+    //弹窗
+    .popup{
+        width: 482px;
+        background: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
+        border-radius: 2px;
+        .popup-title{
+            height: 28px;
+            line-height: 28px;
+            color: #fff;
+            text-align: center;
+            background: #4EAADC;
+            border-radius: 2px 2px 0 0;
+            .popup-close{
+                float: right;
+            }
+        }
     }
     .table-diff-data{
         tr{
+                input{
+                    border:1px solid transparent;
+                    background-color: transparent;
+                }
             &.hover,&.active{
                 input{
-                    border:1px solid #d9d9d9;
+                    border-color:#d9d9d9;
+                    background-color: #fff;
                 }
             }
         }
     }
 
-    .table-diff{
-        tr:nth-child(2n){
-            td{
-                background-color: #fafafa;
+    /*查找药品数据*/
+    .search-box{
+        .input-group{
+            .drug-name{
+                width: 72px;
             }
         }
-        td,th{
-            padding: 0;
-            white-space: nowrap;
-            >div{
-                display: block;
-                width: 100px;
-                overflow: hidden;
+        .search-box-rt{
+            float: right;
+            .create-btn{
+                margin-right: 10px;
+            }
+        }
+        .search-data{
+            margin-top: 8px;
+            line-height: 16px;
+            .color-blue{
+                color: #2D8CC0;
+            }
+            .color-red{
+                color: red;
+            }
+            .download{
+                float: right;
+                line-height: 16px;
+                .icon-download{
+                    vertical-align: top;
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+
+    //药品数据
+    .table-diff{
+        margin-top: 10px;
+        position: relative;
+        .table-diff-bar{
+            position: absolute;
+            left:0;
+            top:0;
+            z-index: 10;
+            background-color: #d2eefd;
+            display: inline-block;
+            a{
+                padding:10px;
+                display: inline-block;
+            }
+        }
+        .table-diff-header{
+            //background-color: #2d8cc0;
+        }
+
+        .table-diff{
+            tr:nth-child(2n){
+                td{
+                    background-color: #fafafa;
+                }
+            }
+            td,th{
+                padding: 0;
+                white-space: nowrap;
+                >div{
+                    display: block;
+                    width: 100px;
+                    overflow: hidden;
+                    padding:5px 0;
+                }
+            }
+            th{
+                background-color: #2d8cc0;
+                color: #fff;
                 padding:5px 0;
             }
         }
-        th{
-            background-color: #2d8cc0;
-            color: #fff;
-            padding:5px 0;
-        }
-    }
-    .table-diff-left{
-        float: left;
-        padding-top: 34px;
-        position: relative;
-        z-index: 9;
+        .table-diff-left{
+            float: left;
+            padding-top: 34px;
+            position: relative;
+            z-index: 9;
 
-        td,th{
-            >div{
-                width: 70.42px;
+            td,th{
+                >div{
+                    width: 70.42px;
+                }
+            }
+            .table-diff-header{
+                position: absolute;
+                width: 500px;
+                top:0;
+                left:0px;
+                z-index: 2;
+            }
+            .table-diff-data{
+                overflow-x: hidden;
+                overflow-y: hidden;
+                height: 350px;
+                &.table-diff-show-detail{
+                    overflow-y: auto;
+                }
+            }
+            .table-diff-data-content{
+                padding-bottom: 20px;
             }
         }
-        .table-diff-header{
-            position: absolute;
-            width: 500px;
-            top:0;
-            left:0px;
-            z-index: 2;
+        .table-diff-right{
+            position: relative;
+            padding-top: 34px;
+            margin-left: 505px;
+            .table-diff-right-single{
+                display: none;
+                &.active{
+                    display: block;
+                }
+                .table-diff-single-title{
+                    line-height: 33px;
+                    border-bottom: 1px solid #d9d9d9;
+                    position: absolute;
+                    text-align: center;
+                    font-size: 12px;
+                    top: 0;
+                    left: 0;
+                    background-color: #2d8cc0;
+                    color: #fff;
+                    width: 100%;
+                }
+                .table-diff-single-content{
+                    height: 350px;
+                    overflow-y:scroll;
+                    background: #F0FAFF;
+                    border: 1px solid #D8D8D8;
+                    padding: 10px 10px 20px;
+                    .content-list{
+                        display: block;
+                        overflow: hidden;
+                        li{
+                            float: left;
+                            margin-right: 30px;
+                            margin-bottom: 10px;
+                        }
+                        .input-group{
+                            .input{
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                    .tool{
+                        position: relative;
+                        text-align: center;
+                        height: 28px;
+                        padding: 30px 0 20px;
+                        .btn-toggle{
+                            float: left;
+                            padding-top: 8px;
+                            color: #2D8CC0;
+                        }
+                        .btn-record{
+                            float: right;
+                            padding-top: 8px;
+                            color: #2D8CC0;
+                        }
+                        .btn-cancel{
+                            position: absolute;
+                            left: 50%;
+                            margin-left: -42px;
+                        }
+                    }
+                    .pagination{
+                        text-align: center;
+                        .pagination-prev{
+                            margin-right: 30px;
+                        }
+                    }
+                }
+            }
+            .table-diff-right-all{
+                display: none;
+                &.active{
+                    display: block;
+                }
+            }
+            .table-diff-header{
+                position: absolute;
+                top:0;
+                width: 100%;
+                overflow: hidden;
+                left:0px;
+                z-index: 2;
+                .table-diff-header-content{
+                    overflow-x: hidden;
+                    table{
+                        padding-right: 20px;
+                        th{
+                            background: #4EAADC;
+                        }
+                    }
+                }
+            }
+            .table-diff-data{
+                overflow-y: scroll;
+                width:auto;
+                height: 350px;
+            }
+        }
+        table{
+            background-color: #d9d9d9;
+            td,th{
+                background-color: #fff;
+            }
         }
         .table-diff-data{
-            overflow-x: hidden;
-            overflow-y: hidden;
-            height: 150px;
-            &.table-diff-show-detail{
-                overflow-y: auto;
+            margin-top: -1px;
+            td{
+                line-height: 20px;
             }
-        }
-        .table-diff-data-content{
-            padding-bottom: 20px;
-        }
-    }
-    .table-diff-right{
-        position: relative;
-        padding-top: 34px;
-        margin-left: 505px;
-        .table-diff-right-single{
-            display: none;
-            &.active{
-                display: block;
-            }
-            .table-diff-single-title{
-                line-height: 33px;
-                border-bottom: 1px solid #d9d9d9;
-                position: absolute;
-                text-align: center;
-                font-size: 12px;
-                top: 0;
-                left: 0;
-                background-color: #2d8cc0;
-                color: #fff;
-                width: 100%;
-            }
-            .table-diff-single-content{
-                height: 150px;
-                background-color: #fff;
-                overflow-y:scroll;
-            }
-        }
-        .table-diff-right-all{
-            display: none;
-            &.active{
-                display: block;
-            }
-        }
-        .table-diff-header{
-            position: absolute;
-            top:0;
-            width: 100%;
-            overflow: hidden;
-            left:0px;
-            z-index: 2;
-            .table-diff-header-content{
-                overflow-x: hidden;
-                table{
-                    padding-right: 20px;
+            tr.active{
+                display: table-row;
+                td{
+                    background-color: #d2eefd;
                 }
             }
         }
-        .table-diff-data{
-            overflow-y: scroll;
-            width:auto;
-            height: 150px;
-        }
     }
-    table{
-        background-color: #d9d9d9;
-        td,th{
-            background-color: #fff;
+
+    //标准数据比对
+    .standard-than{
+        display: none;
+        margin-top: 30px;
+        border: 1px solid #D8D8D8;
+        .title{
+            height: 30px;
+            line-height: 30px;
+            padding: 0 12px;
+            color: #2D8CC0;
+            background: #FAFAFA;
+            border-bottom: 1px solid #D8D8D8;
+            .toggle{
+                float: right;
+                .icon-arrow{
+                    display: inline-block;
+                    width: 10px;
+                    height: 6px;
+                    vertical-align: 2px;
+                    margin-left: 4px;
+                    background:  url(./images/icon-arrow-up.png) center center no-repeat;
+                }
+                .icon-arrow-down{
+                    background:  url(./images/icon-arrow-down.png) center center no-repeat;
+                }
+            }
         }
-    }
-    .table-diff-data{
-        margin-top: -1px;
-        td{
-            line-height: 20px;
+        .search-than{
+            padding: 10px 12px 0;
         }
-        tr.active{
-            td{
-                background-color: #d2eefd;
+        .table{
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+            border-spacing: 0;
+            .thead{
+                color: #fff;
+                background: #4EAADC;
+            }
+            tr{
+                td{
+                    padding: 9px 7px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    border: 1px solid #D8D8D8;
+                }
+            }
+            .table-text{
+                width: 70px;
+            }
+        }
+        .no-than{
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            .add-than{
+                color: #2D8CC0;
+                text-decoration: underline;
             }
         }
     }
-}
 
+    //药品目录-添加对比数据
+    .add-data{
+        display: none;
+        margin-top: -8px;
+        .goback{
+            color: #2D8CC0;
+            margin-bottom: 20px;
+        }
+        //药品目录-添加对比信息弹窗
+        .popup-add-info{
+            .popup-content{
+                padding: 30px;
+                overflow: hidden;
+                .content-lf{
+                    float: left;
+                    width: 212px;
+                }
+                .content-right{
+                    float: left;
+                }
+                .input-group{
+                    .input{
+                        width: 60px;
+                        margin-bottom: 0;
+                    }
+                }
+                li{
+                    margin-bottom: 10px;
+                }
+                .popup-btn{
+                    float: left;
+                    width: 100%;
+                    margin-top: 20px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+    //门诊／住院单位
+    .popup-company{
+        width: 320px;
+    }
+}
 /*页面底部样式*/
 .footer{
     height: 30px;
     line-height: 30px;
     text-align: center;
     background: #f1f1f1;
+    .footer-item{
+        margin: 30px;
+    }
 }

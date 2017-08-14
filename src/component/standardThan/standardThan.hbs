@@ -1,0 +1,59 @@
+<div class="title">标准数据比对
+    <a href="javascript:void(0)" class="toggle" onClick="toggleFn(this)">
+        <span class="toggle-text">收起</span><i class="icon-arrow"></i>
+    </a>
+</div>
+<div class="than-content">
+    <div class="search-than">
+        <lable class="input-group">
+            国管平台ID:
+            <input type="text" class="input">
+        </lable>
+        <lable class="input-group">
+            省采购平台ID:
+            <input type="text" class="input">
+        </lable>
+        <lable class="input-group">
+            药品名称/商品名:
+            <input type="text" class="input">
+        </lable>
+        <lable class="input-group">
+            生产企业:
+            <input type="text" class="input">
+        </lable>
+        <lable class="input-group">
+            批准文号/注册证号:
+            <input type="text" class="input">
+        </lable>
+        <lable class="input-group">
+            人社分类:
+            <input type="text" class="input">
+        </lable>
+        <lable class="input-group">
+            药理分类:
+            <input type="text" class="input">
+        </lable>
+        <a href="javaScript:void(0)" class="btn">查找</a>
+    </div>
+    <table class="table">
+        <tr class="thead">
+            {{#each thead}}
+                <td><div class="table-text">{{this}}</div></td>
+            {{/each}}
+        </tr>
+    </table>
+   <div>
+       <table class="table">
+           {{#each tbody}}
+               <tr>
+                   {{#each this}}
+                       <td><div class="table-text">{{this}}</div></td>
+                   {{/each}}
+               </tr>
+           {{/each}}
+       </table>
+   </div>
+    <div class="no-than">
+        如查询不到所需数据，请点击 <a href="javaScript:void(0)" class="add-than">添加数据</a>
+    </div>
+</div>

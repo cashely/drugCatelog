@@ -7,11 +7,7 @@ var data = {
   time: '2017年8月9日星期三'
 };
 
-
-
-
 $('#header').html(headerTel(data));
-
 
 setTimeout(function(){
     data.gly = 'gly2';

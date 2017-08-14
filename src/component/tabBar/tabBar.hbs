@@ -1,7 +1,5 @@
-<div class="tabBar-box">
-    <ul class="tabBar">
-        <li class="tabBar-item active"><a href="javascript:void(0)">化学药／中成药</a></li>
-        <li class="tabBar-item"><a href="javascript:void(0)">中药饮片</a></li>
-        <li class="tabBar-item"><a href="javascript:void(0)">医院制剂</a></li>
-    </ul>
-</div>
+<ul class="tabs">
+    {{#each content}}
+        <li class="tabs-item {{this.active}} {{this.id}}" data-id="{{this.id}}"><a href="javascript:void(0)">{{this.text}}</a></li>
+    {{/each}}
+</ul>
