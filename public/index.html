@@ -16,19 +16,34 @@
     <!--药品目录-->
     <div id="home">
             <div class="header"></div>
+            <div class="tabs-box"></div>
             <div class="content">
-                <div class="tabBar">
-
-                </div>
-                <div class="table-diff">
-
-                </div>
+              <div class="content-box active">
+                 <div class="content-box-main">
+                     <div class="search-box"></div>
+                     <div class="tabBar"></div>
+                     <div class="table-diff"></div>
+                     <div class="standard-than"></div>
+                 </div>
+                  <div class="add-data"></div>
+              </div>
             </div>
-            <div class="footer">
-
-            </div>
+            <div class="footer"></div>
     </div>
     <!--webpack打包后的文件-->
     <script src="javaScript/index.js"></script>
+    <script>
+        function toggleFn(e){
+            if($(e).children('.icon-arrow').hasClass('icon-arrow-down')){
+                $(e).children('.toggle-text').text('收起');
+                $('.than-content').show();
+                $(e).children('.icon-arrow').removeClass('icon-arrow-down');
+            }else{
+                $(e).children('.toggle-text').text('展开');
+                $('.than-content').hide();
+                $(e).children('.icon-arrow').addClass('icon-arrow-down');
+            }
+        }
+    </script>
 </body>
 </html>
