@@ -1,0 +1,121 @@
+<div class="table-diff">
+    <div class="table-diff-content">
+        <div class="table-diff-bar">
+            <a href="#">比对</a>|<a href="javascript:void(0)" id="showDetail">查看详情</a>|<a href="#">取消比对</a>
+        </div>
+        <div class="table-diff-header">
+            <div class="table-diff-left">
+                <div class="table-diff-header">
+                    <table width="100%" cellspacing="1" border="0">
+                        <thead>
+                            <tr>
+                                <th><div>医院药品ID</div></th>
+                                <th><div>药品名称</div></th>
+                                <th><div>规格厂家</div></th>
+                                <th><div>转换比</div></th>
+                                <th><div>门诊/住院单位</div></th>
+                                <th><div>是否停用</div></th>
+                                <th><div>修订时间</div></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="table-diff-data">
+                    <div class="table-diff-data-content">
+                        <table width="100%" cellspacing="1" border="0">
+                            <tbody>
+                                {{#each ydata}}
+                                    <tr data-id={{id}}>
+                                        <td><div>{{yid}}</div></td>
+                                        <td><div>{{yypmc}}</div></td>
+                                        <td><div>{{yggcj}}</div></td>
+                                        <td><div>{{yzhb}}</div></td>
+                                        <td><div>{{ymzzy}}</div></td>
+                                        <td><div>{{yty}}</div></td>
+                                        <td><div>{{yxdrq}}</div></td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="table-diff-right">
+                <div class="table-diff-right-all active">
+                    <div class="table-diff-header">
+                        <div class="table-diff-header-content">
+                            <table cellspacing="1" border="0">
+                                <thead>
+                                    <tr>
+                                        <th><div>药品编码</div></th>
+                                        <th><div>药品类型</div></th>
+                                        <th><div>药品名称</div></th>
+                                        <th><div>剂型</div></th>
+                                        <th><div>规格</div></th>
+                                        <th><div>转换比</div></th>
+                                        <th><div>企业简称</div></th>
+                                        <th><div>批准文号/注册证号</div></th>
+                                        <th><div>基药</div></th>
+                                        <th><div>重点药物监控</div></th>
+                                        <th><div>营养用药</div></th>
+                                        <th><div>中成药注射剂</div></th>
+                                        <th><div>精麻毒放</div></th>
+                                        <th><div>妊娠用药</div></th>
+                                        <th><div>抗菌药物</div></th>
+                                        <th><div>DDD值</div></th>
+                                        <th><div>给药途径(不计算强度)</div></th>
+                                        <th><div>是否计算强度</div></th>
+                                        <th><div>分级</div></th>
+                                        <th><div>人社分类</div></th>
+                                        <th><div>药理分类</div></th>
+                                        <th><div>是否PPI</div></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="table-diff-data">
+                        <table cellspacing="1" border="0">
+                            <tbody>
+                                {{#each bdata}}
+                                    <tr>
+                                        <td><div>{{bbm}}</div></td>
+                                        <td><div><input value={{blx}} /></div></td>
+                                        <td><div>{{bypmc}}</div></td>
+                                        <td><div>{{bjx}}</div></td>
+                                        <td><div>{{bgg}}</div></td>
+                                        <td><div>{{bzhb}}</div></td>
+                                        <td><div>{{bqyjc}}</div></td>
+                                        <td><div>{{bpzwh}}</div></td>
+                                        <td><div>{{bjy}}</div></td>
+                                        <td><div>{{bzdjkyw}}</div></td>
+                                        <td><div>{{byyyy}}</div></td>
+                                        <td><div>{{bzcyzsj}}</div></td>
+                                        <td><div>{{bjmdf}}</div></td>
+                                        <td><div>{{brsyy}}</div></td>
+                                        <td><div>{{bkjyw}}</div></td>
+                                        <td><div>{{bddd}}</div></td>
+                                        <td><div>{{bgytj}}</div></td>
+                                        <td><div>{{bjsqd}}</div></td>
+                                        <td><div>{{bfj}}</div></td>
+                                        <td><div>{{brsfl}}</div></td>
+                                        <td><div>{{bylfl}}</div></td>
+                                        <td><div>{{bppi}}</div></td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="table-diff-right-single">
+                    <h2 class="table-diff-single-title">标准数据</h2>
+                    <div class="table-diff-single-content">
+                        <p>
+                            药品名称:12121
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
