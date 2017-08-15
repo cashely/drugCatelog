@@ -5,53 +5,35 @@
 </div>
 <div class="than-content">
     <div class="search-than">
-        <lable class="input-group">
-            国管平台ID:
-            <input type="text" class="input">
-        </lable>
-        <lable class="input-group">
-            省采购平台ID:
-            <input type="text" class="input">
-        </lable>
-        <lable class="input-group">
-            药品名称/商品名:
-            <input type="text" class="input">
-        </lable>
-        <lable class="input-group">
-            生产企业:
-            <input type="text" class="input">
-        </lable>
-        <lable class="input-group">
-            批准文号/注册证号:
-            <input type="text" class="input">
-        </lable>
-        <lable class="input-group">
-            人社分类:
-            <input type="text" class="input">
-        </lable>
-        <lable class="input-group">
-            药理分类:
-            <input type="text" class="input">
-        </lable>
+        {{#each input}}
+            <lable class="input-group">
+                {{this}}
+                <input type="text" class="input">
+            </lable>
+        {{/each}}
         <a href="javaScript:void(0)" class="btn">查找</a>
     </div>
-    <table class="table">
-        <tr class="thead">
-            {{#each thead}}
-                <td><div class="table-text">{{this}}</div></td>
-            {{/each}}
-        </tr>
-    </table>
-   <div>
-       <table class="table">
-           {{#each tbody}}
-               <tr>
-                   {{#each this}}
+   <div class="than-table">
+       <div class="than-thead">
+           <table class="table">
+               <tr class="thead">
+                   {{#each thead}}
                        <td><div class="table-text">{{this}}</div></td>
                    {{/each}}
                </tr>
-           {{/each}}
-       </table>
+           </table>
+       </div>
+       <div class="than-tbody">
+           <table class="table">
+               {{#each tbody}}
+                   <tr>
+                       {{#each this}}
+                           <td><div class="table-text">{{this}}</div></td>
+                       {{/each}}
+                   </tr>
+               {{/each}}
+           </table>
+       </div>
    </div>
     <div class="no-than">
         如查询不到所需数据，请点击 <a href="javaScript:void(0)" class="add-than">添加数据</a>

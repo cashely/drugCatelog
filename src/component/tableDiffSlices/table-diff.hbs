@@ -8,9 +8,9 @@
                 <div class="table-diff-header">
                     <table width="100%" cellspacing="1" border="0">
                         <thead>
-                            {{#each tLeftHead}}
-                                <th><div>{{this}}</div></th>
-                            {{/each}}
+                        {{#each tLeftHead}}
+                            <th><div>{{this}}</div></th>
+                        {{/each}}
                         </thead>
                     </table>
                 </div>
@@ -18,17 +18,18 @@
                     <div class="table-diff-data-content">
                         <table width="100%" cellspacing="1" border="0">
                             <tbody>
-                                {{#each ydata}}
-                                    <tr data-id={{id}}>
-                                        <td><div>{{yid}}</div></td>
-                                        <td><div>{{yypmc}}</div></td>
-                                        <td><div>{{yggcj}}</div></td>
-                                        <td><div><input value={{yzhb}} /></div></td>
-                                        <td class="icon-triangle ymzzy"><div>{{ymzzy}}</div></td>
-                                        <td><div>{{yty}}</div></td>
-                                        <td><div>{{yxdrq}}</div></td>
-                                    </tr>
-                                {{/each}}
+                            {{#each ydata}}
+                                <tr data-id={{id}}>
+                                    <td><div>{{yid}}</div></td>
+                                    <td><div>{{yypmc}}</div></td>
+                                    <td><div>{{yggcj}}</div></td>
+                                    <td><div>{{ysydw}}</div></td>
+                                    <td><div><input value={{yzhb}} /></div></td>
+                                    <td class="icon-triangle ymzzy"><div>{{ymzzy}}</div></td>
+                                    <td><div>{{yty}}</div></td>
+                                    <td><div>{{yxdrq}}</div></td>
+                                </tr>
+                            {{/each}}
                             </tbody>
                         </table>
                     </div>
@@ -40,44 +41,29 @@
                         <div class="table-diff-header-content">
                             <table cellspacing="1" border="0">
                                 <thead>
-                                    <tr>
+                                <tr>
                                     {{#each tRightHead}}
                                         <th><div>{{this}}</div></th>
                                     {{/each}}
-                                    </tr>
+                                </tr>
                                 </thead>
                             </table>
                         </div>
                     </div>
-                    <div class="table-diff-data">
+                    <div class="table-diff-data" style="overflow-x: hidden;">
                         <table cellspacing="1" border="0">
                             <tbody>
-                                {{#each bdata}}
-                                    <tr>
-                                        <td><div>{{bbm}}</div></td>
-                                        <td class="icon-triangle"><div>{{blx}}</div></td>
-                                        <td><div>{{bypmc}}</div></td>
-                                        <td><div>{{bjx}}</div></td>
-                                        <td><div>{{bgg}}</div></td>
-                                        <td><div>{{bzhb}}</div></td>
-                                        <td><div>{{bqyjc}}</div></td>
-                                        <td><div>{{bpzwh}}</div></td>
-                                        <td><div>{{bjy}}</div></td>
-                                        <td><div>{{bzdjkyw}}</div></td>
-                                        <td><div>{{byyyy}}</div></td>
-                                        <td><div>{{bzcyzsj}}</div></td>
-                                        <td><div>{{bjmdf}}</div></td>
-                                        <td><div>{{brsyy}}</div></td>
-                                        <td><div>{{bkjyw}}</div></td>
-                                        <td><div>{{bddd}}</div></td>
-                                        <td><div>{{bgytj}}</div></td>
-                                        <td><div>{{bjsqd}}</div></td>
-                                        <td><div>{{bfj}}</div></td>
-                                        <td><div>{{brsfl}}</div></td>
-                                        <td><div>{{bylfl}}</div></td>
-                                        <td><div>{{bppi}}</div></td>
-                                    </tr>
-                                {{/each}}
+                            {{#each bdata}}
+                                <tr>
+                                    <td><div>{{bbm}}</div></td>
+                                    <td><div>{{blx}}</div></td>
+                                    <td><div>{{bypmc}}</div></td>
+                                    <td><div>{{bjx}}</div></td>
+                                    <td  class="icon-triangle"><div>{{bgg}}</div></td>
+                                    <td><div>{{bzhb}}</div></td>
+                                    <td class="icon-triangle"><div>{{bqyjc}}</div></td>
+                                </tr>
+                            {{/each}}
                             </tbody>
                         </table>
                     </div>

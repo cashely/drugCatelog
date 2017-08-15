@@ -21,7 +21,13 @@ a{
     color:#666;
     text-decoration:none;
 }
-
+.icon-arrow-left{
+    width: 6px;
+    height: 10px;
+    margin-right: 5px;
+    display: inline-block;
+    background: url(./images/icon-arrow-left.png) center no-repeat;
+}
 /*页面头部样式*/
 .header{
     height: 50px;
@@ -93,6 +99,13 @@ a{
             padding: 1px 5px;
             border: 1px solid #CACACA;
         }
+        .select{
+            width: 120px;
+            height: 28px;
+            margin: 0 0 10px 8px;
+            padding: 1px 5px;
+            border: 1px solid #CACACA;
+        }
     }
     /*按钮样式*/
     .btn{
@@ -104,6 +117,7 @@ a{
     }
     //弹窗
     .popup{
+        display: none;
         width: 482px;
         background: #FFFFFF;
         border: 1px solid #FFFFFF;
@@ -114,21 +128,30 @@ a{
             line-height: 28px;
             color: #fff;
             text-align: center;
+            position: relative;
             background: #4EAADC;
             border-radius: 2px 2px 0 0;
             .popup-close{
-                float: right;
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                top: 6px;
+                right: 10px;
+                background: url(./images/icon-close.png) center center no-repeat;
             }
         }
     }
     .table-diff-data{
         tr{
                 input{
+                    width: 100%;
+                    color: #666;
                     border:1px solid transparent;
                     background-color: transparent;
                 }
             &.hover,&.active{
                 input{
+                    width: 100%;
                     border-color:#d9d9d9;
                     background-color: #fff;
                 }
@@ -178,9 +201,11 @@ a{
             left:0;
             top:0;
             z-index: 10;
-            background-color: #d2eefd;
+            color: #fff;
+            background-color: #4DA9DB;
             display: inline-block;
             a{
+                color: #fff;
                 padding:10px;
                 display: inline-block;
             }
@@ -190,10 +215,15 @@ a{
         }
 
         .table-diff{
-            tr:nth-child(2n){
-                td{
-                    background-color: #fafafa;
+            tr{
+                &:nth-child(2n){
+                    td{
+                        background-color: #fafafa;
+                    }
                 }
+            }
+            .icon-triangle{
+                background:  url(./images/icon-triangle.png) top right no-repeat #fff;
             }
             td,th{
                 padding: 0;
@@ -202,7 +232,7 @@ a{
                     display: block;
                     width: 100px;
                     overflow: hidden;
-                    padding:5px 0;
+                    padding:5px;
                 }
             }
             th{
@@ -216,7 +246,7 @@ a{
             padding-top: 34px;
             position: relative;
             z-index: 9;
-
+            width: 754px;
             td,th{
                 >div{
                     width: 70.42px;
@@ -224,15 +254,15 @@ a{
             }
             .table-diff-header{
                 position: absolute;
-                width: 500px;
+                width: 754px;
                 top:0;
-                left:0px;
+                left:0;
                 z-index: 2;
             }
             .table-diff-data{
                 overflow-x: hidden;
                 overflow-y: hidden;
-                height: 350px;
+                height: 448px;
                 &.table-diff-show-detail{
                     overflow-y: auto;
                 }
@@ -244,7 +274,7 @@ a{
         .table-diff-right{
             position: relative;
             padding-top: 34px;
-            margin-left: 505px;
+            margin-left: 754px;
             .table-diff-right-single{
                 display: none;
                 &.active{
@@ -258,27 +288,35 @@ a{
                     font-size: 12px;
                     top: 0;
                     left: 0;
-                    background-color: #2d8cc0;
+                    background-color: #4EAADC;
                     color: #fff;
                     width: 100%;
                 }
                 .table-diff-single-content{
-                    height: 350px;
-                    overflow-y:scroll;
+                    height: 416px;
+                    line-height: 1.4;
                     background: #F0FAFF;
                     border: 1px solid #D8D8D8;
                     padding: 10px 10px 20px;
-                    .content-list{
-                        display: block;
-                        overflow: hidden;
-                        li{
-                            float: left;
-                            margin-right: 30px;
-                            margin-bottom: 10px;
-                        }
-                        .input-group{
-                            .input{
-                                margin-bottom: 0;
+                    .table-details-content-box{
+                        overflow-y: scroll;
+                        height: 332px;
+                        .content-list{
+                            display: block;
+                            overflow: hidden;
+                            li{
+                                float: left;
+                                margin-right: 30px;
+                                margin-bottom: 10px;
+                            }
+                            .input-group{
+                                .input{
+                                    margin-bottom: 0;
+                                }
+                                .select{
+                                    width: 106px;
+                                    margin-bottom: 0;
+                                }
                             }
                         }
                     }
@@ -286,7 +324,7 @@ a{
                         position: relative;
                         text-align: center;
                         height: 28px;
-                        padding: 30px 0 20px;
+                        padding: 20px 0;
                         .btn-toggle{
                             float: left;
                             padding-top: 8px;
@@ -337,7 +375,7 @@ a{
             .table-diff-data{
                 overflow-y: scroll;
                 width:auto;
-                height: 350px;
+                height: 448px;
             }
         }
         table{
@@ -390,6 +428,57 @@ a{
         .search-than{
             padding: 10px 12px 0;
         }
+        .than-table{
+            .than-thead{
+                padding-right: 16px;
+                background: #4EAADC;
+            }
+            .than-tbody{
+                height: 168px;
+                overflow-y: scroll;
+            }
+            .table{
+                width: 100%;
+                text-align: left;
+                border-collapse: collapse;
+                border-spacing: 0;
+                .thead{
+                    color: #fff;
+                    background: #4EAADC;
+                }
+                tr{
+                    td{
+                        padding: 9px 7px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        border: 1px solid #D8D8D8;
+                    }
+                }
+                .table-text{
+                    width: 70px;
+                }
+            }
+        }
+        .no-than{
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            .add-than{
+                color: #2D8CC0;
+                text-decoration: underline;
+            }
+        }
+    }
+    .add-than{
+        margin-top: 37px;
+        .than-thead{
+            padding-right: 16px;
+            background: #4EAADC;
+        }
+        .than-tbody{
+            height: 168px;
+            overflow-y: scroll;
+        }
         .table{
             width: 100%;
             text-align: left;
@@ -411,15 +500,6 @@ a{
                 width: 70px;
             }
         }
-        .no-than{
-            height: 28px;
-            line-height: 28px;
-            text-align: center;
-            .add-than{
-                color: #2D8CC0;
-                text-decoration: underline;
-            }
-        }
     }
 
     //药品目录-添加对比数据
@@ -427,6 +507,7 @@ a{
         display: none;
         margin-top: -8px;
         .goback{
+            display: block;
             color: #2D8CC0;
             margin-bottom: 20px;
         }
@@ -463,6 +544,71 @@ a{
     //门诊／住院单位
     .popup-company{
         width: 320px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 99;
+        margin-left: -161px;
+        margin-top: -122px;
+        background: #fff;
+        .popup-content{
+            padding: 20px 74px;
+            .popup-item{
+                margin-top: 10px;
+                overflow: hidden;
+                .item-input{
+                    width: 34px;
+                    height: 26px;
+                    float: left;
+                    padding: 0 5px;
+                    border: 1px solid #CACACA;
+                }
+                .item-select{
+                    height: 28px;
+                    width: 40px;
+                    float: left;
+                    border-left-width: 0;
+                    border-right-width: 0;
+                    border-color: #CACACA;
+                }
+                .last-select{
+                    border-right-width: 1px;
+                }
+            }
+            .btn-group{
+                margin-top: 20px;
+                text-align: center;
+                .add-btn{
+                    background: #BCBCBC;
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+    .popup-record{
+        width: 482px;
+        position: absolute;
+        top: 375px;
+        left: 50%;
+        z-index: 99;
+        margin-left: -241px;
+        background: #fff;
+        .popup-content{
+            padding: 10px 10px 19px;
+            .popup-table{
+                width: 100%;
+                padding: 10px;
+                border-collapse: collapse;
+                border-spacing: 0;
+                tr{
+                    td{
+                        border: 1px solid #D8D8D8;
+                        height: 25px;
+                        padding: 0 5px;
+                    }
+                }
+            }
+        }
     }
 }
 /*页面底部样式*/

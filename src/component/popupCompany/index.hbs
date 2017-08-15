@@ -1,9 +1,24 @@
-<div class="popup popup-company">
+<div class="popup-company">
     <div class="popup-title">
-        甲泼尼龙片◆② <span class="popup-close">关闭</span>
+        {{popupTitle}}甲泼尼龙片◆② <span class="popup-close"></span>
     </div>
     <div class="popup-content">
-        门诊／住院单位：<br>
-        <input type="text"><select></select><input type="text"><select></select>
+        门诊／住院单位：
+        <div class="popup-item">
+            <input type="text" class="item-input"><select  class="item-select"><option value="和">和</option><option value="和">和</option></select>
+            <input type="text" class="item-input"><select  class="item-select last-select"></select>
+        </div>
+        <div class="popup-item">
+            <input type="text" class="item-input"><select  class="item-select"><option value="和">和</option><option value="和">和</option></select>
+            <input type="text" class="item-input"><select  class="item-select last-select"></select>
+        </div>
+        <div class="popup-item">
+            <input type="text" class="item-input"><select  class="item-select"><option value="和">和</option><option value="和">和</option></select>
+            <input type="text" class="item-input"><select  class="item-select last-select"></select>
+        </div>
+        <div class="btn-group">
+            <div class="btn add-btn">新增</div>
+            <div class="btn">保存</div>
+        </div>
     </div>
 </div>

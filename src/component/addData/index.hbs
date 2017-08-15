@@ -1,5 +1,35 @@
-<a href="javascript:void(0)" class="goback">返回</a>
-{{{searchBox}}}
+<a href="javascript:void(0)" class="goback"><i class="icon-arrow-left"></i>返回</a>
+<div class="add-search-than">
+    {{#each input}}
+        <lable class="input-group">
+            {{this.text}}
+            <input type="text" class="input {{this.inputClass}}">
+        </lable>
+    {{/each}}
+    <a href="javaScript:void(0)" class="btn">查找</a>
+</div>
+<div class="add-than">
+    <div class="than-thead">
+        <table class="table">
+            <tr class="thead">
+                {{#each thead}}
+                    <td><div class="table-text">{{this}}</div></td>
+                {{/each}}
+            </tr>
+        </table>
+    </div>
+    <div class="than-tbody">
+        <table class="table">
+            {{#each tbody}}
+                <tr>
+                    {{#each this}}
+                        <td><div class="table-text">{{this}}</div></td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>
 <div class="popup popup-add-info">
     <div class="popup-title">
         新增信息 <span class="popup-close">关闭</span>

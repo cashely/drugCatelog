@@ -1,14 +1,19 @@
 var tableDiff = require('./table-diff.hbs');
+var popupCompanyTal = require('../popupCompany/index.hbs');
+var popupRecordTal = require('../popupCompany/record.hbs');
+var Fn =  require('../function');
 var data = {
+    tLeftHead:['医院药品ID','药品名称','规格厂家','转换比','门诊/住院单位','是否停用','修订时间'],
+    tRightHead:['药品编码','药品类型','药品名称','剂型','规格','转换比','企业简称','批准文号/注册证号','基药','重点药物监控','营养用药','中成药注射剂','精麻毒放','妊娠用药','抗菌药物','DDD值','给药途径(不计算强度)','是否计算强度','分级','人社分类','药理分类','是否PPI'],
     ydata:[{
         id:1,
-        yid:'abc1',
-        yypmc:'abc1',
-        yggcj:'abc1',
-        yzhb:'abc1',
-        ymzzy:'abc1',
-        yty:'abc1',
-        yxdrq:'abc1'
+        yid:'0000007119',
+        yypmc:'氯米芬片◆①',
+        yggcj:'50mg*10/盒  塞浦路斯麦',
+        yzhb:'10',
+        ymzzy:'片，盒，和',
+        yty:'否',
+        yxdrq:'2016.12.12'
     },{
         id:2,
         yid:'abc1',
@@ -74,14 +79,14 @@ var data = {
         yxdrq:'abc1'
     }],
     bdata:[{
-        bbm:'abc',
-        blx:'abc',
-        bypmc:'abc',
-        bjx:'abc',
-        bgg:'abc',
-        bzhb:'abc',
-        bqyjc:'abc',
-        bpzwh:'abc',
+        bbm:'X153818-10',
+        blx:'化学药',
+        bypmc:'枸橼酸氯米',
+        bjx:'素片',
+        bgg:'50mg',
+        bzhb:'10',
+        bqyjc:'麦道甘美',
+        bpzwh:'国药准字',
         bjy:'abc',
         bzdjkyw:'abc',
         byyyy:'abc',
@@ -262,68 +267,56 @@ var data = {
 var singleData = {
     id:null,
     index:null
-}
+};
 
 $('.table-diff').html(tableDiff(data));
-$('.table-diff-right .table-diff-data').on('scroll',function(){
-    var _t = $(this);
-    // console.log(_t.height()+','+_t.scrollTop()+','+_t.children('table').height());
-    $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
-    $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
-});
-$('.table-diff-data tr').on('click',function(){
-    var _index = $(this).prevAll().length;
-    var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    for(var i=0;i<_tables;i++){
-        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
-    }
-});
-$('.table-diff-data tr').hover(function(){
-    var _index = $(this).prevAll().length;
 
-    var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+//滚动事件
+Fn.tableDiffScroll();
+//点击表格数据事件
+Fn.tableDiffClick();
+//鼠标表格悬停事件
+Fn.tableDiffHover();
+//显示比对按钮
+Fn.showDiffBar(singleData);
 
-    for(var i=0;i<_tables;i++){
-        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('hover');
-    }
-},function(){
-    var _index = $(this).prevAll().length;
-    var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    for(var i=0;i<_tables;i++){
-        $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
-    }
-});
-$('.table-diff-left .table-diff-data tr').on('mouseover',function(e){
-    var _tr = $(this);
-    $('.table-diff-bar').css({
-        display:'block',
-        top:_tr.position().top+_tr.height()-1,
-        left:e.pageX-_tr.offset().left
-    });
-    singleData.id = $(this).attr('data-id');
-});
-$('.table-diff-bar').on('mouseout',function(){
-    $('.table-diff-bar').hide();
-});
-$('.table-diff-bar').on('mouseover',function(e){
-    $('.table-diff-bar').show();
-    e.preventDefault();
-});
+//显示比对内容
+Fn.showThan();
+
+//绑定查看详情事件
 $('#showDetail').on('click',showDetail);
-
+//查看详情事件
 function showDetail(e){
     console.log(singleData);
     if(!singleData.id){
         return;
     }
-    $('.table-diff-left .table-diff-data').toggleClass('table-diff-show-detail');
-    $('.table-diff-right-all').toggleClass('active');
-    $('.table-diff-right-single').toggleClass('active');
+    $('.table-diff-data-content').find('[data-id='+singleData.id+']').addClass('active').siblings().removeClass('active');
+    $('.table-diff-left .table-diff-data').addClass('table-diff-show-detail');
+    $('.table-diff-right-all').removeClass('active');
+    $('.table-diff-right-single').addClass('active');
     e.preventDefault();
 }
-//绑定比对
-$('#showThan').on('click',showThan);
+//切换详情事件
+$('.btn-toggle').on('click',hideDetail);
+function hideDetail(e){
+    $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
+    $('.table-diff-data tr').removeClass('active');
+    $('.table-diff-right-all').addClass('active');
+    $('.table-diff-right-single').removeClass('active');
+}
 
-function showThan(){
-    $('.standard-than').show()
+//弹窗修改门诊／住院单位
+$('.ymzzy').on('click',ymzzyPopupFn);
+function ymzzyPopupFn(){
+    var companyData = {popupTitle:'门诊／住院单位'};
+    $('.popup').html(popupCompanyTal(companyData)).show();
+    $('.popup-close').on('click',function(){$('.popup').hide()});
+}
+//弹窗查看属性修改纪录
+$('.btn-record').on('click',recordFn);
+function recordFn(){
+    var recordData = {popupTitle:'住院单位'};
+    $('.popup').html(popupRecordTal(recordData)).show();
+    $('.popup-close').on('click',function(){$('.popup').hide()});
 }
