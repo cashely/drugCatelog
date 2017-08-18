@@ -120,8 +120,8 @@ a{
         display: none;
         width: 482px;
         background: #FFFFFF;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
+        //border: 1px solid #FFFFFF;
+        //box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
         border-radius: 2px;
         .popup-title{
             height: 28px;
@@ -138,23 +138,6 @@ a{
                 top: 6px;
                 right: 10px;
                 background: url(./images/icon-close.png) center center no-repeat;
-            }
-        }
-    }
-    .table-diff-data{
-        tr{
-                input{
-                    width: 100%;
-                    color: #666;
-                    border:1px solid transparent;
-                    background-color: transparent;
-                }
-            &.hover,&.active{
-                input{
-                    width: 100%;
-                    border-color:#d9d9d9;
-                    background-color: #fff;
-                }
             }
         }
     }
@@ -187,212 +170,6 @@ a{
                 .icon-download{
                     vertical-align: top;
                     margin-right: 4px;
-                }
-            }
-        }
-    }
-
-    //药品数据
-    .table-diff{
-        margin-top: 10px;
-        position: relative;
-        .table-diff-bar{
-            position: absolute;
-            left:0;
-            top:0;
-            z-index: 10;
-            color: #fff;
-            background-color: #4DA9DB;
-            display: inline-block;
-            a{
-                color: #fff;
-                padding:10px;
-                display: inline-block;
-            }
-        }
-        .table-diff-header{
-            //background-color: #2d8cc0;
-        }
-
-        .table-diff{
-            tr{
-                &:nth-child(2n){
-                    td{
-                        background-color: #fafafa;
-                    }
-                }
-            }
-            .icon-triangle{
-                background:  url(./images/icon-triangle.png) top right no-repeat #fff;
-            }
-            td,th{
-                padding: 0;
-                white-space: nowrap;
-                >div{
-                    display: block;
-                    width: 100px;
-                    overflow: hidden;
-                    padding:5px;
-                }
-            }
-            th{
-                background-color: #2d8cc0;
-                color: #fff;
-                padding:5px 0;
-            }
-        }
-        .table-diff-left{
-            float: left;
-            padding-top: 34px;
-            position: relative;
-            z-index: 9;
-            width: 754px;
-            td,th{
-                >div{
-                    width: 70.42px;
-                }
-            }
-            .table-diff-header{
-                position: absolute;
-                width: 754px;
-                top:0;
-                left:0;
-                z-index: 2;
-            }
-            .table-diff-data{
-                overflow-x: hidden;
-                overflow-y: hidden;
-                height: 448px;
-                &.table-diff-show-detail{
-                    overflow-y: auto;
-                }
-            }
-            .table-diff-data-content{
-                padding-bottom: 20px;
-            }
-        }
-        .table-diff-right{
-            position: relative;
-            padding-top: 34px;
-            margin-left: 754px;
-            .table-diff-right-single{
-                display: none;
-                &.active{
-                    display: block;
-                }
-                .table-diff-single-title{
-                    line-height: 33px;
-                    border-bottom: 1px solid #d9d9d9;
-                    position: absolute;
-                    text-align: center;
-                    font-size: 12px;
-                    top: 0;
-                    left: 0;
-                    background-color: #4EAADC;
-                    color: #fff;
-                    width: 100%;
-                }
-                .table-diff-single-content{
-                    height: 416px;
-                    line-height: 1.4;
-                    background: #F0FAFF;
-                    border: 1px solid #D8D8D8;
-                    padding: 10px 10px 20px;
-                    .table-details-content-box{
-                        overflow-y: scroll;
-                        height: 332px;
-                        .content-list{
-                            display: block;
-                            overflow: hidden;
-                            li{
-                                float: left;
-                                margin-right: 30px;
-                                margin-bottom: 10px;
-                            }
-                            .input-group{
-                                .input{
-                                    margin-bottom: 0;
-                                }
-                                .select{
-                                    width: 106px;
-                                    margin-bottom: 0;
-                                }
-                            }
-                        }
-                    }
-                    .tool{
-                        position: relative;
-                        text-align: center;
-                        height: 28px;
-                        padding: 20px 0;
-                        .btn-toggle{
-                            float: left;
-                            padding-top: 8px;
-                            color: #2D8CC0;
-                        }
-                        .btn-record{
-                            float: right;
-                            padding-top: 8px;
-                            color: #2D8CC0;
-                        }
-                        .btn-cancel{
-                            position: absolute;
-                            left: 50%;
-                            margin-left: -42px;
-                        }
-                    }
-                    .pagination{
-                        text-align: center;
-                        .pagination-prev{
-                            margin-right: 30px;
-                        }
-                    }
-                }
-            }
-            .table-diff-right-all{
-                display: none;
-                &.active{
-                    display: block;
-                }
-            }
-            .table-diff-header{
-                position: absolute;
-                top:0;
-                width: 100%;
-                overflow: hidden;
-                left:0px;
-                z-index: 2;
-                .table-diff-header-content{
-                    overflow-x: hidden;
-                    table{
-                        padding-right: 20px;
-                        th{
-                            background: #4EAADC;
-                        }
-                    }
-                }
-            }
-            .table-diff-data{
-                overflow-y: scroll;
-                width:auto;
-                height: 448px;
-            }
-        }
-        table{
-            background-color: #d9d9d9;
-            td,th{
-                background-color: #fff;
-            }
-        }
-        .table-diff-data{
-            margin-top: -1px;
-            td{
-                line-height: 20px;
-            }
-            tr.active{
-                display: table-row;
-                td{
-                    background-color: #d2eefd;
                 }
             }
         }
@@ -457,6 +234,9 @@ a{
                 .table-text{
                     width: 70px;
                 }
+                .select-than{
+                    color: #2D8CC0;
+                }
             }
         }
         .no-than{
@@ -470,13 +250,13 @@ a{
         }
     }
     .add-than{
-        margin-top: 37px;
+        margin-top: 26px;
         .than-thead{
             padding-right: 16px;
             background: #4EAADC;
         }
         .than-tbody{
-            height: 168px;
+            height: 350px;
             overflow-y: scroll;
         }
         .table{
@@ -499,6 +279,9 @@ a{
             .table-text{
                 width: 70px;
             }
+            .add-than-info{
+                color: #2D8CC0;
+            }
         }
     }
 
@@ -512,35 +295,46 @@ a{
             margin-bottom: 20px;
         }
         //药品目录-添加对比信息弹窗
-        .popup-add-info{
-            .popup-content{
-                padding: 30px;
-                overflow: hidden;
-                .content-lf{
-                    float: left;
-                    width: 212px;
+    }
+    .popup-add-info{
+        width: 482px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -242px;
+        margin-top: -134px;
+        background: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+        border-radius: 2px;
+        .popup-content{
+            padding: 30px;
+            overflow: hidden;
+            .content-lf{
+                float: left;
+                width: 212px;
+            }
+            .content-right{
+                float: left;
+            }
+            .input-group{
+                .input{
+                    width: 60px;
+                    margin-bottom: 0;
                 }
-                .content-right{
-                    float: left;
-                }
-                .input-group{
-                    .input{
-                        width: 60px;
-                        margin-bottom: 0;
-                    }
-                }
-                li{
-                    margin-bottom: 10px;
-                }
-                .popup-btn{
-                    float: left;
-                    width: 100%;
-                    margin-top: 20px;
-                    text-align: center;
-                }
+            }
+            li{
+                margin-bottom: 10px;
+            }
+            .popup-btn{
+                float: left;
+                width: 100%;
+                margin-top: 20px;
+                text-align: center;
             }
         }
     }
+
     //门诊／住院单位
     .popup-company{
         width: 320px;
@@ -551,34 +345,42 @@ a{
         margin-left: -161px;
         margin-top: -122px;
         background: #fff;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+        border-radius: 2px;
         .popup-content{
             padding: 20px 74px;
-            .popup-item{
-                margin-top: 10px;
-                overflow: hidden;
-                .item-input{
-                    width: 34px;
-                    height: 26px;
-                    float: left;
-                    padding: 0 5px;
-                    border: 1px solid #CACACA;
-                }
-                .item-select{
-                    height: 28px;
-                    width: 40px;
-                    float: left;
-                    border-left-width: 0;
-                    border-right-width: 0;
-                    border-color: #CACACA;
-                }
-                .last-select{
-                    border-right-width: 1px;
+            .popup-list{
+                width: 200px;
+                overflow: auto;
+                max-height: 174px;
+                .popup-item{
+                    margin-top: 10px;
+                    overflow: hidden;
+                    .item-input{
+                        width: 34px;
+                        height: 26px;
+                        float: left;
+                        padding: 0 5px;
+                        border: 1px solid #CACACA;
+                    }
+                    .item-select{
+                        height: 28px;
+                        width: 40px;
+                        float: left;
+                        border-left-width: 0;
+                        border-right-width: 0;
+                        border-color: #CACACA;
+                    }
+                    .last-select{
+                        border-right-width: 1px;
+                    }
                 }
             }
             .btn-group{
                 margin-top: 20px;
                 text-align: center;
-                .add-btn{
+                .add-unit{
                     background: #BCBCBC;
                     margin-right: 30px;
                 }
@@ -607,6 +409,247 @@ a{
                         padding: 0 5px;
                     }
                 }
+            }
+        }
+    }
+}
+//药品数据
+.table-diff-data{
+    tr{
+        input{
+            width: 100%;
+            color: #666;
+            border:1px solid transparent;
+            background-color: transparent;
+        }
+        &.hover,&.active{
+            input{
+                width: 100%;
+                border-color:#d9d9d9;
+                background-color: #fff;
+            }
+        }
+    }
+}
+.table-diff{
+    margin-top: 10px;
+    position: relative;
+    .table-diff-bar{
+        position: absolute;
+        left:0;
+        top:0;
+        z-index: 10;
+        color: #fff;
+        background-color: #4DA9DB;
+        display: inline-block;
+        a{
+            color: #fff;
+            padding:10px;
+            display: inline-block;
+        }
+    }
+    .table-diff-header{
+        //background-color: #2d8cc0;
+    }
+
+    .table-diff{
+        tr{
+            &:nth-child(2n){
+                td{
+                    background-color: #fafafa;
+                }
+            }
+        }
+        .icon-triangle{
+            background:  url(./images/icon-triangle.png) top right no-repeat #fff;
+        }
+        td,th{
+            padding: 0;
+            white-space: nowrap;
+            >div{
+                display: block;
+                width: 100px;
+                overflow: hidden;
+                height: 28px;
+                line-height: 28px;
+                padding: 0 5px;
+            }
+        }
+        th{
+            background-color: #2d8cc0;
+            color: #fff;
+            //padding:5px 0;
+        }
+    }
+    .table-diff-left{
+        float: left;
+        padding-top: 28px;
+        position: relative;
+        z-index: 9;
+        width: 754px;
+        td,th{
+            >div{
+                width: 70.42px;
+            }
+        }
+        .table-diff-header{
+            position: absolute;
+            width: 754px;
+            top:0;
+            left:0;
+            z-index: 2;
+        }
+        .table-diff-data{
+            overflow-x: hidden;
+            overflow-y: hidden;
+            height: 448px;
+            &.table-diff-show-detail{
+                overflow-y: auto;
+            }
+        }
+        .table-diff-data-content{
+            //padding-bottom: 20px;
+        }
+    }
+    .table-diff-right{
+        position: relative;
+        padding-top: 28px;
+        margin-left: 754px;
+        .table-diff-right-single{
+            display: none;
+            &.active{
+                display: block;
+            }
+            .table-diff-single-title{
+                line-height: 29px;
+                border-bottom: 1px solid #d9d9d9;
+                position: absolute;
+                text-align: center;
+                font-size: 12px;
+                top: 0;
+                left: 0;
+                background-color: #4EAADC;
+                color: #fff;
+                width: 100%;
+            }
+            .table-diff-single-content{
+                height: 416px;
+                line-height: 1.4;
+                background: #F0FAFF;
+                border: 1px solid #D8D8D8;
+                padding: 10px 10px 20px;
+                .table-details-content-box{
+                    overflow-y: scroll;
+                    height: 332px;
+                    .content-list{
+                        display: block;
+                        overflow: hidden;
+                        li{
+                            float: left;
+                            margin-right: 30px;
+                            margin-bottom: 10px;
+                        }
+                        .input-group{
+                            .input{
+                                margin-bottom: 0;
+                            }
+                            .select{
+                                width: 106px;
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+                .tool{
+                    position: relative;
+                    text-align: center;
+                    height: 28px;
+                    padding: 20px 0;
+                    .btn-toggle{
+                        float: left;
+                        padding-top: 8px;
+                        color: #2D8CC0;
+                    }
+                    .btn-record{
+                        float: right;
+                        padding-top: 8px;
+                        color: #2D8CC0;
+                    }
+                    .btn-cancel{
+                        position: absolute;
+                        left: 50%;
+                        margin-left: -42px;
+                    }
+                }
+                .pagination{
+                    text-align: center;
+                    .pagination-prev{
+                        margin-right: 30px;
+                    }
+                }
+            }
+        }
+        .table-diff-right-all{
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
+        .table-diff-header{
+            position: absolute;
+            top:0;
+            width: 100%;
+            overflow: hidden;
+            left:0px;
+            z-index: 2;
+            .table-diff-header-content{
+                overflow-x: hidden;
+                table{
+                    padding-right: 20px;
+                    th{
+                        background: #4EAADC;
+                    }
+                }
+            }
+        }
+        .table-diff-data{
+            overflow-y: scroll;
+            width:auto;
+            height: 448px;
+        }
+    }
+    table{
+        background-color: #d9d9d9;
+        td,th{
+            background-color: #fff;
+        }
+    }
+    .table-diff-data{
+        margin-top: -1px;
+        td{
+            line-height: 20px;
+        }
+        tr.active{
+            display: table-row;
+            td{
+                background-color: #d2eefd;
+            }
+        }
+    }
+}
+//中药饮片
+.slices-table{
+    .table-diff{
+        .table-diff-right .table-diff-header {
+            background: #4EAADC;
+        }
+        .table-diff-right .table-diff-header .table-diff-header-content table{
+            margin-right: 16px;
+            padding-right: 0;
+        }
+        .table-diff-right {
+            td > div, th > div{
+                width: 64px;
             }
         }
     }

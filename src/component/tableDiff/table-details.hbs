@@ -1,0 +1,138 @@
+<div>
+    <ul class="content-list">
+        <li>药品名称：{{drugName}}</li>
+        <li>剂型：{{specName}}</li>
+        <li>规格：{{prepName}}</li>
+        <li>转换比：{{fConvertRatio}}</li>
+        <li>药品编码：{{codePro}}</li>
+        <li>含量：{{component}}{{componentUnit}}</li>
+        <li>装量：{{volume}} {{volumeUnit}}</li>
+        <li>最小使用单位：{{minUseUnit}}</li>
+        <li>最小包装单位：{{wrapUnit}}</li>
+        <li>说明书：{{instruction}}</li>
+        <li>说明书版本：{{smsDate}}</li>
+        <li>中成药注射剂：{{isZcyzsj}}</li>
+        <li>企业简称：{{facAbbrF}}</li>
+        <li>批准文号/注册证号：{{pzwh}}/{{prodZczhF}}</li>
+    </ul>
+    <ul class="content-list">
+        <li class="input-group">
+            <span class="ypType">药品类型:</span>
+            <select class="select updateValueFn">
+                <option value="0" {{isTrue ypType}}>化学药、中成药</option>
+                <option value="1" {{isTrue ypType}}>中药饮片</option>
+                <option value="2" {{isTrue ypType}}>医院制剂</option>
+                <option value="3" {{isTrue ypType}}>卫生材料</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="yblb">医保:</span>
+            <select class="select updateValueFn">
+                <option value="0" {{isTrue yblb}}>国家</option>
+                <option value="1" {{isTrue yblb}}>省</option>
+                <option value="2" {{isTrue yblb}}>地市</option>
+            </select>
+        </li>
+        <li class="input-group">医保编码:<input type="text" class="input" value="{{ybbh}}"></li>
+        <li class="input-group">
+            <span class="flag4">基药:</span>
+            <select class="select updateValueFn">
+                <option value="0" {{isTrue flag4}}>国家</option>
+                <option value="1" {{isTrue flag4}}>省</option>
+                <option value="2" {{isTrue flag4}}>地市</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="jkyw">重点监控药物:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue jkyw}}>是</option>
+                <option value="0" {{isTrue jkyw}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="yyyy">营养用药:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue yyyy}}>是</option>
+                <option value="0" {{isTrue yyyy}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="bloodPro">血液制品:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue bloodPro}}>是</option>
+                <option value="0" {{isTrue bloodPro}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="tpzjs">糖皮质激素:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue tpzjs}}>是</option>
+                <option value="0" {{isTrue tpzjs}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="energy">能量用药:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue energy}}>是</option>
+                <option value="0" {{isTrue energy}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="flag5">PPI（质子泵抑制剂）:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue flag5}}>是</option>
+                <option value="0" {{isTrue flag5}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="jmdf">精麻毒放:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue jmdf}}>是</option>
+                <option value="0" {{isTrue jmdf}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+           <span class="pregnancyLevel updateValueFn"> 妊娠用药:</span>
+            <select class="select">
+                <option value="1" {{isTrue pregnancyLevel}}>是</option>
+                <option value="0" {{isTrue pregnancyLevel}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+             <span class="flag1"> 抗菌药物: </span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue flag1}}>是</option>
+                <option value="0" {{isTrue flag1}}>否</option>
+            </select>
+        </li>
+        <li class="input-group" onclick="updateValueFn()">抗菌药物分级:<input type="text" class="input" value="{{kjywType}}"></li>
+        <li class="input-group">抗菌药物分类:<input type="text" class="input"  value="{{kjyw}}"></li>
+        <li class="input-group">DDD值:<input type="text" class="input"  value="{{ddd}}"></li>
+        <li class="input-group">给药途径不计算强度:<input type="text" class="input"  value="{{adminRouteNotDdd}}"></li>
+        <li class="input-group">
+            <span class="isDdd">是否计算强度: </span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue isDdd}}>是</option>
+                <option value="0" {{isTrue isDdd}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="ypid">YPID:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue ypid}}>是</option>
+                <option value="0" {{isTrue ypid}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
+           <span class="pzCode">品种代码: </span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue pzCode}}>是</option>
+                <option value="0" {{isTrue pzCode}}>否</option>
+            </select>
+        </li>
+    </ul>
+    <ul class="content-list">
+        <li>人社分类：{{rbflName}}</li>
+        <li>药理分类：{{ylflName}}</li>
+    </ul>
+</div>

@@ -8,8 +8,3 @@ var data = {
 };
 
 $('#header').html(headerTel(data));
-
-setTimeout(function(){
-    data.gly = 'gly2';
-    $('.header').html(headerTel(data));
-},2000);

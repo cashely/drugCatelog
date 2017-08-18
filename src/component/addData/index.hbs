@@ -6,7 +6,7 @@
             <input type="text" class="input {{this.inputClass}}">
         </lable>
     {{/each}}
-    <a href="javaScript:void(0)" class="btn">查找</a>
+    <a href="javaScript:void(0)" class="btn find-add-than">查找</a>
 </div>
 <div class="add-than">
     <div class="than-thead">
@@ -18,36 +18,19 @@
             </tr>
         </table>
     </div>
-    <div class="than-tbody">
+    <div class="than-tbody add-than-tbody">
         <table class="table">
             {{#each tbody}}
-                <tr>
-                    {{#each this}}
-                        <td><div class="table-text">{{this}}</div></td>
-                    {{/each}}
+                <tr data-id="{{id}}">
+                    <td><div class="table-text codePro">{{codePro}}</div></td>
+                    <td><div class="table-text name">{{name5}}</div></td>
+                    <td><div class="table-text">{{flmc}}</div></td>
+                    <td><div class="table-text spec">{{spec}}</div></td>
+                    <td><div class="table-text manufacturerName">{{manufacturerName}}</div></td>
+                    <td><div class="table-text pzwh">{{pzwh}}</div></td>
+                    <td><div class="table-text add-than-info">新增</div></td>
                 </tr>
             {{/each}}
         </table>
-    </div>
-</div>
-<div class="popup popup-add-info">
-    <div class="popup-title">
-        新增信息 <span class="popup-close">关闭</span>
-    </div>
-    <div class="popup-content">
-        <ul class="content-lf">
-            <li>药品名称：甲泼尼龙片</li>
-            <li>规格：4mg</li>
-            <li class="input-group">包装(转化比):<input type="text" class="input"></li>
-            <li class="input-group">包装单位:<input type="text" class="input"></li>
-        </ul>
-        <ul class="content-rt">
-            <li> 生产企业：天津天药药业股份有限公司</li>
-            <li>批准文号：国药准字H20020224</li>
-            <li class="input-group">最小使用单位:<input type="text" class="input"></li>
-        </ul>
-        <div class="popup-btn">
-            <a href="javaScript:void(0)" class="btn">保存并比对</a>
-        </div>
     </div>
 </div>

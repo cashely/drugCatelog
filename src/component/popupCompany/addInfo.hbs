@@ -1,0 +1,34 @@
+<div class="popup-add-info" data-id="{{default.id}}">
+    <div class="popup-title">
+        新增信息 <span class="popup-close"></span>
+    </div>
+    <div class="popup-content">
+        <ul class="content-lf">
+            <li>药品名称：{{default.name}}</li>
+            <li>规格：{{default.spec}}</li>
+            <li class="input-group">包装(转化比):<input type="text" class="input convert"></li>
+            <li class="input-group">包装单位:
+                <select class="select packUnit">
+                    {{#each packUnit}}
+                        <option value="{{name}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            </li>
+        </ul>
+        <ul class="content-rt">
+            <li>生产企业：{{default.manufacturerName}}</li>
+            <li>批准文号：{{default.pzwh}}</li>
+            <li class="input-group">
+                最小使用单位:
+                <select class="select minUseUnit">
+                    {{#each minUseUnit}}
+                        <option value="{{name}}">{{name}}</option>
+                    {{/each}}
+                </select>
+            </li>
+        </ul>
+        <div class="popup-btn">
+            <a href="javaScript:void(0)" class="btn saveOrUpdate">保存并比对</a>
+        </div>
+    </div>
+</div>

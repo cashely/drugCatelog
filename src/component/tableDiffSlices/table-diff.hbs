@@ -1,16 +1,16 @@
 <div class="table-diff">
     <div class="table-diff-content">
         <div class="table-diff-bar">
-            <a href="#" class="showThan">比对</a>|<a href="javascript:void(0)" id="showDetail">查看详情</a>|<a href="#">取消比对</a>
+            <a href="javascript:void(0)" class="showThan">比对</a>|<a href="javascript:void(0)" class="showDetail">查看详情</a>|<a href="javascript:void(0)" class="cancel-than">取消比对</a>
         </div>
         <div class="table-diff-header">
             <div class="table-diff-left">
                 <div class="table-diff-header">
                     <table width="100%" cellspacing="1" border="0">
                         <thead>
-                        {{#each tLeftHead}}
-                            <th><div>{{this}}</div></th>
-                        {{/each}}
+                            {{#each tLeftHead}}
+                                <th><div>{{this}}</div></th>
+                            {{/each}}
                         </thead>
                     </table>
                 </div>
@@ -20,14 +20,13 @@
                             <tbody>
                             {{#each ydata}}
                                 <tr data-id={{id}}>
-                                    <td><div>{{yid}}</div></td>
-                                    <td><div>{{yypmc}}</div></td>
-                                    <td><div>{{yggcj}}</div></td>
-                                    <td><div>{{ysydw}}</div></td>
-                                    <td><div><input value={{yzhb}} /></div></td>
-                                    <td class="icon-triangle ymzzy"><div>{{ymzzy}}</div></td>
-                                    <td><div>{{yty}}</div></td>
-                                    <td><div>{{yxdrq}}</div></td>
+                                    <td><div>{{id}}</div></td>
+                                    <td><div>{{drugName}}</div></td>
+                                    <td><div>{{spec}}{{manufacturerName}}</div></td>
+                                    <td><div><input value={{convertRatio}}></div></td>
+                                    <td class="icon-triangle"><div>{{unitName}}</div></td>
+                                    <td><div>{{isStop}}</div></td>
+                                    <td><div>{{createDate}}</div></td>
                                 </tr>
                             {{/each}}
                             </tbody>
@@ -53,15 +52,15 @@
                     <div class="table-diff-data" style="overflow-x: hidden;">
                         <table cellspacing="1" border="0">
                             <tbody>
-                            {{#each bdata}}
+                            {{#each ydata}}
                                 <tr>
-                                    <td><div>{{bbm}}</div></td>
-                                    <td><div>{{blx}}</div></td>
-                                    <td><div>{{bypmc}}</div></td>
-                                    <td><div>{{bjx}}</div></td>
-                                    <td  class="icon-triangle"><div>{{bgg}}</div></td>
-                                    <td><div>{{bzhb}}</div></td>
-                                    <td class="icon-triangle"><div>{{bqyjc}}</div></td>
+                                    <td><div>{{codePro}}</div></td>
+                                    <td><div>{{ypType}}</div></td>
+                                    <td><div>{{proName}}</div></td>
+                                    <td><div>{{pxName}}</div></td>
+                                    <td  class="icon-triangle"><div>{{flag4}}</div></td>
+                                    <td><div>{{yblb}}</div></td>
+                                    <td class="icon-triangle"><div>{{ybbh}}</div></td>
                                 </tr>
                             {{/each}}
                             </tbody>
@@ -72,129 +71,7 @@
                     <h2 class="table-diff-single-title">标准数据</h2>
                     <div class="table-diff-single-content">
                         <div class="table-details-content-box">
-                            <ul class="content-list">
-                                <li>药品名称：甲泼尼龙片</li>
-                                <li>剂型：素片</li>
-                                <li>规格：mg</li>
-                                <li>转换比：24</li>
-                                <li>药品编码：X120100-100101-A644-01-21-0004920-01</li>
-                                <li>含量：4mg</li>
-                                <li>装量：无</li>
-                                <li>最小使用单位：mg</li>
-                                <li>最小包装单位：盒</li>
-                                <li>说明书：有</li>
-                                <li>说明书版本：2007-01-09</li>
-                                <li>中成药注射剂：否</li>
-                                <li>企业简称：天津天药</li>
-                                <li>批准文号/注册证号：国药准字H20020224</li>
-                            </ul>
-                            <ul class="content-list">
-                                <li class="input-group">
-                                    药品类型:
-                                    <select class="select">
-                                        <option>化学药</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    医保:
-                                    <select class="select">
-                                        <option>国家</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">医保编码:<input type="text" class="input"></li>
-                                <li class="input-group">
-                                    基药:
-                                    <select class="select">
-                                        <option>省基</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    重点监控药物:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    营养用药:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    血液制品:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    糖皮质激素:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    能量用药:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    PPI（质子泵抑制剂）:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    中成药注射剂:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    精麻毒放:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    妊娠用药:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    抗菌药物:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">抗菌药物分级:<input type="text" class="input"></li>
-                                <li class="input-group">抗菌药物分类:<input type="text" class="input"></li>
-                                <li class="input-group">DDD值:<input type="text" class="input"></li>
-                                <li class="input-group">给药途径不计算强度:<input type="text" class="input"></li>
-                                <li class="input-group">
-                                    是否计算强度:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    YPID:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                                <li class="input-group">
-                                    品种代码:
-                                    <select class="select">
-                                        <option>ddd</option>
-                                    </select>
-                                </li>
-                            </ul>
-                            <ul class="content-list">
-                                <li>人社分类：系统性激素制剂，不含性激素和胰岛素-全身用皮质激素类-全身用皮质激素的单方制剂-糖皮质激素类</li>
-                                <li>药理分类：内分泌系统用药-肾上腺皮质激素-糖皮质激素-中效糖皮质激素</li>
-                            </ul>
+                            <!--标准数据详情-->
                         </div>
                         <div class="tool">
                             <a href="javaScript:void(0)" class="btn-toggle"><i class="icon-arrow-left"></i>切换</a>

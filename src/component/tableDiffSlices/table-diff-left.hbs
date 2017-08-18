@@ -1,0 +1,11 @@
+{{#each ydata}}
+    <tr data-id={{id}}>
+        <td><div>{{id}}</div></td>
+        <td><div>{{drugName}}</div></td>
+        <td><div>{{spec}}{{manufacturerName}}</div></td>
+        <td><div><input value={{convertRatio}}></div></td>
+        <td class="icon-triangle"><div>{{unitName}}</div></td>
+        <td><div>{{isStop}}</div></td>
+        <td><div>{{createDate}}</div></td>
+    </tr>
+{{/each}}
