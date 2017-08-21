@@ -1,56 +1,73 @@
 /**
+ * Created by Administrator on 2017/8/21.
+ */
+/**
  * 添加对比数据
  */
-var addData =  require('./index.hbs');
+var addData = require('./index.hbs');
 var searchBox = require('../searchBox/searchBox.hbs');
 var addDataPopupTel = require('../popupCompany/addInfo.hbs');
 var tbodyTel = require('./tbody.hbs');
-var ajaxFn =  require('../ajax');
-var loadTableFn =  require('../function').loadTableFn;
-
-var searchBoxData={
-  input:[
-    {text:'药品名称:',inputClass:'add-drug-name'},
-    {text:'规格:',inputClass:'add-spec'},
-    {text:'厂家:',inputClass: 'add-manufacturer-name'}
-  ],
-  thead:['(19+7)位药品编码','药品名称','商品名', '规格','生产企业','批准文号/注册证号','新增']
-};
-
+var tr = require('./tr.hbs');
+var ajaxFn = require('../ajax');
+var loadTableFn = require('../function').loadTableFn;
+var data = require('../indexData');//化学药数据
+var firstResult =0,maxResults= 16;loading = false;
 ajaxFn({
   url: 'product/listProduct',
-  callback:function(res){
-    searchBoxData.tbody = res.content;
-    var data = {
-      searchBox:'<div class="search-box">'+searchBox(searchBoxData)+'</div>'
-    };
-    $('.add-data').html(addData(searchBoxData));
-    $('.add-data .goback').on('click',function(){
+  callback: function (res) {
+    data.addData.tbody = res.content;
+    $('.add-data').html(addData(data.addData));
+    $('.add-data .goback').on('click', function () {
       $('.content .add-data').hide();
       $('.content  .content-box-main').show();
     });
-    $('.find-add-than').on('click',function(){
-      ajaxFn({
-        url: 'product/listProduct',
-        data: {
-          drugName: $('.add-drug-name').val(),
-          spec: $('.add-spec').val(),
-          manufacturerName: $('.add-manufacturer-name').val()
-        },
-        callback:function(res){
-          var tbodyData={};
-          tbodyData.tbody= res.content;
-          $('.add-than-tbody').html(tbodyTel(tbodyData));
-          $('.add-than-info').on('click',addThanInfo)
-        }
-      });
+    $('.find-add-than').on('click', function () {
+      if(loading == false){
+        loading = true;
+        ajaxFn({
+          url: 'product/listProduct',
+          data: {
+            drugName: $('.add-drug-name').val(),
+            spec: $('.add-spec').val(),
+            manufacturerName: $('.add-manufacturer-name').val()
+          },
+          callback: function (res) {
+            var tbodyData = {};
+            tbodyData.tbody = res.content;
+            $('.add-than-tbody').html(tbodyTel(tbodyData));
+            loading = false;
+          }
+        });
+      }
     });
-
-    $('.add-than-info').on('click',addThanInfo)
+    $(document).on('click','.add-than-info', addThanInfo);
+    $('.add-than .add-than-tbody').on('scroll',function(){
+      var _t = $(this);
+      if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){
+        if(loading == false){
+          loading = true;
+          ajaxFn({
+            url:'product/listProduct',
+            data:{
+              firstResult: (firstResult+1)*maxResults,
+              maxResults: maxResults
+            },
+            callback:function(res){
+              firstResult = firstResult + 1;
+              var trData = {};
+              trData.tbody = res.content;
+              $('.add-than-tbody tbody').append(tr(trData));
+              loading = false;
+            }
+          });
+        }
+      }
+    });
   }
 });
 
-function addThanInfo(){
+function addThanInfo() {
   var $tr = $(this).parents('tr');
   var data = {
     default: {
@@ -58,7 +75,7 @@ function addThanInfo(){
       name: $tr.find('.name').text(),
       spec: $tr.find('.spec').text(),
       manufacturerName: $tr.find('.manufacturerName').text(),
-      pzwh: $tr.find('.pzwh').text(),
+      pzwh: $tr.find('.pzwh').text()
     }
   };
   ajaxFn({
@@ -66,19 +83,21 @@ function addThanInfo(){
     data: {
       code: 1
     },
-    callback:function(res){
-      data.minUseUnit= res.content;
+    callback: function (res) {
+      data.minUseUnit = res.content;
       ajaxFn({
         url: 'dataDictionary/getDataDictionaryListByCode',
         data: {
           code: 2
         },
-        callback:function(res){
-          data.packUnit= res.content;
+        callback: function (res) {
+          data.packUnit = res.content;
           $('.popup').html(addDataPopupTel(data));
           $('.popup').show();
-          $('.popup-add-info .popup-close').on('click',function(){$('.popup-add-info').hide()});
-          $('.popup-add-info .saveOrUpdate').on('click',function(){
+          $('.popup-add-info .popup-close').on('click', function () {
+            $('.popup-add-info').hide()
+          });
+          $('.popup-add-info .saveOrUpdate').on('click', function () {
             ajaxFn({
               url: 'mcdProduct30Ues/saveOrUpdate',
               data: {
@@ -87,7 +106,7 @@ function addThanInfo(){
                 packUnit: $('.popup-add-info .packUnit').val(),
                 convert: $('.popup-add-info .convert').val()
               },
-              callback:function(res){
+              callback: function (res) {
                 console.log(res.content);
                 ajaxFn({
                   url: 'mcdProduct30/saveMatch',
@@ -95,7 +114,7 @@ function addThanInfo(){
                     drugId: $('.than-content').data('id'),
                     proId: res.content.proId
                   },
-                  callback:function(res){
+                  callback: function (res) {
                     $('.popup').hide();
                     $('.content .add-data').hide();
                     $('.content  .content-box-main').show();

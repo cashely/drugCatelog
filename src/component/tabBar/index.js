@@ -1,18 +1,10 @@
-/**
- * Created by Administrator on 2017/8/8.
- */
 var tabBarTel =  require('./tabBar.hbs');
 var Fn =  require('../function');
 var slices=  require('../../page/index/slices');
-var data = {
-  name: '页面切换条',
-  content: [
-    {text:'化学药／中成药',id:"medicine",active:"active"},
-    {text:'中药饮片',id:"slices"},
-    {text:'医院制剂',id:"potion"}
-  ]
-};
-$('.tabs-box').html(tabBarTel(data));
+var data = require('../indexData');
+var slicesData=  require('../../page/index/slicesData');
+
+$('.tabs-box').html(tabBarTel(data.tabsData));//加载切换条
 
 $(function(){
   $('.tabs .tabs-item').on('click',function(e){
@@ -22,15 +14,14 @@ $(function(){
     $_content.removeClass("active");
     switch ($(this).index()){
       case 1 :
-        $_content.hide() ;
-        if($('.content').children('.'+$(this).data('id')).length <= 0){
+        if($('.content').children('.'+slicesData.name).length <= 0){
           slices($(this));
           return;
         }
-        $_content.eq($(this).index()).show();
+        $_content.eq($(this).index()).addClass('active');
         break;
-      case 2 : $_content.hide(); $_content.eq($(this).index()).show() ;break;
-      default: $_content.hide().first().show();
+      case 2 : $_content.eq($(this).index()).addClass('active');break;
+      default: $_content.first().addClass('active');
     }
   });
 });

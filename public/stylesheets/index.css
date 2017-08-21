@@ -7,7 +7,8 @@ body {
   color: #666;
   margin: 0;
   padding: 0;
-  width: 100%; }
+  width: 100%;
+  min-width: 960px; }
 
 ul, li, p, h1, h2, h3, h4, h5, h6, dl, dt, dd {
   margin: 0;
@@ -175,6 +176,7 @@ a {
       padding-right: 16px;
       background: #4EAADC; }
     .content .standard-than .than-table .than-tbody {
+      position: relative;
       height: 168px;
       overflow-y: scroll; }
     .content .standard-than .than-table .table {
@@ -345,7 +347,7 @@ a {
     z-index: 10;
     color: #fff;
     background-color: #4DA9DB;
-    display: inline-block; }
+    display: none; }
     .table-diff .table-diff-bar a {
       color: #fff;
       padding: 10px;
@@ -385,8 +387,8 @@ a {
       overflow-x: hidden;
       overflow-y: hidden;
       height: 448px; }
-      .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
-        overflow-y: auto; }
+    .table-diff .table-diff-left .table-diff-data-content {
+      padding-bottom: 20px; }
   .table-diff .table-diff-right {
     position: relative;
     padding-top: 28px;
@@ -477,6 +479,8 @@ a {
     margin-top: -1px; }
     .table-diff .table-diff-data td {
       line-height: 20px; }
+    .table-diff .table-diff-data tr {
+      height: 28px; }
     .table-diff .table-diff-data tr.active {
       display: table-row; }
       .table-diff .table-diff-data tr.active td {
@@ -500,3 +504,13 @@ a {
   background: #f1f1f1; }
   .footer .footer-item {
     margin: 30px; }
+
+.loading {
+  margin-top: -6px;
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  width: 100%; }
+  .loading .loading-img {
+    width: 25px; }

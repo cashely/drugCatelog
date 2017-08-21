@@ -1,7 +1,7 @@
 <div class="table-diff">
     <div class="table-diff-content">
         <div class="table-diff-bar">
-            <a href="javascript:void(0)" class="showThan">比对</a>|<a href="javascript:void(0)" id="showDetail">查看详情</a>|<a href="javascript:void(0)" class="cancel-than">取消比对</a>
+            <a href="#standardData" class="showThan">比对</a>|<a href="javascript:void(0)" class="showDetail">查看详情</a>|<a href="javascript:void(0)" class="cancel-than">取消比对</a>
         </div>
         <div class="table-diff-header">
             <div class="table-diff-left">
@@ -19,7 +19,7 @@
                         <table width="100%" cellspacing="1" border="0">
                             <tbody>
                                 {{#each ydata}}
-                                    <tr data-id={{id}}>
+                                    <tr data-id={{id}} data-name={{drugNameFormat}}>
                                         <td class="table-diff-drugId"><div>{{id}}</div></td>
                                         <td><div>{{drugName}}</div></td>
                                         <td><div>{{specName}} {{manufacturerName}}</div></td>

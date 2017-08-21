@@ -8,6 +8,7 @@ body{
     margin:0;
     padding:0;
     width: 100%;
+    min-width: 960px;
 }
 ul,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd{
     margin:0;
@@ -211,6 +212,7 @@ a{
                 background: #4EAADC;
             }
             .than-tbody{
+                position: relative;
                 height: 168px;
                 overflow-y: scroll;
             }
@@ -441,7 +443,8 @@ a{
         z-index: 10;
         color: #fff;
         background-color: #4DA9DB;
-        display: inline-block;
+        //display: inline-block;
+        display: none;
         a{
             color: #fff;
             padding:10px;
@@ -504,11 +507,11 @@ a{
             overflow-y: hidden;
             height: 448px;
             &.table-diff-show-detail{
-                overflow-y: auto;
+                //overflow-y: auto;
             }
         }
         .table-diff-data-content{
-            //padding-bottom: 20px;
+            padding-bottom: 20px;
         }
     }
     .table-diff-right{
@@ -629,6 +632,9 @@ a{
         td{
             line-height: 20px;
         }
+        tr{
+            height: 28px;
+        }
         tr.active{
             display: table-row;
             td{
@@ -662,5 +668,17 @@ a{
     background: #f1f1f1;
     .footer-item{
         margin: 30px;
+    }
+}
+//加载中
+.loading{
+    margin-top: -6px;
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    .loading-img{
+        width: 25px;
     }
 }
