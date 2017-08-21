@@ -163,7 +163,7 @@ function tableDiffScrollFn(){
     $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
     var _t = $(this);
     if(_t.scrollLeft() != tableRightLeft){
-        tableRightLeft = _t.scrollLeft;
+        tableRightLeft = _t.scrollLeft();
         console.log('横向滚动');
         return;
     }
