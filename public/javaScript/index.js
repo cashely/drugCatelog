@@ -481,15 +481,15 @@ var tableRightLeft = 0;
 //滚动事件
 function tableDiffScrollFn() {
   $('.table-diff-right .table-diff-data').on('scroll', function (e) {
+    $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
     var _t = $(this);
     if (_t.scrollLeft() != tableRightLeft) {
       tableRightLeft = _t.scrollLeft;
-      // console.log('横向滚动');
-      return false;
+      console.log('横向滚动');
+      return;
     }
 
-    // console.log('竖向滚动');
-    return false;
+    console.log('竖向滚动');
     if (_t.children('table').height() - _t.scrollTop() + 17 <= _t.height()) {
       if (loading == false) {
         loading = true;
@@ -513,7 +513,6 @@ function tableDiffScrollFn() {
     }
     //console.log(_t.height()+','+_t.scrollTop()+','+_t.children('table').height());
     $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
-    $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
   });
 }
 
