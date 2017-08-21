@@ -138,7 +138,7 @@ function findThanFn(){
 
 //显示比对按钮
 function showDiffBarFn(){
-  $('.table-diff-left .table-diff-data tr').on('mouseover',function(e){
+  $(document).on('mouseover','.table-diff-left .table-diff-data tr',function(e){
     var _tr = $(this);
     $('.table-diff-bar').css({
       display:'block',
@@ -147,19 +147,27 @@ function showDiffBarFn(){
     });
     singleData.id = $(this).attr('data-id');
   });
-  $('.table-diff-bar').on('mouseout',function(){
-    $('.table-diff-bar').hide();
-  });
   $('.table-diff-bar').on('mouseover',function(e){
     $('.table-diff-bar').show();
     e.preventDefault();
   });
+  $(document).on('mouseleave','.table-diff-left',function(){
+      $('.table-diff-bar').hide();
+  })
 }
-
+var tableRightLeft = 0;
 //滚动事件
 function tableDiffScrollFn(){
-  $('.table-diff-right .table-diff-data').on('scroll',function(){
+  $('.table-diff-right .table-diff-data').on('scroll',function(e){
     var _t = $(this);
+    if(_t.scrollLeft() != tableRightLeft){
+        tableRightLeft = _t.scrollLeft;
+        // console.log('横向滚动');
+        return false;
+    }
+
+    // console.log('竖向滚动');
+    return false;
     if(_t.children('table').height()-_t.scrollTop()+17 <= _t.height()){
       if(loading == false){
         loading = true;

@@ -460,7 +460,7 @@ function findThanFn() {
 
 //显示比对按钮
 function showDiffBarFn() {
-  $('.table-diff-left .table-diff-data tr').on('mouseover', function (e) {
+  $(document).on('mouseover', '.table-diff-left .table-diff-data tr', function (e) {
     var _tr = $(this);
     $('.table-diff-bar').css({
       display: 'block',
@@ -469,19 +469,27 @@ function showDiffBarFn() {
     });
     singleData.id = $(this).attr('data-id');
   });
-  $('.table-diff-bar').on('mouseout', function () {
-    $('.table-diff-bar').hide();
-  });
   $('.table-diff-bar').on('mouseover', function (e) {
     $('.table-diff-bar').show();
     e.preventDefault();
   });
+  $(document).on('mouseleave', '.table-diff-left', function () {
+    $('.table-diff-bar').hide();
+  });
 }
-
+var tableRightLeft = 0;
 //滚动事件
 function tableDiffScrollFn() {
-  $('.table-diff-right .table-diff-data').on('scroll', function () {
+  $('.table-diff-right .table-diff-data').on('scroll', function (e) {
     var _t = $(this);
+    if (_t.scrollLeft() != tableRightLeft) {
+      tableRightLeft = _t.scrollLeft;
+      // console.log('横向滚动');
+      return false;
+    }
+
+    // console.log('竖向滚动');
+    return false;
     if (_t.children('table').height() - _t.scrollTop() + 17 <= _t.height()) {
       if (loading == false) {
         loading = true;
@@ -731,93 +739,93 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     return "                                <th><div>"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
+    + "</div></th>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                                    <tr data-id="
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + ">\r\n                                        <td class=\"table-diff-drugId\"><div>"
+    + ">\n                                        <td class=\"table-diff-drugId\"><div>"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.drugName || (depth0 != null ? depth0.drugName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"drugName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.specName || (depth0 != null ? depth0.specName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"specName","hash":{},"data":data}) : helper)))
     + " "
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td class=\"convertRatio\"><div><input value="
+    + "</div></td>\n                                        <td class=\"convertRatio\"><div><input value="
     + alias4(((helper = (helper = helpers.convertRatio || (depth0 != null ? depth0.convertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"convertRatio","hash":{},"data":data}) : helper)))
-    + "></div></td>\r\n                                        <td class=\"icon-triangle ymzzy\"><div>"
+    + "></div></td>\n                                        <td class=\"icon-triangle ymzzy\"><div>"
     + alias4(((helper = (helper = helpers.unitName || (depth0 != null ? depth0.unitName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unitName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.isStop || (depth0 != null ? depth0.isStop : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isStop","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.updateDate || (depth0 != null ? depth0.updateDate : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"updateDate","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    </tr>\r\n";
+    + "</div></td>\n                                    </tr>\n";
 },"5":function(container,depth0,helpers,partials,data) {
     return "                                        <th><div>"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
+    + "</div></th>\n";
 },"7":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "                                    <tr>\r\n                                        <td><div>"
+  return "                                    <tr>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td class=\"icon-triangle\"><div>"
+    + "</div></td>\n                                        <td class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.ypType || (depth0 != null ? depth0.ypType : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ypType","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.proName || (depth0 != null ? depth0.proName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"proName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.prepName || (depth0 != null ? depth0.prepName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"prepName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.fConvertRatio || (depth0 != null ? depth0.fConvertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fConvertRatio","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.facAbbrF || (depth0 != null ? depth0.facAbbrF : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"facAbbrF","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.flag4 || (depth0 != null ? depth0.flag4 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag4","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.jkyw || (depth0 != null ? depth0.jkyw : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jkyw","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.yyyy || (depth0 != null ? depth0.yyyy : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yyyy","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.isZcyzsj || (depth0 != null ? depth0.isZcyzsj : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isZcyzsj","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.jmdf || (depth0 != null ? depth0.jmdf : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jmdf","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.pregnancyLevel || (depth0 != null ? depth0.pregnancyLevel : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pregnancyLevel","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.flag1 || (depth0 != null ? depth0.flag1 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag1","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.ddd || (depth0 != null ? depth0.ddd : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ddd","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.adminRouteExclude || (depth0 != null ? depth0.adminRouteExclude : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"adminRouteExclude","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.isCalcKjyw || (depth0 != null ? depth0.isCalcKjyw : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isCalcKjyw","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.kjywType || (depth0 != null ? depth0.kjywType : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"kjywType","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.rbflName || (depth0 != null ? depth0.rbflName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rbflName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.ylflName || (depth0 != null ? depth0.ylflName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ylflName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                        <td><div>"
+    + "</div></td>\n                                        <td><div>"
     + alias4(((helper = (helper = helpers.flag5 || (depth0 != null ? depth0.flag5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag5","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    </tr>\r\n";
+    + "</div></td>\n                                    </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-bar\">\r\n            <a href=\"javascript:void(0)\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" id=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n        </div>\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                        <thead>\r\n"
+  return "<div class=\"table-diff\">\n    <div class=\"table-diff-content\">\n        <div class=\"table-diff-bar\">\n            <a href=\"javascript:void(0)\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" id=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\n        </div>\n        <div class=\"table-diff-header\">\n            <div class=\"table-diff-left\">\n                <div class=\"table-diff-header\">\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                        <thead>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
+    + "                        </thead>\n                    </table>\n                </div>\n                <div class=\"table-diff-data\">\n                    <div class=\"table-diff-data-content\">\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"table-diff-right\">\r\n                <div class=\"table-diff-right-all active\">\r\n                    <div class=\"table-diff-header\">\r\n                        <div class=\"table-diff-header-content\">\r\n                            <table cellspacing=\"1\" border=\"0\">\r\n                                <thead>\r\n                                    <tr>\r\n"
+    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n            </div>\n            <div class=\"table-diff-right\">\n                <div class=\"table-diff-right-all active\">\n                    <div class=\"table-diff-header\">\n                        <div class=\"table-diff-header-content\">\n                            <table cellspacing=\"1\" border=\"0\">\n                                <thead>\n                                    <tr>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                                    </tr>\r\n                                </thead>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-diff-data\">\r\n                        <table cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
+    + "                                    </tr>\n                                </thead>\n                            </table>\n                        </div>\n                    </div>\n                    <div class=\"table-diff-data\">\n                        <table cellspacing=\"1\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <div class=\"table-details-content-box\">\n                            <!--标准数据详情-->\n                        </div>\n                        <div class=\"tool\">\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\n                        </div>\n                        <div class=\"pagination\">\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -846,30 +854,30 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "    <lable class=\"input-group\">\r\n        "
+  return "    <lable class=\"input-group\">\n        "
     + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
-    + "\r\n        <input type=\"text\" class=\"input  "
+    + "\n        <input type=\"text\" class=\"input  "
     + alias2(alias1((depth0 != null ? depth0.inputClass : depth0), depth0))
-    + "\">\r\n    </lable>\r\n";
+    + "\">\n    </lable>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "<a href=\"javaScript:void(0)\" class=\"btn\">查找</a>\r\n<div class=\"search-box-rt\">\r\n    <a href=\"javaScript:void(0)\" class=\"btn create-btn\">生成新药分类</a>\r\n    <a href=\"javaScript:void(0)\" class=\"btn\">启用新药规则</a>\r\n</div>\r\n<div class=\"search-data\">\r\n    共查找出 "
+    + "<a href=\"javaScript:void(0)\" class=\"btn\">查找</a>\n<div class=\"search-box-rt\">\n    <a href=\"javaScript:void(0)\" class=\"btn create-btn\">生成新药分类</a>\n    <a href=\"javaScript:void(0)\" class=\"btn\">启用新药规则</a>\n</div>\n<div class=\"search-data\">\n    共查找出 "
     + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-    + " 条数据：\r\n    基药(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + " 条数据：\n    基药(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
     + alias4(((helper = (helper = helpers.jbywCount || (depth0 != null ? depth0.jbywCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbywCount","hash":{},"data":data}) : helper)))
-    + "</a>)&nbsp;\r\n    医保(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + "</a>)&nbsp;\n    医保(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
     + alias4(((helper = (helper = helpers.yblbCount || (depth0 != null ? depth0.yblbCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblbCount","hash":{},"data":data}) : helper)))
-    + "</a>)&nbsp;&nbsp;\r\n    问题数据(<a href=\"javaScript:void(0)\" class=\"color-red\">"
+    + "</a>)&nbsp;&nbsp;\n    问题数据(<a href=\"javaScript:void(0)\" class=\"color-red\">"
     + alias4(((helper = (helper = helpers.wtsjCount || (depth0 != null ? depth0.wtsjCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wtsjCount","hash":{},"data":data}) : helper)))
-    + "</a>)&nbsp;\r\n    未比对(<a href=\"javaScript:void(0)\" class=\"color-red\">"
+    + "</a>)&nbsp;\n    未比对(<a href=\"javaScript:void(0)\" class=\"color-red\">"
     + alias4(((helper = (helper = helpers.wbdCount || (depth0 != null ? depth0.wbdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wbdCount","hash":{},"data":data}) : helper)))
-    + "</a>)&nbsp;\r\n    已比对(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + "</a>)&nbsp;\n    已比对(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
     + alias4(((helper = (helper = helpers.ybdCount || (depth0 != null ? depth0.ybdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ybdCount","hash":{},"data":data}) : helper)))
-    + "</a>)&nbsp;&nbsp;\r\n    妊娠用药(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
+    + "</a>)&nbsp;&nbsp;\n    妊娠用药(<a href=\"javaScript:void(0)\" class=\"color-blue\">"
     + alias4(((helper = (helper = helpers.rsyyCount || (depth0 != null ? depth0.rsyyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rsyyCount","hash":{},"data":data}) : helper)))
-    + "</a>)\r\n    <a href=\"javaScript:void(0)\" class=\"download color-blue\"><img src=\"./images/icon-download.png\" class=\"icon-download\">下载</a>\r\n</div>";
+    + "</a>)\n    <a href=\"javaScript:void(0)\" class=\"download color-blue\"><img src=\"./images/icon-download.png\" class=\"icon-download\">下载</a>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -1044,11 +1052,11 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"header-right\">\r\n    当前用户 : &nbsp; "
+  return "<div class=\"header-right\">\n    当前用户 : &nbsp; "
     + alias4(((helper = (helper = helpers.gly || (depth0 != null ? depth0.gly : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"gly","hash":{},"data":data}) : helper)))
-    + "\r\n    <span class=\"time\">今天是 :  &nbsp;"
+    + "\n    <span class=\"time\">今天是 :  &nbsp;"
     + alias4(((helper = (helper = helpers.time || (depth0 != null ? depth0.time : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"time","hash":{},"data":data}) : helper)))
-    + "</span>\r\n    <a href=\"javascript:void(0)\" class=\"login-out\">注销</a>\r\n</div>\r\n";
+    + "</span>\n    <a href=\"javascript:void(0)\" class=\"login-out\">注销</a>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -1995,7 +2003,7 @@ module.exports = g;
 var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<span class=\"footer-item\">版权所有 医睦科技</span>\r\n<span class=\"footer-item\">客服:020-12345678</span>\r\n<span class=\"footer-item\">商务:020-12345678</span>";
+    return "<span class=\"footer-item\">版权所有 医睦科技</span>\n<span class=\"footer-item\">客服:020-12345678</span>\n<span class=\"footer-item\">商务:020-12345678</span>";
 },"useData":true});
 
 /***/ }),
@@ -2054,11 +2062,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><a href=\"javascript:void(0)\">"
     + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
-    + "</a></li>\r\n";
+    + "</a></li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<ul class=\"tabs\">\r\n"
+  return "<ul class=\"tabs\">\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.content : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</ul>";
 },"useData":true});
@@ -2072,59 +2080,59 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "            <lable class=\"input-group\">\r\n                "
+  return "            <lable class=\"input-group\">\n                "
     + alias4(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
-    + "\r\n                <input type=\"text\" class=\"input "
+    + "\n                <input type=\"text\" class=\"input "
     + alias4(((helper = (helper = helpers.inputClass || (depth0 != null ? depth0.inputClass : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"inputClass","hash":{},"data":data}) : helper)))
     + "\" value=\""
     + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
-    + "\">\r\n            </lable>\r\n";
+    + "\">\n            </lable>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     return "                       <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></td>\r\n";
+    + "</div></td>\n";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                   <tr data-id="
     + alias4(((helper = (helper = helpers.ID || (depth0 != null ? depth0.ID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ID","hash":{},"data":data}) : helper)))
-    + ">\r\n                       <td><div class=\"table-text\">"
+    + ">\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.YPID || (depth0 != null ? depth0.YPID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"YPID","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PZ_CODE || (depth0 != null ? depth0.PZ_CODE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PZ_CODE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.YJ_ID || (depth0 != null ? depth0.YJ_ID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"YJ_ID","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.CODE || (depth0 != null ? depth0.CODE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CODE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.DRUG_TYPE || (depth0 != null ? depth0.DRUG_TYPE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"DRUG_TYPE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.NAME_CN_F || (depth0 != null ? depth0.NAME_CN_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"NAME_CN_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PROD_TRADE_F || (depth0 != null ? depth0.PROD_TRADE_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_TRADE_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.SML_NAME_F || (depth0 != null ? depth0.SML_NAME_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"SML_NAME_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.SPEC_F || (depth0 != null ? depth0.SPEC_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"SPEC_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.FAC_NAME_F || (depth0 != null ? depth0.FAC_NAME_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"FAC_NAME_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PROD_PZWH_F || (depth0 != null ? depth0.PROD_PZWH_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_PZWH_F","hash":{},"data":data}) : helper)))
     + " "
     + alias4(((helper = (helper = helpers.PROD_ZCZH_F || (depth0 != null ? depth0.PROD_ZCZH_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_ZCZH_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text select-than\">选择</div></td>\r\n                   </tr>\r\n";
+    + "</div></td>\n                       <td><div class=\"table-text select-than\">选择</div></td>\n                   </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"title\">标准数据比对\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
+  return "<div class=\"title\">标准数据比对\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\n    </a>\n</div>\n<div class=\"than-content\" data-id=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n    <div class=\"search-than\">\r\n"
+    + "\">\n    <div class=\"search-than\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead\">\r\n           <table class=\"table\">\r\n               <tr class=\"thead\">\r\n"
+    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\n    </div>\n   <div class=\"than-table\">\n       <div class=\"than-thead\">\n           <table class=\"table\">\n               <tr class=\"thead\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <table class=\"table\">\r\n"
+    + "               </tr>\n           </table>\n       </div>\n       <div class=\"than-tbody\">\n           <table class=\"table\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "           </table>\r\n       </div>\r\n   </div>\r\n    <div class=\"no-than\">\r\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\r\n    </div>\r\n</div>";
+    + "           </table>\n       </div>\n   </div>\n    <div class=\"no-than\">\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -2138,35 +2146,35 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "        <tr data-id="
     + alias4(((helper = (helper = helpers.ID || (depth0 != null ? depth0.ID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ID","hash":{},"data":data}) : helper)))
-    + ">\r\n            <td><div class=\"table-text\">"
+    + ">\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.YPID || (depth0 != null ? depth0.YPID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"YPID","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PZ_CODE || (depth0 != null ? depth0.PZ_CODE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PZ_CODE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.YJ_ID || (depth0 != null ? depth0.YJ_ID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"YJ_ID","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.CODE || (depth0 != null ? depth0.CODE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CODE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.DRUG_TYPE || (depth0 != null ? depth0.DRUG_TYPE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"DRUG_TYPE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.NAME_CN_F || (depth0 != null ? depth0.NAME_CN_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"NAME_CN_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PROD_TRADE_F || (depth0 != null ? depth0.PROD_TRADE_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_TRADE_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.SML_NAME_F || (depth0 != null ? depth0.SML_NAME_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"SML_NAME_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.SPEC_F || (depth0 != null ? depth0.SPEC_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"SPEC_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.FAC_NAME_F || (depth0 != null ? depth0.FAC_NAME_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"FAC_NAME_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PROD_PZWH_F || (depth0 != null ? depth0.PROD_PZWH_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_PZWH_F","hash":{},"data":data}) : helper)))
     + " "
     + alias4(((helper = (helper = helpers.PROD_ZCZH_F || (depth0 != null ? depth0.PROD_ZCZH_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_ZCZH_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text select-than\">选择</div></td>\r\n        </tr>\r\n";
+    + "</div></td>\n            <td><div class=\"table-text select-than\">选择</div></td>\n        </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<table class=\"table\">\r\n"
+  return "<table class=\"table\">\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</table>";
 },"useData":true});
@@ -2182,31 +2190,31 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "    <tr data-id="
     + alias4(((helper = (helper = helpers.ID || (depth0 != null ? depth0.ID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ID","hash":{},"data":data}) : helper)))
-    + ">\r\n        <td><div class=\"table-text\">"
+    + ">\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.YPID || (depth0 != null ? depth0.YPID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"YPID","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PZ_CODE || (depth0 != null ? depth0.PZ_CODE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PZ_CODE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.YJ_ID || (depth0 != null ? depth0.YJ_ID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"YJ_ID","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.CODE || (depth0 != null ? depth0.CODE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CODE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.DRUG_TYPE || (depth0 != null ? depth0.DRUG_TYPE : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"DRUG_TYPE","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.NAME_CN_F || (depth0 != null ? depth0.NAME_CN_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"NAME_CN_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PROD_TRADE_F || (depth0 != null ? depth0.PROD_TRADE_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_TRADE_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.SML_NAME_F || (depth0 != null ? depth0.SML_NAME_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"SML_NAME_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.SPEC_F || (depth0 != null ? depth0.SPEC_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"SPEC_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.FAC_NAME_F || (depth0 != null ? depth0.FAC_NAME_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"FAC_NAME_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
+    + "</div></td>\n        <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.PROD_PZWH_F || (depth0 != null ? depth0.PROD_PZWH_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_PZWH_F","hash":{},"data":data}) : helper)))
     + " "
     + alias4(((helper = (helper = helpers.PROD_ZCZH_F || (depth0 != null ? depth0.PROD_ZCZH_F : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"PROD_ZCZH_F","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text select-than\">选择</div></td>\r\n    </tr>\r\n";
+    + "</div></td>\n        <td><div class=\"table-text select-than\">选择</div></td>\n    </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -2222,122 +2230,122 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div>\r\n    <ul class=\"content-list\">\r\n        <li>药品名称："
+  return "<div>\n    <ul class=\"content-list\">\n        <li>药品名称："
     + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
-    + "</li>\r\n        <li>剂型："
+    + "</li>\n        <li>剂型："
     + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
-    + "</li>\r\n        <li>规格："
+    + "</li>\n        <li>规格："
     + alias2(alias1((depth0 != null ? depth0.prepName : depth0), depth0))
-    + "</li>\r\n        <li>转换比："
+    + "</li>\n        <li>转换比："
     + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
-    + "</li>\r\n        <li>药品编码："
+    + "</li>\n        <li>药品编码："
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
-    + "</li>\r\n        <li>含量："
+    + "</li>\n        <li>含量："
     + alias2(alias1((depth0 != null ? depth0.component : depth0), depth0))
     + alias2(alias1((depth0 != null ? depth0.componentUnit : depth0), depth0))
-    + "</li>\r\n        <li>装量："
+    + "</li>\n        <li>装量："
     + alias2(alias1((depth0 != null ? depth0.volume : depth0), depth0))
     + " "
     + alias2(alias1((depth0 != null ? depth0.volumeUnit : depth0), depth0))
-    + "</li>\r\n        <li>最小使用单位："
+    + "</li>\n        <li>最小使用单位："
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
-    + "</li>\r\n        <li>最小包装单位："
+    + "</li>\n        <li>最小包装单位："
     + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
-    + "</li>\r\n        <li>说明书："
+    + "</li>\n        <li>说明书："
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
-    + "</li>\r\n        <li>说明书版本："
+    + "</li>\n        <li>说明书版本："
     + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
-    + "</li>\r\n        <li>中成药注射剂："
+    + "</li>\n        <li>中成药注射剂："
     + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
-    + "</li>\r\n        <li>企业简称："
+    + "</li>\n        <li>企业简称："
     + alias2(alias1((depth0 != null ? depth0.facAbbrF : depth0), depth0))
-    + "</li>\r\n        <li>批准文号/注册证号："
+    + "</li>\n        <li>批准文号/注册证号："
     + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
     + "/"
     + alias2(alias1((depth0 != null ? depth0.prodZczhF : depth0), depth0))
-    + "</li>\r\n    </ul>\r\n    <ul class=\"content-list\">\r\n        <li class=\"input-group\">\r\n            <span class=\"ypType\">药品类型:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + "</li>\n    </ul>\n    <ul class=\"content-list\">\n        <li class=\"input-group\">\n            <span class=\"ypType\">药品类型:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">化学药、中成药</option>\r\n                <option value=\"1\" "
+    + ">化学药、中成药</option>\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">中药饮片</option>\r\n                <option value=\"2\" "
+    + ">中药饮片</option>\n                <option value=\"2\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">医院制剂</option>\r\n                <option value=\"3\" "
+    + ">医院制剂</option>\n                <option value=\"3\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">卫生材料</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yblb\">医保:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + ">卫生材料</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"yblb\">医保:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">国家</option>\r\n                <option value=\"1\" "
+    + ">国家</option>\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">省</option>\r\n                <option value=\"2\" "
+    + ">省</option>\n                <option value=\"2\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">地市</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">医保编码:<input type=\"text\" class=\"input\" value=\""
+    + ">地市</option>\n            </select>\n        </li>\n        <li class=\"input-group\">医保编码:<input type=\"text\" class=\"input\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\">\r\n            <span class=\"flag4\">基药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + "\"></li>\n        <li class=\"input-group\">\n            <span class=\"flag4\">基药:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">国家</option>\r\n                <option value=\"1\" "
+    + ">国家</option>\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">省</option>\r\n                <option value=\"2\" "
+    + ">省</option>\n                <option value=\"2\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">地市</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"jkyw\">重点监控药物:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">地市</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"jkyw\">重点监控药物:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yyyy\">营养用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"yyyy\">营养用药:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"bloodPro\">血液制品:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"bloodPro\">血液制品:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"tpzjs\">糖皮质激素:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"tpzjs\">糖皮质激素:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.tpzjs : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.tpzjs : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"energy\">能量用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"energy\">能量用药:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.energy : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.energy : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"flag5\">PPI（质子泵抑制剂）:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"flag5\">PPI（质子泵抑制剂）:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"jmdf\">精麻毒放:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"jmdf\">精麻毒放:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n           <span class=\"pregnancyLevel updateValueFn\"> 妊娠用药:</span>\r\n            <select class=\"select\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n           <span class=\"pregnancyLevel updateValueFn\"> 妊娠用药:</span>\n            <select class=\"select\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n             <span class=\"flag1\"> 抗菌药物: </span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n             <span class=\"flag1\"> 抗菌药物: </span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\" onclick=\"updateValueFn()\">抗菌药物分级:<input type=\"text\" class=\"input\" value=\""
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\" onclick=\"updateValueFn()\">抗菌药物分级:<input type=\"text\" class=\"input\" value=\""
     + alias2(alias1((depth0 != null ? depth0.kjywType : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\">抗菌药物分类:<input type=\"text\" class=\"input\"  value=\""
+    + "\"></li>\n        <li class=\"input-group\">抗菌药物分类:<input type=\"text\" class=\"input\"  value=\""
     + alias2(alias1((depth0 != null ? depth0.kjyw : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\">DDD值:<input type=\"text\" class=\"input\"  value=\""
+    + "\"></li>\n        <li class=\"input-group\">DDD值:<input type=\"text\" class=\"input\"  value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\">给药途径不计算强度:<input type=\"text\" class=\"input\"  value=\""
+    + "\"></li>\n        <li class=\"input-group\">给药途径不计算强度:<input type=\"text\" class=\"input\"  value=\""
     + alias2(alias1((depth0 != null ? depth0.adminRouteNotDdd : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isDdd\">是否计算强度: </span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + "\"></li>\n        <li class=\"input-group\">\n            <span class=\"isDdd\">是否计算强度: </span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isDdd : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isDdd : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"ypid\">YPID:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"ypid\">YPID:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypid : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypid : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n           <span class=\"pzCode\">品种代码: </span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"1\" "
+    + ">否</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n           <span class=\"pzCode\">品种代码: </span>\n            <select class=\"select updateValueFn\">\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pzCode : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n                <option value=\"0\" "
+    + ">是</option>\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pzCode : depth0),{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n            </select>\r\n        </li>\r\n    </ul>\r\n    <ul class=\"content-list\">\r\n        <li>人社分类："
+    + ">否</option>\n            </select>\n        </li>\n    </ul>\n    <ul class=\"content-list\">\n        <li>人社分类："
     + alias2(alias1((depth0 != null ? depth0.rbflName : depth0), depth0))
-    + "</li>\r\n        <li>药理分类："
+    + "</li>\n        <li>药理分类："
     + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
-    + "</li>\r\n    </ul>\r\n</div>";
+    + "</li>\n    </ul>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -2351,23 +2359,23 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "    <tr data-id="
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + ">\r\n        <td class=\"table-diff-drugId\"><div>"
+    + ">\n        <td class=\"table-diff-drugId\"><div>"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.drugName || (depth0 != null ? depth0.drugName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"drugName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.specName || (depth0 != null ? depth0.specName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"specName","hash":{},"data":data}) : helper)))
     + " "
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td class=\"convertRatio\"><div><input value="
+    + "</div></td>\n        <td class=\"convertRatio\"><div><input value="
     + alias4(((helper = (helper = helpers.convertRatio || (depth0 != null ? depth0.convertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"convertRatio","hash":{},"data":data}) : helper)))
-    + "></div></td>\r\n        <td class=\"icon-triangle ymzzy\"><div>"
+    + "></div></td>\n        <td class=\"icon-triangle ymzzy\"><div>"
     + alias4(((helper = (helper = helpers.unitName || (depth0 != null ? depth0.unitName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unitName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.isStop || (depth0 != null ? depth0.isStop : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isStop","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.smsDate || (depth0 != null ? depth0.smsDate : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"smsDate","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n    </tr>\r\n";
+    + "</div></td>\n    </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -2383,51 +2391,51 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "    <tr>\r\n        <td><div>"
+  return "    <tr>\n        <td><div>"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td class=\"icon-triangle\"><div>"
+    + "</div></td>\n        <td class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.ypType || (depth0 != null ? depth0.ypType : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ypType","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.proName || (depth0 != null ? depth0.proName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"proName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.prepName || (depth0 != null ? depth0.prepName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"prepName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.fConvertRatio || (depth0 != null ? depth0.fConvertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fConvertRatio","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.facAbbrF || (depth0 != null ? depth0.facAbbrF : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"facAbbrF","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.flag4 || (depth0 != null ? depth0.flag4 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag4","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.jkyw || (depth0 != null ? depth0.jkyw : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jkyw","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.yyyy || (depth0 != null ? depth0.yyyy : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yyyy","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.isZcyzsj || (depth0 != null ? depth0.isZcyzsj : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isZcyzsj","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.jmdf || (depth0 != null ? depth0.jmdf : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jmdf","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.pregnancyLevel || (depth0 != null ? depth0.pregnancyLevel : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pregnancyLevel","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.flag1 || (depth0 != null ? depth0.flag1 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag1","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.ddd || (depth0 != null ? depth0.ddd : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ddd","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.adminRouteNotDdd || (depth0 != null ? depth0.adminRouteNotDdd : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"adminRouteNotDdd","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.isDdd || (depth0 != null ? depth0.isDdd : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isDdd","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.kjywType || (depth0 != null ? depth0.kjywType : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"kjywType","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.rbflName || (depth0 != null ? depth0.rbflName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rbflName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.ylflName || (depth0 != null ? depth0.ylflName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ylflName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.flag5 || (depth0 != null ? depth0.flag5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag5","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n    </tr>\r\n";
+    + "</div></td>\n    </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -2445,48 +2453,48 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "                <div class=\"popup-item\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n                    <input type=\"text\" class=\"item-input convertRatio\" value="
+    + "\">\n                    <input type=\"text\" class=\"item-input convertRatio\" value="
     + alias4(((helper = (helper = helpers.convertRatio || (depth0 != null ? depth0.convertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"convertRatio","hash":{},"data":data}) : helper)))
-    + " disabled>\r\n                    <select  class=\"item-select unit\" disabled>\r\n                        <option value=\""
+    + " disabled>\n                    <select  class=\"item-select unit\" disabled>\n                        <option value=\""
     + alias4(((helper = (helper = helpers.unit || (depth0 != null ? depth0.unit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unit","hash":{},"data":data}) : helper)))
     + "\">"
     + alias4(((helper = (helper = helpers.unit || (depth0 != null ? depth0.unit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unit","hash":{},"data":data}) : helper)))
-    + "</option>\r\n                    </select>\r\n                    <input type=\"text\" class=\"item-input fConvertRatio\" value="
+    + "</option>\n                    </select>\n                    <input type=\"text\" class=\"item-input fConvertRatio\" value="
     + alias4(((helper = (helper = helpers.fConvertRatio || (depth0 != null ? depth0.fConvertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fConvertRatio","hash":{},"data":data}) : helper)))
-    + " disabled>\r\n                    <select  class=\"item-select last-select formatUnit\" disabled>\r\n                        <option value=\""
+    + " disabled>\n                    <select  class=\"item-select last-select formatUnit\" disabled>\n                        <option value=\""
     + alias4(((helper = (helper = helpers.formatUnit || (depth0 != null ? depth0.formatUnit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"formatUnit","hash":{},"data":data}) : helper)))
     + "\">"
     + alias4(((helper = (helper = helpers.formatUnit || (depth0 != null ? depth0.formatUnit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"formatUnit","hash":{},"data":data}) : helper)))
-    + "</option>\r\n                    </select>\r\n                </div>\r\n";
+    + "</option>\n                    </select>\n                </div>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                <div class=\"popup-item unstandard\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n                    <input type=\"text\" class=\"item-input convertRatio\" value="
+    + "\">\n                    <input type=\"text\" class=\"item-input convertRatio\" value="
     + alias4(((helper = (helper = helpers.convertRatio || (depth0 != null ? depth0.convertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"convertRatio","hash":{},"data":data}) : helper)))
-    + ">\r\n                    <select  class=\"item-select unit\">\r\n                        <option value=\""
+    + ">\n                    <select  class=\"item-select unit\">\n                        <option value=\""
     + alias4(((helper = (helper = helpers.unit || (depth0 != null ? depth0.unit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unit","hash":{},"data":data}) : helper)))
     + "\">"
     + alias4(((helper = (helper = helpers.unit || (depth0 != null ? depth0.unit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unit","hash":{},"data":data}) : helper)))
-    + "</option>\r\n                    </select>\r\n                    <input type=\"text\" class=\"item-input fConvertRatio\" value="
+    + "</option>\n                    </select>\n                    <input type=\"text\" class=\"item-input fConvertRatio\" value="
     + alias4(((helper = (helper = helpers.fConvertRatio || (depth0 != null ? depth0.fConvertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fConvertRatio","hash":{},"data":data}) : helper)))
-    + ">\r\n                    <select  class=\"item-select last-select formatUnit\">\r\n                        <option value=\""
+    + ">\n                    <select  class=\"item-select last-select formatUnit\">\n                        <option value=\""
     + alias4(((helper = (helper = helpers.formatUnit || (depth0 != null ? depth0.formatUnit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"formatUnit","hash":{},"data":data}) : helper)))
     + "\">"
     + alias4(((helper = (helper = helpers.formatUnit || (depth0 != null ? depth0.formatUnit : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"formatUnit","hash":{},"data":data}) : helper)))
-    + "</option>\r\n                    </select>\r\n                </div>\r\n";
+    + "</option>\n                    </select>\n                </div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<div class=\"popup-company\" data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n    <div class=\"popup-title\">\r\n        "
+    + "\">\n    <div class=\"popup-title\">\n        "
     + alias4(((helper = (helper = helpers.popupTitle || (depth0 != null ? depth0.popupTitle : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"popupTitle","hash":{},"data":data}) : helper)))
-    + "<span class=\"popup-close\"></span>\r\n    </div>\r\n    <div class=\"popup-content\">\r\n        门诊／住院单位：\r\n        <div class=\"popup-list\">\r\n"
+    + "<span class=\"popup-close\"></span>\n    </div>\n    <div class=\"popup-content\">\n        门诊／住院单位：\n        <div class=\"popup-list\">\n"
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.standard : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.unstandard : stack1),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </div>\r\n        <div class=\"btn-group\">\r\n            <div class=\"btn add-unit\">新增</div>\r\n            <div class=\"btn save-unit\">保存</div>\r\n        </div>\r\n    </div>\r\n</div>";
+    + "        </div>\n        <div class=\"btn-group\">\n            <div class=\"btn add-unit\">新增</div>\n            <div class=\"btn save-unit\">保存</div>\n        </div>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -2498,9 +2506,9 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "<div class=\"popup-record\">\r\n    <div class=\"popup-title\">\r\n        "
+  return "<div class=\"popup-record\">\n    <div class=\"popup-title\">\n        "
     + container.escapeExpression(((helper = (helper = helpers.popupTitle || (depth0 != null ? depth0.popupTitle : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"popupTitle","hash":{},"data":data}) : helper)))
-    + "属性修改纪录 <span class=\"popup-close\"></span>\r\n    </div>\r\n   <div class=\"popup-content\">\r\n       <table class=\"popup-table\">\r\n           <tr>\r\n               <td>修改人</td>\r\n               <td>修改内容</td>\r\n               <td>修改时间</td>\r\n           </tr>\r\n       </table>\r\n   </div>\r\n</div>";
+    + "属性修改纪录 <span class=\"popup-close\"></span>\n    </div>\n   <div class=\"popup-content\">\n       <table class=\"popup-table\">\n           <tr>\n               <td>修改人</td>\n               <td>修改内容</td>\n               <td>修改时间</td>\n           </tr>\n       </table>\n   </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -2726,47 +2734,47 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "            <lable class=\"input-group\">\r\n                "
+  return "            <lable class=\"input-group\">\n                "
     + alias4(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
-    + "\r\n                <input type=\"text\" class=\"input "
+    + "\n                <input type=\"text\" class=\"input "
     + alias4(((helper = (helper = helpers.inputClass || (depth0 != null ? depth0.inputClass : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"inputClass","hash":{},"data":data}) : helper)))
     + "\" value=\""
     + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
-    + "\">\r\n            </lable>\r\n";
+    + "\">\n            </lable>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     return "                       <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></td>\r\n";
+    + "</div></td>\n";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                   <tr data-id="
     + alias4(((helper = (helper = helpers.ID || (depth0 != null ? depth0.ID : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ID","hash":{},"data":data}) : helper)))
-    + ">\r\n                       <td><div class=\"table-text\">"
+    + ">\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.code || (depth0 != null ? depth0.code : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"code","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.pzName || (depth0 != null ? depth0.pzName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.pxName || (depth0 != null ? depth0.pxName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pxName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.jbyw || (depth0 != null ? depth0.jbyw : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbyw","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text\">"
+    + "</div></td>\n                       <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.yblb || (depth0 != null ? depth0.yblb : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblb","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                       <td><div class=\"table-text select-than\">选择</div></td>\r\n                   </tr>\r\n";
+    + "</div></td>\n                       <td><div class=\"table-text select-than\">选择</div></td>\n                   </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"title\">标准数据比对\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
+  return "<div class=\"title\">标准数据比对\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\n    </a>\n</div>\n<div class=\"than-content\" data-id=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n    <div class=\"search-than\">\r\n"
+    + "\">\n    <div class=\"search-than\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead\">\r\n           <table class=\"table\">\r\n               <tr class=\"thead\">\r\n"
+    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\n    </div>\n   <div class=\"than-table\">\n       <div class=\"than-thead\">\n           <table class=\"table\">\n               <tr class=\"thead\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <table class=\"table\">\r\n"
+    + "               </tr>\n           </table>\n       </div>\n       <div class=\"than-tbody\">\n           <table class=\"table\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "           </table>\r\n       </div>\r\n   </div>\r\n</div>";
+    + "           </table>\n       </div>\n   </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -2778,62 +2786,62 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     return "                                <th><div>"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
+    + "</div></th>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                                <tr data-id="
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + ">\r\n                                    <td><div>"
+    + ">\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.drugName || (depth0 != null ? depth0.drugName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"drugName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div><input value="
+    + "</div></td>\n                                    <td><div><input value="
     + alias4(((helper = (helper = helpers.convertRatio || (depth0 != null ? depth0.convertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"convertRatio","hash":{},"data":data}) : helper)))
-    + "></div></td>\r\n                                    <td class=\"icon-triangle\"><div>"
+    + "></div></td>\n                                    <td class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.unitName || (depth0 != null ? depth0.unitName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unitName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.isStop || (depth0 != null ? depth0.isStop : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isStop","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.createDate || (depth0 != null ? depth0.createDate : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"createDate","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                </tr>\r\n";
+    + "</div></td>\n                                </tr>\n";
 },"5":function(container,depth0,helpers,partials,data) {
     return "                                        <th><div>"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
+    + "</div></th>\n";
 },"7":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "                                <tr>\r\n                                    <td><div>"
+  return "                                <tr>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.ypType || (depth0 != null ? depth0.ypType : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ypType","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.proName || (depth0 != null ? depth0.proName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"proName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.pxName || (depth0 != null ? depth0.pxName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pxName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td  class=\"icon-triangle\"><div>"
+    + "</div></td>\n                                    <td  class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.flag4 || (depth0 != null ? depth0.flag4 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag4","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td><div>"
+    + "</div></td>\n                                    <td><div>"
     + alias4(((helper = (helper = helpers.yblb || (depth0 != null ? depth0.yblb : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblb","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                    <td class=\"icon-triangle\"><div>"
+    + "</div></td>\n                                    <td class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.ybbh || (depth0 != null ? depth0.ybbh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ybbh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                                </tr>\r\n";
+    + "</div></td>\n                                </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-bar\">\r\n            <a href=\"javascript:void(0)\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n        </div>\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                        <thead>\r\n"
+  return "<div class=\"table-diff\">\n    <div class=\"table-diff-content\">\n        <div class=\"table-diff-bar\">\n            <a href=\"javascript:void(0)\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\n        </div>\n        <div class=\"table-diff-header\">\n            <div class=\"table-diff-left\">\n                <div class=\"table-diff-header\">\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                        <thead>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
+    + "                        </thead>\n                    </table>\n                </div>\n                <div class=\"table-diff-data\">\n                    <div class=\"table-diff-data-content\">\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"table-diff-right\">\r\n                <div class=\"table-diff-right-all active\">\r\n                    <div class=\"table-diff-header\">\r\n                        <div class=\"table-diff-header-content\">\r\n                            <table cellspacing=\"1\" border=\"0\">\r\n                                <thead>\r\n                                <tr>\r\n"
+    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n            </div>\n            <div class=\"table-diff-right\">\n                <div class=\"table-diff-right-all active\">\n                    <div class=\"table-diff-header\">\n                        <div class=\"table-diff-header-content\">\n                            <table cellspacing=\"1\" border=\"0\">\n                                <thead>\n                                <tr>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                                </tr>\r\n                                </thead>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-diff-data\" style=\"overflow-x: hidden;\">\r\n                        <table cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
+    + "                                </tr>\n                                </thead>\n                            </table>\n                        </div>\n                    </div>\n                    <div class=\"table-diff-data\" style=\"overflow-x: hidden;\">\n                        <table cellspacing=\"1\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <div class=\"table-details-content-box\">\n                            <!--标准数据详情-->\n                        </div>\n                        <div class=\"tool\">\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\n                        </div>\n                        <div class=\"pagination\">\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\n                            <a href=\"javaScript:void(0)\">下一条</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -2847,22 +2855,22 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "    <tr data-id="
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + ">\r\n        <td><div>"
+    + ">\n        <td><div>"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.drugName || (depth0 != null ? depth0.drugName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"drugName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div><input value="
+    + "</div></td>\n        <td><div><input value="
     + alias4(((helper = (helper = helpers.convertRatio || (depth0 != null ? depth0.convertRatio : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"convertRatio","hash":{},"data":data}) : helper)))
-    + "></div></td>\r\n        <td class=\"icon-triangle\"><div>"
+    + "></div></td>\n        <td class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.unitName || (depth0 != null ? depth0.unitName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unitName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.isStop || (depth0 != null ? depth0.isStop : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"isStop","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.createDate || (depth0 != null ? depth0.createDate : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"createDate","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n    </tr>\r\n";
+    + "</div></td>\n    </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -2878,21 +2886,21 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "    <tr>\r\n        <td><div>"
+  return "    <tr>\n        <td><div>"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.ypType || (depth0 != null ? depth0.ypType : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ypType","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.proName || (depth0 != null ? depth0.proName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"proName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.pxName || (depth0 != null ? depth0.pxName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pxName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td  class=\"icon-triangle\"><div>"
+    + "</div></td>\n        <td  class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.flag4 || (depth0 != null ? depth0.flag4 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flag4","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div>"
+    + "</div></td>\n        <td><div>"
     + alias4(((helper = (helper = helpers.yblb || (depth0 != null ? depth0.yblb : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblb","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td class=\"icon-triangle\"><div>"
+    + "</div></td>\n        <td class=\"icon-triangle\"><div>"
     + alias4(((helper = (helper = helpers.ybbh || (depth0 != null ? depth0.ybbh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ybbh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n    </tr>\r\n";
+    + "</div></td>\n    </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -2908,9 +2916,9 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "<ul class=\"content-list\">\r\n    <li>药品名称：甲泼尼龙片</li>\r\n    <li>剂型：素片</li>\r\n    <li>规格："
+  return "<ul class=\"content-list\">\n    <li>药品名称：甲泼尼龙片</li>\n    <li>剂型：素片</li>\n    <li>规格："
     + container.escapeExpression(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</li>\r\n    <li>转换比：24</li>\r\n    <li>药品编码：X120100-100101-A644-01-21-0004920-01</li>\r\n    <li>含量：4mg</li>\r\n    <li>装量：无</li>\r\n    <li>最小使用单位：mg</li>\r\n    <li>最小包装单位：盒</li>\r\n    <li>说明书：有</li>\r\n    <li>说明书版本：2007-01-09</li>\r\n    <li>中成药注射剂：否</li>\r\n    <li>企业简称：天津天药</li>\r\n    <li>批准文号/注册证号：国药准字H20020224</li>\r\n</ul>\r\n<ul class=\"content-list\">\r\n    <li class=\"input-group\">\r\n        药品类型:\r\n        <select class=\"select\">\r\n            <option>化学药</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        医保:\r\n        <select class=\"select\">\r\n            <option>国家</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">医保编码:<input type=\"text\" class=\"input\"></li>\r\n    <li class=\"input-group\">\r\n        基药:\r\n        <select class=\"select\">\r\n            <option>省基</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        重点监控药物:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        营养用药:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        血液制品:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        糖皮质激素:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        能量用药:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        PPI（质子泵抑制剂）:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        中成药注射剂:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        精麻毒放:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        妊娠用药:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        抗菌药物:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">抗菌药物分级:<input type=\"text\" class=\"input\"></li>\r\n    <li class=\"input-group\">抗菌药物分类:<input type=\"text\" class=\"input\"></li>\r\n    <li class=\"input-group\">DDD值:<input type=\"text\" class=\"input\"></li>\r\n    <li class=\"input-group\">给药途径不计算强度:<input type=\"text\" class=\"input\"></li>\r\n    <li class=\"input-group\">\r\n        是否计算强度:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        YPID:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n    <li class=\"input-group\">\r\n        品种代码:\r\n        <select class=\"select\">\r\n            <option>ddd</option>\r\n        </select>\r\n    </li>\r\n</ul>\r\n<ul class=\"content-list\">\r\n    <li>人社分类：系统性激素制剂，不含性激素和胰岛素-全身用皮质激素类-全身用皮质激素的单方制剂-糖皮质激素类</li>\r\n    <li>药理分类：内分泌系统用药-肾上腺皮质激素-糖皮质激素-中效糖皮质激素</li>\r\n</ul>";
+    + "</li>\n    <li>转换比：24</li>\n    <li>药品编码：X120100-100101-A644-01-21-0004920-01</li>\n    <li>含量：4mg</li>\n    <li>装量：无</li>\n    <li>最小使用单位：mg</li>\n    <li>最小包装单位：盒</li>\n    <li>说明书：有</li>\n    <li>说明书版本：2007-01-09</li>\n    <li>中成药注射剂：否</li>\n    <li>企业简称：天津天药</li>\n    <li>批准文号/注册证号：国药准字H20020224</li>\n</ul>\n<ul class=\"content-list\">\n    <li class=\"input-group\">\n        药品类型:\n        <select class=\"select\">\n            <option>化学药</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        医保:\n        <select class=\"select\">\n            <option>国家</option>\n        </select>\n    </li>\n    <li class=\"input-group\">医保编码:<input type=\"text\" class=\"input\"></li>\n    <li class=\"input-group\">\n        基药:\n        <select class=\"select\">\n            <option>省基</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        重点监控药物:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        营养用药:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        血液制品:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        糖皮质激素:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        能量用药:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        PPI（质子泵抑制剂）:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        中成药注射剂:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        精麻毒放:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        妊娠用药:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        抗菌药物:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">抗菌药物分级:<input type=\"text\" class=\"input\"></li>\n    <li class=\"input-group\">抗菌药物分类:<input type=\"text\" class=\"input\"></li>\n    <li class=\"input-group\">DDD值:<input type=\"text\" class=\"input\"></li>\n    <li class=\"input-group\">给药途径不计算强度:<input type=\"text\" class=\"input\"></li>\n    <li class=\"input-group\">\n        是否计算强度:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        YPID:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n    <li class=\"input-group\">\n        品种代码:\n        <select class=\"select\">\n            <option>ddd</option>\n        </select>\n    </li>\n</ul>\n<ul class=\"content-list\">\n    <li>人社分类：系统性激素制剂，不含性激素和胰岛素-全身用皮质激素类-全身用皮质激素的单方制剂-糖皮质激素类</li>\n    <li>药理分类：内分泌系统用药-肾上腺皮质激素-糖皮质激素-中效糖皮质激素</li>\n</ul>";
 },"useData":true});
 
 /***/ }),
@@ -3117,43 +3125,43 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <lable class=\"input-group\">\r\n            "
+  return "        <lable class=\"input-group\">\n            "
     + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
-    + "\r\n            <input type=\"text\" class=\"input "
+    + "\n            <input type=\"text\" class=\"input "
     + alias2(alias1((depth0 != null ? depth0.inputClass : depth0), depth0))
-    + "\">\r\n        </lable>\r\n";
+    + "\">\n        </lable>\n";
 },"3":function(container,depth0,helpers,partials,data) {
     return "                    <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></td>\r\n";
+    + "</div></td>\n";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                <tr data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n                    <td><div class=\"table-text codePro\">"
+    + "\">\n                    <td><div class=\"table-text codePro\">"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td><div class=\"table-text name\">"
+    + "</div></td>\n                    <td><div class=\"table-text name\">"
     + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td><div class=\"table-text\">"
+    + "</div></td>\n                    <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td><div class=\"table-text spec\">"
+    + "</div></td>\n                    <td><div class=\"table-text spec\">"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td><div class=\"table-text manufacturerName\">"
+    + "</div></td>\n                    <td><div class=\"table-text manufacturerName\">"
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td><div class=\"table-text pzwh\">"
+    + "</div></td>\n                    <td><div class=\"table-text pzwh\">"
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td><div class=\"table-text add-than-info\">新增</div></td>\r\n                </tr>\r\n";
+    + "</div></td>\n                    <td><div class=\"table-text add-than-info\">新增</div></td>\n                </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<a href=\"javascript:void(0)\" class=\"goback\"><i class=\"icon-arrow-left\"></i>返回</a>\r\n<div class=\"add-search-than\">\r\n"
+  return "<a href=\"javascript:void(0)\" class=\"goback\"><i class=\"icon-arrow-left\"></i>返回</a>\n<div class=\"add-search-than\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <a href=\"javaScript:void(0)\" class=\"btn find-add-than\">查找</a>\r\n</div>\r\n<div class=\"add-than\">\r\n    <div class=\"than-thead\">\r\n        <table class=\"table\">\r\n            <tr class=\"thead\">\r\n"
+    + "    <a href=\"javaScript:void(0)\" class=\"btn find-add-than\">查找</a>\n</div>\n<div class=\"add-than\">\n    <div class=\"than-thead\">\n        <table class=\"table\">\n            <tr class=\"thead\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "            </tr>\r\n        </table>\r\n    </div>\r\n    <div class=\"than-tbody add-than-tbody\">\r\n        <table class=\"table\">\r\n"
+    + "            </tr>\n        </table>\n    </div>\n    <div class=\"than-tbody add-than-tbody\">\n        <table class=\"table\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </table>\r\n    </div>\r\n</div>";
+    + "        </table>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -3169,25 +3177,25 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "\">"
     + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</option>\r\n";
+    + "</option>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "<div class=\"popup-add-info\" data-id=\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.id : stack1), depth0))
-    + "\">\r\n    <div class=\"popup-title\">\r\n        新增信息 <span class=\"popup-close\"></span>\r\n    </div>\r\n    <div class=\"popup-content\">\r\n        <ul class=\"content-lf\">\r\n            <li>药品名称："
+    + "\">\n    <div class=\"popup-title\">\n        新增信息 <span class=\"popup-close\"></span>\n    </div>\n    <div class=\"popup-content\">\n        <ul class=\"content-lf\">\n            <li>药品名称："
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.name : stack1), depth0))
-    + "</li>\r\n            <li>规格："
+    + "</li>\n            <li>规格："
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.spec : stack1), depth0))
-    + "</li>\r\n            <li class=\"input-group\">包装(转化比):<input type=\"text\" class=\"input convert\"></li>\r\n            <li class=\"input-group\">包装单位:\r\n                <select class=\"select packUnit\">\r\n"
+    + "</li>\n            <li class=\"input-group\">包装(转化比):<input type=\"text\" class=\"input convert\"></li>\n            <li class=\"input-group\">包装单位:\n                <select class=\"select packUnit\">\n"
     + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.packUnit : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                </select>\r\n            </li>\r\n        </ul>\r\n        <ul class=\"content-rt\">\r\n            <li>生产企业："
+    + "                </select>\n            </li>\n        </ul>\n        <ul class=\"content-rt\">\n            <li>生产企业："
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.manufacturerName : stack1), depth0))
-    + "</li>\r\n            <li>批准文号："
+    + "</li>\n            <li>批准文号："
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.pzwh : stack1), depth0))
-    + "</li>\r\n            <li class=\"input-group\">\r\n                最小使用单位:\r\n                <select class=\"select minUseUnit\">\r\n"
+    + "</li>\n            <li class=\"input-group\">\n                最小使用单位:\n                <select class=\"select minUseUnit\">\n"
     + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.minUseUnit : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                </select>\r\n            </li>\r\n        </ul>\r\n        <div class=\"popup-btn\">\r\n            <a href=\"javaScript:void(0)\" class=\"btn saveOrUpdate\">保存并比对</a>\r\n        </div>\r\n    </div>\r\n</div>";
+    + "                </select>\n            </li>\n        </ul>\n        <div class=\"popup-btn\">\n            <a href=\"javaScript:void(0)\" class=\"btn saveOrUpdate\">保存并比对</a>\n        </div>\n    </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -3201,23 +3209,23 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "        <tr data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n            <td><div class=\"table-text codePro\">"
+    + "\">\n            <td><div class=\"table-text codePro\">"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text name\">"
+    + "</div></td>\n            <td><div class=\"table-text name\">"
     + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
+    + "</div></td>\n            <td><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text spec\">"
+    + "</div></td>\n            <td><div class=\"table-text spec\">"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text manufacturerName\">"
+    + "</div></td>\n            <td><div class=\"table-text manufacturerName\">"
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text pzwh\">"
+    + "</div></td>\n            <td><div class=\"table-text pzwh\">"
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text add-than-info\">新增</div></td>\r\n        </tr>\r\n";
+    + "</div></td>\n            <td><div class=\"table-text add-than-info\">新增</div></td>\n        </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<table class=\"table\">\r\n"
+  return "<table class=\"table\">\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</table>";
 },"useData":true});
