@@ -1,4 +1,4 @@
-var http = 'http://www.immortalshealth.com/hpms/';
+var http = 'http://www.immortalshealth.com/hpms/api/';
 function ajaxFn(params){
   var callback =  params.callback || function(){};
   if(params.contentType){

@@ -160,6 +160,7 @@ var tableRightLeft = 0;
 function tableDiffScrollFn(){
   $('.table-diff-right .table-diff-data').on('scroll',function(e){
     $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
+    $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
     var _t = $(this);
     if(_t.scrollLeft() != tableRightLeft){
         tableRightLeft = _t.scrollLeft;
@@ -190,7 +191,7 @@ function tableDiffScrollFn(){
       }
     }
      //console.log(_t.height()+','+_t.scrollTop()+','+_t.children('table').height());
-    $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
+
   });
 }
 
