@@ -22,6 +22,9 @@ a{
     color:#666;
     text-decoration:none;
 }
+.color-red{
+    color: red;
+}
 .icon-arrow-left{
     width: 6px;
     height: 10px;
@@ -392,12 +395,14 @@ a{
     .popup-record{
         width: 482px;
         position: absolute;
-        top: 375px;
+        top: 250px;
         left: 50%;
         z-index: 99;
         margin-left: -241px;
         background: #fff;
         .popup-content{
+            max-height: 250px;
+            overflow: auto;
             padding: 10px 10px 19px;
             .popup-table{
                 width: 100%;
@@ -414,6 +419,30 @@ a{
             }
         }
     }
+    .popup-channel{
+        width: 380px;
+        position: absolute;
+        top: 250px;
+        left: 50%;
+        z-index: 99;
+        margin-left: -241px;
+        background: #fff;
+        .popup-content{
+            padding: 10px 10px 10px;
+            max-height: 200px;
+            overflow: auto;
+            .channel-checkbox{
+                vertical-align: middle;
+            }
+            .sub-channel{
+                display: none;
+                margin-left: 15px;
+            }
+        }
+        .save-channel{
+            margin: 10px;
+        }
+    }
 }
 //药品数据
 .table-diff-data{
@@ -423,6 +452,9 @@ a{
             color: #666;
             border:1px solid transparent;
             background-color: transparent;
+        }
+        .color-red{
+            color: red;
         }
         &.hover,&.active{
             input{
@@ -464,6 +496,7 @@ a{
             }
         }
         .icon-triangle{
+            cursor: pointer;
             background:  url(./images/icon-triangle.png) top right no-repeat #fff;
         }
         td,th{
@@ -680,5 +713,66 @@ a{
     width: 100%;
     .loading-img{
         width: 25px;
+    }
+}
+//登录框
+.login{
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    margin-left: -190px;
+    background: #fff;
+    color: #666;
+    width: 380px;
+    font-size: 14px;
+    z-index: 999;
+    .login-title{
+        padding: 12px;
+        background-color: #4EAADC;
+        color: #fff;
+    }
+    .login-input{
+        display: block;
+        color: #747474;
+        padding: 20px 20px 0 20px;
+        line-height: 25px;
+        .input{
+            border: 1px solid #e3e3e3;
+            line-height: 1.5;
+            padding: 5px 10px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            box-sizing: content-box;
+            width: 308px;
+            margin-top: 5px
+        }
+    }
+    .login-btn{
+        background-color: #2d8cc0;
+        margin: 20px 30px;
+        border: 0;
+        padding: 7px 15px;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #fff;
+    }
+    .popup-close{
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        top: 6px;
+        right: 10px;
+        background: url(./images/icon-close.png) center center no-repeat;
+    }
+    .login-cancel{
+        float: right;
+        margin: 20px 30px;
+        border: 0;
+        padding: 7px 15px;
+        border-radius: 3px;
+        font-size: 14px;
+        background: #BCBCBC;
     }
 }

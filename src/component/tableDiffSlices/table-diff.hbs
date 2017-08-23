@@ -24,9 +24,9 @@
                                     <td><div>{{drugName}}</div></td>
                                     <td><div>{{spec}}{{manufacturerName}}</div></td>
                                     <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
-                                    <td class="icon-triangle ymzzy"><div>{{unitName}}</div></td>
-                                    <td><div>{{isStop}}</div></td>
-                                    <td><div>{{createDate}}</div></td>
+                                    <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}"><div>{{unitName}}</div></td>
+                                    <td><div>{{isOrNo isStop}}</div></td>
+                                    <td title="{{timeFn createDate}}"><div>{{timeFn createDate}}</div></td>
                                 </tr>
                             {{/each}}
                             </tbody>
@@ -55,7 +55,7 @@
                             {{#each ydata}}
                                 <tr>
                                     <td><div>{{codePro}}</div></td>
-                                    <td><div>{{ypType}}</div></td>
+                                    <td><div>{{ypTypeSwitch ypType}}</div></td>
                                     <td><div>{{proName}}</div></td>
                                     <td><div>{{pxName}}</div></td>
                                     <td  class="icon-triangle"><div>{{flag4}}</div></td>

@@ -1,15 +1,13 @@
 <div class="popup-item unstandard">
     <input type="text" class="item-input convertRatio" value="">
     <select class="item-select unit">
-        {{#each unit}}
-            <option value={{this}}>{{this}}</option>
+        {{#each unitArr}}
+            <option value="{{this}}">{{this}}</option>
         {{/each}}
     </select>
     <input type="text" class="item-input fConvertRatio" value="">
     <select class="item-select last-select formatUnit">
-        {{#each formatUnit}}
-            <option value="{{this}}">{{this}}</option>
-        {{/each}}
+        <option value="{{formatUnit}}">{{formatUnit}}</option>
     </select>
 </div>
   

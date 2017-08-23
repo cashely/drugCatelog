@@ -1,6 +1,7 @@
-var http = 'http://www.immortalshealth.com/hpms/api/';
+var http = 'http://192.168.1.233:8083/hpms/api/';
 function ajaxFn(params){
   var callback =  params.callback || function(){};
+  var error =  params.error || function(){};
   if(params.contentType){
     $.ajax({
       type: params.type || 'POST',
@@ -11,8 +12,11 @@ function ajaxFn(params){
       success: function(res){
         if(res.flag == "S"){
           callback(res);
+        }else if(res.flag == "N"){
+          $('.login').show();
+          $('.header .login-out').removeClass('active').text('登录');
         }else{
-          console.log(res.message)
+          error(res);
         }
       }
     });
@@ -25,8 +29,12 @@ function ajaxFn(params){
       success: function(res){
         if(res.flag == "S"){
           callback(res);
+        }else if(res.flag == "N"){
+          $('.login').show();
+          $('.header .login-out').removeClass('active').text('登录');
         }else{
           console.log(res.message)
+          error(res);
         }
       }
     });

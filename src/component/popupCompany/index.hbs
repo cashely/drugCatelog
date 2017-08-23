@@ -20,8 +20,10 @@
             {{#each content.unstandard}}
                 <div class="popup-item unstandard" data-id="{{id}}">
                     <input type="text" class="item-input convertRatio" value={{convertRatio}}>
-                    <select  class="item-select unit">
-                        <option value="{{unit}}">{{unit}}</option>
+                    <select class="item-select unit">
+                        {{#each ../unitArr}}
+                            <option value="{{this}}" {{selectedFn ../unit this}}>{{this}}</option>
+                        {{/each}}
                     </select>
                     <input type="text" class="item-input fConvertRatio" value={{fConvertRatio}}>
                     <select  class="item-select last-select formatUnit">

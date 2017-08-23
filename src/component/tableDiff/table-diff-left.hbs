@@ -3,9 +3,9 @@
         <td class="table-diff-drugId"><div>{{id}}</div></td>
         <td><div>{{drugName}}</div></td>
         <td><div>{{specName}} {{manufacturerName}}</div></td>
-        <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
+        <td class="convertRatio"><div><input class="{{convertRatioFn convertRatio fConvertRatio}}" value={{convertRatio}}></div></td>
         <td class="icon-triangle ymzzy"><div>{{unitName}}</div></td>
-        <td><div>{{isStop}}</div></td>
-        <td><div>{{smsDate}}</div></td>
+        <td><div>{{isOrNo isStop}}</div></td>
+        <td title={{timeFn updateDate}}><div>{{timeFn updateDate}}</div></td>
     </tr>
 {{/each}}

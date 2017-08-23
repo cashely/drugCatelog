@@ -7,14 +7,21 @@
 var addData = require('./index.hbs');
 var searchBox = require('../searchBox/searchBox.hbs');
 var addDataPopupTel = require('../popupCompany/addInfo.hbs');
+var tableDiffRightTr = require('../tableDiff/table-diff-right-tr.hbs');//化学药右边详情模版
 var tbodyTel = require('./tbody.hbs');
 var tr = require('./tr.hbs');
 var ajaxFn = require('../ajax');
-var loadTableFn = require('../function').loadTableFn;
+//var loadTableFn = require('../function').loadTableFn;
 var data = require('../indexData');//化学药数据
-var firstResult =0,maxResults= 16;loading = false;
+var parent = '.'+data.name;
+var firstResult =0,maxResult= 16;loading = false;
+var listProductData ={}
 ajaxFn({
   url: 'product/listProduct',
+  data:{
+    firstResult: firstResult,
+    maxResult: maxResult
+  },
   callback: function (res) {
     data.addData.tbody = res.content;
     $('.add-data').html(addData(data.addData));
@@ -23,15 +30,19 @@ ajaxFn({
       $('.content  .content-box-main').show();
     });
     $('.find-add-than').on('click', function () {
+      firstResult=0 ;maxResult=16;
+      listProductData = {
+        drugName: $('.add-drug-name').val(),
+        spec: $('.add-spec').val(),
+        manufacturerName: $('.add-manufacturer-name').val(),
+        firstResult: firstResult,
+        maxResult: maxResult
+      };
       if(loading == false){
         loading = true;
         ajaxFn({
           url: 'product/listProduct',
-          data: {
-            drugName: $('.add-drug-name').val(),
-            spec: $('.add-spec').val(),
-            manufacturerName: $('.add-manufacturer-name').val()
-          },
+          data: listProductData,
           callback: function (res) {
             var tbodyData = {};
             tbodyData.tbody = res.content;
@@ -45,14 +56,13 @@ ajaxFn({
     $('.add-than .add-than-tbody').on('scroll',function(){
       var _t = $(this);
       if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){
+        listProductData.firstResult =(firstResult+1)*maxResult;
+        listProductData.maxResult = maxResult;
         if(loading == false){
           loading = true;
           ajaxFn({
             url:'product/listProduct',
-            data:{
-              firstResult: (firstResult+1)*maxResults,
-              maxResults: maxResults
-            },
+            data:listProductData,
             callback:function(res){
               firstResult = firstResult + 1;
               var trData = {};
@@ -98,6 +108,7 @@ function addThanInfo() {
             $('.popup-add-info').hide()
           });
           $('.popup-add-info .saveOrUpdate').on('click', function () {
+            var  drugId = $('.than-content').attr('data-id');
             ajaxFn({
               url: 'mcdProduct30Ues/saveOrUpdate',
               data: {
@@ -111,14 +122,16 @@ function addThanInfo() {
                 ajaxFn({
                   url: 'mcdProduct30/saveMatch',
                   data: {
-                    drugId: $('.than-content').data('id'),
+                    drugId: drugId,
                     proId: res.content.proId
                   },
                   callback: function (res) {
                     $('.popup').hide();
                     $('.content .add-data').hide();
                     $('.content  .content-box-main').show();
-                    loadTableFn()
+                    var _index = $(parent).find('.table-diff-data-content [data-id='+drugId+']').index();
+                    console.log(_index)
+                    $(parent).find('.table-diff-right .table-diff-data tr').eq(_index).html( tableDiffRightTr(res.content));
                   }
                 })
               }

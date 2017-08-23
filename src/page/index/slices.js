@@ -4,6 +4,7 @@ var tableDiffTel =  require('./../../component/tableDiffSlices/table-diff.hbs');
 var tableDiffLeft= require('./../../component/tableDiffSlices/table-diff-left.hbs');
 var tableDiffRight= require('./../../component/tableDiffSlices/table-diff-right.hbs');
 var tableDetails =  require('./../../component/tableDiffSlices/table-details.hbs');
+var tableDiffRightTr =  require('./../../component/tableDiffSlices/table-diff-right-tr.hbs');
 
 var standardThanTel =  require('./../../component/standardThanSlices/standardThan.hbs');
 var standardThanTbody =  require('./../../component/standardThanSlices/standardThanTbody.hbs');
@@ -18,7 +19,7 @@ var parent =  '.'+data.name;
 //  id:null,
 //  index:null
 //};
-var firstResult =0,maxResults= 16,firstResultThan =0,maxResultsThan= 16;
+var firstResult =0,maxResult= 16,firstResultThan =0,maxResultThan= 16;
 //var loading = false;
 
 module.exports = function($this){
@@ -28,17 +29,20 @@ module.exports = function($this){
     parent: parent,
     url: 'zyyp/listZyypHisProduct',
     firstResult: firstResult,
-    maxResults: maxResults,
+    maxResult: maxResult,
     data: data,
     searchClassifyTel:searchClassifyTel,
     tableDiffTel: tableDiffTel,
     tableDiffLeft:tableDiffLeft,
     tableDiffRight: tableDiffRight,
     cancelUrl:'zyyp/deleteMatch',
+    cancelThanData: 'drugId',
+    tableDiffRightTr: tableDiffRightTr,
+    downloadUrl:'mcdProduct30/downHisProductZyyp',
     fn:function(){
       $(parent).find(".search-box").html(searchTel(data.searchDate));
     }
-  }
+  };
   Fn.loadData(loadData);//加载中药饮片数据
   Fn.showDetail({
     parent: parent,
@@ -57,7 +61,7 @@ module.exports = function($this){
     standardThanTel: standardThanTel,
     standardThanTr: standardThanTr,
     firstResultThan: firstResultThan,
-    maxResultsThan: maxResultsThan,
+    maxResultThan: maxResultThan,
     saveUrl:'zyyp/saveMatch',
     findThanData:['name'],
     selectThanData:'zyypId'

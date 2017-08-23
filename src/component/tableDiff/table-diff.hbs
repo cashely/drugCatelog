@@ -20,13 +20,17 @@
                             <tbody>
                                 {{#each ydata}}
                                     <tr data-id={{id}} data-name={{drugNameFormat}}>
-                                        <td class="table-diff-drugId"><div>{{id}}</div></td>
-                                        <td><div>{{drugName}}</div></td>
-                                        <td><div>{{specName}} {{manufacturerName}}</div></td>
-                                        <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
-                                        <td class="icon-triangle ymzzy"><div>{{unitName}}</div></td>
-                                        <td><div>{{isStop}}</div></td>
-                                        <td><div>{{updateDate}}</div></td>
+                                        <td class="table-diff-drugId" title="{{id}}"><div>{{id}}</div></td>
+                                        <td title="{{drugName}}"><div>{{drugName}}</div></td>
+                                        <td title="{{specName}} {{manufacturerName}}"><div>{{specName}} {{manufacturerName}}</div></td>
+                                        <td class="convertRatio" title="{{convertRatio}}"><div><input class="{{convertRatioFn convertRatio fConvertRatio}}" value={{convertRatio}}></div></td>
+                                        <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}">
+                                            <div>
+                                                {{{unitInput unitOps}}}
+                                            </div>
+                                        </td>
+                                        <td><div>{{isOrNo isStop}}</div></td>
+                                        <td title={{timeFn updateDate}}><div>{{timeFn updateDate}}</div></td>
                                     </tr>
                                 {{/each}}
                             </tbody>
@@ -54,28 +58,28 @@
                             <tbody>
                                 {{#each ydata}}
                                     <tr>
-                                        <td><div>{{codePro}}</div></td>
-                                        <td class="icon-triangle"><div>{{ypType}}</div></td>
-                                        <td><div>{{proName}}</div></td>
-                                        <td><div>{{prepName}}</div></td>
-                                        <td><div>{{spec}}</div></td>
-                                        <td><div>{{fConvertRatio}}</div></td>
-                                        <td><div>{{facAbbrF}}</div></td>
-                                        <td><div>{{pzwh}}</div></td>
-                                        <td><div>{{flag4}}</div></td>
-                                        <td><div>{{jkyw}}</div></td>
-                                        <td><div>{{yyyy}}</div></td>
-                                        <td><div>{{isZcyzsj}}</div></td>
-                                        <td><div>{{jmdf}}</div></td>
-                                        <td><div>{{pregnancyLevel}}</div></td>
-                                        <td><div>{{flag1}}</div></td>
-                                        <td><div>{{ddd}}</div></td>
-                                        <td><div>{{adminRouteExclude}}</div></td>
-                                        <td><div>{{isCalcKjyw}}</div></td>
-                                        <td><div>{{kjywType}}</div></td>
-                                        <td><div>{{rbflName}}</div></td>
-                                        <td><div>{{ylflName}}</div></td>
-                                        <td><div>{{flag5}}</div></td>
+                                        <td title="{{codePro}}"><div>{{codePro}}</div></td>
+                                        <td title="{{ypTypeSwitch ypType}}"><div>{{ypTypeSwitch ypType}}</div></td>
+                                        <td title="{{proName}}"><div>{{proName}}</div></td>
+                                        <td title="{{prepName}}"><div>{{prepName}}</div></td>
+                                        <td title="{{spec}}"><div>{{spec}}</div></td>
+                                        <td title="{{fConvertRatio}}"><div>{{fConvertRatio}}</div></td>
+                                        <td title="{{facAbbrF}}"><div>{{facAbbrF}}</div></td>
+                                        <td title="{{pzwh}}"><div>{{pzwh}}</div></td>
+                                        <td title="{{flag4}}"><div>{{flag4}}</div></td>
+                                        <td title="{{jkyw}}"><div>{{jkyw}}</div></td>
+                                        <td title="{{yyyy}}"><div>{{yyyy}}</div></td>
+                                        <td title="{{isZcyzsj}}"><div>{{isZcyzsj}}</div></td>
+                                        <td title="{{jmdf}}"><div>{{jmdf}}</div></td>
+                                        <td title="{{pregnancyLevel}}"><div>{{pregnancyLevel}}</div></td>
+                                        <td title="{{flag1}}"><div>{{flag1}}</div></td>
+                                        <td title="{{ddd}}"><div>{{ddd}}</div></td>
+                                        <td title="{{adminRouteExclude}}"><div>{{adminRouteExclude}}</div></td>
+                                        <td title="{{isCalcKjyw}}"><div>{{isCalcKjyw}}</div></td>
+                                        <td title="{{kjywType}}"><div>{{kjywType}}</div></td>
+                                        <td title="{{rbflName}}"><div>{{rbflName}}</div></td>
+                                        <td title="{{ylflName}}"><div>{{ylflName}}</div></td>
+                                        <td title="{{flag5}}"><div>{{flag5}}</div></td>
                                     </tr>
                                 {{/each}}
                             </tbody>

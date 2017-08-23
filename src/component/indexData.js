@@ -15,10 +15,10 @@ module.exports = {
    thead:['YPID','品种代码','药交ID','药品编码', '药品类型','药品名称','商品名','剂型','规格','生产企业','批准文号/注册证号','操作'],
     input:[
       {text:'YPID/品种代码:',inputClass:'ypid'},
-      {text:'药交ID:',inputClass:'yj_id'},
-      {text:'药品名称/商品名:',inputClass:'prod_name'},
-      {text:'生产企业:',inputClass:'fnc_name'},
-      {text:'批准文号/注册证号:',inputClass:'prod_pzwh'}
+      {text:'药交ID:',inputClass:'yjId'},
+      {text:'药品名称/商品名:',inputClass:'prodName'},
+      {text:'生产企业:',inputClass:'fncName'},
+      {text:'批准文号/注册证号:',inputClass:'prodPzwh'}
     ]
   },
   tabsData:{

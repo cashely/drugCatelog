@@ -15,7 +15,7 @@ var $chemistry = $('.'+data.name);
 //      drugName: $('.search-box .drug-name').val(),
 //      specName: $('.search-box .spec-name').val(),
 //      firstResult: 0,
-//      maxResults: 16
+//      maxResult: 16
 //    },
 //    callback:function(res){
 //      data.searchDate.total = res.total;

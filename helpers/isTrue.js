@@ -1,9 +1,5 @@
-module.exports = function(_this) {
- if(_this == 0){
+module.exports = function(_this,nub) {
+ if(_this == nub){
   return "selected"
- }else if(_this == 1){
-  return "selected"
- }else{
-  return _this
  }
 };

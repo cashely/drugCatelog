@@ -26,6 +26,9 @@ a {
   color: #666;
   text-decoration: none; }
 
+.color-red {
+  color: red; }
+
 .icon-arrow-left {
   width: 6px;
   height: 10px;
@@ -309,12 +312,14 @@ a {
   .content .popup-record {
     width: 482px;
     position: absolute;
-    top: 375px;
+    top: 250px;
     left: 50%;
     z-index: 99;
     margin-left: -241px;
     background: #fff; }
     .content .popup-record .popup-content {
+      max-height: 250px;
+      overflow: auto;
       padding: 10px 10px 19px; }
       .content .popup-record .popup-content .popup-table {
         width: 100%;
@@ -325,12 +330,34 @@ a {
           border: 1px solid #D8D8D8;
           height: 25px;
           padding: 0 5px; }
+  .content .popup-channel {
+    width: 380px;
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    z-index: 99;
+    margin-left: -241px;
+    background: #fff; }
+    .content .popup-channel .popup-content {
+      padding: 10px 10px 10px;
+      max-height: 200px;
+      overflow: auto; }
+      .content .popup-channel .popup-content .channel-checkbox {
+        vertical-align: middle; }
+      .content .popup-channel .popup-content .sub-channel {
+        display: none;
+        margin-left: 15px; }
+    .content .popup-channel .save-channel {
+      margin: 10px; }
 
 .table-diff-data tr input {
   width: 100%;
   color: #666;
   border: 1px solid transparent;
   background-color: transparent; }
+
+.table-diff-data tr .color-red {
+  color: red; }
 
 .table-diff-data tr.hover input, .table-diff-data tr.active input {
   width: 100%;
@@ -355,6 +382,7 @@ a {
   .table-diff .table-diff tr:nth-child(2n) td {
     background-color: #fafafa; }
   .table-diff .table-diff .icon-triangle {
+    cursor: pointer;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAAD9JREFUGBljzMjIaPj37189Aw7AfObMmQOmpqaM////d8CmhhkkiE8RWAE+RXAFuBShKMCmCEMBuiKsCpAVAQAWzjMScai5qQAAAABJRU5ErkJggg==) top right no-repeat #fff; }
   .table-diff .table-diff td, .table-diff .table-diff th {
     padding: 0;
@@ -514,3 +542,57 @@ a {
   width: 100%; }
   .loading .loading-img {
     width: 25px; }
+
+.login {
+  display: none;
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  margin-left: -190px;
+  background: #fff;
+  color: #666;
+  width: 380px;
+  font-size: 14px;
+  z-index: 999; }
+  .login .login-title {
+    padding: 12px;
+    background-color: #4EAADC;
+    color: #fff; }
+  .login .login-input {
+    display: block;
+    color: #747474;
+    padding: 20px 20px 0 20px;
+    line-height: 25px; }
+    .login .login-input .input {
+      border: 1px solid #e3e3e3;
+      line-height: 1.5;
+      padding: 5px 10px;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      box-sizing: content-box;
+      width: 308px;
+      margin-top: 5px; }
+  .login .login-btn {
+    background-color: #2d8cc0;
+    margin: 20px 30px;
+    border: 0;
+    padding: 7px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #fff; }
+  .login .popup-close {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 6px;
+    right: 10px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAATFJREFUOBGdkzFKBEEQRbcHBVMFQzHwAHqKFeYabmpqKBsbGhjpCcxX8BLDHmAD3XDBTQ3E8T3pWptmgsGCT1X9rl/d1dOTJpX1fX8KdQkuwDHowQZ04DWl9I7fWYoI4R7xDLRgx8d69t/4BXii0Zfcb2EWz8nPJUfYkpq5TZpc7M5jxUqsVTNp8sweO+yDYBVJ4eVcC2vVeoIpKGfekt8CjxlmLOdamJppossDwUmw2Su4Azc5j7gec22DZ4oOcmHpoomcjWqx/Gdcosm/zAY+ktpid3cWjiBX28YGXcV62+XMHj2a1F+n8w58uvcgxvFTbcEZKE3xITjKpE/8uuE1vRG8ZFJnQS2Wlwux+UJt7PoIMTSjhUNmrZq/B8Qo++RXoC154tKGf6ayIt/J6N/5BwNkXKktE4jdAAAAAElFTkSuQmCC) center center no-repeat; }
+  .login .login-cancel {
+    float: right;
+    margin: 20px 30px;
+    border: 0;
+    padding: 7px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+    background: #BCBCBC; }
