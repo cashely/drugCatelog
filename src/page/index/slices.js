@@ -10,24 +10,20 @@ var standardThanTel =  require('./../../component/standardThanSlices/standardTha
 var standardThanTbody =  require('./../../component/standardThanSlices/standardThanTbody.hbs');
 var standardThanTr =  require('./../../component/standardThanSlices/standardThanTr.hbs');
 var searchClassifyTel =  require('./../../component/searchBox/searchClassify.hbs');//比对表格搜索分类
-var ajaxFn =  require('./../../component/ajax');
+
 var Fn = require('./../../component/function');
 var data =  require('./slicesData');
 var parent =  '.'+data.name;
-
-//var singleData = {
-//  id:null,
-//  index:null
-//};
+var loadData;
 var firstResult =0,maxResult= 16,firstResultThan =0,maxResultThan= 16;
-//var loading = false;
-
+var findThanData ={firstResult:0,maxResult:16};
 module.exports = function($this){
   var content = '<div class="content-box active '+data.name +'"><div class="search-box"></div><div class="table-diff slices-table"></div><div class="standard-than" id="slicesStandardData"></div></div>';
   $('.content').append(content);
   var loadData = {
     parent: parent,
     url: 'zyyp/listZyypHisProduct',
+    loadData: loadData,
     firstResult: firstResult,
     maxResult: maxResult,
     data: data,
@@ -54,7 +50,7 @@ module.exports = function($this){
   Fn.showThan({
     parent: parent,
     url: 'zyyp/listMcdZyyp',
-    dataName: 'prod_nam',
+    slicesName: 'name',
     inputName:'name',
     data: data,
     standardThanTbody: standardThanTbody,
@@ -62,10 +58,12 @@ module.exports = function($this){
     standardThanTr: standardThanTr,
     firstResultThan: firstResultThan,
     maxResultThan: maxResultThan,
+    findThanData: findThanData,
+    findThanDataName:['name'],
     saveUrl:'zyyp/saveMatch',
-    findThanData:['name'],
     selectThanData:'zyypId'
   },loadData);
+
   //弹窗事件
   Fn.popupFn({
     parent: parent

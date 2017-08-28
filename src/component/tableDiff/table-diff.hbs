@@ -19,7 +19,7 @@
                         <table width="100%" cellspacing="1" border="0">
                             <tbody>
                                 {{#each ydata}}
-                                    <tr data-id={{id}} data-name={{drugNameFormat}}>
+                                    <tr data-id="{{id}}" data-name="{{drugNameFormat}}"  data-fncName="{{manufacturerName}}">
                                         <td class="table-diff-drugId" title="{{id}}"><div>{{id}}</div></td>
                                         <td title="{{drugName}}"><div>{{drugName}}</div></td>
                                         <td title="{{specName}} {{manufacturerName}}"><div>{{specName}} {{manufacturerName}}</div></td>
@@ -30,7 +30,7 @@
                                             </div>
                                         </td>
                                         <td><div>{{isOrNo isStop}}</div></td>
-                                        <td title={{timeFn updateDate}}><div>{{timeFn updateDate}}</div></td>
+                                        <td title="{{timeFn updateDate}}"><div>{{timeFn updateDate}}</div></td>
                                     </tr>
                                 {{/each}}
                             </tbody>
@@ -66,20 +66,22 @@
                                         <td title="{{fConvertRatio}}"><div>{{fConvertRatio}}</div></td>
                                         <td title="{{facAbbrF}}"><div>{{facAbbrF}}</div></td>
                                         <td title="{{pzwh}}"><div>{{pzwh}}</div></td>
+                                        <td title="{{instruction}}"><div>{{isNull instruction}}</div></td>
+                                        <td title="{{smsDate}}"><div>{{smsDate}}</div></td>
                                         <td title="{{flag4}}"><div>{{flag4}}</div></td>
-                                        <td title="{{jkyw}}"><div>{{jkyw}}</div></td>
-                                        <td title="{{yyyy}}"><div>{{yyyy}}</div></td>
-                                        <td title="{{isZcyzsj}}"><div>{{isZcyzsj}}</div></td>
+                                        <td title="{{isOrNo jkyw}}"><div>{{isOrNo jkyw}}</div></td>
+                                        <td title="{{isOrNo yyyy}}"><div>{{isOrNo yyyy}}</div></td>
+                                        <td title="{{isOrNo isZcyzsj}}"><div>{{isOrNo isZcyzsj}}</div></td>
                                         <td title="{{jmdf}}"><div>{{jmdf}}</div></td>
                                         <td title="{{pregnancyLevel}}"><div>{{pregnancyLevel}}</div></td>
                                         <td title="{{flag1}}"><div>{{flag1}}</div></td>
-                                        <td title="{{ddd}}"><div>{{ddd}}</div></td>
+                                        <td title="{{ddd}}{{dddUnit}}"><div>{{ddd}}{{dddUnit}}</div></td>
                                         <td title="{{adminRouteExclude}}"><div>{{adminRouteExclude}}</div></td>
                                         <td title="{{isCalcKjyw}}"><div>{{isCalcKjyw}}</div></td>
                                         <td title="{{kjywType}}"><div>{{kjywType}}</div></td>
                                         <td title="{{rbflName}}"><div>{{rbflName}}</div></td>
                                         <td title="{{ylflName}}"><div>{{ylflName}}</div></td>
-                                        <td title="{{flag5}}"><div>{{flag5}}</div></td>
+                                        <td title="{{isOrNo flag5}}"><div>{{isOrNo flag5}}</div></td>
                                     </tr>
                                 {{/each}}
                             </tbody>
@@ -103,6 +105,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="loading-wrap">
+            <div class="loading">
+                <img src="./images/loading.gif" class="loading-img">
             </div>
         </div>
     </div>

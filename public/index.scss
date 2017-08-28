@@ -18,6 +18,8 @@ ul,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd{
 }
 input{border:none;}
 img{border: none;}
+.lf{ float: left;}
+.rt{ float: right;}
 a{
     color:#666;
     text-decoration:none;
@@ -94,14 +96,19 @@ a{
     }
     /*输入框样式*/
     .input-group{
-        margin-right: 20px;
+        display: inline-block;
         white-space: nowrap;
+        float: left;
         .input{
+            display: inline-block;
             width: 108px;
             height: 24px;
-            margin: 0 0 10px 8px;
+            line-height: 24px;
+            margin-left: 8px;
+            margin-right: 20px;
             padding: 1px 5px;
             border: 1px solid #CACACA;
+            vertical-align: middle;
         }
         .select{
             width: 120px;
@@ -118,6 +125,7 @@ a{
         color: #FFFFFF;
         background: #2D8CC0;
         border-radius: 4px;
+        cursor: pointer;
     }
     //弹窗
     .popup{
@@ -141,6 +149,7 @@ a{
                 height: 16px;
                 top: 6px;
                 right: 10px;
+                cursor: pointer;
                 background: url(./images/icon-close.png) center center no-repeat;
             }
         }
@@ -148,20 +157,22 @@ a{
 
     /*查找药品数据*/
     .search-box{
-        .input-group{
-            .drug-name{
-                width: 72px;
+        .search-top{
+            overflow: hidden;
+            .search-top-lf{
+                float: left;
             }
-        }
-        .search-box-rt{
-            float: right;
-            .create-btn{
-                margin-right: 10px;
+            .search-top-rt{
+                float: right;
+                .create-btn{
+                    margin-right: 10px;
+                }
             }
         }
         .search-data{
-            margin-top: 8px;
+            margin-top: 18px;
             line-height: 16px;
+            overflow: hidden;
             .color-blue{
                 color: #2D8CC0;
             }
@@ -207,9 +218,10 @@ a{
             }
         }
         .search-than{
-            padding: 10px 12px 0;
+            padding: 10px 12px 10px;
         }
         .than-table{
+            position: relative;
             .than-thead{
                 padding-right: 16px;
                 background: #4EAADC;
@@ -240,6 +252,7 @@ a{
                     width: 70px;
                 }
                 .select-than{
+                    cursor: pointer;
                     color: #2D8CC0;
                 }
             }
@@ -259,6 +272,9 @@ a{
         .than-thead{
             padding-right: 16px;
             background: #4EAADC;
+        }
+        .than-tbody-wrap{
+            position: relative;
         }
         .than-tbody{
             height: 350px;
@@ -286,6 +302,7 @@ a{
             }
             .add-than-info{
                 color: #2D8CC0;
+                cursor: pointer;
             }
         }
     }
@@ -400,6 +417,8 @@ a{
         z-index: 99;
         margin-left: -241px;
         background: #fff;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
         .popup-content{
             max-height: 250px;
             overflow: auto;
@@ -427,6 +446,8 @@ a{
         z-index: 99;
         margin-left: -241px;
         background: #fff;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
         .popup-content{
             padding: 10px 10px 10px;
             max-height: 200px;
@@ -594,6 +615,9 @@ a{
                                 margin-bottom: 0;
                             }
                         }
+                        .adminRouteExclude{
+                            overflow: hidden;
+                        }
                     }
                 }
                 .tool{
@@ -704,6 +728,15 @@ a{
     }
 }
 //加载中
+.loading-wrap{
+    display: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    background: rgba(0,0,0,0.1);
+}
 .loading{
     margin-top: -6px;
     text-align: center;
@@ -715,6 +748,7 @@ a{
         width: 25px;
     }
 }
+
 //登录框
 .login{
     display: none;
@@ -727,6 +761,8 @@ a{
     width: 380px;
     font-size: 14px;
     z-index: 999;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
     .login-title{
         padding: 12px;
         background-color: #4EAADC;

@@ -1,8 +1,12 @@
-共查找出 {{total}} 条数据：
-<a href="javaScript:void(0)" class="jbywCount"><span class="text">基药</span><span class="color-blue">({{jbywCount}})</span></a>&nbsp;
-<a href="javaScript:void(0)" class="yblbCount"><span class="text">医保</span>(<span class="color-blue">{{yblbCount}}</span>)</a>&nbsp;&nbsp;
-<a href="javaScript:void(0)" class="wtsjCount"><span class="text">问题数据</span>(<span class="color-red">{{wtsjCount}}</span>)</a>&nbsp;
-<a href="javaScript:void(0)" class="wbdCount"><span class="text">未比对</span>(<span class="color-red">{{wbdCount}}</span>)</a>&nbsp;
-<a href="javaScript:void(0)" class="ybdCount"><span class="text">已比对</span>(<span class="color-blue">{{ybdCount}}</span>)</a>&nbsp;&nbsp;
-<a href="javaScript:void(0)" class="rsyyCount"><span class="text">妊娠用药</span>(<span class="color-blue">{{rsyyCount}}</span>)</a>
-<a href="javaScript:void(0)" class="download color-blue"><img src="./images/icon-download.png" class="icon-download">下载</a>
+<div class="lf">
+    共查找出 {{total}} 条数据：
+    <a href="javaScript:void(0)" class="jbywCount"><span class="text">基药</span><span class="color-blue">({{jbywCount}})</span></a>&nbsp;
+    <a href="javaScript:void(0)" class="yblbCount"><span class="text">医保</span>(<span class="color-blue">{{yblbCount}}</span>)</a>&nbsp;&nbsp;
+    <a href="javaScript:void(0)" class="wtsjCount"><span class="text">问题数据</span>(<span class="color-red">{{wtsjCount}}</span>)</a>&nbsp;
+    <a href="javaScript:void(0)" class="wbdCount"><span class="text">未比对</span>(<span class="color-red">{{wbdCount}}</span>)</a>&nbsp;
+    <a href="javaScript:void(0)" class="ybdCount"><span class="text">已比对</span>(<span class="color-blue">{{ybdCount}}</span>)</a>&nbsp;&nbsp;
+    {{#if showRsyyCount}}
+        <a href="javaScript:void(0)" class="rsyyCount"><span class="text">妊娠用药</span>(<span class="color-blue">{{rsyyCount}}</span>)</a>
+    {{/if}}
+</div>
+<a href="javaScript:void(0)" class="download color-blue rt"><img src="./images/icon-download.png" class="icon-download">下载</a>

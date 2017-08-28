@@ -1,8 +1,8 @@
 <div>
     <ul class="content-list">
-        <li>药品名称：{{drugName}}</li>
-        <li>剂型：{{specName}}</li>
-        <li>规格：{{prepName}}</li>
+        <li>药品名称：{{proName}}</li>
+        <li>剂型：{{smlNameF}}</li>
+        <li>规格：{{specName}}</li>
         <li>转换比：{{fConvertRatio}}</li>
         <li>药品编码：{{codePro}}</li>
         <li>含量：{{component}}{{componentUnit}}</li>
@@ -19,10 +19,11 @@
         <li class="input-group">
             <span class="ypType">药品类型:</span>
             <select class="select updateValueFn">
-                <option value="0" {{isTrue ypType "0"}}>化学药、中成药</option>
-                <option value="1" {{isTrue ypType "1"}}>中药饮片</option>
-                <option value="2" {{isTrue ypType "2"}}>医院制剂</option>
-                <option value="3" {{isTrue ypType "3"}}>卫生材料</option>
+                <option value="0" {{isTrue ypType "0"}}>西药</option>
+                <option value="0" {{isTrue ypType "1"}}>中成药</option>
+                <option value="1" {{isTrue ypType "2"}}>中药饮片</option>
+                <option value="2" {{isTrue ypType "3"}}>医院制剂</option>
+                <option value="3" {{isTrue ypType "4"}}>卫生材料</option>
             </select>
         </li>
         <li class="input-group">
@@ -31,7 +32,7 @@
                 <option value="0" {{isTrue yblb "0"}}>否</option>
                 <option value="1" {{isTrue yblb "1"}}>国家</option>
                 <option value="2" {{isTrue yblb "2"}}>省</option>
-                <option value="3" {{isTrue yblb "3"}}>地</option>
+                <option value="3" {{isTrue yblb "3"}}>地市</option>
             </select>
         </li>
         <li class="input-group"><span data-name="ybbh">医保编码:</span><input type="text" class="input upInputFn" value="{{ybbh}}"></li>
@@ -40,8 +41,8 @@
             <select class="select updateValueFn">
                 <option value="0" {{isTrue flag4 "0"}}>否</option>
                 <option value="1" {{isTrue flag4 "1"}}>国家</option>
-                <option value="2" {{isTrue flag4 "2"}}>省</option>
-                <option value="3" {{isTrue flag4 "3"}}>地</option>
+                <option value="2" {{isTrue flag4 "2"}}>省基</option>
+                <option value="3" {{isTrue flag4 "3"}}>地基</option>
             </select>
         </li>
         <li class="input-group">
@@ -90,7 +91,10 @@
             <span class="jmdf">精麻毒放:</span>
             <select class="select updateValueFn">
                 <option value="0" {{isTrue jmdf "0"}}>否</option>
-                <option value="1" {{isTrue jmdf "1"}}>是</option>
+                <option value="1" {{isTrue jmdf "1"}}>麻</option>
+                <option value="0" {{isTrue jmdf "2"}}>毒</option>
+                <option value="1" {{isTrue jmdf "3"}}>精二</option>
+                <option value="0" {{isTrue jmdf "4"}}>精一</option>
             </select>
         </li>
         <li class="input-group">
@@ -121,7 +125,7 @@
             <input type="text" class="input" value="{{kjyw}}">
         </li>
         <li class="input-group"><span data-name="ddd">DDD值:</span><input type="text" class="input upInputFn" value="{{ddd}}"></li>
-        <li class="input-group"><span data-name="adminRouteExclude">给药途径不计算强度:</span><input type="text" class="input upInputFn" value="{{adminRouteExclude}}"></li>
+        <li class="input-group"><span data-name="adminRouteExclude">给药途径不计算强度:</span><div class="input icon-triangle adminRouteExclude">{{adminRouteExclude}}</div></li>
         <li class="input-group">
             <span class="isDdd">是否计算强度:</span>
             <select class="select updateValueFn">

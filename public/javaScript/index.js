@@ -60,11 +60,25 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+module.exports = function (_this) {
+  if (_this == 0) {
+    return '否';
+  } else if (_this == 1) {
+    return '是';
+  } else {
+    return _this;
+  }
+};
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports) {
 
 module.exports = function (_this, nub) {
@@ -74,15 +88,15 @@ module.exports = function (_this, nub) {
 };
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
-module.exports = __webpack_require__(25)['default'];
+module.exports = __webpack_require__(28)['default'];
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = function (_this, str) {
@@ -94,7 +108,27 @@ module.exports = function (_this, str) {
 };
 
 /***/ }),
-/* 3 */
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = function (_this) {
+  if (_this == 0) {
+    return "西药";
+  } else if (_this == 1) {
+    return "中成药";
+  } else if (_this == 2) {
+    return '中药饮片';
+  } else if (_this == 3) {
+    return '医院制剂';
+  } else if (_this == 4) {
+    return '卫生材料';
+  } else {
+    return _this;
+  }
+};
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -223,7 +257,35 @@ function appendContextPath(contextPath, id) {
 }
 
 /***/ }),
-/* 4 */
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  name: 'chemistryMain',
+  http: 'http://192.168.1.233:8083/hpms/api/',
+  searchDate: {
+    input: [{ text: '医院药品ID:', inputClass: 'drug-id' }, { text: '药品名称:', inputClass: 'drug-name' }, { text: '规格/厂家:', inputClass: 'spec-name' }],
+    showRsyyCount: 1
+  },
+  diffData: {
+    tLeftHead: ['医院药品ID', '药品名称', '规格厂家', '转换比', '门诊/住院单位', '是否停用', '修订时间'],
+    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格', '转换比', '企业简称', '批准文号/注册证号', '说明书', '说明书版本', '基药', '重点药物监控', '营养用药', '中成药注射剂', '精麻毒放', '妊娠用药', '抗菌药物', 'DDD值', '给药途径(不计算强度)', '是否计算强度', '分级', '人社分类', '药理分类', '是否PPI']
+  },
+  thanData: {
+    thead: ['YPID', '品种代码', '药交ID', '药品编码', '药品类型', '药品名称', '商品名', '剂型', '规格', '生产企业', '批准文号/注册证号', '操作'],
+    input: [{ text: 'YPID/品种代码:', inputClass: 'ypid' }, { text: '药交ID:', inputClass: 'yjId' }, { text: '药品名称/商品名:', inputClass: 'prodName' }, { text: '生产企业:', inputClass: 'fncName' }, { text: '批准文号/注册证号:', inputClass: 'prodPzwh' }]
+  },
+  tabsData: {
+    content: [{ text: '西药／中成药', id: "chemistry", active: "active" }, { text: '中药饮片', id: "slices" }, { text: '医院制剂', id: "potion" }]
+  },
+  addData: {
+    input: [{ text: '药品名称:', inputClass: 'add-drug-name' }, { text: '规格:', inputClass: 'add-spec' }, { text: '生产企业:', inputClass: 'add-manufacturer-name' }],
+    thead: ['(19+7)位药品编码', '药品名称', '商品名', '规格', '生产企业', '批准文号/注册证号', '操作']
+  }
+};
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = function (time) {
@@ -241,51 +303,7 @@ module.exports = function (time) {
 };
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = function (_this) {
-  if (_this == 0) {
-    return "化学药、中成药";
-  } else if (_this == 1) {
-    return "中药饮片";
-  } else if (_this == 2) {
-    return '医院制剂';
-  } else if (_this == 3) {
-    return '卫生材料';
-  } else {
-    return _this;
-  }
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  name: 'chemistryMain',
-  searchDate: {
-    input: [{ text: '医院药品ID:', inputClass: 'drug-id' }, { text: '药品名称:', inputClass: 'drug-name' }, { text: '规格/厂家:', inputClass: 'spec-name' }]
-  },
-  diffData: {
-    tLeftHead: ['医院药品ID', '药品名称', '规格厂家', '转换比', '门诊/住院单位', '是否停用', '修订时间'],
-    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格', '转换比', '企业简称', '批准文号/注册证号', '基药', '重点药物监控', '营养用药', '中成药注射剂', '精麻毒放', '妊娠用药', '抗菌药物', 'DDD值', '给药途径(不计算强度)', '是否计算强度', '分级', '人社分类', '药理分类', '是否PPI']
-  },
-  thanData: {
-    thead: ['YPID', '品种代码', '药交ID', '药品编码', '药品类型', '药品名称', '商品名', '剂型', '规格', '生产企业', '批准文号/注册证号', '操作'],
-    input: [{ text: 'YPID/品种代码:', inputClass: 'ypid' }, { text: '药交ID:', inputClass: 'yjId' }, { text: '药品名称/商品名:', inputClass: 'prodName' }, { text: '生产企业:', inputClass: 'fncName' }, { text: '批准文号/注册证号:', inputClass: 'prodPzwh' }]
-  },
-  tabsData: {
-    content: [{ text: '化学药／中成药', id: "chemistry", active: "active" }, { text: '中药饮片', id: "slices" }, { text: '医院制剂', id: "potion" }]
-  },
-  addData: {
-    input: [{ text: '药品名称:', inputClass: 'add-drug-name' }, { text: '规格:', inputClass: 'add-spec' }, { text: '厂家:', inputClass: 'add-manufacturer-name' }],
-    thead: ['(19+7)位药品编码', '药品名称', '商品名', '规格', '生产企业', '批准文号/注册证号', '新增']
-  }
-};
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -344,88 +362,55 @@ exports['default'] = Exception;
 module.exports = exports['default'];
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports) {
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var http = 'http://192.168.1.233:8083/hpms/api/';
+var http = __webpack_require__(6).http; //化学药数据;
 function ajaxFn(params) {
   var callback = params.callback || function () {};
   var error = params.error || function () {};
-  if (params.contentType) {
-    $.ajax({
-      type: params.type || 'POST',
-      url: http + params.url,
-      data: params.data,
-      dataType: 'JSON',
-      contentType: params.contentType,
-      success: function (res) {
-        if (res.flag == "S") {
-          callback(res);
-        } else if (res.flag == "N") {
-          $('.login').show();
-          $('.header .login-out').removeClass('active').text('登录');
-        } else {
-          error(res);
-        }
+  $.ajax({
+    type: params.type || 'POST',
+    url: http + params.url,
+    data: params.data,
+    dataType: 'JSON',
+    success: function (res) {
+      if (res.flag == "S") {
+        callback(res);
+      } else if (res.flag == "N") {
+        $('.login').show();
+        $('.header .login-out').removeClass('active').text('登录');
+      } else {
+        console.log(res.message);
+        error(res);
       }
-    });
-  } else {
-    $.ajax({
-      type: params.type || 'POST',
-      url: http + params.url,
-      data: params.data,
-      dataType: 'JSON',
-      success: function (res) {
-        if (res.flag == "S") {
-          callback(res);
-        } else if (res.flag == "N") {
-          $('.login').show();
-          $('.header .login-out').removeClass('active').text('登录');
-        } else {
-          console.log(res.message);
-          error(res);
-        }
-      }
-    });
-  }
+    }
+  });
 }
 module.exports = ajaxFn;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = function (_this) {
-  if (_this == 0) {
-    return '否';
-  } else if (_this == 1) {
-    return '是';
-  } else {
-    return _this;
-  }
-};
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ajaxFn = __webpack_require__(8); //请求方法
+var ajaxFn = __webpack_require__(9); //请求方法
+var http = __webpack_require__(6).http;
 var data = __webpack_require__(6); //化学药数据
-var tableDiff = __webpack_require__(11); //化学药比对表格
-var unitTel = __webpack_require__(47); //门诊/住院单位
-var popupCompanyTal = __webpack_require__(48);
-var popupRecordTal = __webpack_require__(50);
-var popupChannelTal = __webpack_require__(51);
+var unitTel = __webpack_require__(49); //门诊/住院单位
+var popupCompanyTal = __webpack_require__(50);
+var popupRecordTal = __webpack_require__(52);
+var popupChannelTal = __webpack_require__(53);
 var loading = false;
 var singleData = { id: null, index: null };
+var addData = __webpack_require__(16);
 var $parent = $('.' + data.name);
 var tableRightLeft = 0;
-var findThanData = { firstResult: 0, maxResult: 16 };
-var loadData;
+//var loadData;
 //加载化学药数据方法
 function loadChemistryTableFn(params, type) {
   var $params = $(params.parent);
-  loadData = {
+  $params.find('.table-diff .loading-wrap').show();
+  params.loadData = {
     drugId: $params.find('.search-box .drug-id').val(),
     drugName: $params.find('.search-box .drug-name').val(),
     specName: $params.find('.search-box .spec-name').val(),
@@ -433,11 +418,11 @@ function loadChemistryTableFn(params, type) {
     maxResult: params.maxResult
   };
   if (!!type) {
-    loadData[type.name] = type.val;
+    params.loadData[type.name] = type.val;
   }
   ajaxFn({
     url: params.url,
-    data: loadData,
+    data: params.loadData,
     callback: function (res) {
       params.firstResult = params.firstResult + 1;
       params.data.searchDate.total = res.total;
@@ -448,12 +433,14 @@ function loadChemistryTableFn(params, type) {
       params.data.searchDate.ybdCount = res.content.ybdCount;
       params.data.searchDate.yblbCount = res.content.yblbCount;
       $params.find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
+      $params.find('.table-diff .loading-wrap').hide();
       params.data.diffData.ydata = res.content.rows;
       $params.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
       tableDiffScrollFn($params, params);
     }
   });
 }
+
 //比对表格滚动事件
 function tableDiffScrollFn($params, params) {
   $params.find('.table-diff-right .table-diff-data').on('scroll', function (e) {
@@ -471,11 +458,11 @@ function tableDiffScrollFn($params, params) {
     if (trHeight * trLength <= _t.scrollTop() + _t.height()) {
       if (loading == false) {
         loading = true;
-        loadData.firstResult = (params.firstResult + 1) * params.maxResult;
-        loadData.maxResult = params.maxResult;
+        params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
+        params.loadData.maxResult = params.maxResult;
         ajaxFn({
           url: params.url,
-          data: loadData,
+          data: params.loadData,
           callback: function (res) {
             params.firstResult = params.firstResult + 1;
             var data = {};
@@ -539,6 +526,7 @@ function tableDiffHoverFn() {
     }
   });
 }
+
 //选择标准数据比对
 function selectThanFn(params, $this, loadObj) {
   var drugId = $(params.parent).find('.than-content').attr('data-id');
@@ -558,24 +546,93 @@ function selectThanFn(params, $this, loadObj) {
     }
   });
 }
-//显示30位标准数据
+//比对19位标准数据
+function addThanInfo() {
+  var $tr = $(this).parents('tr');
+  var data = {
+    'default': {
+      id: $tr.data('id'),
+      name: $tr.find('.name').text(),
+      spec: $tr.find('.spec').text(),
+      manufacturerName: $tr.find('.manufacturerName').text(),
+      pzwh: $tr.find('.pzwh').text()
+    }
+  };
+  ajaxFn({
+    url: 'dataDictionary/getDataDictionaryListByCode',
+    data: {
+      code: 1
+    },
+    callback: function (res) {
+      data.minUseUnit = res.content;
+      ajaxFn({
+        url: 'dataDictionary/getDataDictionaryListByCode',
+        data: {
+          code: 2
+        },
+        callback: function (res) {
+          data.packUnit = res.content;
+          $('.popup').html(addDataPopupTel(data));
+          $('.popup').show();
+          $('.popup-add-info .popup-close').on('click', function () {
+            $('.popup-add-info').hide();
+          });
+          $('.popup-add-info .saveOrUpdate').on('click', function () {
+            var drugId = $('.than-content').attr('data-id');
+            ajaxFn({
+              url: 'mcdProduct30Ues/saveOrUpdate',
+              data: {
+                productId: $('.popup-add-info').data('id'),
+                minUseUnit: $('.popup-add-info .minUseUnit').val(),
+                packUnit: $('.popup-add-info .packUnit').val(),
+                convert: $('.popup-add-info .convert').val()
+              },
+              callback: function (res) {
+                console.log(res.content);
+                ajaxFn({
+                  url: 'mcdProduct30/saveMatch',
+                  data: {
+                    drugId: drugId,
+                    proId: res.content.proId
+                  },
+                  callback: function (res) {
+                    $('.popup').hide();
+                    $('.content .add-data').hide();
+                    $('.content  .content-box-main').show();
+                    var _index = $(parent).find('.table-diff-data-content [data-id=' + drugId + ']').index();
+                    console.log(_index);
+                    $(parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(tableDiffRightTr(res.content));
+                  }
+                });
+              }
+            });
+          });
+        }
+      });
+    }
+  });
+}
+//显示19位标准数据
 function addThan(params) {
   $(params.parent).find('.content-box-main').hide();
   $(params.parent).find('.add-data').show();
 }
+
 //查找标准比对数据
 function findThanFn(params) {
   var $parent = $(params.parent);
-  findThanData.firstResult = 0;
-  findThanData.maxResult = 16;
-  $(params.findThanData).each(function (i, e) {
-    findThanData[e] = $parent.find('.' + e).val();
+  params.findThanData.firstResult = 0;
+  params.findThanData.maxResult = 16;
+  $(params.findThanDataName).each(function (i, e) {
+    params.findThanData[e] = $parent.find('.' + e).val();
   });
+  $parent.find('.than-table .loading-wrap').show();
   ajaxFn({
     url: params.url,
-    data: findThanData,
+    data: params.findThanData,
     callback: function (res) {
       var tbodyData = {};
+      $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
       $parent.find('.standard-than .than-tbody').html(params.standardThanTbody(tbodyData));
       $parent.find('.standard-than .than-tbody').scrollTop(0);
@@ -593,21 +650,42 @@ function showThan(params) {
   var singleDataId = singleData.id;
   var $parent = $(params.parent);
   $parent.find('.standard-than').show();
+  $parent.find('.than-table .loading-wrap').show();
   var _prodName = $parent.find('.table-diff-data-content [data-id=' + singleDataId + ']').attr('data-name');
   var _index = $('.table-diff-data-content').find('[data-id=' + singleDataId + ']').index();
   $parent.find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
   $parent.find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
-  $parent.find('.search-than .' + params.dataName).val(_prodName);
-  findThanData[params.dataName] = _prodName;
+  if (!!params.homeProdName) {
+    //西药
+    var _homeFncName = $parent.find('.table-diff-data-content [data-id=' + singleDataId + ']').attr('data-fncName');
+    $parent.find('.search-than .' + params.homeProdName).val(_prodName);
+    params.findThanData[params.homeProdName] = _prodName;
+    $parent.find('.search-than .' + params.homeFncName).val(_homeFncName);
+    params.findThanData[params.homeFncName] = _homeFncName;
+  }
+  if (!!params.slicesName) {
+    //中药饮片
+    $parent.find('.search-than .' + params.slicesName).val(_prodName);
+    params.findThanData[params.slicesName] = _prodName;
+  }
   ajaxFn({
     url: params.url,
-    data: findThanData,
+    data: params.findThanData,
     callback: function (res) {
+      $parent.find('.than-table .loading-wrap').hide();
       params.data.thanData.id = singleDataId;
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id', singleDataId);
       $parent.find('.standard-than .than-tbody').html(params.standardThanTbody(params.data.thanData));
-      $parent.find('.search-than .' + params.inputName).val(_prodName);
+      if (!!params.homeProdName) {
+        //西药
+        $parent.find('.search-than .' + params.homeProdName).val(_prodName);
+        $parent.find('.search-than .' + params.homeFncName).val(_homeFncName);
+      }
+      if (!!params.slicesName) {
+        //中药饮片
+        $parent.find('.search-than .' + params.slicesName).val(_prodName);
+      }
       $parent.find('.standard-than .than-tbody').on('scroll', function () {
         thanScrollFn(params, $(this));
       }); //滚动加载19位标准数据
@@ -616,14 +694,14 @@ function showThan(params) {
 }
 //滚动加载19位标准数据
 function thanScrollFn(params, $this) {
-  findThanData.firstResult = (params.firstResultThan + 1) * params.maxResultThan;
-  findThanData.maxResult = params.maxResultThan;
+  params.findThanData.firstResult = (params.firstResultThan + 1) * params.maxResultThan;
+  params.findThanData.maxResult = params.maxResultThan;
   if ($this.children('table').height() <= $this.scrollTop() + $this.height() && $this.children('table').height() > 0) {
     if (loading == false) {
       loading = true;
       ajaxFn({
         url: params.url,
-        data: findThanData,
+        data: params.findThanData,
         callback: function (res) {
           params.firstResultThan = params.firstResultThan + 1;
           var tbodyData = {};
@@ -741,14 +819,13 @@ function showDetail(params, e) {
       if (!!params.updateValueUrl) {
         updateValueFn(params);
       }
-      $parent.find('[data-name=adminRouteExclude]').on('click', function () {
-        popupChannelFn(params);
+      $parent.find('.table-details-content-box .adminRouteExclude').on('click', function () {
+        popupChannelFn(params, $(this));
       });
       e.preventDefault();
     }
   });
 }
-
 //保存门诊/住院单位
 function saveUnitFn() {
   var arr = [];
@@ -764,8 +841,10 @@ function saveUnitFn() {
   });
   ajaxFn({
     url: 'unitConversion/saveOrUpdateUnitConversion',
-    data: JSON.stringify(arr),
-    contentType: "application/json",
+    data: {
+      drugId: $('.popup .popup-company').data('id'),
+      unitConversions: JSON.stringify(arr)
+    },
     callback: function (res) {
       $('.popup').hide();
     }
@@ -821,10 +900,13 @@ function recordFn(params) {
   });
 }
 //弹窗给药途径不计算强度
-function popupChannelFn(params) {
+function popupChannelFn(params, $this) {
   var $parent = $(params.parent);
   ajaxFn({
     url: 'mcdProduct30/getRouteTree',
+    data: {
+      drugId: $parent.find('.table-diff-right').attr('data-id')
+    },
     callback: function (res) {
       var channelData = {};
       channelData.tree = res.content;
@@ -839,6 +921,16 @@ function popupChannelFn(params) {
         }
         $(this).addClass('tree-active').siblings('.sub-channel').show();
       });
+      $('.channel-checkbox').on('click', function () {
+        if ($(this).is(':checked')) {
+          if ($(this).siblings('.sub-channel')) {
+            $(this).parent('li').find('.sub-channel .channel-checkbox').prop("checked", true);
+          }
+        } else {
+          $(this).parents('.sub-channel').siblings('.channel-checkbox').prop("checked", false);
+          $(this).parent('li').find('.sub-channel .channel-checkbox').prop("checked", false);
+        }
+      });
       $('.save-channel').on('click', function () {
         saveChannelFn($parent);
       });
@@ -848,20 +940,24 @@ function popupChannelFn(params) {
 
 function saveChannelFn($params) {
   var _drugId = $params.find('.table-diff-right').attr('data-id');
-  var _obj = {},
-      arr = [];
-  _obj.drugId = _drugId;
+  var arr = [],
+      textArr = [];
   $('.popup-channel .channel-checkbox:checked').each(function (i, e) {
     arr.push($(e).attr('data-id'));
+    textArr.push($(e).next().text());
   });
-  _obj.routeIds = arr;
-  console.dir(_obj);
+  textArr = textArr.join(',');
+  $params.find('.table-details-content-box .adminRouteExclude').text(textArr);
   ajaxFn({
     url: 'mcdProduct30/updateMcdP30Adminroute',
-    data: JSON.stringify(_obj),
+    data: {
+      drugId: _drugId,
+      routeIds: JSON.stringify(arr),
+      names: textArr
+    },
     contentType: "application/json",
     callback: function (res) {
-      console.log('ss');
+      $('.popup').hide();
     }
   });
 }
@@ -882,16 +978,27 @@ function cancelThanFn(params, hptid) {
     }
   });
 }
+function isNull(_this) {
+  if (!!_this && typeof _this != undefined) {
+    return _this;
+  }
+  return '';
+}
 //下载
 function downloadFn(params) {
-  var downloadData = loadData;
-  downloadData.firstResult = null;
-  downloadData.maxResult = null;
-  ajaxFn({
-    url: params.downloadUrl,
-    data: loadData,
-    callback: function (res) {}
-  });
+  var downloadData = params.loadData;
+  var downloadUrl = http;
+  downloadUrl += params.downloadUrl;
+  downloadUrl += '?drugId=' + isNull(downloadData.drugId);
+  downloadUrl += '&drugName=' + isNull(downloadData.drugName);
+  downloadUrl += '&specName=' + isNull(downloadData.specName);
+  downloadUrl += '&jbyw=' + isNull(downloadData.jbyw);
+  downloadUrl += '&yblb=' + isNull(downloadData.yblb);
+  downloadUrl += '&wtsj=' + isNull(downloadData.wtsj);
+  downloadUrl += '&ybd=' + isNull(downloadData.ybd);
+  downloadUrl += '&wbd=' + isNull(downloadData.wbd);
+  downloadUrl += '&rsyy=' + isNull(downloadData.rsyy);
+  window.location.href = downloadUrl;
 }
 
 module.exports = {
@@ -902,7 +1009,7 @@ module.exports = {
     var $parent = $(params.parent);
 
     loadChemistryTableFn(params); //加载数据
-    showDiffBarFn(params); //显示化学药比对按钮
+    showDiffBarFn(params); //显示比对按钮
 
     bindFn(params.parent, 'click', '.search-box .btn', function () {
       params.firstResult = 0;params.maxResult = 16;
@@ -999,182 +1106,35 @@ module.exports = {
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    return "                                <th><div>"
-    + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "                                    <tr data-id="
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + " data-name="
-    + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
-    + ">\r\n                                        <td class=\"table-diff-drugId\" title=\""
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
-    + " "
-    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
-    + " "
-    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
-    + "</div></td>\r\n                                        <td class=\"convertRatio\" title=\""
-    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
-    + "\"><div><input class=\""
-    + alias2(__default(__webpack_require__(15)).call(alias3,(depth0 != null ? depth0.convertRatio : depth0),(depth0 != null ? depth0.fConvertRatio : depth0),{"name":"convertRatioFn","hash":{},"data":data}))
-    + "\" value="
-    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
-    + "></div></td>\r\n                                        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
-    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
-    + "\">\r\n                                            <div>\r\n                                                "
-    + ((stack1 = __default(__webpack_require__(46)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
-    + "\r\n                                            </div>\r\n                                        </td>\r\n                                        <td><div>"
-    + alias2(__default(__webpack_require__(9)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
-    + "</div></td>\r\n                                        <td title="
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
-    + "><div>"
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
-    + "</div></td>\r\n                                    </tr>\r\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    return "                                        <th><div>"
-    + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "                                    <tr>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(__default(__webpack_require__(5)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
-    + "\"><div>"
-    + alias2(__default(__webpack_require__(5)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.prepName : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.prepName : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.facAbbrF : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.facAbbrF : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.jkyw : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.jkyw : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.yyyy : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.yyyy : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.jmdf : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.jmdf : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.pregnancyLevel : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.pregnancyLevel : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.flag1 : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag1 : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.isCalcKjyw : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.isCalcKjyw : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.kjywType : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.kjywType : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.rbflName : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.rbflName : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.flag5 : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag5 : depth0), depth0))
-    + "</div></td>\r\n                                    </tr>\r\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-bar\">\r\n            <a href=\"#standardData\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n        </div>\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                        <thead>\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"table-diff-right\">\r\n                <div class=\"table-diff-right-all active\">\r\n                    <div class=\"table-diff-header\">\r\n                        <div class=\"table-diff-header-content\">\r\n                            <table cellspacing=\"1\" border=\"0\">\r\n                                <thead>\r\n                                    <tr>\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                                    </tr>\r\n                                </thead>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-diff-data\">\r\n                        <table cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
-},"useData":true});
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "    <lable class=\"input-group\">\r\n        "
+  return "            <label class=\"input-group\">\r\n                "
     + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
-    + "\r\n        <input type=\"text\" class=\"input  "
+    + "\r\n                <input type=\"text\" class=\"input  "
     + alias2(alias1((depth0 != null ? depth0.inputClass : depth0), depth0))
-    + "\">\r\n    </lable>\r\n";
+    + "\">\r\n            </label>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "<a href=\"javaScript:void(0)\" class=\"btn\">查找</a>\r\n<div class=\"search-box-rt\">\r\n    <a href=\"javaScript:void(0)\" class=\"btn create-btn\">生成新药分类</a>\r\n    <a href=\"javaScript:void(0)\" class=\"btn\">启用新药规则</a>\r\n</div>\r\n<div class=\"search-data\">\r\n    <!--searchClassify.hbs 搜索分类-->\r\n</div>";
+  return "<div class=\"search-top\">\r\n    <div class=\"search-top-lf\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "        <a href=\"javaScript:void(0)\" class=\"btn\">查找</a>\r\n    </div>\r\n    <div class=\"search-top-rt\">\r\n        <a href=\"javaScript:void(0)\" class=\"btn create-btn\">生成新药分类</a>\r\n        <a href=\"javaScript:void(0)\" class=\"btn\">启用新药规则</a>\r\n    </div>\r\n</div>\r\n<div class=\"search-data\">\r\n    <!--searchClassify.hbs 搜索分类-->\r\n</div>";
 },"useData":true});
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = function (_this) {
+  if (!!_this) {
+    return '是';
+  } else {
+    return '否';
+  }
+};
 
 /***/ }),
 /* 13 */
@@ -1191,17 +1151,17 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
-var _exception = __webpack_require__(7);
+var _exception = __webpack_require__(8);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _helpers = __webpack_require__(26);
+var _helpers = __webpack_require__(29);
 
-var _decorators = __webpack_require__(34);
+var _decorators = __webpack_require__(37);
 
-var _logger = __webpack_require__(36);
+var _logger = __webpack_require__(39);
 
 var _logger2 = _interopRequireDefault(_logger);
 
@@ -1291,7 +1251,7 @@ exports.logger = _logger2['default'];
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var footerTel = __webpack_require__(43);
+var footerTel = __webpack_require__(46);
 var data = {
   name: '页面底部'
 };
@@ -1302,9 +1262,9 @@ $('.footer').html(footerTel(data));
 /* 15 */
 /***/ (function(module, exports) {
 
-module.exports = function (convertRatio, fConvertRatio) {
-  if (convertRatio != fConvertRatio) {
-    return 'color-red';
+module.exports = function (_this) {
+  if (_this == '1') {
+    return 'checked';
   }
 };
 
@@ -1312,40 +1272,107 @@ module.exports = function (convertRatio, fConvertRatio) {
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "        <lable class=\"input-group\">\r\n            "
+    + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
+    + "\r\n            <input type=\"text\" class=\"input "
+    + alias2(alias1((depth0 != null ? depth0.inputClass : depth0), depth0))
+    + "\">\r\n        </lable>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "                    <td><div class=\"table-text\">"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</div></td>\r\n";
+},"5":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "共查找出 "
-    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-    + " 条数据：\r\n<a href=\"javaScript:void(0)\" class=\"jbywCount\"><span class=\"text\">基药</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.jbywCount || (depth0 != null ? depth0.jbywCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbywCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n<a href=\"javaScript:void(0)\" class=\"yblbCount\"><span class=\"text\">医保</span>(<span class=\"color-blue\">"
-    + alias4(((helper = (helper = helpers.yblbCount || (depth0 != null ? depth0.yblbCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblbCount","hash":{},"data":data}) : helper)))
-    + "</span>)</a>&nbsp;&nbsp;\r\n<a href=\"javaScript:void(0)\" class=\"wtsjCount\"><span class=\"text\">问题数据</span>(<span class=\"color-red\">"
-    + alias4(((helper = (helper = helpers.wtsjCount || (depth0 != null ? depth0.wtsjCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wtsjCount","hash":{},"data":data}) : helper)))
-    + "</span>)</a>&nbsp;\r\n<a href=\"javaScript:void(0)\" class=\"wbdCount\"><span class=\"text\">未比对</span>(<span class=\"color-red\">"
-    + alias4(((helper = (helper = helpers.wbdCount || (depth0 != null ? depth0.wbdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wbdCount","hash":{},"data":data}) : helper)))
-    + "</span>)</a>&nbsp;\r\n<a href=\"javaScript:void(0)\" class=\"ybdCount\"><span class=\"text\">已比对</span>(<span class=\"color-blue\">"
-    + alias4(((helper = (helper = helpers.ybdCount || (depth0 != null ? depth0.ybdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ybdCount","hash":{},"data":data}) : helper)))
-    + "</span>)</a>&nbsp;&nbsp;\r\n<a href=\"javaScript:void(0)\" class=\"rsyyCount\"><span class=\"text\">妊娠用药</span>(<span class=\"color-blue\">"
-    + alias4(((helper = (helper = helpers.rsyyCount || (depth0 != null ? depth0.rsyyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"rsyyCount","hash":{},"data":data}) : helper)))
-    + "</span>)</a>\r\n<a href=\"javaScript:void(0)\" class=\"download color-blue\"><img src=\"./images/icon-download.png\" class=\"icon-download\">下载</a>";
+  return "                    <tr data-id=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\r\n                        <td title=\""
+    + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
+    + "\"><div class=\"table-text codePro\">"
+    + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
+    + "</div></td>\r\n                        <td title=\""
+    + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
+    + "\"><div class=\"table-text name\">"
+    + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
+    + "</div></td>\r\n                        <td title=\""
+    + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
+    + "\"><div class=\"table-text\">"
+    + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
+    + "</div></td>\r\n                        <td title=\""
+    + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
+    + "\"><div class=\"table-text spec\">"
+    + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
+    + "</div></td>\r\n                        <td title=\""
+    + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
+    + "\"><div class=\"table-text manufacturerName\">"
+    + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
+    + "</div></td>\r\n                        <td title=\""
+    + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
+    + "\"><div class=\"table-text pzwh\">"
+    + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
+    + "</div></td>\r\n                        <td><div class=\"table-text add-than-info\">新增</div></td>\r\n                    </tr>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "<a href=\"javascript:void(0)\" class=\"goback\"><i class=\"icon-arrow-left\"></i>返回</a>\r\n<div class=\"add-search-than\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    <a href=\"javaScript:void(0)\" class=\"btn find-add-than\">查找</a>\r\n</div>\r\n<div class=\"add-than\">\r\n    <div class=\"than-thead\">\r\n        <table class=\"table\">\r\n            <tr class=\"thead\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "            </tr>\r\n        </table>\r\n    </div>\r\n    <div class=\"than-tbody-wrap\">\r\n        <div class=\"than-tbody add-than-tbody\">\r\n            <table class=\"table\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "            </table>\r\n        </div>\r\n        <div class=\"loading-wrap\">\r\n            <div class=\"loading\">\r\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
 },"useData":true});
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "        <a href=\"javaScript:void(0)\" class=\"rsyyCount\"><span class=\"text\">妊娠用药</span>(<span class=\"color-blue\">"
+    + container.escapeExpression(((helper = (helper = helpers.rsyyCount || (depth0 != null ? depth0.rsyyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"rsyyCount","hash":{},"data":data}) : helper)))
+    + "</span>)</a>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div class=\"lf\">\r\n    共查找出 "
+    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
+    + " 条数据：\r\n    <a href=\"javaScript:void(0)\" class=\"jbywCount\"><span class=\"text\">基药</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.jbywCount || (depth0 != null ? depth0.jbywCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbywCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"yblbCount\"><span class=\"text\">医保</span>(<span class=\"color-blue\">"
+    + alias4(((helper = (helper = helpers.yblbCount || (depth0 != null ? depth0.yblbCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblbCount","hash":{},"data":data}) : helper)))
+    + "</span>)</a>&nbsp;&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"wtsjCount\"><span class=\"text\">问题数据</span>(<span class=\"color-red\">"
+    + alias4(((helper = (helper = helpers.wtsjCount || (depth0 != null ? depth0.wtsjCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wtsjCount","hash":{},"data":data}) : helper)))
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"wbdCount\"><span class=\"text\">未比对</span>(<span class=\"color-red\">"
+    + alias4(((helper = (helper = helpers.wbdCount || (depth0 != null ? depth0.wbdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wbdCount","hash":{},"data":data}) : helper)))
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"ybdCount\"><span class=\"text\">已比对</span>(<span class=\"color-blue\">"
+    + alias4(((helper = (helper = helpers.ybdCount || (depth0 != null ? depth0.ybdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ybdCount","hash":{},"data":data}) : helper)))
+    + "</span>)</a>&nbsp;&nbsp;\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showRsyyCount : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div>\r\n<a href=\"javaScript:void(0)\" class=\"download color-blue rt\"><img src=\"./images/icon-download.png\" class=\"icon-download\">下载</a>";
+},"useData":true});
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = {
   name: 'slicesMain',
   searchDate: {
-    input: [{ text: '医院药品ID:', inputClass: 'drug-id' }, { text: '药品名称:', inputClass: 'drug-name' }, { text: '规格/厂家:', inputClass: 'spec-name' }]
+    input: [{ text: '医院药品ID:', inputClass: 'drug-id' }, { text: '药品名称:', inputClass: 'drug-name' }, { text: '规格/厂家:', inputClass: 'spec-name' }],
+    showRsyyCount: 0
   },
   diffData: {
     tLeftHead: ['医院药品ID', '药品名称', '规格厂家', '转换比', '门诊／住院单位', '是否停用', '修订时间'],
-    tRightHead: ['药品编码', '品种名称', '饮片名称', '片型', '基药', '医保', '医保编码']
+    tRightHead: ['药品编码', '药品类型', '饮片名称', '片型', '基药', '医保', '医保编码']
   },
   thanData: {
     input: [{ text: '药品名称:', inputClass: 'name' }],
@@ -1354,42 +1381,209 @@ module.exports = {
 };
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(1);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "            <lable class=\"input-group\">\r\n                "
-    + alias4(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
-    + "\r\n                <input type=\"text\" class=\"input "
-    + alias4(((helper = (helper = helpers.inputClass || (depth0 != null ? depth0.inputClass : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"inputClass","hash":{},"data":data}) : helper)))
-    + "\" value=\""
-    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
-    + "\">\r\n            </lable>\r\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "                       <td><div class=\"table-text\">"
-    + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></td>\r\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "<div class=\"title\">标准数据比对\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
-    + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n    <div class=\"search-than\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead\">\r\n           <table class=\"table\">\r\n               <tr class=\"thead\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n          <div class=\"loading\">\r\n             <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n          </div>\r\n       </div>\r\n   </div>\r\n    <div class=\"no-than\">\r\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\r\n    </div>\r\n</div>";
-},"useData":true});
-
-/***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    return "                                <th><div>"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</div></th>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "                                    <tr data-id=\""
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "\" data-name=\""
+    + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
+    + "\"  data-fncName=\""
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "\">\r\n                                        <td class=\"table-diff-drugId\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
+    + " "
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
+    + " "
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "</div></td>\r\n                                        <td class=\"convertRatio\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
+    + "\"><div><input class=\""
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.convertRatio : depth0),(depth0 != null ? depth0.fConvertRatio : depth0),{"name":"convertRatioFn","hash":{},"data":data}))
+    + "\" value="
+    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
+    + "></div></td>\r\n                                        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n                                            <div>\r\n                                                "
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
+    + "\r\n                                            </div>\r\n                                        </td>\r\n                                        <td><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + "</div></td>\r\n                                    </tr>\r\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    return "                                        <th><div>"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</div></th>\r\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "                                    <tr>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.prepName : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.prepName : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.facAbbrF : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.facAbbrF : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(12)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.jmdf : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.jmdf : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.pregnancyLevel : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.pregnancyLevel : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.flag1 : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.flag1 : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.dddUnit : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.dddUnit : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.isCalcKjyw : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.isCalcKjyw : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.kjywType : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.kjywType : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.rbflName : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.rbflName : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
+    + "</div></td>\r\n                                        <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n                                    </tr>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-bar\">\r\n            <a href=\"#standardData\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n        </div>\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                        <thead>\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"table-diff-right\">\r\n                <div class=\"table-diff-right-all active\">\r\n                    <div class=\"table-diff-header\">\r\n                        <div class=\"table-diff-header-content\">\r\n                            <table cellspacing=\"1\" border=\"0\">\r\n                                <thead>\r\n                                    <tr>\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "                                    </tr>\r\n                                </thead>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-diff-data\">\r\n                        <table cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"loading-wrap\">\r\n            <div class=\"loading\">\r\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+},"useData":true});
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = function (convertRatio, fConvertRatio) {
+  if (convertRatio != fConvertRatio) {
+    return 'color-red';
+  }
+};
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = function (arr) {
+  var newArr = [];
+  $(arr).each(function (i, e) {
+    if (e.sign == 0) {
+      newArr.push('<span class="color-red">' + e.unit + '</span>');
+    } else {
+      newArr.push('<span>' + e.unit + '</span>');
+    }
+  });
+  newArr = newArr.join(",");
+  return newArr;
+};
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
@@ -1399,9 +1593,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "</div></td>\r\n<td title=\""
-    + alias2(__default(__webpack_require__(5)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(5)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
     + "\"><div>"
@@ -1427,21 +1621,29 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
     + "</div></td>\r\n<td title=\""
+    + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(12)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + "</div></td>\r\n<td title=\""
+    + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
+    + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
     + "</div></td>\r\n<td title=\""
-    + alias2(alias1((depth0 != null ? depth0.jkyw : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.jkyw : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n<td title=\""
-    + alias2(alias1((depth0 != null ? depth0.yyyy : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.yyyy : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n<td title=\""
-    + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.jmdf : depth0), depth0))
     + "\"><div>"
@@ -1456,8 +1658,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(alias1((depth0 != null ? depth0.flag1 : depth0), depth0))
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.dddUnit : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.dddUnit : depth0), depth0))
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
     + "\"><div>"
@@ -1479,50 +1683,50 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
     + "</div></td>\r\n<td title=\""
-    + alias2(alias1((depth0 != null ? depth0.flag5 : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag5 : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>";
 },"useData":true});
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(21);
-//index.js-药品目录
-__webpack_require__(22);
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(23);
-__webpack_require__(41);
-__webpack_require__(14);
-__webpack_require__(44);
-__webpack_require__(61);
-__webpack_require__(62);
-__webpack_require__(63);
-__webpack_require__(64);
-__webpack_require__(14);
-__webpack_require__(69);
 
 /***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(24);
+//index.js-药品目录
+__webpack_require__(25);
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(26);
+__webpack_require__(44);
+__webpack_require__(14);
+__webpack_require__(47);
+__webpack_require__(63);
+__webpack_require__(64);
+__webpack_require__(65);
+__webpack_require__(67);
+__webpack_require__(14);
+__webpack_require__(71);
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /**
  *页面头部
  */
-var loginTel = __webpack_require__(24);
-var ajaxFn = __webpack_require__(8);
+var loginTel = __webpack_require__(27);
+var ajaxFn = __webpack_require__(9);
 $('.login-box').html(loginTel());
 
 $('.login .login-btn').click(function () {
@@ -1548,17 +1752,17 @@ $('.login .login-cancel').click(function () {
 });
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class=\"login\">\r\n    <div class=\"login-title\">欢迎登录医院药事管理软件<span class=\"popup-close\"></span></div>\r\n    <label class=\"login-input\">\r\n        用户名：<br>\r\n        <input type=\"text\" class=\"input userName\">\r\n    </label>\r\n    <label class=\"login-input\">\r\n        密码：<br>\r\n        <input type=\"text\" class=\"input password\">\r\n    </label>\r\n    <button class=\"login-btn\">登录</button>\r\n    <button class=\"login-cancel\">取消</button>\r\n</div>\r\n";
 },"useData":true});
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1592,23 +1796,23 @@ var base = _interopRequireWildcard(_handlebarsBase);
 // Each of these augment the Handlebars object. No need to setup here.
 // (This is done to easily share code between commonjs and browse envs)
 
-var _handlebarsSafeString = __webpack_require__(37);
+var _handlebarsSafeString = __webpack_require__(40);
 
 var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
-var _handlebarsException = __webpack_require__(7);
+var _handlebarsException = __webpack_require__(8);
 
 var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
-var _handlebarsUtils = __webpack_require__(3);
+var _handlebarsUtils = __webpack_require__(5);
 
 var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-var _handlebarsRuntime = __webpack_require__(38);
+var _handlebarsRuntime = __webpack_require__(41);
 
 var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-var _handlebarsNoConflict = __webpack_require__(39);
+var _handlebarsNoConflict = __webpack_require__(42);
 
 var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -1641,7 +1845,7 @@ exports['default'] = inst;
 module.exports = exports['default'];
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1655,31 +1859,31 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _helpersBlockHelperMissing = __webpack_require__(27);
+var _helpersBlockHelperMissing = __webpack_require__(30);
 
 var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-var _helpersEach = __webpack_require__(28);
+var _helpersEach = __webpack_require__(31);
 
 var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-var _helpersHelperMissing = __webpack_require__(29);
+var _helpersHelperMissing = __webpack_require__(32);
 
 var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-var _helpersIf = __webpack_require__(30);
+var _helpersIf = __webpack_require__(33);
 
 var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-var _helpersLog = __webpack_require__(31);
+var _helpersLog = __webpack_require__(34);
 
 var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-var _helpersLookup = __webpack_require__(32);
+var _helpersLookup = __webpack_require__(35);
 
 var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-var _helpersWith = __webpack_require__(33);
+var _helpersWith = __webpack_require__(36);
 
 var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -1694,7 +1898,7 @@ function registerDefaultHelpers(instance) {
 }
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1702,7 +1906,7 @@ function registerDefaultHelpers(instance) {
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
 exports['default'] = function (instance) {
   instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -1738,7 +1942,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1751,9 +1955,9 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
-var _exception = __webpack_require__(7);
+var _exception = __webpack_require__(8);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -1839,7 +2043,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1852,7 +2056,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _exception = __webpack_require__(7);
+var _exception = __webpack_require__(8);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -1871,7 +2075,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1879,7 +2083,7 @@ module.exports = exports['default'];
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
 exports['default'] = function (instance) {
   instance.registerHelper('if', function (conditional, options) {
@@ -1905,7 +2109,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1936,7 +2140,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1953,7 +2157,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1961,7 +2165,7 @@ module.exports = exports['default'];
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
 exports['default'] = function (instance) {
   instance.registerHelper('with', function (context, options) {
@@ -1991,7 +2195,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2005,7 +2209,7 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { 'default': obj };
 }
 
-var _decoratorsInline = __webpack_require__(35);
+var _decoratorsInline = __webpack_require__(38);
 
 var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -2014,7 +2218,7 @@ function registerDefaultDecorators(instance) {
 }
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2022,7 +2226,7 @@ function registerDefaultDecorators(instance) {
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
 exports['default'] = function (instance) {
   instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -2048,7 +2252,7 @@ exports['default'] = function (instance) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2056,7 +2260,7 @@ module.exports = exports['default'];
 
 exports.__esModule = true;
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
 var logger = {
   methodMap: ['debug', 'info', 'warn', 'error'],
@@ -2100,7 +2304,7 @@ exports['default'] = logger;
 module.exports = exports['default'];
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2120,7 +2324,7 @@ exports['default'] = SafeString;
 module.exports = exports['default'];
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2153,11 +2357,11 @@ function _interopRequireWildcard(obj) {
   }
 }
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(5);
 
 var Utils = _interopRequireWildcard(_utils);
 
-var _exception = __webpack_require__(7);
+var _exception = __webpack_require__(8);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -2444,7 +2648,7 @@ function executeDecorators(fn, prog, container, depths, data, blockParams) {
 }
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2467,10 +2671,10 @@ exports['default'] = function (Handlebars) {
 };
 
 module.exports = exports['default'];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports) {
 
 var g;
@@ -2495,14 +2699,14 @@ try {
 module.exports = g;
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  *页面头部
  */
-var headerTel = __webpack_require__(42);
-var ajaxFn = __webpack_require__(8);
+var headerTel = __webpack_require__(45);
+var ajaxFn = __webpack_require__(9);
 var data = {
   gly: 'gly',
   headerTime: '2017年8月9日星期三'
@@ -2525,10 +2729,10 @@ $('.header .login-out').click(function () {
 });
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -2541,24 +2745,24 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 },"useData":true});
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<span class=\"footer-item\">版权所有 医睦科技</span>\r\n<span class=\"footer-item\">客服:020-12345678</span>\r\n<span class=\"footer-item\">商务:020-12345678</span>";
 },"useData":true});
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var tabBarTel = __webpack_require__(45);
+var tabBarTel = __webpack_require__(48);
 var Fn = __webpack_require__(10);
-var slices = __webpack_require__(52);
+var slices = __webpack_require__(54);
 var data = __webpack_require__(6);
-var slicesData = __webpack_require__(17);
+var slicesData = __webpack_require__(18);
 
 $('.tabs-box').html(tabBarTel(data.tabsData)); //加载切换条
 
@@ -2585,10 +2789,10 @@ $(function () {
 });
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -2611,27 +2815,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 46 */
-/***/ (function(module, exports) {
-
-module.exports = function (arr) {
-  var newArr = [];
-  $(arr).each(function (i, e) {
-    if (e.sign == 0) {
-      newArr.push('<span class="color-red">' + e.unit + '</span>');
-    } else {
-      newArr.push('<span>' + e.unit + '</span>');
-    }
-  });
-  newArr = newArr.join(",");
-  return newArr;
-};
-
-/***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -2654,10 +2841,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -2666,13 +2853,13 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\">\r\n                    <input type=\"text\" class=\"item-input convertRatio\" value="
     + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
-    + " disabled>\r\n                    <select  class=\"item-select unit\" disabled>\r\n                        <option value=\""
+    + " disabled>\r\n                    <select  class=\"item-select unit\">\r\n                        <option value=\""
     + alias2(alias1((depth0 != null ? depth0.unit : depth0), depth0))
     + "\">"
     + alias2(alias1((depth0 != null ? depth0.unit : depth0), depth0))
     + "</option>\r\n                    </select>\r\n                    <input type=\"text\" class=\"item-input fConvertRatio\" value="
     + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
-    + " disabled>\r\n                    <select  class=\"item-select last-select formatUnit\" disabled>\r\n                        <option value=\""
+    + " disabled>\r\n                    <select  class=\"item-select last-select formatUnit\">\r\n                        <option value=\""
     + alias2(alias1((depth0 != null ? depth0.formatUnit : depth0), depth0))
     + "\">"
     + alias2(alias1((depth0 != null ? depth0.formatUnit : depth0), depth0))
@@ -2699,7 +2886,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
   return "                            <option value=\""
     + alias2(alias1(depth0, depth0))
     + "\" "
-    + alias2(__default(__webpack_require__(49)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depths[1] != null ? depths[1].unit : depths[1]),depth0,{"name":"selectedFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(51)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depths[1] != null ? depths[1].unit : depths[1]),depth0,{"name":"selectedFn","hash":{},"data":data}))
     + ">"
     + alias2(alias1(depth0, depth0))
     + "</option>\r\n";
@@ -2717,7 +2904,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true,"useDepths":true});
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = function (unit, _this) {
@@ -2727,10 +2914,10 @@ module.exports = function (unit, _this) {
 };
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -2742,7 +2929,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</td>\r\n                   <td>"
     + alias2(alias1((depth0 != null ? depth0.aftValue : depth0), depth0))
     + "</td>\r\n                   <td>"
-    + alias2(__default(__webpack_require__(4)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.updDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(7)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.updDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "</td>\r\n                   <td>"
     + alias2(alias1((depth0 != null ? depth0.updName : depth0), depth0))
     + "</td>\r\n               </tr>\r\n";
@@ -2755,26 +2942,30 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "            <ul>\r\n                <li>\r\n                    <input type=\"checkbox\" class=\"channel-checkbox\" data-id=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "\"><a href=\"javascript:void(0)\" class=\"channel-name\">"
+    + "\" "
+    + alias2(__default(__webpack_require__(15)).call(alias3,(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
+    + "><a href=\"javascript:void(0)\" class=\"channel-name\">"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "</a>\r\n                    <ul class=\"sub-channel\">\r\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.chirden : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.chirden : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                    </ul>\r\n                </li>\r\n            </ul>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
   return "                            <li><input type=\"checkbox\" class=\"channel-checkbox\" data-id="
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + " "
+    + alias2(__default(__webpack_require__(15)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
     + "><a href=\"javascript:void(0)\" class=\"channel-name\">"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "</a></li>\r\n";
@@ -2787,42 +2978,38 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var searchTel = __webpack_require__(12);
+var searchTel = __webpack_require__(11);
 
-var tableDiffTel = __webpack_require__(53);
-var tableDiffLeft = __webpack_require__(54);
-var tableDiffRight = __webpack_require__(55);
-var tableDetails = __webpack_require__(56);
-var tableDiffRightTr = __webpack_require__(57);
+var tableDiffTel = __webpack_require__(55);
+var tableDiffLeft = __webpack_require__(56);
+var tableDiffRight = __webpack_require__(57);
+var tableDetails = __webpack_require__(58);
+var tableDiffRightTr = __webpack_require__(59);
 
-var standardThanTel = __webpack_require__(58);
-var standardThanTbody = __webpack_require__(59);
-var standardThanTr = __webpack_require__(60);
-var searchClassifyTel = __webpack_require__(16); //比对表格搜索分类
-var ajaxFn = __webpack_require__(8);
+var standardThanTel = __webpack_require__(60);
+var standardThanTbody = __webpack_require__(61);
+var standardThanTr = __webpack_require__(62);
+var searchClassifyTel = __webpack_require__(17); //比对表格搜索分类
+
 var Fn = __webpack_require__(10);
-var data = __webpack_require__(17);
+var data = __webpack_require__(18);
 var parent = '.' + data.name;
-
-//var singleData = {
-//  id:null,
-//  index:null
-//};
+var loadData;
 var firstResult = 0,
     maxResult = 16,
     firstResultThan = 0,
     maxResultThan = 16;
-//var loading = false;
-
+var findThanData = { firstResult: 0, maxResult: 16 };
 module.exports = function ($this) {
   var content = '<div class="content-box active ' + data.name + '"><div class="search-box"></div><div class="table-diff slices-table"></div><div class="standard-than" id="slicesStandardData"></div></div>';
   $('.content').append(content);
   var loadData = {
     parent: parent,
     url: 'zyyp/listZyypHisProduct',
+    loadData: loadData,
     firstResult: firstResult,
     maxResult: maxResult,
     data: data,
@@ -2849,7 +3036,7 @@ module.exports = function ($this) {
   Fn.showThan({
     parent: parent,
     url: 'zyyp/listMcdZyyp',
-    dataName: 'prod_nam',
+    slicesName: 'name',
     inputName: 'name',
     data: data,
     standardThanTbody: standardThanTbody,
@@ -2857,10 +3044,12 @@ module.exports = function ($this) {
     standardThanTr: standardThanTr,
     firstResultThan: firstResultThan,
     maxResultThan: maxResultThan,
+    findThanData: findThanData,
+    findThanDataName: ['name'],
     saveUrl: 'zyyp/saveMatch',
-    findThanData: ['name'],
     selectThanData: 'zyypId'
   }, loadData);
+
   //弹窗事件
   Fn.popupFn({
     parent: parent
@@ -2871,10 +3060,10 @@ module.exports = function ($this) {
 };
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     return "                                <th><div>"
@@ -2885,54 +3074,77 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "                                <tr data-id="
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + " data-name="
+    + " data-name=\""
     + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
-    + ">\r\n                                    <td><div>"
+    + "\">\r\n                                    <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "</div></td>\r\n                                    <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "</div></td>\r\n                                    <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
-    + "</div></td>\r\n                                    <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
+    + "</div></td>\r\n                                    <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
     + "</div></td>\r\n                                    <td class=\"convertRatio\"><div><input value="
     + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
     + "></div></td>\r\n                                    <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.unitName : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.unitName : depth0), depth0))
     + "</div></td>\r\n                                    <td><div>"
-    + alias2(__default(__webpack_require__(9)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n                                    <td title=\""
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "</div></td>\r\n                                </tr>\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
     return "                                        <th><div>"
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "</div></th>\r\n";
 },"7":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "                                <tr>\r\n                                    <td><div>"
+  return "                                <tr>\r\n                                    <td title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
-    + "</div></td>\r\n                                    <td><div>"
-    + alias2(__default(__webpack_require__(5)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
-    + "</div></td>\r\n                                    <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
+    + "</div></td>\r\n                                    <td title=\""
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "</div></td>\r\n                                    <td title=\""
     + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
-    + "</div></td>\r\n                                    <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
+    + "</div></td>\r\n                                    <td title=\""
     + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
-    + "</div></td>\r\n                                    <td  class=\"icon-triangle\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
-    + "</div></td>\r\n                                    <td><div>"
-    + alias2(alias1((depth0 != null ? depth0.yblb : depth0), depth0))
-    + "</div></td>\r\n                                    <td class=\"icon-triangle\"><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
+    + "</div></td>\r\n                                    <td  class=\"icon-triangle\" title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n                                    <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n                                    <td class=\"icon-triangle\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
+    + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
     + "</div></td>\r\n                                </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-bar\">\r\n            <a href=\"#slicesStandardData\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n        </div>\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                        <thead>\r\n"
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-bar\">\r\n            <a href=\"#slicesStandardData\" class=\"showThan\">比对</a>|\r\n            <!--<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|-->\r\n            <a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n        </div>\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                        <thead>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -2940,41 +3152,50 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                                </tr>\r\n                                </thead>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-diff-data\" style=\"overflow-x: hidden;\">\r\n                        <table cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"loading-wrap\">\r\n            <div class=\"loading\">\r\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "    <tr data-id="
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + " data-name="
+    + " data-name=\""
     + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
-    + ">\r\n        <td><div>"
+    + "\">\r\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "</div></td>\r\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
-    + "</div></td>\r\n        <td><div><input value="
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "</div></td>\r\n        <td class=\"convertRatio\"><div><input value="
     + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
     + "></div></td>\r\n        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.unitName : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.unitName : depth0), depth0))
     + "</div></td>\r\n        <td><div>"
-    + alias2(__default(__webpack_require__(9)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n        <td title=\""
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.createDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "</div></td>\r\n    </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -2983,27 +3204,41 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "    <tr>\r\n        <td><div>"
+  return "    <tr>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
-    + alias2(__default(__webpack_require__(5)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
-    + "</div></td>\r\n        <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
-    + "</div></td>\r\n        <td  class=\"icon-triangle\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
-    + alias2(alias1((depth0 != null ? depth0.yblb : depth0), depth0))
-    + "</div></td>\r\n        <td class=\"icon-triangle\"><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
+    + "</div></td>\r\n        <td  class=\"icon-triangle\" title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n        <td class=\"icon-triangle\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
+    + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
     + "</div></td>\r\n    </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -3013,10 +3248,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -3039,36 +3274,50 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 },"useData":true});
 
 /***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<td><div>"
+  return "<td title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
-    + "</div></td>\r\n<td><div>"
-    + alias2(__default(__webpack_require__(5)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
-    + "</div></td>\r\n<td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
+    + "</div></td>\r\n<td title=\""
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
-    + "</div></td>\r\n<td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
+    + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
-    + "</div></td>\r\n<td  class=\"icon-triangle\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
-    + "</div></td>\r\n<td><div>"
-    + alias2(alias1((depth0 != null ? depth0.yblb : depth0), depth0))
-    + "</div></td>\r\n<td class=\"icon-triangle\"><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
+    + "</div></td>\r\n<td  class=\"icon-triangle\" title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n<td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n<td class=\"icon-triangle\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
+    + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
     + "</div></td>";
 },"useData":true});
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -3093,33 +3342,45 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead\">\r\n           <table class=\"table\">\r\n               <tr class=\"thead\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n</div>";
+    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <!--<div class=\"loading\">-->\r\n               <!--<img src=\"./images/loading.gif\" class=\"loading-img\">-->\r\n           <!--</div>-->\r\n       </div>\r\n       <div class=\"loading-wrap\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n</div>";
 },"useData":true});
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "        <tr data-id="
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + ">\r\n            <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.code || (depth0 != null ? depth0.code : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"code","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.pzName || (depth0 != null ? depth0.pzName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.pxName || (depth0 != null ? depth0.pxName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pxName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.jbyw || (depth0 != null ? depth0.jbyw : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbyw","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.yblb || (depth0 != null ? depth0.yblb : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblb","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n            <td><div class=\"table-text select-than\">选择</div></td>\r\n        </tr>\r\n";
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + ">\r\n            <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.code : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.code : depth0), depth0))
+    + "</div></td>\r\n            <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
+    + "</div></td>\r\n            <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "</div></td>\r\n            <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
+    + "</div></td>\r\n            <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jbyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div class=\"table-text\">"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jbyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n            <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div class=\"table-text\">"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n            <td><div class=\"table-text select-than\">选取</div></td>\r\n        </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -3129,29 +3390,41 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "    <tr data-id="
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + ">\r\n        <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.code || (depth0 != null ? depth0.code : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"code","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.pzName || (depth0 != null ? depth0.pzName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.pxName || (depth0 != null ? depth0.pxName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pxName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.jbyw || (depth0 != null ? depth0.jbyw : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbyw","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.yblb || (depth0 != null ? depth0.yblb : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblb","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text select-than\">选择</div></td>\r\n    </tr>\r\n";
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + ">\r\n        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.code : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.code : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.pxName : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jbyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div class=\"table-text\">"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jbyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "\"><div class=\"table-text\">"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n        <td><div class=\"table-text select-than\">选取</div></td>\r\n    </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -3159,66 +3432,67 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * 搜索区
  */
-var searchBoxTel = __webpack_require__(12);
-//var tableDiff = require('../tableDiff/table-diff.hbs');
-//var ajaxFn =  require('../ajax');
-//var Fn =  require('../function');
+var searchBoxTel = __webpack_require__(11);
 var data = __webpack_require__(6);
 var $chemistry = $('.' + data.name);
-//function loadData(){
-//  ajaxFn({
-//    url: 'mcdProduct30/listHisProduct',
-//    data:{
-//      drugId: $('.search-box .drug-id').val(),
-//      drugName: $('.search-box .drug-name').val(),
-//      specName: $('.search-box .spec-name').val(),
-//      firstResult: 0,
-//      maxResult: 16
-//    },
-//    callback:function(res){
-//      data.searchDate.total = res.total;
-//      data.searchDate.jbywCount = res.content.jbywCount;
-//      data.searchDate.rsyyCount = res.content.rsyyCount;
-//      data.searchDate.wbdCount = res.content.wbdCount;
-//      data.searchDate.wtsjCount = res.content.wtsjCount;
-//      data.searchDate.ybdCount = res.content.ybdCount;
-//      data.searchDate.yblbCount = res.content.yblbCount;
-//      $('.search-box').html(searchBoxTel(data.searchDate));
-//      data.diffData.ydata = res.content.rows;
-//      $('.table-diff').html(tableDiff(data.diffData));
-//      $('.search-box .btn').on('click',loadData);
-//      Fn.eventBinding();
-//    }
-//  });
-//}
-//loadData();
 
 $chemistry.find('.search-box').html(searchBoxTel(data.searchDate));
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var tableDiff = __webpack_require__(11);
+var tableDiff = __webpack_require__(19);
 var data = __webpack_require__(6);
-var $chemistry = $('.' + data.name);
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var standardThanTel = __webpack_require__(18);
+var standardThanTel = __webpack_require__(66);
 var data = __webpack_require__(6); //化学药数据
 $('.' + data.name + ' .standard-than').html(standardThanTel(data.thanData));
 
 /***/ }),
-/* 64 */
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(2);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "            <lable class=\"input-group\">\r\n                "
+    + alias4(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
+    + "\r\n                <input type=\"text\" class=\"input "
+    + alias4(((helper = (helper = helpers.inputClass || (depth0 != null ? depth0.inputClass : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"inputClass","hash":{},"data":data}) : helper)))
+    + "\" value=\""
+    + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
+    + "\">\r\n            </lable>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "                       <td><div class=\"table-text\">"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</div></td>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "<div class=\"title\">标准数据比对\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
+    + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\r\n    <div class=\"search-than\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead\">\r\n           <table class=\"table\">\r\n               <tr class=\"thead\">\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n       </div>\r\n       <div class=\"loading-wrap\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n    <div class=\"no-than\">\r\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\r\n    </div>\r\n</div>";
+},"useData":true});
+
+/***/ }),
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3227,13 +3501,13 @@ $('.' + data.name + ' .standard-than').html(standardThanTel(data.thanData));
 /**
  * 添加对比数据
  */
-var addData = __webpack_require__(65);
-var searchBox = __webpack_require__(12);
-var addDataPopupTel = __webpack_require__(66);
-var tableDiffRightTr = __webpack_require__(19); //化学药右边详情模版
-var tbodyTel = __webpack_require__(67);
-var tr = __webpack_require__(68);
-var ajaxFn = __webpack_require__(8);
+var addData = __webpack_require__(16);
+var searchBox = __webpack_require__(11);
+var addDataPopupTel = __webpack_require__(68);
+var tableDiffRightTr = __webpack_require__(22); //化学药右边详情模版
+var tbodyTel = __webpack_require__(69);
+var tr = __webpack_require__(70);
+var ajaxFn = __webpack_require__(9);
 //var loadTableFn = require('../function').loadTableFn;
 var data = __webpack_require__(6); //化学药数据
 var parent = '.' + data.name;
@@ -3252,8 +3526,10 @@ ajaxFn({
     $('.add-data .goback').on('click', function () {
       $('.content .add-data').hide();
       $('.content  .content-box-main').show();
+      $('.popup').hide();
     });
     $('.find-add-than').on('click', function () {
+      $('.add-than .loading-wrap').show();
       firstResult = 0;maxResult = 16;
       listProductData = {
         drugName: $('.add-drug-name').val(),
@@ -3268,6 +3544,7 @@ ajaxFn({
           url: 'product/listProduct',
           data: listProductData,
           callback: function (res) {
+            $('.add-than .loading-wrap').hide();
             var tbodyData = {};
             tbodyData.tbody = res.content;
             $('.add-than-tbody').html(tbodyTel(tbodyData));
@@ -3368,70 +3645,10 @@ function addThanInfo() {
 }
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "        <lable class=\"input-group\">\r\n            "
-    + alias2(alias1((depth0 != null ? depth0.text : depth0), depth0))
-    + "\r\n            <input type=\"text\" class=\"input "
-    + alias2(alias1((depth0 != null ? depth0.inputClass : depth0), depth0))
-    + "\">\r\n        </lable>\r\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "                    <td><div class=\"table-text\">"
-    + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></td>\r\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "                <tr data-id=\""
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n                    <td title=\""
-    + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text codePro\">"
-    + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td title=\""
-    + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text name\">"
-    + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td title=\""
-    + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td title=\""
-    + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text spec\">"
-    + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td title=\""
-    + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text manufacturerName\">"
-    + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td title=\""
-    + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text pzwh\">"
-    + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n                    <td><div class=\"table-text add-than-info\">新增</div></td>\r\n                </tr>\r\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "<a href=\"javascript:void(0)\" class=\"goback\"><i class=\"icon-arrow-left\"></i>返回</a>\r\n<div class=\"add-search-than\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <a href=\"javaScript:void(0)\" class=\"btn find-add-than\">查找</a>\r\n</div>\r\n<div class=\"add-than\">\r\n    <div class=\"than-thead\">\r\n        <table class=\"table\">\r\n            <tr class=\"thead\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "            </tr>\r\n        </table>\r\n    </div>\r\n    <div class=\"than-tbody add-than-tbody\">\r\n        <table class=\"table\">\r\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </table>\r\n    </div>\r\n</div>";
-},"useData":true});
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -3462,10 +3679,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -3506,10 +3723,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
@@ -3548,19 +3765,18 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var searchClassifyTel = __webpack_require__(16); //化学药比对表格搜索分类
-var tableDiffTel = __webpack_require__(11); //化学药比对表格
-var tableDiffLeft = __webpack_require__(70); //化学药左边单行比对表格
-var tableDiffRight = __webpack_require__(71); //化学药右边单行比对表格
-var tableDetails = __webpack_require__(72); //化学药右边详情模版
-var tableDiffRightTr = __webpack_require__(19); //化学药右边详情模版
+var searchClassifyTel = __webpack_require__(17); //化学药比对表格搜索分类
+var tableDiffTel = __webpack_require__(19); //化学药比对表格
+var tableDiffLeft = __webpack_require__(72); //化学药左边单行比对表格
+var tableDiffRight = __webpack_require__(73); //化学药右边单行比对表格
+var tableDetails = __webpack_require__(74); //化学药右边详情模版
+var tableDiffRightTr = __webpack_require__(22); //化学药右边详情模版
 
-var standardThanTel = __webpack_require__(18); //化学药标准数据模版
-var standardThanTbody = __webpack_require__(73); //化学药标准表格数据模版
-var standardThanTr = __webpack_require__(74); //化学药标准单行表格数据模版
+var standardThanTbody = __webpack_require__(75); //化学药标准表格数据模版
+var standardThanTr = __webpack_require__(76); //化学药标准单行表格数据模版
 
 var Fn = __webpack_require__(10);
 var data = __webpack_require__(6); //化学药数据
@@ -3569,9 +3785,12 @@ var firstResult = 0,
     maxResult = 16,
     firstResultThan = 0,
     maxResultThan = 16;loading = false;
+var findThanData = { firstResult: 0, maxResult: 16 };
+var loadData;
 var loadDataObj = {
   parent: parent,
   url: 'mcdProduct30/listHisProduct',
+  loadData: loadData,
   firstResult: firstResult,
   maxResult: maxResult,
   data: data,
@@ -3584,8 +3803,10 @@ var loadDataObj = {
   tableDiffRightTr: tableDiffRightTr,
   downloadUrl: 'mcdProduct30/downHisProduct'
 };
+
 $(function () {
   Fn.loadData(loadDataObj); //加载化学药数据
+  //显示比对详情
   Fn.showDetail({
     parent: parent,
     url: 'mcdProduct30/getHistProductById',
@@ -3593,10 +3814,14 @@ $(function () {
     tableDetails: tableDetails,
     updateValueUrl: 'mcdProduct30/updateHisProductByParmas'
   });
+  //显示标准数据
   Fn.showThan({
     parent: parent,
     url: 'mcdProduct30/listMcdProduct',
-    dataName: 'prodName',
+    homeProdName: 'prodName',
+    homeFncName: 'fncName',
+    findThanData: findThanData,
+    findThanDataName: ['ypid', 'yjId', 'prodName', 'fncName', 'prodPzwh'],
     inputName: 'prodName',
     data: data,
     standardThanTbody: standardThanTbody,
@@ -3604,52 +3829,66 @@ $(function () {
     firstResultThan: firstResultThan,
     maxResultThan: maxResultThan,
     saveUrl: 'mcdProduct30/saveMatch',
-    findThanData: ['ypid', 'yjId', 'prodName', 'fncName', 'prodPzwh'],
     selectThanData: 'proId',
     addThanFn: 1
   }, loadDataObj);
-
+  //显示弹窗
   Fn.popupFn({
     parent: parent
   });
+  //修改转换比
   Fn.updateConvertRatio({
     parent: parent
   });
 });
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "    <tr data-id="
+  return "    <tr data-id=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + " data-name="
+    + "\" data-name=\""
     + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
-    + ">\r\n        <td class=\"table-diff-drugId\"><div>"
+    + "\" data-fncName=\""
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "\">\r\n        <td class=\"table-diff-drugId\" title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
     + " "
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
-    + "</div></td>\r\n        <td class=\"convertRatio\"><div><input class=\""
-    + alias2(__default(__webpack_require__(15)).call(alias3,(depth0 != null ? depth0.convertRatio : depth0),(depth0 != null ? depth0.fConvertRatio : depth0),{"name":"convertRatioFn","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
+    + " "
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "</div></td>\r\n        <td class=\"convertRatio\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
+    + "\"><div><input class=\""
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.convertRatio : depth0),(depth0 != null ? depth0.fConvertRatio : depth0),{"name":"convertRatioFn","hash":{},"data":data}))
     + "\" value="
     + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
-    + "></div></td>\r\n        <td class=\"icon-triangle ymzzy\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.unitName : depth0), depth0))
-    + "</div></td>\r\n        <td><div>"
-    + alias2(__default(__webpack_require__(9)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
-    + "</div></td>\r\n        <td title="
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
-    + "><div>"
-    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + "></div></td>\r\n        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n            <div>\r\n                "
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
+    + "\r\n            </div>\r\n        </td>\r\n        <td><div>"
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "</div></td>\r\n    </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -3658,10 +3897,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
@@ -3671,9 +3910,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias2(__default(__webpack_require__(5)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(5)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSwitch","hash":{},"data":data}))
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
     + "\"><div>"
@@ -3699,21 +3938,29 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
+    + "\"><div>"
+    + alias2(__default(__webpack_require__(12)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + "</div></td>\r\n        <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
+    + "\"><div>"
+    + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.flag4 : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.jkyw : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.jkyw : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.yyyy : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.yyyy : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.jmdf : depth0), depth0))
     + "\"><div>"
@@ -3728,8 +3975,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.flag1 : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.dddUnit : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.dddUnit : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
     + "\"><div>"
@@ -3751,9 +4000,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.flag5 : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.flag5 : depth0), depth0))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),{"name":"isOrNo","hash":{},"data":data}))
     + "</div></td>\r\n    </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -3762,20 +4011,20 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "<div>\r\n    <ul class=\"content-list\">\r\n        <li>药品名称："
-    + alias2(alias1((depth0 != null ? depth0.drugName : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.proName : depth0), depth0))
     + "</li>\r\n        <li>剂型："
-    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.smlNameF : depth0), depth0))
     + "</li>\r\n        <li>规格："
-    + alias2(alias1((depth0 != null ? depth0.prepName : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
     + "</li>\r\n        <li>转换比："
     + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
     + "</li>\r\n        <li>药品编码："
@@ -3804,85 +4053,93 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "/"
     + alias2(alias1((depth0 != null ? depth0.prodZczhF : depth0), depth0))
     + "</li>\r\n    </ul>\r\n    <ul class=\"content-list\">\r\n        <li class=\"input-group\">\r\n            <span class=\"ypType\">药品类型:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
-    + ">化学药、中成药</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + ">西药</option>\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">中成药</option>\r\n                <option value=\"1\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
     + ">中药饮片</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
     + ">医院制剂</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
     + ">卫生材料</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yblb\">医保:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">国家</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
     + ">省</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
-    + ">地</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"ybbh\">医保编码:</span><input type=\"text\" class=\"input upInputFn\" value=\""
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">地市</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"ybbh\">医保编码:</span><input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
     + "\"></li>\r\n        <li class=\"input-group\">\r\n            <span class=\"flag4\">基药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">国家</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
-    + ">省</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
-    + ">地</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"jkyw\">重点监控药物:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + ">省基</option>\r\n                <option value=\"3\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">地基</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"jkyw\">重点监控药物:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yyyy\">营养用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"bloodPro\">血液制品:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"tpzjs\">糖皮质激素:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.tpzjs : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.tpzjs : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.tpzjs : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.tpzjs : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"energy\">能量用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.energy : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.energy : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.energy : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.energy : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"flag5\">PPI（质子泵抑制剂）:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"jmdf\">精麻毒放:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n           <span class=\"pregnancyLevel\">妊娠用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">麻</option>\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + ">毒</option>\r\n                <option value=\"1\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">精二</option>\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
+    + ">精一</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n           <span class=\"pregnancyLevel\">妊娠用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n             <span class=\"flag1\"> 抗菌药物:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"kjywType\"> 抗菌药物分级:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">无</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">非限制使用级</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
     + ">限制使用级</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
     + ">特殊使用级</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            抗菌药物分类:\r\n            <input type=\"text\" class=\"input\" value=\""
     + alias2(alias1((depth0 != null ? depth0.kjyw : depth0), depth0))
     + "\">\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"ddd\">DDD值:</span><input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\"><span data-name=\"adminRouteExclude\">给药途径不计算强度:</span><input type=\"text\" class=\"input upInputFn\" value=\""
+    + "\"></li>\r\n        <li class=\"input-group\"><span data-name=\"adminRouteExclude\">给药途径不计算强度:</span><div class=\"input icon-triangle adminRouteExclude\">"
     + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isDdd\">是否计算强度:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + "</div></li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isDdd\">是否计算强度:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"ypid\">YPID:</span><input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ypid : depth0), depth0))
     + "\"></li>\r\n        <li class=\"input-group\"><span data-name=\"pzCode\">品种代码:</span><input type=\"text\" class=\"input upInputFn\" value=\""
@@ -3895,10 +4152,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 },"useData":true});
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
@@ -3939,30 +4196,30 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.SML_NAME_F : depth0), depth0))
     + "</div></td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.SPEC_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\">\r\n                <div class=\"table-text\">\r\n                    "
     + alias2(alias1((depth0 != null ? depth0.SPEC_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\r\n                </div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
     + " "
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\">\r\n                <div class=\"table-text\">\r\n                    "
     + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
     + " "
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\r\n                </div>\r\n            </td>\r\n            <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.PROD_PZWH_F : depth0), depth0))
     + " "
@@ -3971,7 +4228,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.PROD_PZWH_F : depth0), depth0))
     + " "
     + alias2(alias1((depth0 != null ? depth0.PROD_ZCZH_F : depth0), depth0))
-    + "</div></td>\r\n            <td><div class=\"table-text select-than\">选择</div></td>\r\n        </tr>\r\n";
+    + "</div></td>\r\n            <td><div class=\"table-text select-than\">选取</div></td>\r\n        </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -3981,10 +4238,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(1);
+var Handlebars = __webpack_require__(2);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
@@ -4025,30 +4282,30 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.SML_NAME_F : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.SPEC_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\">\r\n            <div class=\"table-text\">\r\n                "
     + alias2(alias1((depth0 != null ? depth0.SPEC_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\r\n            </div>\r\n        </td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
     + " "
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\">\r\n            <div class=\"table-text\">\r\n                "
     + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
     + " "
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
-    + alias2(__default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\r\n            </div>\r\n        </td>\r\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.PROD_PZWH_F : depth0), depth0))
     + " "
@@ -4057,7 +4314,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.PROD_PZWH_F : depth0), depth0))
     + " "
     + alias2(alias1((depth0 != null ? depth0.PROD_ZCZH_F : depth0), depth0))
-    + "</div></td>\r\n        <td><div class=\"table-text select-than\">选择</div></td>\r\n    </tr>\r\n";
+    + "</div></td>\r\n        <td><div class=\"table-text select-than\">选取</div></td>\r\n    </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

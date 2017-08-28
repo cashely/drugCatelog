@@ -7,4 +7,4 @@ require('../../component/tableDiff/');
 require('../../component/standardThan/');
 require('../../component/addData/');
 require('../../component/footer/');
-require('../../component/index');
+require('./home.js');

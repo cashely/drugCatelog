@@ -6,10 +6,10 @@
         {{#each tree}}
             <ul>
                 <li>
-                    <input type="checkbox" class="channel-checkbox" data-id="{{this.id}}"><a href="javascript:void(0)" class="channel-name">{{this.name}}</a>
+                    <input type="checkbox" class="channel-checkbox" data-id="{{this.id}}" {{isChecked checked}}><a href="javascript:void(0)" class="channel-name">{{this.name}}</a>
                     <ul class="sub-channel">
                         {{#each this.chirden}}
-                            <li><input type="checkbox" class="channel-checkbox" data-id={{this.id}}><a href="javascript:void(0)" class="channel-name">{{this.name}}</a></li>
+                            <li><input type="checkbox" class="channel-checkbox" data-id={{this.id}} {{isChecked checked}}><a href="javascript:void(0)" class="channel-name">{{this.name}}</a></li>
                         {{/each}}
                     </ul>
                 </li>

@@ -1,7 +1,7 @@
 var tabBarTel =  require('./tabBar.hbs');
 var Fn =  require('../function');
 var slices=  require('../../page/index/slices');
-var data = require('../indexData');
+var data = require('../../page/index/indexData');
 var slicesData=  require('../../page/index/slicesData');
 
 $('.tabs-box').html(tabBarTel(data.tabsData));//加载切换条

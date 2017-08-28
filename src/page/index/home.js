@@ -1,20 +1,23 @@
-var searchClassifyTel =  require('./searchBox/searchClassify.hbs');//化学药比对表格搜索分类
-var tableDiffTel = require('./tableDiff/table-diff.hbs');//化学药比对表格
-var tableDiffLeft = require('./tableDiff/table-diff-left.hbs');//化学药左边单行比对表格
-var tableDiffRight = require('./tableDiff/table-diff-right.hbs');//化学药右边单行比对表格
-var tableDetails = require('./tableDiff/table-details.hbs');//化学药右边详情模版
-var tableDiffRightTr = require('./tableDiff/table-diff-right-tr.hbs');//化学药右边详情模版
+var searchClassifyTel =  require('./../../component/searchBox/searchClassify.hbs');//化学药比对表格搜索分类
+var tableDiffTel = require('./../../component/tableDiff/table-diff.hbs');//化学药比对表格
+var tableDiffLeft = require('./../../component/tableDiff/table-diff-left.hbs');//化学药左边单行比对表格
+var tableDiffRight = require('./../../component/tableDiff/table-diff-right.hbs');//化学药右边单行比对表格
+var tableDetails = require('./../../component/tableDiff/table-details.hbs');//化学药右边详情模版
+var tableDiffRightTr = require('./../../component/tableDiff/table-diff-right-tr.hbs');//化学药右边详情模版
 
-var standardThanTbody =  require('./standardThan/standardThanTbody.hbs');//化学药标准表格数据模版
-var standardThanTr =  require('./standardThan/standardThanTr.hbs');//化学药标准单行表格数据模版
+var standardThanTbody =  require('./../../component/standardThan/standardThanTbody.hbs');//化学药标准表格数据模版
+var standardThanTr =  require('./../../component/standardThan/standardThanTr.hbs');//化学药标准单行表格数据模版
 
-var Fn = require('./function');
+var Fn = require('./../../component/function');
 var data =  require('./indexData');//化学药数据
 var parent = '.'+data.name;
 var firstResult= 0, maxResult= 16, firstResultThan =0,maxResultThan= 16;loading = false;
+var findThanData ={firstResult:0,maxResult:16};
+var loadData;
 var loadDataObj={
   parent: parent,
   url: 'mcdProduct30/listHisProduct',
+  loadData: loadData,
   firstResult: firstResult,
   maxResult: maxResult,
   data: data,
@@ -27,7 +30,6 @@ var loadDataObj={
   tableDiffRightTr: tableDiffRightTr,
   downloadUrl:'mcdProduct30/downHisProduct'
 };
-
 
 $(function(){
   Fn.loadData(loadDataObj);//加载化学药数据
@@ -43,7 +45,10 @@ $(function(){
   Fn.showThan({
     parent: parent,
     url: 'mcdProduct30/listMcdProduct',
-    dataName: 'prodName',
+    homeProdName:'prodName',
+    homeFncName:'fncName',
+    findThanData:findThanData,
+    findThanDataName:['ypid','yjId','prodName','fncName','prodPzwh'],
     inputName:'prodName',
     data: data,
     standardThanTbody: standardThanTbody,
@@ -51,7 +56,6 @@ $(function(){
     firstResultThan: firstResultThan,
     maxResultThan: maxResultThan,
     saveUrl:'mcdProduct30/saveMatch',
-    findThanData:['ypid','yjId','prodName','fncName','prodPzwh'],
     selectThanData:'proId',
     addThanFn:1
   },loadDataObj);

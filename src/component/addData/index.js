@@ -12,10 +12,10 @@ var tbodyTel = require('./tbody.hbs');
 var tr = require('./tr.hbs');
 var ajaxFn = require('../ajax');
 //var loadTableFn = require('../function').loadTableFn;
-var data = require('../indexData');//化学药数据
+var data = require('../../page/index/indexData');//化学药数据
 var parent = '.'+data.name;
 var firstResult =0,maxResult= 16;loading = false;
-var listProductData ={}
+var listProductData ={};
 ajaxFn({
   url: 'product/listProduct',
   data:{
@@ -28,8 +28,10 @@ ajaxFn({
     $('.add-data .goback').on('click', function () {
       $('.content .add-data').hide();
       $('.content  .content-box-main').show();
+      $('.popup').hide();
     });
     $('.find-add-than').on('click', function () {
+      $('.add-than .loading-wrap').show();
       firstResult=0 ;maxResult=16;
       listProductData = {
         drugName: $('.add-drug-name').val(),
@@ -44,6 +46,7 @@ ajaxFn({
           url: 'product/listProduct',
           data: listProductData,
           callback: function (res) {
+            $('.add-than .loading-wrap').hide();
             var tbodyData = {};
             tbodyData.tbody = res.content;
             $('.add-than-tbody').html(tbodyTel(tbodyData));
