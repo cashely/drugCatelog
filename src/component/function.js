@@ -79,6 +79,7 @@ function tableDiffScrollFn($params,params){
 }
 
 function showDiffBarFn(params){
+    var $parent = $(params.parent);
   $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
     var _tr = $(this);
    $('.table-diff-bar').css({
@@ -92,7 +93,7 @@ function showDiffBarFn(params){
     $('.table-diff-bar').show();
     e.preventDefault();
   });
-  $(document).on('mouseleave','.table-diff-left',function(){
+  $(document).on('mouseleave','.table-diff-content',function(){
     $('.table-diff-bar').hide();
   })
 }
