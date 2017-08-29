@@ -580,6 +580,19 @@ a {
   .loading .loading-img {
     width: 25px; }
 
+.prompt {
+  display: none;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  background: black;
+  top: 50%;
+  padding: 10px;
+  z-index: 99;
+  left: 50%;
+  margin-top: -16px;
+  border-radius: 10px; }
+
 .login {
   display: none;
   position: absolute;

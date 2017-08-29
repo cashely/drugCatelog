@@ -732,6 +732,12 @@ function updateConvertRatio(params) {
         colName: $tr.find('td').eq(3).attr('class'),
         colView: $('.table-diff-header th').eq(3).text(),
         aftValue: $(this).val()
+      },
+      callback: function (res) {
+        $(params.parent).find('.prompt').show();
+        setTimeout(function () {
+          $(params.parent).find('.prompt').hide();
+        }, 500);
       }
     });
   });
@@ -1549,7 +1555,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                                    </tr>\r\n                                </thead>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-diff-data\">\r\n                        <table cellspacing=\"1\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"loading-wrap\">\r\n            <div class=\"loading\">\r\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+    + "                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <div class=\"table-diff-right-single\">\r\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\r\n                    <div class=\"table-diff-single-content\">\r\n                        <div class=\"table-details-content-box\">\r\n                            <!--标准数据详情-->\r\n                        </div>\r\n                        <div class=\"tool\">\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\r\n                        </div>\r\n                        <div class=\"pagination\">\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\r\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"loading-wrap\">\r\n            <div class=\"loading\">\r\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n            </div>\r\n        </div>\r\n        <div class=\"prompt\">保存成功</div>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 /***/ }),
@@ -4024,7 +4030,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "</li>\r\n        <li>剂型："
     + alias2(alias1((depth0 != null ? depth0.smlNameF : depth0), depth0))
     + "</li>\r\n        <li>规格："
-    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + "</li>\r\n        <li>转换比："
     + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
     + "</li>\r\n        <li>药品编码："

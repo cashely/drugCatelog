@@ -2,7 +2,7 @@
     <ul class="content-list">
         <li>药品名称：{{proName}}</li>
         <li>剂型：{{smlNameF}}</li>
-        <li>规格：{{specName}}</li>
+        <li>规格：{{spec}}</li>
         <li>转换比：{{fConvertRatio}}</li>
         <li>药品编码：{{codePro}}</li>
         <li>含量：{{component}}{{componentUnit}}</li>
@@ -127,7 +127,7 @@
         <li class="input-group"><span data-name="ddd">DDD值:</span><input type="text" class="input upInputFn" value="{{ddd}}"></li>
         <li class="input-group"><span data-name="adminRouteExclude">给药途径不计算强度:</span><div class="input icon-triangle adminRouteExclude">{{adminRouteExclude}}</div></li>
         <li class="input-group">
-            <span class="isDdd">是否计算强度:</span>
+            <span class="isCalcKjyw">是否计算强度:</span>
             <select class="select updateValueFn">
                 <option value="0" {{isTrue isCalcKjyw "0"}}>否</option>
                 <option value="1" {{isTrue isCalcKjyw "1"}}>是</option>
