@@ -736,6 +736,12 @@ function updateConvertRatio(params) {
         colName: $tr.find('td').eq(3).attr('class'),
         colView: $('.table-diff-header th').eq(3).text(),
         aftValue: $(this).val()
+      },
+      callback: function (res) {
+        $(params.parent).find('.prompt').show();
+        setTimeout(function () {
+          $(params.parent).find('.prompt').fadeOut();
+        }, 2000);
       }
     });
   });
@@ -1429,9 +1435,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
     + "\">\n                                            <div>\n                                                "
     + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
-    + "\n                                            </div>\n                                        </td>\n                                        <td><div>"
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isOrNo","hash":{},"data":data}))
-    + "</div></td>\n                                        <td title=\""
+    + "\n                                            </div>\n                                        </td>\n                                        <td class=\"icon-triangle table-diff-data-td-select\">"
+    + ((stack1 = __default(__webpack_require__(84)).call(alias3,(depth0 != null ? depth0.isStop : depth0),{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
+    + "</td>\n                                        <td title=\""
     + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "\"><div>"
     + alias2(__default(__webpack_require__(7)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
@@ -1553,7 +1559,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                                    </tr>\n                                </thead>\n                            </table>\n                        </div>\n                    </div>\n                    <div class=\"table-diff-data\">\n                        <table cellspacing=\"0\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <div class=\"table-details-content-box\">\n                            <!--标准数据详情-->\n                        </div>\n                        <div class=\"tool\">\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\n                        </div>\n                        <div class=\"pagination\">\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"loading-wrap\">\n            <div class=\"loading\">\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\n            </div>\n        </div>\n    </div>\n</div>\n";
+    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <div class=\"table-details-content-box\">\n                            <!--标准数据详情-->\n                        </div>\n                        <div class=\"tool\">\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\n                        </div>\n                        <div class=\"pagination\">\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"loading-wrap\">\n            <div class=\"loading\">\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\n            </div>\n        </div>\n        <div class=\"prompt\">保存成功</div>\n    </div>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -4028,7 +4034,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "</li>\n        <li>剂型："
     + alias2(alias1((depth0 != null ? depth0.smlNameF : depth0), depth0))
     + "</li>\n        <li>规格："
-    + alias2(alias1((depth0 != null ? depth0.specName : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + "</li>\n        <li>转换比："
     + alias2(alias1((depth0 != null ? depth0.fConvertRatio : depth0), depth0))
     + "</li>\n        <li>药品编码："
@@ -4140,7 +4146,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
     + "\"></li>\n        <li class=\"input-group\"><span data-name=\"adminRouteExclude\">给药途径不计算强度:</span><div class=\"input icon-triangle adminRouteExclude\">"
     + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
-    + "</div></li>\n        <li class=\"input-group\">\n            <span class=\"isDdd\">是否计算强度:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
+    + "</div></li>\n        <li class=\"input-group\">\n            <span class=\"isCalcKjyw\">是否计算强度:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(1)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
@@ -4324,6 +4330,39 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
+
+/***/ }),
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */
+/***/ (function(module, exports) {
+
+// 是否停用
+module.exports = function (value) {
+    var string = '<div class="value">';
+
+    if (value == 1) {
+        string += '是';
+    } else {
+        string += '否';
+    }
+
+    string += '</div><div class="select"><select>';
+
+    if (value == 1) {
+        string += '<option value=1 selected="selected">是</option><option value=0>否</option>';
+    } else {
+        string += '<option value=1>是</option><option selected="selected" value=0>否</option>';
+    }
+
+    string += '</select></div>';
+    return string;
+};
 
 /***/ })
 /******/ ]);

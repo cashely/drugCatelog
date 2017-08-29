@@ -391,9 +391,24 @@ a {
   border-color: #d9d9d9;
   background-color: #fff; }
 
+.table-diff-data tr.hover .table-diff-data-td-select .value, .table-diff-data tr.active .table-diff-data-td-select .value {
+  display: none; }
+
+.table-diff-data tr.hover .table-diff-data-td-select .select, .table-diff-data tr.active .table-diff-data-td-select .select {
+  display: block; }
+
 .table-diff {
   margin-top: 10px;
   position: relative; }
+  .table-diff .table-diff-data-td-select .value {
+    display: block; }
+  .table-diff .table-diff-data-td-select .select {
+    display: none; }
+    .table-diff .table-diff-data-td-select .select select {
+      width: 100%;
+      height: 24px;
+      display: block;
+      margin-top: 2px; }
   .table-diff .table-diff-bar {
     position: absolute;
     left: 0;
@@ -445,14 +460,14 @@ a {
       overflow-x: hidden;
       overflow-y: hidden;
       height: 448px; }
+      .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
+        overflow-y: auto; }
     .table-diff .table-diff-left .table-diff-data-content {
       padding-bottom: 20px; }
   .table-diff .table-diff-right {
     position: relative;
     padding-top: 28px;
     margin-left: 637px; }
-    .table-diff .table-diff-right table {
-      border-left-width: 0px; }
     .table-diff .table-diff-right .table-diff-right-single {
       display: none; }
       .table-diff .table-diff-right .table-diff-right-single.active {
@@ -585,6 +600,18 @@ a {
   width: 100%; }
   .loading .loading-img {
     width: 25px; }
+
+.prompt {
+  display: none;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  background: black;
+  bottom: 0;
+  line-height: 2;
+  padding: 10px 40px;
+  z-index: 99;
+  right: 0; }
 
 .login {
   display: none;

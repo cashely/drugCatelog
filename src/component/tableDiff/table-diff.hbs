@@ -29,7 +29,7 @@
                                                 {{{unitInput unitOps}}}
                                             </div>
                                         </td>
-                                        <td><div>{{isOrNo isStop}}</div></td>
+                                        <td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot isStop}}}</td>
                                         <td title="{{timeFn updateDate}}"><div>{{timeFn updateDate}}</div></td>
                                     </tr>
                                 {{/each}}
@@ -112,5 +112,6 @@
                 <img src="./images/loading.gif" class="loading-img">
             </div>
         </div>
+        <div class="prompt">保存成功</div>
     </div>
 </div>

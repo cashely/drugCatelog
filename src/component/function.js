@@ -330,6 +330,10 @@ function updateConvertRatio(params){
         colName: $tr.find('td').eq(3).attr('class'),
         colView: $('.table-diff-header th').eq(3).text(),
         aftValue: $(this).val()
+      },
+      callback:function(res){
+        $(params.parent).find('.prompt').show();
+        setTimeout(function () { $(params.parent).find('.prompt').fadeOut(); }, 2000);
       }
     })
   });

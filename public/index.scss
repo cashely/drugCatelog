@@ -489,12 +489,35 @@ a{
                 border-color:#d9d9d9;
                 background-color: #fff;
             }
+            .table-diff-data-td-select{
+                .value{
+                    display: none;
+                }
+                .select{
+                    display: block;
+                }
+            }
         }
     }
 }
 .table-diff{
     margin-top: 10px;
     position: relative;
+    .table-diff-data-td-select{
+        .value{
+            display: block;
+        }
+        .select{
+
+            display: none;
+            select{
+                width: 100%;
+                height: 24px;
+                display: block;
+                margin-top: 2px;
+            }
+        }
+    }
     .table-diff-bar{
         position: absolute;
         left:0;
@@ -570,7 +593,7 @@ a{
             overflow-y: hidden;
             height: 448px;
             &.table-diff-show-detail{
-                //overflow-y: auto;
+                overflow-y: auto;
             }
         }
         .table-diff-data-content{
@@ -578,9 +601,6 @@ a{
         }
     }
     .table-diff-right{
-        table{
-            border-left-width:0px;
-        }
         position: relative;
         padding-top: 28px;
         margin-left: 637px;
@@ -762,6 +782,20 @@ a{
     }
 }
 
+//保存成功
+.prompt{
+    display: none;
+    color: #fff;
+    text-align: center;
+    // position: absolute;
+    position: fixed;
+    background: black;
+    bottom:0;
+    line-height: 2;
+    padding: 10px 40px;
+    z-index: 99;
+    right:0;
+}
 //登录框
 .login{
     display: none;
