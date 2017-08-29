@@ -1,18 +1,26 @@
-<table class="table">
+<table cellpadding="0" cellspacing="0" class="table">
     {{#each tbody}}
         <tr data-id={{ID}}>
-            <td><div class="table-text">{{YPID}}</div></td>
-            <td><div class="table-text">{{PZ_CODE}}</div></td>
-            <td><div class="table-text">{{YJ_ID}}</div></td>
-            <td><div class="table-text">{{CODE}}</div></td>
-            <td><div class="table-text">{{DRUG_TYPE}}</div></td>
-            <td><div class="table-text">{{NAME_CN_F}}</div></td>
-            <td><div class="table-text">{{PROD_TRADE_F}}</div></td>
-            <td><div class="table-text">{{SML_NAME_F}}</div></td>
-            <td><div class="table-text">{{SPEC_F}}</div></td>
-            <td><div class="table-text">{{FAC_NAME_F}}</div></td>
-            <td><div class="table-text">{{PROD_PZWH_F}} {{PROD_ZCZH_F}}</div></td>
-            <td><div class="table-text select-than">选择</div></td>
+            <td title="{{YPID}}"><div class="table-text">{{YPID}}</div></td>
+            <td title="{{PZ_CODE}}"><div class="table-text">{{PZ_CODE}}</div></td>
+            <td title="{{YJ_ID}}"><div class="table-text">{{YJ_ID}}</div></td>
+            <td title="{{CODE}}"><div class="table-text">{{CODE}}</div></td>
+            <td title="{{DRUG_TYPE}}"><div class="table-text">{{DRUG_TYPE}}</div></td>
+            <td title="{{NAME_CN_F}}"><div class="table-text">{{NAME_CN_F}}</div></td>
+            <td title="{{PROD_TRADE_F}}"><div class="table-text">{{PROD_TRADE_F}}</div></td>
+            <td title="{{SML_NAME_F}}"><div class="table-text">{{SML_NAME_F}}</div></td>
+            <td title="{{SPEC_F}}{{switchFn CONVERT_F "*"}}{{CONVERT_F}}{{switchFn ATTR_NAME_F "["}}{{switchFn ATTR_NAME_F}}{{switchFn ATTR_NAME_F "]"}}">
+                <div class="table-text">
+                    {{SPEC_F}}{{switchFn CONVERT_F "*"}}{{CONVERT_F}}{{switchFn ATTR_NAME_F "["}}{{switchFn ATTR_NAME_F}}{{switchFn ATTR_NAME_F "]"}}
+                </div>
+            </td>
+            <td title="{{FAC_NAME_F}} {{switchFn BRAND_NAME '['}}{{BRAND_NAME}}{{switchFn BRAND_NAME ']'}}">
+                <div class="table-text">
+                    {{FAC_NAME_F}} {{switchFn BRAND_NAME '['}}{{BRAND_NAME}}{{switchFn BRAND_NAME ']'}}
+                </div>
+            </td>
+            <td  title="{{PROD_PZWH_F}} {{PROD_ZCZH_F}}"><div class="table-text">{{PROD_PZWH_F}} {{PROD_ZCZH_F}}</div></td>
+            <td><div class="table-text select-than">选取</div></td>
         </tr>
     {{/each}}
 </table>

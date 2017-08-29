@@ -1,14 +1,25 @@
 <div class="popup-record">
     <div class="popup-title">
-        {{popupTitle}}属性修改纪录 <span class="popup-close"></span>
+        属性修改纪录 <span class="popup-close"></span>
     </div>
    <div class="popup-content">
        <table class="popup-table">
            <tr>
-               <td>修改人</td>
-               <td>修改内容</td>
+               <td>修改列名</td>
+               <td>修改前</td>
+               <td>修改后</td>
                <td>修改时间</td>
+               <td>修改人</td>
            </tr>
+           {{#each content}}
+               <tr>
+                   <td>{{colView}}</td>
+                   <td>{{befValue}}</td>
+                   <td>{{aftValue}}</td>
+                   <td>{{timeFn updDate}}</td>
+                   <td>{{updName}}</td>
+               </tr>
+           {{/each}}
        </table>
    </div>
 </div>

@@ -1,11 +1,11 @@
 {{#each ydata}}
-    <tr data-id={{id}} data-name={{drugNameFormat}}>
-        <td><div>{{id}}</div></td>
-        <td><div>{{drugName}}</div></td>
-        <td><div>{{spec}}{{manufacturerName}}</div></td>
-        <td><div><input value={{convertRatio}}></div></td>
-        <td class="icon-triangle"><div>{{unitName}}</div></td>
-        <td><div>{{isStop}}</div></td>
-        <td><div>{{createDate}}</div></td>
+    <tr data-id={{id}} data-name="{{drugNameFormat}}">
+        <td  title="{{id}}"><div>{{id}}</div></td>
+        <td  title="{{drugName}}"><div>{{drugName}}</div></td>
+        <td title="{{spec}}{{manufacturerName}}"><div>{{spec}}{{manufacturerName}}</div></td>
+        <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
+        <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}" title="{{unitName}}"><div>{{unitName}}</div></td>
+        <td><div>{{isOrNo isStop}}</div></td>
+        <td title="{{timeFn createDate}}"><div>{{timeFn createDate}}</div></td>
     </tr>
 {{/each}}

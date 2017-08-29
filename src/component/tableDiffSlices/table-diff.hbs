@@ -1,12 +1,15 @@
 <div class="table-diff">
     <div class="table-diff-content">
-        <div class="table-diff-bar">
-            <a href="#slicesStandardData" class="showThan">比对</a>|<a href="javascript:void(0)" class="showDetail">查看详情</a>|<a href="javascript:void(0)" class="cancel-than">取消比对</a>
-        </div>
+
         <div class="table-diff-header">
             <div class="table-diff-left">
+                <div class="table-diff-bar">
+                    <a href="#slicesStandardData" class="showThan">比对</a>|
+                    <!--<a href="javascript:void(0)" class="showDetail">查看详情</a>|-->
+                    <a href="javascript:void(0)" class="cancel-than">取消比对</a>
+                </div>
                 <div class="table-diff-header">
-                    <table width="100%" cellspacing="1" border="0">
+                    <table width="100%" cellspacing="0" border="0">
                         <thead>
                             {{#each tLeftHead}}
                                 <th><div>{{this}}</div></th>
@@ -16,17 +19,17 @@
                 </div>
                 <div class="table-diff-data">
                     <div class="table-diff-data-content">
-                        <table width="100%" cellspacing="1" border="0">
+                        <table width="100%" cellspacing="0" border="0">
                             <tbody>
                             {{#each ydata}}
-                                <tr data-id={{id}} data-name={{drugNameFormat}}>
-                                    <td><div>{{id}}</div></td>
-                                    <td><div>{{drugName}}</div></td>
-                                    <td><div>{{spec}}{{manufacturerName}}</div></td>
+                                <tr data-id={{id}} data-name="{{drugNameFormat}}">
+                                    <td  title="{{id}}"><div>{{id}}</div></td>
+                                    <td  title="{{drugName}}"><div>{{drugName}}</div></td>
+                                    <td title="{{spec}}{{manufacturerName}}"><div>{{spec}}{{manufacturerName}}</div></td>
                                     <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
-                                    <td class="icon-triangle ymzzy"><div>{{unitName}}</div></td>
-                                    <td><div>{{isStop}}</div></td>
-                                    <td><div>{{createDate}}</div></td>
+                                    <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}" title="{{unitName}}"><div>{{unitName}}</div></td>
+                                    <td><div>{{isOrNo isStop}}</div></td>
+                                    <td title="{{timeFn createDate}}"><div>{{timeFn createDate}}</div></td>
                                 </tr>
                             {{/each}}
                             </tbody>
@@ -38,7 +41,7 @@
                 <div class="table-diff-right-all active">
                     <div class="table-diff-header">
                         <div class="table-diff-header-content">
-                            <table cellspacing="1" border="0">
+                            <table cellspacing="0" border="0">
                                 <thead>
                                 <tr>
                                     {{#each tRightHead}}
@@ -49,18 +52,18 @@
                             </table>
                         </div>
                     </div>
-                    <div class="table-diff-data" style="overflow-x: hidden;">
-                        <table cellspacing="1" border="0">
+                    <div class="table-diff-data">
+                        <table cellspacing="0" border="0">
                             <tbody>
                             {{#each ydata}}
                                 <tr>
-                                    <td><div>{{codePro}}</div></td>
-                                    <td><div>{{ypType}}</div></td>
-                                    <td><div>{{proName}}</div></td>
-                                    <td><div>{{pxName}}</div></td>
-                                    <td  class="icon-triangle"><div>{{flag4}}</div></td>
-                                    <td><div>{{yblb}}</div></td>
-                                    <td class="icon-triangle"><div>{{ybbh}}</div></td>
+                                    <td title="{{codePro}}"><div>{{codePro}}</div></td>
+                                    <td title="{{ypTypeSwitch ypType}}"><div>{{ypTypeSwitch ypType}}</div></td>
+                                    <td title="{{proName}}"><div>{{proName}}</div></td>
+                                    <td title="{{pxName}}"><div>{{pxName}}</div></td>
+                                    <td  class="icon-triangle" title="{{isOrNo flag4}}"><div>{{isOrNo flag4}}</div></td>
+                                    <td title="{{isOrNo yblb}}"><div>{{isOrNo yblb}}</div></td>
+                                    <td class="icon-triangle" title="{{ybbh}}"><div>{{ybbh}}</div></td>
                                 </tr>
                             {{/each}}
                             </tbody>
@@ -84,6 +87,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="loading-wrap">
+            <div class="loading">
+                <img src="./images/loading.gif" class="loading-img">
             </div>
         </div>
     </div>

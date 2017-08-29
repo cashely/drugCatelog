@@ -18,9 +18,14 @@ ul,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd{
 }
 input{border:none;}
 img{border: none;}
+.lf{ float: left;}
+.rt{ float: right;}
 a{
     color:#666;
     text-decoration:none;
+}
+.color-red{
+    color: red;
 }
 .icon-arrow-left{
     width: 6px;
@@ -91,14 +96,19 @@ a{
     }
     /*输入框样式*/
     .input-group{
-        margin-right: 20px;
+        display: inline-block;
         white-space: nowrap;
+        float: left;
         .input{
+            display: inline-block;
             width: 108px;
             height: 24px;
-            margin: 0 0 10px 8px;
+            line-height: 24px;
+            margin-left: 8px;
+            margin-right: 20px;
             padding: 1px 5px;
             border: 1px solid #CACACA;
+            vertical-align: middle;
         }
         .select{
             width: 120px;
@@ -115,6 +125,7 @@ a{
         color: #FFFFFF;
         background: #2D8CC0;
         border-radius: 4px;
+        cursor: pointer;
     }
     //弹窗
     .popup{
@@ -138,6 +149,7 @@ a{
                 height: 16px;
                 top: 6px;
                 right: 10px;
+                cursor: pointer;
                 background: url(./images/icon-close.png) center center no-repeat;
             }
         }
@@ -145,20 +157,22 @@ a{
 
     /*查找药品数据*/
     .search-box{
-        .input-group{
-            .drug-name{
-                width: 72px;
+        .search-top{
+            overflow: hidden;
+            .search-top-lf{
+                float: left;
             }
-        }
-        .search-box-rt{
-            float: right;
-            .create-btn{
-                margin-right: 10px;
+            .search-top-rt{
+                float: right;
+                .create-btn{
+                    margin-right: 10px;
+                }
             }
         }
         .search-data{
-            margin-top: 8px;
+            margin-top: 18px;
             line-height: 16px;
+            overflow: hidden;
             .color-blue{
                 color: #2D8CC0;
             }
@@ -204,11 +218,12 @@ a{
             }
         }
         .search-than{
-            padding: 10px 12px 0;
+            padding: 10px 12px 10px;
         }
         .than-table{
+            position: relative;
             .than-thead{
-                padding-right: 16px;
+                // padding-right: 16px;
                 background: #4EAADC;
             }
             .than-tbody{
@@ -219,24 +234,30 @@ a{
             .table{
                 width: 100%;
                 text-align: left;
-                border-collapse: collapse;
-                border-spacing: 0;
+                border-left:1px solid #d9d9d9;
+                border-top:1px solid #d9d9d9;
                 .thead{
                     color: #fff;
                     background: #4EAADC;
                 }
                 tr{
                     td{
-                        padding: 9px 7px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        border: 1px solid #D8D8D8;
+
+                        border-right:1px solid #d9d9d9;
+                        border-bottom:1px solid #d9d9d9;
+
+                        div{
+                            white-space: nowrap;
+                            overflow: hidden;
+                            padding: 9px 7px;
+                        }
                     }
                 }
                 .table-text{
                     width: 70px;
                 }
                 .select-than{
+                    cursor: pointer;
                     color: #2D8CC0;
                 }
             }
@@ -254,8 +275,11 @@ a{
     .add-than{
         margin-top: 26px;
         .than-thead{
-            padding-right: 16px;
+            // padding-right: 16px;
             background: #4EAADC;
+        }
+        .than-tbody-wrap{
+            position: relative;
         }
         .than-tbody{
             height: 350px;
@@ -283,6 +307,7 @@ a{
             }
             .add-than-info{
                 color: #2D8CC0;
+                cursor: pointer;
             }
         }
     }
@@ -392,12 +417,16 @@ a{
     .popup-record{
         width: 482px;
         position: absolute;
-        top: 375px;
+        top: 250px;
         left: 50%;
         z-index: 99;
         margin-left: -241px;
         background: #fff;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
         .popup-content{
+            max-height: 250px;
+            overflow: auto;
             padding: 10px 10px 19px;
             .popup-table{
                 width: 100%;
@@ -414,15 +443,45 @@ a{
             }
         }
     }
+    .popup-channel{
+        width: 380px;
+        position: absolute;
+        top: 250px;
+        left: 50%;
+        z-index: 99;
+        margin-left: -241px;
+        background: #fff;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+        .popup-content{
+            padding: 10px 10px 10px;
+            max-height: 200px;
+            overflow: auto;
+            .channel-checkbox{
+                vertical-align: middle;
+            }
+            .sub-channel{
+                display: none;
+                margin-left: 15px;
+            }
+        }
+        .save-channel{
+            margin: 10px;
+        }
+    }
 }
 //药品数据
 .table-diff-data{
     tr{
         input{
             width: 100%;
+            padding:4px 0;
             color: #666;
             border:1px solid transparent;
             background-color: transparent;
+        }
+        .color-red{
+            color: red;
         }
         &.hover,&.active{
             input{
@@ -439,6 +498,7 @@ a{
     .table-diff-bar{
         position: absolute;
         left:0;
+        white-space: nowrap;
         top:0;
         z-index: 10;
         color: #fff;
@@ -464,10 +524,13 @@ a{
             }
         }
         .icon-triangle{
+            cursor: pointer;
             background:  url(./images/icon-triangle.png) top right no-repeat #fff;
         }
         td,th{
             padding: 0;
+            border-right:1px solid #d9d9d9;
+            border-bottom:1px solid #d9d9d9;
             white-space: nowrap;
             >div{
                 display: block;
@@ -489,15 +552,15 @@ a{
         padding-top: 28px;
         position: relative;
         z-index: 9;
-        width: 754px;
+        width: 637px;
         td,th{
             >div{
-                width: 70.42px;
+                width: 80px;
             }
         }
         .table-diff-header{
             position: absolute;
-            width: 754px;
+            width: 637px;
             top:0;
             left:0;
             z-index: 2;
@@ -515,9 +578,12 @@ a{
         }
     }
     .table-diff-right{
+        table{
+            border-left-width:0px;
+        }
         position: relative;
         padding-top: 28px;
-        margin-left: 754px;
+        margin-left: 637px;
         .table-diff-right-single{
             display: none;
             &.active{
@@ -560,6 +626,9 @@ a{
                                 width: 106px;
                                 margin-bottom: 0;
                             }
+                        }
+                        .adminRouteExclude{
+                            overflow: hidden;
                         }
                     }
                 }
@@ -623,12 +692,13 @@ a{
     }
     table{
         background-color: #d9d9d9;
+        border-top:1px solid #d9d9d9;
+        border-left:1px solid #d9d9d9;
         td,th{
             background-color: #fff;
         }
     }
     .table-diff-data{
-        margin-top: -1px;
         td{
             line-height: 20px;
         }
@@ -671,6 +741,15 @@ a{
     }
 }
 //加载中
+.loading-wrap{
+    display: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    background: rgba(0,0,0,0.1);
+}
 .loading{
     margin-top: -6px;
     text-align: center;
@@ -680,5 +759,69 @@ a{
     width: 100%;
     .loading-img{
         width: 25px;
+    }
+}
+
+//登录框
+.login{
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    margin-left: -190px;
+    background: #fff;
+    color: #666;
+    width: 380px;
+    font-size: 14px;
+    z-index: 999;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
+    .login-title{
+        padding: 12px;
+        background-color: #4EAADC;
+        color: #fff;
+    }
+    .login-input{
+        display: block;
+        color: #747474;
+        padding: 20px 20px 0 20px;
+        line-height: 25px;
+        .input{
+            border: 1px solid #e3e3e3;
+            line-height: 1.5;
+            padding: 5px 10px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            box-sizing: content-box;
+            width: 308px;
+            margin-top: 5px
+        }
+    }
+    .login-btn{
+        background-color: #2d8cc0;
+        margin: 20px 30px;
+        border: 0;
+        padding: 7px 15px;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #fff;
+    }
+    .popup-close{
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        top: 6px;
+        right: 10px;
+        background: url(./images/icon-close.png) center center no-repeat;
+    }
+    .login-cancel{
+        float: right;
+        margin: 20px 30px;
+        border: 0;
+        padding: 7px 15px;
+        border-radius: 3px;
+        font-size: 14px;
+        background: #BCBCBC;
     }
 }

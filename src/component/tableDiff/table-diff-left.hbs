@@ -1,11 +1,15 @@
 {{#each ydata}}
-    <tr data-id={{id}} data-name={{drugNameFormat}}>
-        <td class="table-diff-drugId"><div>{{id}}</div></td>
-        <td><div>{{drugName}}</div></td>
-        <td><div>{{specName}} {{manufacturerName}}</div></td>
-        <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
-        <td class="icon-triangle ymzzy"><div>{{unitName}}</div></td>
-        <td><div>{{isStop}}</div></td>
-        <td><div>{{smsDate}}</div></td>
+    <tr data-id="{{id}}" data-name="{{drugNameFormat}}" data-fncName="{{manufacturerName}}">
+        <td class="table-diff-drugId" title="{{id}}"><div>{{id}}</div></td>
+        <td title="{{drugName}}"><div>{{drugName}}</div></td>
+        <td title="{{specName}} {{manufacturerName}}"><div>{{specName}} {{manufacturerName}}</div></td>
+        <td class="convertRatio" title="{{convertRatio}}"><div><input class="{{convertRatioFn convertRatio fConvertRatio}}" value={{convertRatio}}></div></td>
+        <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}">
+            <div>
+                {{{unitInput unitOps}}}
+            </div>
+        </td>
+        <td><div>{{isOrNo isStop}}</div></td>
+        <td title="{{timeFn updateDate}}"><div>{{timeFn updateDate}}</div></td>
     </tr>
 {{/each}}
