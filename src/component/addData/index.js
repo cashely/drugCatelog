@@ -11,75 +11,75 @@ var tableDiffRightTr = require('../tableDiff/table-diff-right-tr.hbs');//化学�
 var tbodyTel = require('./tbody.hbs');
 var tr = require('./tr.hbs');
 var ajaxFn = require('../ajax');
-//var loadTableFn = require('../function').loadTableFn;
 var data = require('../../page/index/indexData');//化学药数据
 var parent = '.'+data.name;
 var firstResult =0,maxResult= 16;loading = false;
 var listProductData ={};
-ajaxFn({
-  url: 'product/listProduct',
-  data:{
-    firstResult: firstResult,
-    maxResult: maxResult
-  },
-  callback: function (res) {
-    data.addData.tbody = res.content;
-    $('.add-data').html(addData(data.addData));
-    $('.add-data .goback').on('click', function () {
-      $('.content .add-data').hide();
-      $('.content  .content-box-main').show();
-      $('.popup').hide();
-    });
-    $('.find-add-than').on('click', function () {
-      $('.add-than .loading-wrap').show();
-      firstResult=0 ;maxResult=16;
-      listProductData = {
-        drugName: $('.add-drug-name').val(),
-        spec: $('.add-spec').val(),
-        manufacturerName: $('.add-manufacturer-name').val(),
-        firstResult: firstResult,
-        maxResult: maxResult
-      };
-      if(loading == false){
-        loading = true;
-        ajaxFn({
-          url: 'product/listProduct',
-          data: listProductData,
-          callback: function (res) {
-            $('.add-than .loading-wrap').hide();
-            var tbodyData = {};
-            tbodyData.tbody = res.content;
-            $('.add-than-tbody').html(tbodyTel(tbodyData));
-            loading = false;
-          }
-        });
-      }
-    });
-    $(document).on('click','.add-than-info', addThanInfo);
-    $('.add-than .add-than-tbody').on('scroll',function(){
-      var _t = $(this);
-      if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){
-        listProductData.firstResult =(firstResult+1)*maxResult;
-        listProductData.maxResult = maxResult;
+function addDataFn(){
+  ajaxFn({
+    url: 'product/listProduct',
+    data:{
+      firstResult: firstResult,
+      maxResult: maxResult
+    },
+    callback: function (res) {
+      data.addData.tbody = res.content;
+      $('.add-data').html(addData(data.addData));
+      $('.add-data .goback').on('click', function () {
+        $('.content .add-data').hide();
+        $('.content  .content-box-main').show();
+        $('.popup').hide();
+      });
+      $('.find-add-than').on('click', function () {
+        $('.add-than .loading-wrap').show();
+        firstResult=0 ;maxResult=16;
+        listProductData = {
+          drugName: $('.add-drug-name').val(),
+          spec: $('.add-spec').val(),
+          manufacturerName: $('.add-manufacturer-name').val(),
+          firstResult: firstResult,
+          maxResult: maxResult
+        };
         if(loading == false){
           loading = true;
           ajaxFn({
-            url:'product/listProduct',
-            data:listProductData,
-            callback:function(res){
-              firstResult = firstResult + 1;
-              var trData = {};
-              trData.tbody = res.content;
-              $('.add-than-tbody tbody').append(tr(trData));
+            url: 'product/listProduct',
+            data: listProductData,
+            callback: function (res) {
+              $('.add-than .loading-wrap').hide();
+              var tbodyData = {};
+              tbodyData.tbody = res.content;
+              $('.add-than-tbody').html(tbodyTel(tbodyData));
               loading = false;
             }
           });
         }
-      }
-    });
-  }
-});
-
+      });
+      $(document).on('click','.add-than-info', addThanInfo);
+      $('.add-than .add-than-tbody').on('scroll',function(){
+        var _t = $(this);
+        if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){
+          listProductData.firstResult =(firstResult+1)*maxResult;
+          listProductData.maxResult = maxResult;
+          if(loading == false){
+            loading = true;
+            ajaxFn({
+              url:'product/listProduct',
+              data:listProductData,
+              callback:function(res){
+                firstResult = firstResult + 1;
+                var trData = {};
+                trData.tbody = res.content;
+                $('.add-than-tbody tbody').append(tr(trData));
+                loading = false;
+              }
+            });
+          }
+        }
+      });
+    }
+  });
+}
 function addThanInfo() {
   var $tr = $(this).parents('tr');
   var data = {
@@ -144,4 +144,11 @@ function addThanInfo() {
       });
     }
   });
+}
+
+module.exports = {
+  addDataFn:function(e){
+    alert(e);
+    addDataFn();
+  }
 }

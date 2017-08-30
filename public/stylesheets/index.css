@@ -190,11 +190,14 @@ a {
         .content .standard-than .title .toggle .icon-arrow-down {
           background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAABGdBTUEAALGPC/xhBQAAAJRJREFUCB1j1O09eJSBiSn2cqHtPQYsQLf/sBLDv3+LmRgZGOsY/v7brDf9qBi6OrAYUA6khulSsd1eoOqm/1//bHGYepUHphjEBokxMjE2g9QwwiT0eg/k/Wdg9GHj4fYGif368nUr43+GrZdK7CeC+HCFIA5QcRuQUgAK///PyPDocpF9JUgcKwAqnq3Xe3AOuiQAW8w5UkDrKnkAAAAASUVORK5CYII=) center center no-repeat; }
     .content .standard-than .search-than {
-      padding: 10px 12px 10px; }
+      padding: 10px 12px 10px;
+      overflow: hidden; }
     .content .standard-than .than-table {
       position: relative; }
       .content .standard-than .than-table .than-thead {
-        background: #4EAADC; }
+        background: #4EAADC;
+        padding-right: 16px;
+        overflow: hidden; }
       .content .standard-than .than-table .than-tbody {
         position: relative;
         height: 168px;
@@ -229,6 +232,7 @@ a {
   .content .add-than {
     margin-top: 26px; }
     .content .add-than .than-thead {
+      padding-right: 16px;
       background: #4EAADC; }
     .content .add-than .than-tbody-wrap {
       position: relative; }
@@ -562,16 +566,6 @@ a {
     display: table-row; }
     .table-diff .table-diff-data tr.active td {
       background-color: #d2eefd; }
-
-.slices-table .table-diff .table-diff-right .table-diff-header {
-  background: #4EAADC; }
-
-.slices-table .table-diff .table-diff-right .table-diff-header .table-diff-header-content table {
-  margin-right: 16px;
-  padding-right: 0; }
-
-.slices-table .table-diff .table-diff-right td > div, .slices-table .table-diff .table-diff-right th > div {
-  width: 64px; }
 
 /*页面底部样式*/
 .footer {

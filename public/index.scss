@@ -219,12 +219,14 @@ a{
         }
         .search-than{
             padding: 10px 12px 10px;
+            overflow: hidden;
         }
         .than-table{
             position: relative;
             .than-thead{
-                // padding-right: 16px;
                 background: #4EAADC;
+                padding-right: 16px;
+                overflow: hidden;
             }
             .than-tbody{
                 position: relative;
@@ -275,7 +277,7 @@ a{
     .add-than{
         margin-top: 26px;
         .than-thead{
-            // padding-right: 16px;
+            padding-right: 16px;
             background: #4EAADC;
         }
         .than-tbody-wrap{
@@ -733,23 +735,7 @@ a{
         }
     }
 }
-//中药饮片
-.slices-table{
-    .table-diff{
-        .table-diff-right .table-diff-header {
-            background: #4EAADC;
-        }
-        .table-diff-right .table-diff-header .table-diff-header-content table{
-            margin-right: 16px;
-            padding-right: 0;
-        }
-        .table-diff-right {
-            td > div, th > div{
-                width: 64px;
-            }
-        }
-    }
-}
+
 /*页面底部样式*/
 .footer{
     height: 30px;

@@ -10,6 +10,8 @@ var singleData = {id:null, index:null};
 var addData = require('./addData/index.hbs');
 var $parent = $('.'+data.name);
 var tableRightLeft = 0;
+var addDataFn= require('./addData/index').addDataFn;
+var addFirstResult =0,addMaxResult= 16;
 //var loadData;
 //加载化学药数据方法
 function loadChemistryTableFn(params,type){
@@ -29,15 +31,17 @@ function loadChemistryTableFn(params,type){
     url: params.url,
     data: params.loadData,
     callback:function(res){
-      params.firstResult = params.firstResult + 1;
-      params.data.searchDate.total = res.total;
-      params.data.searchDate.jbywCount = res.content.jbywCount;
-      params.data.searchDate.rsyyCount = res.content.rsyyCount;
-      params.data.searchDate.wbdCount = res.content.wbdCount;
-      params.data.searchDate.wtsjCount = res.content.wtsjCount;
-      params.data.searchDate.ybdCount = res.content.ybdCount;
-      params.data.searchDate.yblbCount = res.content.yblbCount;
-      $params.find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
+      if(!type){
+        params.firstResult = params.firstResult + 1;
+        params.data.searchDate.total = res.total;
+        params.data.searchDate.jbywCount = res.content.jbywCount;
+        params.data.searchDate.rsyyCount = res.content.rsyyCount;
+        params.data.searchDate.wbdCount = res.content.wbdCount;
+        params.data.searchDate.wtsjCount = res.content.wtsjCount;
+        params.data.searchDate.ybdCount = res.content.ybdCount;
+        params.data.searchDate.yblbCount = res.content.yblbCount;
+        $params.find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
+      }
       $params.find('.table-diff .loading-wrap').hide();
       params.data.diffData.ydata = res.content.rows;
       $params.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
@@ -216,10 +220,24 @@ function addThanInfo() {
     }
   });
 }
+//function addDataFn(params){
+//  ajaxFn({
+//    url: 'product/listProduct',
+//    data:{
+//      firstResult: addMaxResult,
+//      maxResult: addMaxResult
+//    },
+//    callback: function (res) {
+//      params.data.addData.tbody = res.content;
+//      $('.add-data').html(addData(params.data.addData));
+//    }
+//  });
+//}
 //显示19位标准数据
 function addThan(params){
   $(params.parent).find('.content-box-main').hide();
   $(params.parent).find('.add-data').show();
+  addDataFn();
 }
 
 //查找标准比对数据
@@ -320,15 +338,15 @@ function hideDetail(e){
 }
 
 //更新转换比
-function updateConvertRatio(params){
-  bindFn(params.parent,'blur','.table-diff-data .convertRatio input',function(){
-    var $tr = $(this).parents('tr');
+function upInputFn(params){
+  bindFn(params.parent,'blur','.upInput',function(){
+    var $tr = $('.table-diff-data-content .active'),index=$(this).parents('td').index();
     ajaxFn({
       url: 'mcdProduct30/updateHisProductByParmas',
       data: {
         drugId: $tr.attr('data-id'),
-        colName: $tr.find('td').eq(3).attr('class'),
-        colView: $('.table-diff-header th').eq(3).text(),
+        colName: $(this).attr('data-name'),
+        colView: $(this).parents('.table-diff-data').prev().find('th').eq(index).text(),
         aftValue: $(this).val()
       },
       callback:function(res){
@@ -338,10 +356,24 @@ function updateConvertRatio(params){
     })
   });
 }
-
+function upSelect(params){
+  $(document).on('blur',params.parent+' .upSelect',function(){
+    var $tr = $('.table-diff-data-content .active'),index=$(this).parents('td').index();
+    $(this).parent().prev().html($(this).find("option:selected").text());
+    ajaxFn({
+      url:'mcdProduct30/updateHisProductByParmas',
+      data: {
+        drugId: $tr.attr('data-id'),
+        colName: $(this).attr('data-name'),
+        colView: $(this).parents('.table-diff-data').prev().find('th').eq(index).text(),
+        aftValue: $(this).val()
+      }
+    })
+  });
+}
 //更新修改表格字段的值
 function updateValueFn(params){
-  $(params.parent).find('.table-details-content-box .updateValueFn').on('blur',function(){
+  $(params.parent).find('.updateValueFn').on('blur',function(){
     var colView = $(this).prev().text();
     colView = colView.substring(0,colView.length-1);
     ajaxFn({
@@ -354,7 +386,7 @@ function updateValueFn(params){
       }
     })
   });
-  $(params.parent).find('.table-details-content-box .upInputFn').on('blur',function(){
+  $(params.parent).find('.upInputFn').on('blur',function(){
     var colView = $(this).prev().text();
     colView = colView.substring(0,colView.length-1);
     ajaxFn({
@@ -419,7 +451,6 @@ function showDetail(params,e){
       if(!!params.updateValueUrl){
         updateValueFn(params);
       }
-      $parent.find('.table-details-content-box .adminRouteExclude').on('click',function(){popupChannelFn(params,$(this))});
       e.preventDefault();
     }
   })
@@ -493,10 +524,16 @@ function recordFn(params){
 //弹窗给药途径不计算强度
 function popupChannelFn(params,$this){
   var $parent = $(params.parent);
+  var _drugId = $parent.find('.table-diff-right').attr('data-id');
+  if($parent.find('.table-diff-right-single').is(':hidden')){
+    var index = $this.parents('tr').index();
+    console.log($this[0],$this.parents('tr')[0],$this.parents('tr').index());
+    _drugId = $parent.find('.table-diff-left .table-diff-data tr').eq(index).attr('data-id')
+  }
   ajaxFn({
     url: 'mcdProduct30/getRouteTree',
     data:{
-      drugId:$parent.find('.table-diff-right').attr('data-id')
+      drugId: _drugId
     },
     callback:function(res){
       var channelData={};
@@ -521,21 +558,25 @@ function popupChannelFn(params,$this){
         }
       });
       $('.save-channel').on('click',function(){
-        saveChannelFn($parent)
+        saveChannelFn($parent,$this,_drugId)
       });
     }
   })
 }
 
-function saveChannelFn($params){
-  var _drugId = $params.find('.table-diff-right').attr('data-id');
+function saveChannelFn($params,$this,_drugId){
+  //var _drugId = $params.find('.table-diff-right').attr('data-id');
   var arr=[],textArr=[];
   $('.popup-channel .channel-checkbox:checked').each(function(i,e){
     arr.push($(e).attr('data-id'));
     textArr.push($(e).next().text())
   });
   textArr = textArr.join(',');
-  $params.find('.table-details-content-box .adminRouteExclude').text(textArr);
+  if($parent.find('.table-diff-right-single').is(':hidden')){
+    $this.find('div').text(textArr);
+  }else{
+    $params.find('.table-details-content-box .adminRouteExclude').text(textArr);
+  }
   ajaxFn({
     url: 'mcdProduct30/updateMcdP30Adminroute',
     data: {
@@ -634,7 +675,10 @@ module.exports = {
 
     //下载表格
     bindFn(params.parent,'click','.search-data .download',function(){downloadFn(params)});
-
+    //修改表格属性
+    upSelect(params);
+    //绑定给药途径
+    bindFn(params.parent,'click','.adminRouteExclude',function(){popupChannelFn(params,$(this))});
     //取消比对
     bindFn(params.parent,'click','.table-diff-single-content .btn-cancel',function(){cancelThanFn(params,$(params.parent).find('.table-diff-right').attr('data-id'))});
     bindFn(params.parent,'click','.table-diff-bar .cancel-than',function(){cancelThanFn(params,singleData.id)});
@@ -662,6 +706,6 @@ module.exports = {
     bindFn(params.parent,'click','.btn-record',function(){recordFn(params)});
   },
   updateConvertRatio:function(params){
-    updateConvertRatio(params);//更新转换比
+    upInputFn(params);//更新输入框
   }
 };

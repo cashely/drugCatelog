@@ -5,7 +5,7 @@
         <td title="{{spec}}{{manufacturerName}}"><div>{{spec}}{{manufacturerName}}</div></td>
         <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
         <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}" title="{{unitName}}"><div>{{unitName}}</div></td>
-        <td><div>{{isOrNo isStop}}</div></td>
+        <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isStop 'isStop'}}}</div></td>
         <td title="{{timeFn createDate}}"><div>{{timeFn createDate}}</div></td>
     </tr>
 {{/each}}

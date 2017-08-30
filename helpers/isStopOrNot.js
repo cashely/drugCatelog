@@ -1,6 +1,6 @@
 // 是否停用
-module.exports = function(value){
-    var string = '<div class="value">';
+module.exports = function(value,name){
+    var string = '<div class="value showValue">';
 
     if(value == 1){
         string += '是';
@@ -8,7 +8,7 @@ module.exports = function(value){
         string += '否';
     }
 
-    string += '</div><div class="select"><select>';
+    string += '</div><div class="select"><select class="upSelect" data-name='+name+'>';
 
     if(value == 1){
         string += '<option value=1 selected="selected">是</option><option value=0>否</option>'
