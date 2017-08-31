@@ -1,0 +1,8 @@
+<div class="value showValue">{{text}}</div>
+<div class="select">
+    <select  class="upSelect" data-name="{{name}}">
+        {{#each option}}
+            <option value="{{optionValue}}" {{isTrue ../value optionValue}}>{{optionName}}</option>
+        {{/each}}
+    </select>
+</div>

@@ -229,32 +229,32 @@ a {
       .content .standard-than .no-than .add-than {
         color: #2D8CC0;
         text-decoration: underline; }
-  .content .add-than {
+  .content .add-than-table {
     margin-top: 26px; }
-    .content .add-than .than-thead {
+    .content .add-than-table .than-thead {
       padding-right: 16px;
       background: #4EAADC; }
-    .content .add-than .than-tbody-wrap {
+    .content .add-than-table .than-tbody-wrap {
       position: relative; }
-    .content .add-than .than-tbody {
+    .content .add-than-table .than-tbody {
       height: 350px;
       overflow-y: scroll; }
-    .content .add-than .table {
+    .content .add-than-table .table {
       width: 100%;
       text-align: left;
       border-collapse: collapse;
       border-spacing: 0; }
-      .content .add-than .table .thead {
+      .content .add-than-table .table .thead {
         color: #fff;
         background: #4EAADC; }
-      .content .add-than .table tr td {
+      .content .add-than-table .table tr td {
         padding: 9px 7px;
         white-space: nowrap;
         overflow: hidden;
         border: 1px solid #D8D8D8; }
-      .content .add-than .table .table-text {
+      .content .add-than-table .table .table-text {
         width: 70px; }
-      .content .add-than .table .add-than-info {
+      .content .add-than-table .table .add-than-info {
         color: #2D8CC0;
         cursor: pointer; }
   .content .add-data {

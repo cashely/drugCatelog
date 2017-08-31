@@ -26,7 +26,9 @@
                                     <td  title="{{id}}"><div>{{id}}</div></td>
                                     <td  title="{{drugName}}"><div>{{drugName}}</div></td>
                                     <td title="{{spec}}{{manufacturerName}}"><div>{{spec}}{{manufacturerName}}</div></td>
-                                    <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
+                                    <td title="{{convertRatio}}">
+                                        <div><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div>
+                                    </td>
                                     <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}" title="{{unitName}}"><div>{{unitName}}</div></td>
                                     <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isStop 'isStop'}}}</div></td>
                                     <td title="{{timeFn createDate}}"><div>{{timeFn createDate}}</div></td>
@@ -58,42 +60,17 @@
                             {{#each ydata}}
                                 <tr>
                                     <td title="{{codePro}}"><div>{{codePro}}</div></td>
-                                    <td class="icon-triangle table-diff-data-td-select">
-                                        <div class="value showValue">{{ypTypeSwitch ypType}}</div>
-                                        <div class="select">
-                                            <select  class="upSelect" data-name="ypType">
-                                                <option value="0" {{isTrue ypType "0"}}>西药</option>
-                                                <option value="1" {{isTrue ypType "1"}}>中成药</option>
-                                                <option value="2" {{isTrue ypType "2"}}>中药饮片</option>
-                                                <option value="3" {{isTrue ypType "3"}}>医院制剂</option>
-                                                <option value="4" {{isTrue ypType "4"}}>卫生材料</option>
-                                            </select>
-                                        </div>
+                                    <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
+                                        {{{ypTypeSelect ypType}}}
                                     </td>
                                     <td title="{{pzName}}"><div>{{pzName}}</div></td>
                                     <td title="{{proName}}"><div>{{proName}}</div></td>
                                     <td title="{{pxName}}"><div>{{pxName}}</div></td>
-                                    <td class="icon-triangle table-diff-data-td-select" title="{{flag4Switch flag4}}">
-                                        <div class="value showValue">{{flag4Switch flag4}}</div>
-                                        <div class="select">
-                                            <select  class="upSelect" data-name="flag4">
-                                                <option value="0" {{isTrue flag4 "0"}}>否</option>
-                                                <option value="1" {{isTrue flag4 "1"}}>国家</option>
-                                                <option value="2" {{isTrue flag4 "2"}}>省基</option>
-                                                <option value="3" {{isTrue flag4 "3"}}>地基</option>
-                                            </select>
-                                        </div>
+                                    <td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
+                                        {{{flag4Select flag4}}}
                                     </td>
-                                    <td class="icon-triangle table-diff-data-td-select" title="{{yblbSwitch yblb}}">
-                                        <div class="value showValue">{{yblbSwitch yblb}}</div>
-                                        <div class="select">
-                                            <select  class="upSelect" data-name="yblb">
-                                                <option value="0" {{isTrue yblb "0"}}>否</option>
-                                                <option value="1" {{isTrue yblb "1"}}>国家</option>
-                                                <option value="2" {{isTrue yblb "2"}}>省</option>
-                                                <option value="3" {{isTrue yblb "3"}}>地市</option>
-                                            </select>
-                                        </div>
+                                    <td class="icon-triangle table-diff-data-td-select" title="{{yblbSelect yblb 0}}">
+                                        {{{yblbSelect yblb}}}
                                     </td>
                                     <td class="icon-triangle table-diff-data-td-select" title="{{ybbh}}">
                                         <div><input class="upInput" value="{{ybbh}}" data-name="ybbh"></div>
@@ -128,5 +105,6 @@
                 <img src="./images/loading.gif" class="loading-img">
             </div>
         </div>
+        <div class="prompt">保存成功</div>
     </div>
 </div>

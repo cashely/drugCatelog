@@ -15,23 +15,28 @@ var data = require('../../page/index/indexData');//化学药数据
 var parent = '.'+data.name;
 var firstResult =0,maxResult= 16;loading = false;
 var listProductData ={};
-function addDataFn(){
+function addDataFn(drugName){
+  $('.add-data').html(addData(data.addData));
+  $('.add-search-than .add-drug-name').val(drugName);
+  listProductData ={
+    firstResult: firstResult,
+    maxResult: maxResult,
+    drugName: drugName
+  };
   ajaxFn({
     url: 'product/listProduct',
-    data:{
-      firstResult: firstResult,
-      maxResult: maxResult
-    },
+    data:listProductData,
     callback: function (res) {
       data.addData.tbody = res.content;
-      $('.add-data').html(addData(data.addData));
+      $('.add-than-tbody').html(tbodyTel(data.addData));
       $('.add-data .goback').on('click', function () {
         $('.content .add-data').hide();
         $('.content  .content-box-main').show();
         $('.popup').hide();
       });
+      $(document).on('click','.add-than-info', addThanInfo);
       $('.find-add-than').on('click', function () {
-        $('.add-than .loading-wrap').show();
+        $('.add-than-table .loading-wrap').show();
         firstResult=0 ;maxResult=16;
         listProductData = {
           drugName: $('.add-drug-name').val(),
@@ -46,17 +51,15 @@ function addDataFn(){
             url: 'product/listProduct',
             data: listProductData,
             callback: function (res) {
-              $('.add-than .loading-wrap').hide();
-              var tbodyData = {};
-              tbodyData.tbody = res.content;
-              $('.add-than-tbody').html(tbodyTel(tbodyData));
+              $('.add-than-table .loading-wrap').hide();
+              data.addData.tbody = res.content;
+              $('.add-than-tbody').html(tbodyTel(data.addData));
               loading = false;
             }
           });
         }
       });
-      $(document).on('click','.add-than-info', addThanInfo);
-      $('.add-than .add-than-tbody').on('scroll',function(){
+      $('.add-than-table .add-than-tbody').on('scroll',function(){
         var _t = $(this);
         if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){
           listProductData.firstResult =(firstResult+1)*maxResult;
@@ -147,8 +150,7 @@ function addThanInfo() {
 }
 
 module.exports = {
-  addDataFn:function(e){
-    alert(e);
-    addDataFn();
+  loadAddData:function(drugName){
+    addDataFn(drugName);
   }
 }

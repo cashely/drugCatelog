@@ -12,6 +12,7 @@ $(function(){
     if ($(this).hasClass("active")) return false;
     $(this).addClass("active").siblings().removeClass("active");
     $_content.removeClass("active");
+    $('.popup').hide();
     switch ($(this).index()){
       case 1 :
         if($('.content').children('.'+slicesData.name).length <= 0){
@@ -21,7 +22,10 @@ $(function(){
         $_content.eq($(this).index()).addClass('active');
         break;
       case 2 : $_content.eq($(this).index()).addClass('active');break;
-      default: $_content.first().addClass('active');
+      default:
+        $_content.first().addClass('active');
+        $_content.first().find('.content-box-main').show();
+        $('.add-data').hide();
     }
   });
 });

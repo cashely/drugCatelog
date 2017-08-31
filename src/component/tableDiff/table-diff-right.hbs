@@ -1,17 +1,8 @@
 {{#each ydata}}
     <tr>
         <td title="{{codePro}}"><div>{{codePro}}</div></td>
-        <td class="icon-triangle table-diff-data-td-select">
-            <div class="value showValue">{{ypTypeSwitch ypType}}</div>
-            <div class="select">
-                <select  class="upSelect" data-name="ypType">
-                    <option value="0" {{isTrue ypType "0"}}>西药</option>
-                    <option value="1" {{isTrue ypType "1"}}>中成药</option>
-                    <option value="2" {{isTrue ypType "2"}}>中药饮片</option>
-                    <option value="3" {{isTrue ypType "3"}}>医院制剂</option>
-                    <option value="4" {{isTrue ypType "4"}}>卫生材料</option>
-                </select>
-            </div>
+        <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
+            {{{ypTypeSelect ypType}}}
         </td>
         <td title="{{proName}}"><div>{{proName}}</div></td>
         <td title="{{prepName}}"><div>{{prepName}}</div></td>
@@ -21,104 +12,35 @@
         <td title="{{pzwh}}"><div>{{pzwh}}</div></td>
         <td title="{{instruction}}"><div>{{isNull instruction}}</div></td>
         <td title="{{smsDate}}"><div>{{smsDate}}</div></td>
-        <td class="icon-triangle table-diff-data-td-select" title="{{flag4Switch flag4}}">
-            <div class="value showValue">{{flag4Switch flag4}}</div>
-            <div class="select">
-                <select  class="upSelect" data-name="flag4">
-                    <option value="0" {{isTrue flag4 "0"}}>否</option>
-                    <option value="1" {{isTrue flag4 "1"}}>国家</option>
-                    <option value="2" {{isTrue flag4 "2"}}>省基</option>
-                    <option value="3" {{isTrue flag4 "3"}}>地基</option>
-                </select>
-            </div>
+        <td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
+            {{{flag4Select flag4}}}
         </td>
-        <td class="icon-triangle table-diff-data-td-select" title="{{flag1Switch flag1}}">
-            <div class="value showValue">{{flag1Switch flag1}}</div>
-            <div class="select">
-                <select  class="upSelect" data-name="flag1">
-                    <option value="0" {{isTrue flag1 "0"}}>否</option>
-                    <option value="1" {{isTrue flag1 "1"}}>非限制使用级</option>
-                    <option value="2" {{isTrue flag1 "2"}}>限制使用级</option>
-                    <option value="3" {{isTrue flag1 "3"}}>特殊使用级</option>
-                </select>
-            </div>
+        <td class="icon-triangle table-diff-data-td-select" title="{{flag1Select flag1 0}}">
+            {{{flag1Select flag1}}}
         </td>
-        <td class="icon-triangle" title="{{ddd}}{{dddUnit}}"><div>{{ddd}}{{dddUnit}}</div></td>
-        <td class="icon-triangle table-diff-data-td-select" title="{{kjywTypeSwitch kjywType}}">
-            <div class="value showValue">{{kjywTypeSwitch kjywType}}</div>
-            <div class="select">
-                <select  class="upSelect" data-name="kjywType">
-                    <option value="0" {{isTrue kjywType "0"}}>无</option>
-                    <option value="1" {{isTrue kjywType "1"}}>四环素类</option>
-                    <option value="2" {{isTrue kjywType "2"}}>氯霉素类</option>
-                    <option value="3" {{isTrue kjywType "3"}}>广谱青霉素</option>
-                    <option value="4" {{isTrue kjywType "4"}}>对青霉素酶不稳定的青霉素类</option>
-                    <option value="5" {{isTrue kjywType "5"}}>对青霉素酶稳定的青霉素类</option>
-                    <option value="6" {{isTrue kjywType "6"}}>β-内酰胺酶抑制剂</option>
-                    <option value="7" {{isTrue kjywType "7"}}>青霉素类复方制剂（β-内酰胺酶抑制剂）</option>
-                    <option value="8" {{isTrue kjywType "8"}}>第一代头孢菌素类</option>
-                    <option value="9" {{isTrue kjywType "9"}}>第二代头孢菌素类</option>
-                    <option value="10" {{isTrue kjywType "10"}}>第三（四）代头孢菌素类</option>
-                    <option value="11" {{isTrue kjywType "11"}}>其他β内酰胺类</option>
-                    <option value="12" {{isTrue kjywType "12"}}>碳青霉烯类</option>
-                    <option value="13" {{isTrue kjywType "13"}}>磺胺类和甲氧苄啶</option>
-                    <option value="14" {{isTrue kjywType "14"}}>大环内酯类</option>
-                    <option value="15" {{isTrue kjywType "15"}}>林可酰胺类</option>
-                    <option value="16" {{isTrue kjywType "16"}}>氨基糖苷类</option>
-                    <option value="17" {{isTrue kjywType "17"}}>喹诺酮类</option>
-                    <option value="18" {{isTrue kjywType "18"}}>糖肽类</option>
-                    <option value="19" {{isTrue kjywType "19"}}>多粘菌素类</option>
-                    <option value="20" {{isTrue kjywType "20"}}>咪唑衍生物</option>
-                    <option value="21" {{isTrue kjywType "21"}}>硝基呋喃衍生物</option>
-                    <option value="22" {{isTrue kjywType "22"}}>其它抗菌药物</option>
-                    <option value="23" {{isTrue kjywType "23"}}>抗真菌药N</option>
-                </select>
-            </div>
+        <td class="icon-triangle table-diff-data-td-select" title="{{ddd}}{{dddUnit}}">
+            <div><input class="upInput" value="{{ddd}}{{dddUnit}}" data-name="ybbh"></div>
+        </td>
+        <td class="icon-triangle table-diff-data-td-select" title="{{kjywTypeSelect kjywType 0}}">
+            {{{kjywTypeSelect kjywType}}}
         </td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isCalcKjyw 'isCalcKjyw'}}}</div></td>
         <td class="icon-triangle adminRouteExclude" title="{{adminRouteExclude}}"><div>{{adminRouteExclude}}</div></td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isZcyzsj 'isZcyzsj'}}}</div></td>
         <td class="icon-triangle table-diff-data-td-select">
-            <div class="value showValue">{{pregnancyLevelSwitch pregnancyLevel}}</div>
-            <div class="select">
-                <select  class="upSelect" data-name="pregnancyLevel">
-                    <option value="0" {{isTrue pregnancyLevel "0"}}>无</option>
-                    <option value="1" {{isTrue pregnancyLevel "1"}}>A</option>
-                    <option value="2" {{isTrue pregnancyLevel "2"}}>B</option>
-                    <option value="3" {{isTrue pregnancyLevel "3"}}>C</option>
-                    <option value="4" {{isTrue pregnancyLevel "4"}}>D</option>
-                    <option value="5" {{isTrue pregnancyLevel "5"}}>X</option>
-                </select>
-            </div>
+            {{{pregnancyLevelSelect pregnancyLevel}}}
         </td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot bloodPro 'bloodPro'}}}</div></td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot tpzjs 'tpzjs'}}}</div></td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot energy 'energy'}}}</div></td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot yyyy 'yyyy'}}}</div></td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot flag5 'flag5'}}}</div></td>
-        <td class="icon-triangle table-diff-data-td-select" title="{{jmdf}}">
-            <div class="value showValue">{{jmdfSwitch jmdf}}</div>
-            <div class="select">
-                <select  class="upSelect" data-name="jmdf">
-                    <option value="0" {{isTrue jmdf "0"}}>否</option>
-                    <option value="1" {{isTrue jmdf "1"}}>麻</option>
-                    <option value="2" {{isTrue jmdf "2"}}>毒</option>
-                    <option value="3" {{isTrue jmdf "3"}}>精二</option>
-                    <option value="4" {{isTrue jmdf "4"}}>精一</option>
-                </select>
-            </div>
+        <td class="icon-triangle table-diff-data-td-select" title="{{jmdfSelect jmdf 0}}">
+            {{{jmdfSelect jmdf}}}
         </td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot jkyw 'jkyw'}}}</div></td>
-        <td class="icon-triangle table-diff-data-td-select" title="{{yblbSwitch yblb}}">
-            <div class="value showValue">{{yblbSwitch yblb}}</div>
-            <div class="select">
-                <select  class="upSelect" data-name="yblb">
-                    <option value="0" {{isTrue yblb "0"}}>否</option>
-                    <option value="1" {{isTrue yblb "1"}}>国家</option>
-                    <option value="2" {{isTrue yblb "2"}}>省</option>
-                    <option value="3" {{isTrue yblb "3"}}>地市</option>
-                </select>
-            </div>
+        <td class="icon-triangle table-diff-data-td-select" title="{{yblbSelect yblb 0}}">
+            {{{yblbSelect yblb}}}
         </td>
         <td class="icon-triangle table-diff-data-td-select" title="{{ybbh}}">
             <div><input class="upInput" value="{{ybbh}}" data-name="ybbh"></div>
