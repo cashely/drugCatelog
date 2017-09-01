@@ -392,7 +392,7 @@ module.exports = {
   },
   diffData: {
     tLeftHead: ['医院药品ID', '药品名称', '规格厂家', '转换比', '门诊/住院单位', '是否停用', '修订时间'],
-    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格', '转换比', '企业简称', '批准文号/注册证号', '说明书', '说明书版本', '基药', '抗菌药物', 'DDD值(mg)', '抗菌药物分类', '是否计算强度', '给药途径(不计算强度)', '中成药注射剂', '妊娠用药', '血液制品', '糖皮质激素', '能量用药', '营养用药', 'PPI（质子泵抑制剂)', '精麻毒放', '重点药物监控', '医保', '医保编码', 'YPID', '品种代码', '人社分类', '药理分类']
+    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格', '转换比', '企业简称', '批准文号/注册证号', '说明书', '说明书版本', '基药', '抗菌药物', 'DDD值(mg)', '抗菌药物分类', '是否计算强度', '给药途径(不计算强度)', '中成药注射剂', '妊娠用药', '血液制品', '糖皮质激素', '能量用药', '营养用药', 'PPI（质子泵抑制剂)', '精麻毒放', '辅助用药', '医保', '医保编码', 'YPID', '品种代码', '人社分类', '药理分类']
   },
   thanData: {
     thead: ['YPID', '品种代码', '药交ID', '药品编码', '药品类型', '药品名称', '商品名', '剂型', '规格', '生产企业', '批准文号/注册证号', '操作'],
@@ -757,6 +757,11 @@ function loadChemistryTableFn(params, type) {
       }
       $parent.find('.table-diff .loading-wrap').hide();
       params.data.diffData.ydata = res.content.rows;
+      if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult) {
+        $('.table-diff-header .scroll-loading').show();
+      } else {
+        $('.table-diff-header .scroll-loading').hide();
+      }
       $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
       tableDiffScrollFn($parent, params);
     }
@@ -780,7 +785,6 @@ function tableDiffScrollFn($parent, params) {
     if (trHeight * trLength <= _t.scrollTop() + _t.height()) {
       if (loading == false) {
         loading = true;
-        console.log(params.firstResult, params.maxResult, (params.firstResult + 1) * params.maxResult);
         params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
         params.loadData.maxResult = params.maxResult;
         ajaxFn({
@@ -803,12 +807,22 @@ function tableDiffScrollFn($parent, params) {
       }
     }
   });
+  //$parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
+  //  $parent.find('.table-diff-right .table-diff-data').scrollTop($(this)[0].scrollTop);
+  //})
 }
 
 function showDiffBarFn(params) {
   var $parent = $(params.parent);
   $(document).on('mouseover', params.parent + ' .table-diff-left .table-diff-data tr', function (e) {
     var _tr = $(this);
+    var _index = _tr.index();
+    var trRigth = $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index);
+    if (trRigth.find('.codePro > div').text() == '') {
+      $('.table-diff-bar .cancel-than').hide().prev().hide();
+    } else {
+      $('.table-diff-bar .cancel-than').show().prev().show();
+    }
     $('.table-diff-bar').css({
       display: 'block',
       top: _tr.position().top + _tr.height() - 1,
@@ -956,8 +970,11 @@ function addThan(params, loadObj) {
 //查找标准比对数据
 function findThanFn(params) {
   var $parent = $(params.parent);
-  params.findThanData.firstResult = 0;
-  params.findThanData.maxResult = 16;
+  params.firstResultThan = 0;
+  params.maxResultThan = 16;
+  params.findThanData.firstResult = params.firstResultThan;
+  params.findThanData.maxResult = params.maxResultThan;
+  console.log(params.findThanData, 'findThanFn');
   $(params.findThanDataName).each(function (i, e) {
     params.findThanData[e] = $parent.find('.' + e).val();
   });
@@ -966,6 +983,11 @@ function findThanFn(params) {
     url: params.url,
     data: params.findThanData,
     callback: function (res) {
+      if (res.content.length >= params.findThanData.maxResult) {
+        $(params.parent).find('.standard-than .scroll-loading').show();
+      } else {
+        $(params.parent).find('.standard-than .scroll-loading').hide();
+      }
       var tbodyData = {};
       $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
@@ -1012,6 +1034,11 @@ function showThan(params) {
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id', singleDataId);
       $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(params.data.thanData));
+      if ($(params.parent).find('.standard-than .than-tbody tr').length >= params.findThanData.maxResult) {
+        $(params.parent).find('.standard-than .scroll-loading').show();
+      } else {
+        $(params.parent).find('.standard-than .scroll-loading').hide();
+      }
       if (!!params.homeProdName) {
         //西药
         $parent.find('.search-than .' + params.homeProdName).val(_prodName);
@@ -1029,11 +1056,12 @@ function showThan(params) {
 }
 //滚动加载19位标准数据
 function thanScrollFn(params, $this) {
-  params.findThanData.firstResult = (params.firstResultThan + 1) * params.maxResultThan;
-  params.findThanData.maxResult = params.maxResultThan;
   if ($this.children('table').height() <= $this.scrollTop() + $this.height() && $this.children('table').height() > 0) {
     if (loading == false) {
       loading = true;
+      params.findThanData.firstResult = (params.firstResultThan + 1) * params.maxResultThan;
+      params.findThanData.maxResult = params.maxResultThan;
+      console.log(params.firstResultThan);
       ajaxFn({
         url: params.url,
         data: params.findThanData,
@@ -1886,6 +1914,11 @@ function addDataFn(drugName) {
     callback: function (res) {
       data.addData.tbody = res.content;
       $('.add-than-tbody .table').html(tbodyTel(data.addData));
+      if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
+        $('.add-than-tbody .scroll-loading').show();
+      } else {
+        $('.add-than-tbody .scroll-loading').hide();
+      }
       $('.add-data .goback').on('click', function () {
         $('.content .add-data').hide();
         $('.content  .content-box-main').show();
@@ -1910,6 +1943,11 @@ function addDataFn(drugName) {
               $('.add-than-table .loading-wrap').hide();
               data.addData.tbody = res.content;
               $('.add-than-tbody .table').html(tbodyTel(data.addData));
+              if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
+                $('.add-than-tbody .scroll-loading').show();
+              } else {
+                $('.add-than-tbody .scroll-loading').hide();
+              }
               loading = false;
             }
           });
@@ -1926,7 +1964,6 @@ function addDataFn(drugName) {
               url: 'product/listProduct',
               data: listProductData,
               callback: function (res) {
-                console.log($('.add-than-tbody tr').length, res.total);
                 if ($('.add-than-tbody tr').length < res.total) {
                   firstResult = firstResult + 1;
                   var trData = {};
@@ -1944,70 +1981,6 @@ function addDataFn(drugName) {
     }
   });
 }
-/*function addThanInfo() {
-  var $tr = $(this).parents('tr');
-  var data = {
-    default: {
-      id: $tr.data('id'),
-      name: $tr.find('.name').text(),
-      spec: $tr.find('.spec').text(),
-      manufacturerName: $tr.find('.manufacturerName').text(),
-      pzwh: $tr.find('.pzwh').text()
-    }
-  };
-  ajaxFn({
-    url: 'dataDictionary/getDataDictionaryListByCode',
-    data: {
-      code: 1
-    },
-    callback: function (res) {
-      data.minUseUnit = res.content;
-      ajaxFn({
-        url: 'dataDictionary/getDataDictionaryListByCode',
-        data: {
-          code: 2
-        },
-        callback: function (res) {
-          data.packUnit = res.content;
-          $('.popup').html(addDataPopupTel(data));
-          $('.popup').show();
-          $('.popup-add-info .popup-close').on('click', function () {
-            $('.popup-add-info').hide()
-          });
-          $('.popup-add-info .saveOrUpdate').on('click', function () {
-            var  drugId = $('.than-content').attr('data-id');
-            ajaxFn({
-              url: 'mcdProduct30Ues/saveOrUpdate',
-              data: {
-                productId: $('.popup-add-info').data('id'),
-                minUseUnit: $('.popup-add-info .minUseUnit').val(),
-                packUnit: $('.popup-add-info .packUnit').val(),
-                convert: $('.popup-add-info .convert').val()
-              },
-              callback: function (res) {
-                console.log(res.content);
-                ajaxFn({
-                  url: 'mcdProduct30/saveMatch',
-                  data: {
-                    drugId: drugId,
-                    proId: res.content.proId
-                  },
-                  callback: function (res) {
-                    $('.popup').hide();
-                    $('.content .add-data').hide();
-                    $('.content  .content-box-main').show();
-                    var _index = $(parent).find('.table-diff-data-content [data-id='+drugId+']').index();
-                    $(parent).find('.table-diff-right .table-diff-data tr').eq(_index).html( tableDiffRightTr(res.content));
-                  }
-                })
-              }
-            })
-          });
-        }
-      });
-    }
-  });
-}*/
 module.exports = {
   loadAddData: function (drugName) {
     addDataFn(drugName);
@@ -2023,7 +1996,7 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<td title=\""
+  return "<td class=\"codePro\" title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
@@ -3742,7 +3715,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"7":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "                                <tr>\r\n                                    <td title=\""
+  return "                                <tr>\r\n                                    <td class=\"codePro\" title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
@@ -3778,7 +3751,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#slicesStandardData\" class=\"showThan\">比对</a>|\r\n                    <!--<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|-->\r\n                    <a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                             <th style=\"width: 40px\"><div style=\"width: 40px\">序号</div></th>\r\n"
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#slicesStandardData\" class=\"showThan\">比对</a><span>|</span>\r\n                    <!--<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span>-->\r\n                    <a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                             <th style=\"width: 40px\"><div style=\"width: 40px\">序号</div></th>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -3850,7 +3823,7 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "    <tr>\r\n        <td title=\""
+  return "    <tr>\r\n        <td class=\"codePro\" title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
@@ -3924,7 +3897,7 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<td title=\""
+  return "<td class=\"codePro\" title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
@@ -4148,7 +4121,8 @@ var parent = '.' + data.name;
 var firstResult = 0,
     maxResult = 16,
     firstResultThan = 0,
-    maxResultThan = 16;loading = false;
+    maxResultThan = 16;
+var loading = false;
 var findThanData = { firstResult: 0, maxResult: 16 };
 var loadData;
 var loadDataObj = {
@@ -4268,7 +4242,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"7":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "                                    <tr>\r\n                                        <td title=\""
+  return "                                    <tr>\r\n                                        <td class=\"codePro\" title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
@@ -4376,7 +4350,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#standardData\" class=\"showThan\">比对</a>|<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a>|<a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                            <th style=\"width: 40px\"><div style=\"width: 40px\">序号</div></th>\r\n"
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#standardData\" class=\"showThan\">比对</a><span>|</span><a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span><a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                            <th style=\"width: 40px\"><div style=\"width: 40px\">序号</div></th>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -4452,7 +4426,7 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "    <tr>\r\n        <td title=\""
+  return "    <tr>\r\n        <td class=\"codePro\" title=\""
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
@@ -4603,9 +4577,17 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
     + "</li>\r\n        <li>最小包装单位："
     + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
-    + "</li>\r\n        <li>中成药注射剂："
-    + alias2(alias1((depth0 != null ? depth0.isZcyzsj : depth0), depth0))
-    + "</li>\r\n    </ul>\r\n    <ul class=\"content-list\">\r\n        <li class=\"input-group\">\r\n            <span class=\"flag4\">基药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + "</li>\r\n    </ul>\r\n    <ul class=\"content-list\">\r\n        <li class=\"input-group\">\r\n            <span class=\"ypType\">药品类型:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + ">西药</option>\r\n                <option value=\"1\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">中成药</option>\r\n                <option value=\"2\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + ">中药饮片</option>\r\n                <option value=\"3\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">医院制剂</option>\r\n                <option value=\"4\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
+    + ">卫生材料</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"flag4\">基药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
@@ -4615,9 +4597,13 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag4 : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
     + ">地基</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"flag1\">抗菌药物:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
-    + ">否</option>\r\n                <option value=\"1\" "
+    + ">无</option>\r\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span data-name=\"ddd\">DDD值(mg):</span>\r\n            <input type=\"text\" class=\"input upInputFn\" value=\""
+    + ">非限制使用级</option>\r\n                <option value=\"2\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + ">限制使用级</option>\r\n                <option value=\"3\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">特殊使用级</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span data-name=\"ddd\">DDD值(mg):</span>\r\n            <input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
     + "\">\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"kjyw\">抗菌药物分类:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
@@ -4667,34 +4653,20 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"22",{"name":"isTrue","hash":{},"data":data}))
     + ">其它抗菌药物</option>\r\n                <option value=\"23\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"23",{"name":"isTrue","hash":{},"data":data}))
-    + ">抗真菌药N</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"ypType\">药品类型:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
-    + ">西药</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">中成药</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
-    + ">中药饮片</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
-    + ">医院制剂</option>\r\n                <option value=\"4\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.ypType : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
-    + ">卫生材料</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yblb\">医保:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + ">抗真菌药N</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isCalcKjyw\">是否计算强度:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">国家</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
-    + ">省</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
-    + ">地市</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"ybbh\">医保编码:</span><input type=\"text\" class=\"input upInputFn\" value=\""
-    + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
-    + "\"></li>\r\n        <li class=\"input-group\">\r\n            <span class=\"jkyw\">重点监控药物:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span data-name=\"adminRouteExclude\">给药途径不计算强度:</span>\r\n            <div class=\"input icon-triangle adminRouteExclude\">"
+    + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
+    + "</div>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isZcyzsj\">中成药注射剂:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yyyy\">营养用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"pregnancyLevel\">妊娠用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"bloodPro\">血液制品:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
@@ -4707,6 +4679,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.energy : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.energy : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yyyy\">营养用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + ">否</option>\r\n                <option value=\"1\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yyyy : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"flag5\">PPI（质子泵抑制剂）:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag5 : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
@@ -4721,25 +4697,21 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
     + ">精二</option>\r\n                <option value=\"4\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jmdf : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
-    + ">精一</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n           <span class=\"pregnancyLevel\">妊娠用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + ">精一</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"jkyw\">辅助用药:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"kjywType\"> 抗菌药物分级:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
-    + ">无</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">非限制使用级</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
-    + ">限制使用级</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
-    + ">特殊使用级</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"adminRouteExclude\">给药途径不计算强度:</span><div class=\"input icon-triangle adminRouteExclude\">"
-    + alias2(alias1((depth0 != null ? depth0.adminRouteExclude : depth0), depth0))
-    + "</div></li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isCalcKjyw\">是否计算强度:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.jkyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"yblb\">医保:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"ypid\">YPID:</span><input type=\"text\" class=\"input upInputFn\" value=\""
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + ">国家</option>\r\n                <option value=\"2\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + ">省</option>\r\n                <option value=\"3\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.yblb : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">地市</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\"><span data-name=\"ybbh\">医保编码:</span><input type=\"text\" class=\"input upInputFn\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.ybbh : depth0), depth0))
+    + "\"></li>\r\n        <li class=\"input-group\"><span data-name=\"ypid\">YPID:</span><input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ypid : depth0), depth0))
     + "\"></li>\r\n        <li class=\"input-group\"><span data-name=\"pzCode\">品种代码:</span><input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.pzCode : depth0), depth0))

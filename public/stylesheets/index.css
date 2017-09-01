@@ -625,6 +625,7 @@ a {
     width: 25px; }
 
 .scroll-loading {
+  display: none;
   height: 30px;
   line-height: 30px;
   text-align: center; }
