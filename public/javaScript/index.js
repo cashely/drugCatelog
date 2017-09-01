@@ -767,7 +767,39 @@ function loadChemistryTableFn(params, type) {
     }
   });
 }
-
+function tableDiffRequest(params, _t, trHeight, trLength) {
+  console.log(_t);
+  if (_t.scrollLeft() != tableRightLeft) {
+    tableRightLeft = _t.scrollLeft();
+    console.log('横向滚动');
+    return;
+  }
+  console.log('竖向滚动');
+  if (trHeight * trLength <= _t.scrollTop() + _t.height()) {
+    if (loading == false) {
+      loading = true;
+      params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
+      params.loadData.maxResult = params.maxResult;
+      ajaxFn({
+        url: params.url,
+        data: params.loadData,
+        callback: function (res) {
+          if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total) {
+            params.firstResult = params.firstResult + 1;
+            var data = {};
+            data.ydata = res.content.rows;
+            data.tableNum = params.loadData.firstResult;
+            $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
+            $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+          } else {
+            $('.table-diff-header .scroll-loading').hide();
+          }
+          loading = false;
+        }
+      });
+    }
+  }
+}
 //比对表格滚动事件
 function tableDiffScrollFn($parent, params) {
   $parent.find('.table-diff-right .table-diff-data').on('scroll', function (e) {
@@ -776,40 +808,14 @@ function tableDiffScrollFn($parent, params) {
     var _t = $(this),
         trHeight = $(this).find('tr:first').height(),
         trLength = $(this).find('tr').length;
-    if (_t.scrollLeft() != tableRightLeft) {
-      tableRightLeft = _t.scrollLeft();
-      console.log('横向滚动');
-      return;
-    }
-    console.log('竖向滚动');
-    if (trHeight * trLength <= _t.scrollTop() + _t.height()) {
-      if (loading == false) {
-        loading = true;
-        params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
-        params.loadData.maxResult = params.maxResult;
-        ajaxFn({
-          url: params.url,
-          data: params.loadData,
-          callback: function (res) {
-            if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total) {
-              params.firstResult = params.firstResult + 1;
-              var data = {};
-              data.ydata = res.content.rows;
-              data.tableNum = params.loadData.firstResult;
-              $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
-              $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-            } else {
-              $('.table-diff-header .scroll-loading').hide();
-            }
-            loading = false;
-          }
-        });
-      }
-    }
+    tableDiffRequest(params, _t, trHeight, trLength);
   });
-  //$parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
-  //  $parent.find('.table-diff-right .table-diff-data').scrollTop($(this)[0].scrollTop);
-  //})
+  $parent.find('.table-diff-left .table-diff-data').on('scroll', function (e) {
+    var _t = $(this),
+        trHeight = $(this).find('tr:first').height(),
+        trLength = $(this).find('tr').length;
+    tableDiffRequest(params, _t, trHeight, trLength);
+  });
 }
 
 function showDiffBarFn(params) {
@@ -1086,6 +1092,7 @@ function hideDetail(e) {
   $('.table-diff-data tr').removeClass('active');
   $('.table-diff-right-all').addClass('active');
   $('.table-diff-right-single').removeClass('active');
+  $('.table-diff-right .table-diff-data').scrollTop($('.table-diff-left .table-diff-data')[0].scrollTop);
 }
 
 //更新转换比
@@ -4667,7 +4674,15 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"bloodPro\">血液制品:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + ">A</option>\r\n                <option value=\"2\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + ">B</option>\r\n                <option value=\"3\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">C</option>\r\n                <option value=\"4\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
+    + ">D</option>\r\n                <option value=\"5\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"5",{"name":"isTrue","hash":{},"data":data}))
+    + ">X</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"bloodPro\">血液制品:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
