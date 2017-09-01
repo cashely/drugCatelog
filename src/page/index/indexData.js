@@ -1,6 +1,6 @@
 module.exports = {
   name:'chemistryMain',
-  http: 'http://192.168.1.233:8083/hpms/api/',
+  http: '/hpms/api/',
   searchDate: {
     input:[
       {text:'医院药品ID:',inputClass:'drug-id'},
