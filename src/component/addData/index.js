@@ -34,7 +34,6 @@ function addDataFn(drugName){
         $('.content  .content-box-main').show();
         $('.popup').hide();
       });
-      $(document).on('click','.add-than-info', addThanInfo);
       $('.find-add-than').on('click', function () {
         $('.add-than-table .loading-wrap').show();
         firstResult=0 ;maxResult=16;
@@ -83,7 +82,7 @@ function addDataFn(drugName){
     }
   });
 }
-function addThanInfo() {
+/*function addThanInfo() {
   var $tr = $(this).parents('tr');
   var data = {
     default: {
@@ -136,7 +135,6 @@ function addThanInfo() {
                     $('.content .add-data').hide();
                     $('.content  .content-box-main').show();
                     var _index = $(parent).find('.table-diff-data-content [data-id='+drugId+']').index();
-                    console.log(_index)
                     $(parent).find('.table-diff-right .table-diff-data tr').eq(_index).html( tableDiffRightTr(res.content));
                   }
                 })
@@ -147,8 +145,7 @@ function addThanInfo() {
       });
     }
   });
-}
-
+}*/
 module.exports = {
   loadAddData:function(drugName){
     addDataFn(drugName);

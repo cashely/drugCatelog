@@ -20,6 +20,7 @@ var findThanData ={firstResult:0,maxResult:16};
 module.exports = function($this){
   var content = '<div class="content-box active '+data.name +'"><div class="search-box"></div><div class="table-diff"></div><div class="standard-than" id="slicesStandardData"></div></div>';
   $('.content').append(content);
+
   var loadData = {
     parent: parent,
     url: 'zyyp/listZyypHisProduct',
@@ -35,6 +36,7 @@ module.exports = function($this){
     cancelThanData: 'drugId',
     tableDiffRightTr: tableDiffRightTr,
     downloadUrl:'mcdProduct30/downHisProductZyyp',
+    ypTypeValue : ['2'],
     fn:function(){
       $(parent).find(".search-box").html(searchTel(data.searchDate));
     }

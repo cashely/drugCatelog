@@ -1,18 +1,20 @@
-<tr>
-    <td title="{{codePro}}"><div>{{codePro}}</div></td>
-    <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
-        {{{ypTypeSelect ypType}}}
-    </td>
-    <td title="{{pzName}}"><div>{{pzName}}</div></td>
-    <td title="{{proName}}"><div>{{proName}}</div></td>
-    <td title="{{pxName}}"><div>{{pxName}}</div></td>
-    <td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
-        {{{flag4Select flag4}}}
-    </td>
-    <td class="icon-triangle table-diff-data-td-select" title="{{yblbSelect yblb 0}}">
-        {{{yblbSelect yblb}}}
-    </td>
-    <td class="icon-triangle table-diff-data-td-select" title="{{ybbh}}">
-        <div><input class="upInput" value="{{ybbh}}" data-name="ybbh"></div>
-    </td>
-</tr>
+{{#each ydata}}
+    <tr>
+        <td title="{{codePro}}"><div>{{codePro}}</div></td>
+        <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
+            {{{ypTypeSelect ypType}}}
+        </td>
+        <td title="{{pzName}}"><div>{{pzName}}</div></td>
+        <td title="{{proName}}"><div>{{proName}}</div></td>
+        <td title="{{pxName}}"><div>{{pxName}}</div></td>
+        <td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
+            {{{flag4Select flag4}}}
+        </td>
+        <td class="icon-triangle table-diff-data-td-select" title="{{yblbSelect yblb 0}}">
+            {{{yblbSelect yblb}}}
+        </td>
+        <td class="icon-triangle table-diff-data-td-select" title="{{ybbh}}">
+            <div><input class="upInput" value="{{ybbh}}" data-name="ybbh"></div>
+        </td>
+    </tr>
+{{/each}}

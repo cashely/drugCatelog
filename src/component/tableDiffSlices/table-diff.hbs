@@ -11,6 +11,7 @@
                 <div class="table-diff-header">
                     <table width="100%" cellspacing="0" border="0">
                         <thead>
+                             <th style="width: 40px"><div style="width: 40px">序号</div></th>
                             {{#each tLeftHead}}
                                 <th><div>{{this}}</div></th>
                             {{/each}}
@@ -23,11 +24,12 @@
                             <tbody>
                             {{#each ydata}}
                                 <tr data-id={{id}} data-name="{{drugNameFormat}}">
+                                    <td class="table-num"><div>{{@index}}</div></td>
                                     <td  title="{{id}}"><div>{{id}}</div></td>
                                     <td  title="{{drugName}}"><div>{{drugName}}</div></td>
                                     <td title="{{spec}}{{manufacturerName}}"><div>{{spec}}{{manufacturerName}}</div></td>
                                     <td title="{{convertRatio}}">
-                                        <div><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div>
+                                        <div><input class="upInput" value="{{convertRatio}}" data-name="convertRatio"></div>
                                     </td>
                                     <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}" title="{{unitName}}"><div>{{unitName}}</div></td>
                                     <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isStop 'isStop'}}}</div></td>

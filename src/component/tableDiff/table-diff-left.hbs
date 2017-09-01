@@ -1,5 +1,6 @@
 {{#each ydata}}
     <tr data-id="{{id}}" data-name="{{drugNameFormat}}"  data-fncName="{{manufacturerName}}">
+        <td class="table-num"><div>{{add @index ../tableNum}}</div></td>
         <td class="table-diff-drugId" title="{{id}}"><div>{{id}}</div></td>
         <td title="{{drugName}}"><div>{{drugName}}</div></td>
         <td title="{{specName}} {{manufacturerName}}"><div>{{specName}} {{manufacturerName}}</div></td>

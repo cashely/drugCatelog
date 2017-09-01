@@ -1,9 +1,12 @@
 {{#each ydata}}
     <tr data-id={{id}} data-name="{{drugNameFormat}}">
+        <td class="table-num"><div>{{add @index ../tableNum}}</div></td>
         <td  title="{{id}}"><div>{{id}}</div></td>
         <td  title="{{drugName}}"><div>{{drugName}}</div></td>
         <td title="{{spec}}{{manufacturerName}}"><div>{{spec}}{{manufacturerName}}</div></td>
-        <td class="convertRatio"><div><input value={{convertRatio}}></div></td>
+        <td title="{{convertRatio}}">
+            <div><input class="upInput" value="{{convertRatio}}" data-name="convertRatio"></div>
+        </td>
         <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}" title="{{unitName}}"><div>{{unitName}}</div></td>
         <td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isStop 'isStop'}}}</div></td>
         <td title="{{timeFn createDate}}"><div>{{timeFn createDate}}</div></td>

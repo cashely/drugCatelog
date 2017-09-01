@@ -13,7 +13,7 @@
         <li>说明书版本：{{smsDate}}</li>
         <li>中成药注射剂：{{isZcyzsj}}</li>
         <li>企业简称：{{facAbbrF}}</li>
-        <li>批准文号/注册证号：{{pzwh}}/{{prodZczhF}}</li>
+        <li>批准文号/注册证号：{{pzwh}}{{switchFn prodZczhF "/"}}{{prodZczhF}}</li>
     </ul>
     <ul class="content-list">
         <li class="input-group">
@@ -124,7 +124,7 @@
             抗菌药物分类:
             <input type="text" class="input" value="{{kjyw}}">
         </li>
-        <li class="input-group"><span data-name="ddd">DDD值:</span><input type="text" class="input upInputFn" value="{{ddd}}"></li>
+        <li class="input-group"><span data-name="ddd">DDD值(mg):</span><input type="text" class="input upInputFn" value="{{ddd}}"></li>
         <li class="input-group"><span data-name="adminRouteExclude">给药途径不计算强度:</span><div class="input icon-triangle adminRouteExclude">{{adminRouteExclude}}</div></li>
         <li class="input-group">
             <span class="isCalcKjyw">是否计算强度:</span>
