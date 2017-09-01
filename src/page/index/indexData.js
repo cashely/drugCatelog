@@ -33,7 +33,7 @@ module.exports = {
   },
   tabsData:{
     content: [
-      {text:'西药／中成药',id:"chemistry",active:"active"},
+      {text:'西药／中成药',id:"chemistryMain",active:"active"},
       {text:'中药饮片',id:"slices"},
       {text:'医院制剂',id:"potion"}
     ]

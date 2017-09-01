@@ -16,7 +16,7 @@ $(function(){
     switch ($(this).index()){
       case 1 :
         if($('.content').children('.'+slicesData.name).length <= 0){
-          slices($(this));
+          slices();
           return;
         }
         $_content.eq($(this).index()).addClass('active');

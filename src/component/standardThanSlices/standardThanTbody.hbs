@@ -1,13 +1,11 @@
-<table class="table">
-    {{#each tbody}}
-        <tr data-id={{id}}>
-            <td title="{{code}}"><div class="table-text">{{code}}</div></td>
-            <td title="{{pzName}}"><div class="table-text">{{pzName}}</div></td>
-            <td title="{{name}}"><div class="table-text">{{name}}</div></td>
-            <td title="{{pxName}}"><div class="table-text">{{pxName}}</div></td>
-            <td title="{{isOrNo jbyw}}"><div class="table-text">{{isOrNo jbyw}}</div></td>
-            <td title="{{isOrNo yblb}}"><div class="table-text">{{isOrNo yblb}}</div></td>
-            <td><div class="table-text select-than">选取</div></td>
-        </tr>
-    {{/each}}
-</table>
+{{#each tbody}}
+    <tr data-id={{id}}>
+        <td title="{{code}}"><div class="table-text">{{code}}</div></td>
+        <td title="{{pzName}}"><div class="table-text">{{pzName}}</div></td>
+        <td title="{{name}}"><div class="table-text">{{name}}</div></td>
+        <td title="{{pxName}}"><div class="table-text">{{pxName}}</div></td>
+        <td title="{{isOrNo jbyw}}"><div class="table-text">{{isOrNo jbyw}}</div></td>
+        <td title="{{isOrNo yblb}}"><div class="table-text">{{isOrNo yblb}}</div></td>
+        <td><div class="table-text select-than">选取</div></td>
+    </tr>
+{{/each}}

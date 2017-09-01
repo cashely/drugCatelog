@@ -28,7 +28,7 @@ function addDataFn(drugName){
     data:listProductData,
     callback: function (res) {
       data.addData.tbody = res.content;
-      $('.add-than-tbody').html(tbodyTel(data.addData));
+      $('.add-than-tbody .table').html(tbodyTel(data.addData));
       $('.add-data .goback').on('click', function () {
         $('.content .add-data').hide();
         $('.content  .content-box-main').show();
@@ -52,7 +52,7 @@ function addDataFn(drugName){
             callback: function (res) {
               $('.add-than-table .loading-wrap').hide();
               data.addData.tbody = res.content;
-              $('.add-than-tbody').html(tbodyTel(data.addData));
+              $('.add-than-tbody .table').html(tbodyTel(data.addData));
               loading = false;
             }
           });
@@ -69,10 +69,15 @@ function addDataFn(drugName){
               url:'product/listProduct',
               data:listProductData,
               callback:function(res){
-                firstResult = firstResult + 1;
-                var trData = {};
-                trData.tbody = res.content;
-                $('.add-than-tbody tbody').append(tr(trData));
+                console.log($('.add-than-tbody tr').length , res.total);
+                if($('.add-than-tbody tr').length < res.total){
+                  firstResult = firstResult + 1;
+                  var trData = {};
+                  trData.tbody = res.content;
+                  $('.add-than-tbody .table').append(tr(trData));
+                }else{
+                  $('.add-than-tbody .scroll-loading').hide();
+                }
                 loading = false;
               }
             });

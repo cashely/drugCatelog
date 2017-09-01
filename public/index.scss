@@ -369,11 +369,10 @@ a{
     .popup-company{
         width: 320px;
         position: absolute;
-        top: 50%;
+        top: 250px;
         left: 50%;
         z-index: 99;
         margin-left: -161px;
-        margin-top: -122px;
         background: #fff;
         border: 1px solid #FFFFFF;
         box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
@@ -472,6 +471,28 @@ a{
             margin: 10px;
         }
     }
+    //取消比对
+    .popup-cancel-than{
+        width: 250px;
+        position: absolute;
+        top: 250px;
+        left: 50%;
+        z-index: 99;
+        margin-left: -125px;
+        background: #fff;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+        .btn-group{
+            margin: 20px 0;
+            text-align: center;
+            .cancel-btn{
+                background: #BCBCBC;
+            }
+            .cancel-than-btn{
+                margin-left: 30px;
+            }
+        }
+    }
 }
 //药品数据
 .table-diff-data{
@@ -539,6 +560,12 @@ a{
     }
     .table-diff-header{
         //background-color: #2d8cc0;
+        .scroll-loading{
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            z-index: -1;
+        }
     }
 
     .table-diff{
@@ -600,7 +627,8 @@ a{
             }
         }
         .table-diff-data-content{
-            padding-bottom: 20px;
+            //padding-bottom: 20px;
+            padding-bottom: 50px;
             .table-num{
                 width: 40px;
                 div{
@@ -696,6 +724,11 @@ a{
             &.active{
                 display: block;
             }
+            .table-diff-data{
+                table{
+                    margin-bottom: 30px;
+                }
+            }
         }
         .table-diff-header{
             position: absolute;
@@ -776,6 +809,12 @@ a{
     }
 }
 
+//滚动加载
+.scroll-loading{
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
 //保存成功
 .prompt{
     display: none;
