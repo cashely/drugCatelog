@@ -28,7 +28,8 @@ var loadDataObj={
   cancelUrl: 'mcdProduct30/delMatch',
   cancelThanData:'hptid',
   tableDiffRightTr: tableDiffRightTr,
-  downloadUrl:'mcdProduct30/downHisProduct'
+  downloadUrl:'mcdProduct30/downHisProduct',
+  ypTypeValue : ['0','1']
 };
 
 $(function(){
@@ -40,7 +41,7 @@ $(function(){
     dataName: 'drugId',
     tableDetails:tableDetails,
     updateValueUrl: 'mcdProduct30/updateHisProductByParmas'
-  })
+  },loadDataObj);
   //显示标准数据
   Fn.showThan({
     parent: parent,

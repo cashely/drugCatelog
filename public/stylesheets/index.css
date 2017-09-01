@@ -100,7 +100,8 @@ a {
   .content .input-group {
     display: inline-block;
     white-space: nowrap;
-    float: left; }
+    float: left;
+    margin-bottom: 10px; }
     .content .input-group .input {
       display: inline-block;
       width: 108px;
@@ -154,7 +155,7 @@ a {
       .content .search-box .search-top .search-top-rt .create-btn {
         margin-right: 10px; }
   .content .search-box .search-data {
-    margin-top: 18px;
+    margin-top: 10px;
     line-height: 16px;
     overflow: hidden; }
     .content .search-box .search-data .color-blue {
@@ -190,7 +191,7 @@ a {
         .content .standard-than .title .toggle .icon-arrow-down {
           background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAABGdBTUEAALGPC/xhBQAAAJRJREFUCB1j1O09eJSBiSn2cqHtPQYsQLf/sBLDv3+LmRgZGOsY/v7brDf9qBi6OrAYUA6khulSsd1eoOqm/1//bHGYepUHphjEBokxMjE2g9QwwiT0eg/k/Wdg9GHj4fYGif368nUr43+GrZdK7CeC+HCFIA5QcRuQUgAK///PyPDocpF9JUgcKwAqnq3Xe3AOuiQAW8w5UkDrKnkAAAAASUVORK5CYII=) center center no-repeat; }
     .content .standard-than .search-than {
-      padding: 10px 12px 10px;
+      padding: 10px 12px 0px;
       overflow: hidden; }
     .content .standard-than .than-table {
       position: relative; }
@@ -451,12 +452,12 @@ a {
     padding-top: 28px;
     position: relative;
     z-index: 9;
-    width: 637px; }
+    width: 687px; }
     .table-diff .table-diff-left td > div, .table-diff .table-diff-left th > div {
       width: 80px; }
     .table-diff .table-diff-left .table-diff-header {
       position: absolute;
-      width: 637px;
+      width: 687px;
       top: 0;
       left: 0;
       z-index: 2; }
@@ -468,10 +469,15 @@ a {
         overflow-y: auto; }
     .table-diff .table-diff-left .table-diff-data-content {
       padding-bottom: 20px; }
+      .table-diff .table-diff-left .table-diff-data-content .table-num {
+        width: 40px; }
+        .table-diff .table-diff-left .table-diff-data-content .table-num div {
+          width: 40px;
+          text-align: center; }
   .table-diff .table-diff-right {
     position: relative;
     padding-top: 28px;
-    margin-left: 637px; }
+    margin-left: 687px; }
     .table-diff .table-diff-right .table-diff-right-single {
       display: none; }
       .table-diff .table-diff-right .table-diff-right-single.active {
