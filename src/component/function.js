@@ -3,6 +3,7 @@ var http = require('./../page/index/indexData').http;
 var data =  require('./../page/index/indexData');//化学药数据
 var unitTel = require('./unit/unit.hbs');//门诊/住院单位
 var popupCompanyTal = require('./popupCompany/index.hbs');
+var popupCancelThanTal = require('./popupCompany/cancelThan.hbs');
 var popupRecordTal = require('./popupCompany/record.hbs');
 var popupChannelTal = require('./popupCompany/popupChannelTal.hbs');
 var addDataPopupTel = require('./popupCompany/addInfo.hbs');
@@ -92,12 +93,16 @@ function tableDiffScrollFn($parent,params){
           url: params.url,
           data:params.loadData,
           callback:function(res){
-            params.firstResult = params.firstResult + 1;
-            var data = {};
-            data.ydata = res.content.rows;
-            data.tableNum = params.loadData.firstResult;
-            $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
-            $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+            if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
+              params.firstResult = params.firstResult + 1;
+              var data = {};
+              data.ydata = res.content.rows;
+              data.tableNum = params.loadData.firstResult;
+              $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
+              $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+            }else{
+              $('.table-diff-header .scroll-loading').hide();
+            }
             loading = false;
           }
         });
@@ -273,7 +278,7 @@ function findThanFn(params){
       var tbodyData = {};
       $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
-      $parent.find('.standard-than .than-tbody').html(params.standardThanTbody(tbodyData));
+      $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(tbodyData));
       $parent.find('.standard-than .than-tbody').scrollTop(0);
     }
   })
@@ -313,7 +318,7 @@ function showThan(params){
       params.data.thanData.id = singleDataId;
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id',singleDataId);
-      $parent.find('.standard-than .than-tbody').html(params.standardThanTbody(params.data.thanData));
+      $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(params.data.thanData));
       if(!!params.homeProdName){//西药
         $parent.find('.search-than .'+params.homeProdName).val(_prodName);
         $parent.find('.search-than .'+params.homeFncName).val(_homeFncName);
@@ -336,10 +341,14 @@ function thanScrollFn(params,$this){
         url: params.url,
         data:params.findThanData,
         callback:function(res){
-          params.firstResultThan = params.firstResultThan + 1;
-          var tbodyData = {};
-          tbodyData.tbody = res.content;
-          $(params.parent).find('.standard-than .than-tbody tbody').append(params.standardThanTr(tbodyData));
+          if($(params.parent).find('.standard-than .than-tbody tr').length < res.total){
+            params.firstResultThan = params.firstResultThan + 1;
+            var tbodyData = {};
+            tbodyData.tbody = res.content;
+            $(params.parent).find('.standard-than .than-tbody .table').append(params.standardThanTr(tbodyData));
+          }else{
+            $(params.parent).find('.standard-than .scroll-loading').hide();
+          }
           loading = false;
         }
       });
@@ -655,19 +664,27 @@ function saveChannelFn(params,$this,_drugId){
   })
 }
 //取消比对
-function cancelThanFn(params,hptid){
+function cancelThanPopupFn(params,hptid){
   var _index = $('.table-diff-data-content').find('[data-id='+hptid+']').index();
   var cancelThanData = {};
   cancelThanData[params.cancelThanData] = hptid;
+  $('.popup').html(popupCancelThanTal()).show();
+  $('.popup-close').on('click',function(){$('.popup').hide()});
+  $('.cancel-btn').on('click',function(){$('.popup').hide()});
+  $('.popup .cancel-than-btn').on('click',function(){
+    cancelThanFn(params,cancelThanData,_index)
+  })
+}
+function cancelThanFn(params,cancelThanData,_index){
   ajaxFn({
     url: params.cancelUrl,
     data: cancelThanData,
     callback:function(res){
+      $('.popup').hide();
       reloadsearchClassifyTel(params);
       if(!!res.content){
         $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(params.tableDiffRightTr(res.content));
       }
-      //$(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).find('td').html('');
       $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
       $('.table-diff-data tr').removeClass('active');
       $('.table-diff-right-all').addClass('active');
@@ -749,8 +766,8 @@ module.exports = {
     //绑定给药途径
     bindFn(params.parent,'click','.adminRouteExclude',function(){popupChannelFn(params,$(this))});
     //取消比对
-    bindFn(params.parent,'click','.table-diff-single-content .btn-cancel',function(){cancelThanFn(params,$(params.parent).find('.table-diff-right').attr('data-id'))});
-    bindFn(params.parent,'click','.table-diff-bar .cancel-than',function(){cancelThanFn(params,singleData.id)});
+    bindFn(params.parent,'click','.table-diff-single-content .btn-cancel',function(){cancelThanPopupFn(params,$(params.parent).find('.table-diff-right').attr('data-id'))});
+    bindFn(params.parent,'click','.table-diff-bar .cancel-than',function(){cancelThanPopupFn(params,singleData.id)});
   },
   showDetail:function(params,loadObj){
     bindFn(params.parent,'click','.showDetail',function(e){showDetail(params,e,loadObj)}); //绑定查看详情事件

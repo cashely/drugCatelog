@@ -1,21 +1,70 @@
 <div>
     <ul class="content-list">
+        <li>药品编码：{{codePro}}</li>
         <li>药品名称：{{proName}}</li>
         <li>剂型：{{smlNameF}}</li>
         <li>规格：{{spec}}</li>
+        <li>企业简称：{{facAbbrF}}</li>
+        <li>批准文号/注册证号：{{pzwh}}{{switchFn prodZczhF "/"}}{{prodZczhF}}</li>
+        <li>说明书：{{instruction}}</li>
+        <li>说明书版本：{{smsDate}}</li>
         <li>转换比：{{fConvertRatio}}</li>
-        <li>药品编码：{{codePro}}</li>
         <li>含量：{{component}}{{componentUnit}}</li>
         <li>装量：{{volume}} {{volumeUnit}}</li>
         <li>最小使用单位：{{minUseUnit}}</li>
         <li>最小包装单位：{{wrapUnit}}</li>
-        <li>说明书：{{instruction}}</li>
-        <li>说明书版本：{{smsDate}}</li>
         <li>中成药注射剂：{{isZcyzsj}}</li>
-        <li>企业简称：{{facAbbrF}}</li>
-        <li>批准文号/注册证号：{{pzwh}}{{switchFn prodZczhF "/"}}{{prodZczhF}}</li>
     </ul>
     <ul class="content-list">
+        <li class="input-group">
+            <span class="flag4">基药:</span>
+            <select class="select updateValueFn">
+                <option value="0" {{isTrue flag4 "0"}}>否</option>
+                <option value="1" {{isTrue flag4 "1"}}>国家</option>
+                <option value="2" {{isTrue flag4 "2"}}>省基</option>
+                <option value="3" {{isTrue flag4 "3"}}>地基</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="flag1">抗菌药物:</span>
+            <select class="select updateValueFn">
+                <option value="0" {{isTrue flag1 "0"}}>否</option>
+                <option value="1" {{isTrue flag1 "1"}}>是</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span data-name="ddd">DDD值(mg):</span>
+            <input type="text" class="input upInputFn" value="{{ddd}}">
+        </li>
+        <li class="input-group">
+            <span class="kjyw">抗菌药物分类:</span>
+            <select class="select updateValueFn">
+                <option value="0" {{isTrue kjyw "0"}}>无</option>
+                <option value="1" {{isTrue kjyw "1"}}>四环素类</option>
+                <option value="2" {{isTrue kjyw "2"}}>氯霉素类</option>
+                <option value="3" {{isTrue kjyw "3"}}>广谱青霉素</option>
+                <option value="4" {{isTrue kjyw "4"}}>对青霉素酶不稳定的青霉素类</option>
+                <option value="5" {{isTrue kjyw "5"}}>对青霉素酶稳定的青霉素类</option>
+                <option value="6" {{isTrue kjyw "6"}}>β-内酰胺酶抑制剂</option>
+                <option value="7" {{isTrue kjyw "7"}}>青霉素类复方制剂（β-内酰胺酶抑制剂）</option>
+                <option value="8" {{isTrue kjyw "8"}}>第一代头孢菌素类</option>
+                <option value="9" {{isTrue kjyw "9"}}>第二代头孢菌素类</option>
+                <option value="10" {{isTrue kjyw "10"}}>第三（四）代头孢菌素类</option>
+                <option value="11" {{isTrue kjyw "11"}}>其他β内酰胺类</option>
+                <option value="12" {{isTrue kjyw "12"}}>碳青霉烯类</option>
+                <option value="13" {{isTrue kjyw "13"}}>磺胺类和甲氧苄啶</option>
+                <option value="14" {{isTrue kjyw "14"}}>大环内酯类</option>
+                <option value="15" {{isTrue kjyw "15"}}>林可酰胺类</option>
+                <option value="16" {{isTrue kjyw "16"}}>氨基糖苷类</option>
+                <option value="17" {{isTrue kjyw "17"}}>喹诺酮类</option>
+                <option value="18" {{isTrue kjyw "18"}}>糖肽类</option>
+                <option value="19" {{isTrue kjyw "19"}}>多粘菌素类</option>
+                <option value="20" {{isTrue kjyw "20"}}>咪唑衍生物</option>
+                <option value="21" {{isTrue kjyw "21"}}>硝基呋喃衍生物</option>
+                <option value="22" {{isTrue kjyw "22"}}>其它抗菌药物</option>
+                <option value="23" {{isTrue kjyw "23"}}>抗真菌药N</option>
+            </select>
+        </li>
         <li class="input-group">
             <span class="ypType">药品类型:</span>
             <select class="select updateValueFn">
@@ -36,15 +85,6 @@
             </select>
         </li>
         <li class="input-group"><span data-name="ybbh">医保编码:</span><input type="text" class="input upInputFn" value="{{ybbh}}"></li>
-        <li class="input-group">
-            <span class="flag4">基药:</span>
-            <select class="select updateValueFn">
-                <option value="0" {{isTrue flag4 "0"}}>否</option>
-                <option value="1" {{isTrue flag4 "1"}}>国家</option>
-                <option value="2" {{isTrue flag4 "2"}}>省基</option>
-                <option value="3" {{isTrue flag4 "3"}}>地基</option>
-            </select>
-        </li>
         <li class="input-group">
             <span class="jkyw">重点监控药物:</span>
             <select class="select updateValueFn">
@@ -105,13 +145,6 @@
             </select>
         </li>
         <li class="input-group">
-             <span class="flag1"> 抗菌药物:</span>
-            <select class="select updateValueFn">
-                <option value="0" {{isTrue flag1 "0"}}>否</option>
-                <option value="1" {{isTrue flag1 "1"}}>是</option>
-            </select>
-        </li>
-        <li class="input-group">
             <span class="kjywType"> 抗菌药物分级:</span>
             <select class="select updateValueFn">
                 <option value="0" {{isTrue kjywType "0"}}>无</option>
@@ -120,11 +153,6 @@
                 <option value="3" {{isTrue kjywType "3"}}>特殊使用级</option>
             </select>
         </li>
-        <li class="input-group">
-            抗菌药物分类:
-            <input type="text" class="input" value="{{kjyw}}">
-        </li>
-        <li class="input-group"><span data-name="ddd">DDD值(mg):</span><input type="text" class="input upInputFn" value="{{ddd}}"></li>
         <li class="input-group"><span data-name="adminRouteExclude">给药途径不计算强度:</span><div class="input icon-triangle adminRouteExclude">{{adminRouteExclude}}</div></li>
         <li class="input-group">
             <span class="isCalcKjyw">是否计算强度:</span>
