@@ -132,7 +132,7 @@ function tableDiffScrollFn($parent,params){
 
 function showDiffBarFn(params){
   var $parent = $(params.parent);
-  $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
+  $(document).on('contextmenu',params.parent +' .table-diff-left .table-diff-data tr',function(e){
     var _tr = $(this);
     var _index = _tr.index();
     var trRigth = $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index);
@@ -147,11 +147,12 @@ function showDiffBarFn(params){
       left: e.pageX - _tr.offset().left
     });
     singleData.id = $(this).attr('data-id');
+    e.preventDefault();
   });
-  $parent.find('.table-diff-bar').on('mouseover',function(e){
-      $('.table-diff-bar').show();
-      e.preventDefault();
-  });
+  //$parent.find('.table-diff-bar').on('mouseover',function(e){
+  //    $('.table-diff-bar').show();
+  //    e.preventDefault();
+  //});
   $(document).on('mouseleave','.table-diff-left',function(){
       $('.table-diff-bar').hide();
   })
@@ -165,6 +166,7 @@ function bindFn(parent,event,className,fn){
 function tableDiffClickFn(){
   var _index = $(this).prevAll().length;
   var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+  $('.table-diff-bar').hide();
   for(var i=0;i<_tables;i++){
     $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
   }
