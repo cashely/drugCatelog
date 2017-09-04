@@ -65,6 +65,11 @@ function loadChemistryTableFn(params,type){
       }
       $parent.find('.table-diff .loading-wrap').hide();
       params.data.diffData.ydata = res.content.rows;
+      if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
+        $('.table-diff-header .scroll-loading').show();
+      }else{
+        $('.table-diff-header .scroll-loading').hide();
+      }
       $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
       tableDiffScrollFn($parent,params);
     }
@@ -74,63 +79,73 @@ function loadChemistryTableFn(params,type){
 //比对表格滚动事件
 function tableDiffScrollFn($parent,params){
     $parent.find('.table-diff-right .table-diff-data').on('scroll',function(e){
-    $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
-    $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
-    var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
-    if(_t.scrollLeft() != tableRightLeft){
-      tableRightLeft = _t.scrollLeft();
-      console.log('横向滚动');
-      return;
-    }
-      console.log('竖向滚动');
-    if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
-      if(loading == false){
-        loading = true;
-        console.log(params.firstResult,params.maxResult,(params.firstResult+1)*params.maxResult);
-        params.loadData.firstResult = (params.firstResult+1)*params.maxResult;
-        params.loadData.maxResult = params.maxResult;
-        ajaxFn({
-          url: params.url,
-          data:params.loadData,
-          callback:function(res){
-            if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
-              params.firstResult = params.firstResult + 1;
-              var data = {};
-              data.ydata = res.content.rows;
-              data.tableNum = params.loadData.firstResult;
-              $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
-              $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-            }else{
-              $('.table-diff-header .scroll-loading').hide();
-            }
-            loading = false;
-          }
-        });
+      $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
+      $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
+      var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
+      if(_t.scrollLeft() != tableRightLeft){
+        tableRightLeft = _t.scrollLeft();
+        console.log('横向滚动');
+        return;
       }
-    }
-  })
+        console.log('竖向滚动');
+      if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
+        if(loading == false){
+          loading = true;
+          params.loadData.firstResult = (params.firstResult+1)*params.maxResult;
+          params.loadData.maxResult = params.maxResult;
+          ajaxFn({
+            url: params.url,
+            data:params.loadData,
+            callback:function(res){
+              if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
+                params.firstResult = params.firstResult + 1;
+                var data = {};
+                data.ydata = res.content.rows;
+                data.tableNum = params.loadData.firstResult;
+                $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
+                $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+              }else{
+                $('.table-diff-header .scroll-loading').hide();
+              }
+              loading = false;
+            }
+          });
+        }
+      }
+    })
+    //$parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
+    //  $parent.find('.table-diff-right .table-diff-data').scrollTop($(this)[0].scrollTop);
+    //})
+
+    $parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
+        $parent.find('.table-diff-right').scrollTop($(this).scrollTop);
+    })
 }
 
 function showDiffBarFn(params){
-    var $parent = $(params.parent);
+  var $parent = $(params.parent);
   $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
     var _tr = $(this);
-
-    
-
-   $('.table-diff-bar').css({
-      display:'block',
-      top:_tr.position().top+_tr.height()-1,
-      left:e.pageX-_tr.offset().left
+    var _index = _tr.index();
+    var trRigth = $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index);
+    if(trRigth.find('.codePro > div').text() == ''){
+      $('.table-diff-bar .cancel-than').hide().prev().hide()
+    }else{
+      $('.table-diff-bar .cancel-than').show().prev().show()
+    }
+    $('.table-diff-bar').css({
+      display: 'block',
+      top: _tr.position().top + _tr.height() - 1,
+      left: e.pageX - _tr.offset().left
     });
     singleData.id = $(this).attr('data-id');
   });
   $parent.find('.table-diff-bar').on('mouseover',function(e){
-    $('.table-diff-bar').show();
-    e.preventDefault();
+      $('.table-diff-bar').show();
+      e.preventDefault();
   });
   $(document).on('mouseleave','.table-diff-left',function(){
-    $('.table-diff-bar').hide();
+      $('.table-diff-bar').hide();
   })
 }
 
@@ -265,8 +280,11 @@ function addThan(params,loadObj){
 //查找标准比对数据
 function findThanFn(params){
   var $parent = $(params.parent);
-  params.findThanData.firstResult = 0;
-  params.findThanData.maxResult = 16;
+  params.firstResultThan = 0;
+  params.maxResultThan = 16;
+  params.findThanData.firstResult =  params.firstResultThan;
+  params.findThanData.maxResult =  params.maxResultThan;
+  console.log(params.findThanData,'findThanFn');
    $(params.findThanDataName).each(function(i,e){
      params.findThanData[e] = $parent.find('.'+e).val()
   });
@@ -275,6 +293,11 @@ function findThanFn(params){
     url: params.url,
     data: params.findThanData,
     callback:function(res){
+      if(res.content.length >=  params.findThanData.maxResult){
+        $(params.parent).find('.standard-than .scroll-loading').show();
+      }else{
+        $(params.parent).find('.standard-than .scroll-loading').hide();
+      }
       var tbodyData = {};
       $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
@@ -319,6 +342,11 @@ function showThan(params){
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id',singleDataId);
       $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(params.data.thanData));
+      if($(params.parent).find('.standard-than .than-tbody tr').length >=  params.findThanData.maxResult){
+        $(params.parent).find('.standard-than .scroll-loading').show();
+      }else{
+        $(params.parent).find('.standard-than .scroll-loading').hide();
+      }
       if(!!params.homeProdName){//西药
         $parent.find('.search-than .'+params.homeProdName).val(_prodName);
         $parent.find('.search-than .'+params.homeFncName).val(_homeFncName);
@@ -332,11 +360,12 @@ function showThan(params){
 }
 //滚动加载19位标准数据
 function thanScrollFn(params,$this){
-  params.findThanData.firstResult = (params.firstResultThan+1)*params.maxResultThan;
-  params.findThanData.maxResult = params.maxResultThan;
-  if($this.children('table').height() <= $this.scrollTop()+ $this.height() && $this.children('table').height() > 0){
+   if($this.children('table').height() <= $this.scrollTop()+ $this.height() && $this.children('table').height() > 0){
     if(loading == false){
       loading = true;
+      params.findThanData.firstResult = (params.firstResultThan+1) * params.maxResultThan;
+      params.findThanData.maxResult = params.maxResultThan;
+      console.log(params.firstResultThan);
       ajaxFn({
         url: params.url,
         data:params.findThanData,

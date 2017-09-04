@@ -4,8 +4,8 @@
         <div class="table-diff-header">
             <div class="table-diff-left">
                 <div class="table-diff-bar">
-                    <a href="#slicesStandardData" class="showThan">比对</a>|
-                    <!--<a href="javascript:void(0)" class="showDetail">查看详情</a>|-->
+                    <a href="#slicesStandardData" class="showThan">比对</a><span>|</span>
+                    <!--<a href="javascript:void(0)" class="showDetail">查看详情</a><span>|</span>-->
                     <a href="javascript:void(0)" class="cancel-than">取消比对</a>
                 </div>
                 <div class="table-diff-header">
@@ -61,7 +61,7 @@
                             <tbody>
                             {{#each ydata}}
                                 <tr>
-                                    <td title="{{codePro}}"><div>{{codePro}}</div></td>
+                                    <td class="codePro" title="{{codePro}}"><div>{{codePro}}</div></td>
                                     <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
                                         {{{ypTypeSelect ypType}}}
                                     </td>

@@ -11,7 +11,8 @@ var standardThanTr =  require('./../../component/standardThan/standardThanTr.hbs
 var Fn = require('./../../component/function');
 var data =  require('./indexData');//化学药数据
 var parent = '.'+data.name;
-var firstResult= 0, maxResult= 16, firstResultThan =0,maxResultThan= 16;loading = false;
+var firstResult= 0, maxResult= 16,firstResultThan =0,maxResultThan= 16;
+var loading = false;
 var findThanData ={firstResult:0,maxResult:16};
 var loadData;
 var loadDataObj={
