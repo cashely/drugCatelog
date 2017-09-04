@@ -75,36 +75,29 @@ function loadChemistryTableFn(params,type){
     }
   });
 }
-function tableDiffRequest(params,_t,trHeight,trLength){
-  if(_t.scrollLeft() != tableRightLeft){
-    tableRightLeft = _t.scrollLeft();
-    console.log('横向滚动');
-    return;
-  }
-  console.log('竖向滚动');
-  if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
-    if(loading == false){
-      loading = true;
-      params.loadData.firstResult = (params.firstResult+1)*params.maxResult;
-      params.loadData.maxResult = params.maxResult;
-      ajaxFn({
-        url: params.url,
-        data:params.loadData,
-        callback:function(res){
-          if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
-            params.firstResult = params.firstResult + 1;
-            var data = {};
-            data.ydata = res.content.rows;
-            data.tableNum = params.loadData.firstResult;
-            $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
-            $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-          }else{
-            $('.table-diff-header .scroll-loading').hide();
-          }
-          loading = false;
+
+function tableDiffRequest(params){
+  if(loading == false){
+    loading = true;
+    params.loadData.firstResult = (params.firstResult+1)*params.maxResult;
+    params.loadData.maxResult = params.maxResult;
+    ajaxFn({
+      url: params.url,
+      data:params.loadData,
+      callback:function(res){
+        if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
+          params.firstResult = params.firstResult + 1;
+          var data = {};
+          data.ydata = res.content.rows;
+          data.tableNum = params.loadData.firstResult;
+          $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
+          $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+        }else{
+          $('.table-diff-header .scroll-loading').hide();
         }
-      });
-    }
+        loading = false;
+      }
+    });
   }
 }
 //比对表格滚动事件
@@ -113,11 +106,27 @@ function tableDiffScrollFn($parent,params){
       $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
       $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
       var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
-      tableDiffRequest(params,_t,trHeight,trLength);
+      if(_t.scrollLeft() != tableRightLeft){
+        tableRightLeft = _t.scrollLeft();
+        console.log('横向滚动');
+        return;
+      }
+      //console.log('竖向滚动');
+      if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
+        tableDiffRequest(params);
+      }
     });
     $parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
       var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
-      tableDiffRequest(params,_t,trHeight,trLength);
+      if(_t.scrollLeft() != tableRightLeft){
+        tableRightLeft = _t.scrollLeft();
+        console.log('横向滚动');
+        return;
+      }
+      //console.log('竖向滚动');
+      if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
+        tableDiffRequest(params);
+      }
     })
 }
 
@@ -431,6 +440,23 @@ function upSelect(params){
           if(params.ypTypeValue.indexOf(aftValue) == -1){
             $trLeft.remove();
             $trRight.remove();
+            if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
+              $('.table-diff-header .scroll-loading').show();
+            }else{
+              $('.table-diff-header .scroll-loading').hide();
+              tableDiffRequest(params)
+            }
+            var num = Math.max(aftValue-1,0);
+            switch (num){
+              case 0:
+                loadChemistryTableFn(paramsAll[num]);
+                break;
+              case 1:
+                if(!!paramsAll[num]){
+                  loadChemistryTableFn(paramsAll[num]);
+                }
+                break;
+            }
           }
         }
         reloadsearchClassifyTel(params);
@@ -462,10 +488,27 @@ function updateValueFn(params,loadObj){
           if(loadObj.ypTypeValue.indexOf(aftValue) == -1){
             $(params.parent).find('.table-diff-data-content table tr').eq(_index).remove();
             $(params.parent).find('.table-diff-right .table-diff-data  table tr').eq(_index).remove();
+            if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
+              $('.table-diff-header .scroll-loading').show();
+            }else{
+              $('.table-diff-header .scroll-loading').hide();
+              tableDiffRequest(params)
+            }
             $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
             $('.table-diff-data tr').removeClass('active');
             $('.table-diff-right-all').addClass('active');
             $('.table-diff-right-single').removeClass('active');
+            var num = Math.max(aftValue-1,0);
+            switch (num){
+              case 0:
+                loadChemistryTableFn(paramsAll[num]);
+                break;
+              case 1:
+                if(!!paramsAll[num]){
+                  loadChemistryTableFn(paramsAll[num]);
+                }
+                break;
+            }
           }
         }else{
           $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
@@ -743,12 +786,17 @@ function downloadFn(params){
   downloadUrl+='&rsyy='+isNull(downloadData.rsyy);
   window.location.href=downloadUrl;
 }
-
+var  paramsAll=[],paramsType=[];
 module.exports = {
   loadData:function(params){
     if(!!params.fn){
       params.fn();
     }
+    if(paramsType.indexOf(params.parent) == -1){
+      paramsType.push(params.parent);
+      paramsAll.push(params)
+    }
+    console.log(paramsAll);
     var $parent =$(params.parent);
 
     loadChemistryTableFn(params);//加载数据
