@@ -688,6 +688,14 @@ module.exports = ajaxFn;
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports) {
+
+module.exports = function (index, num) {
+  return index + num;
+};
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ajaxFn = __webpack_require__(16); //请求方法
@@ -698,17 +706,15 @@ var popupCompanyTal = __webpack_require__(60);
 var popupCancelThanTal = __webpack_require__(62);
 var popupRecordTal = __webpack_require__(63);
 var popupChannelTal = __webpack_require__(64);
-var addDataPopupTel = __webpack_require__(24);
+var addDataPopupTel = __webpack_require__(25);
 var loading = false;
 var singleData = { id: null, index: null };
-var addData = __webpack_require__(25);
-var $parent = $('.' + data.name);
+var addData = __webpack_require__(26);
 var tableRightLeft = 0;
-var addFn = __webpack_require__(26);
+var addFn = __webpack_require__(27);
 
 //加载查询统计
 function loadsearchClassifyTel(params, res) {
-  //params.firstResult = params.firstResult + 1;
   params.data.searchDate.total = res.total;
   params.data.searchDate.jbywCount = res.content.jbywCount;
   params.data.searchDate.rsyyCount = res.content.rsyyCount;
@@ -781,7 +787,7 @@ function tableDiffRequest(params) {
           params.firstResult = params.firstResult + 1;
           var data = {};
           data.ydata = res.content.rows;
-          data.tableNum = params.loadData.firstResult;
+          data.tableNum = params.loadData.firstResult + 1;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
         } else {
@@ -792,6 +798,7 @@ function tableDiffRequest(params) {
     });
   }
 }
+
 //比对表格滚动事件
 function tableDiffScrollFn($parent, params) {
   $parent.find('.table-diff-right .table-diff-data').on('scroll', function (e) {
@@ -825,7 +832,7 @@ function tableDiffScrollFn($parent, params) {
     }
   });
 }
-
+//显示操作条
 function showDiffBarFn(params) {
   var $parent = $(params.parent);
   $(document).on('contextmenu', params.parent + ' .table-diff-left .table-diff-data tr', function (e) {
@@ -845,10 +852,9 @@ function showDiffBarFn(params) {
     singleData.id = $(this).attr('data-id');
     e.preventDefault();
   });
-  //$parent.find('.table-diff-bar').on('mouseover',function(e){
-  //    $('.table-diff-bar').show();
-  //    e.preventDefault();
-  //});
+  $(document).on('mouseover', params.parent + ' .table-diff-left .table-diff-data tr', function (e) {
+    singleData.id = $(this).attr('data-id');
+  });
   $(document).on('mouseleave', '.table-diff-left', function () {
     $('.table-diff-bar').hide();
   });
@@ -1064,14 +1070,13 @@ function showThan(params) {
         //中药饮片
         $parent.find('.search-than .' + params.slicesName).val(_prodName);
       }
-      $parent.find('.standard-than .than-tbody').on('scroll', function () {
-        thanScrollFn(params, $(this));
-      }); //滚动加载19位标准数据
     }
   });
 }
+
 //滚动加载19位标准数据
 function thanScrollFn(params, $this) {
+  $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
   if ($this.children('table').height() <= $this.scrollTop() + $this.height() && $this.children('table').height() > 0) {
     if (loading == false) {
       loading = true;
@@ -1609,6 +1614,9 @@ module.exports = {
     bindFn(params.parent, 'click', '.find-than', function () {
       findThanFn(params);
     }); //查找30位标准比对数据
+    $(params.parent).find('.standard-than .than-tbody').on('scroll', function () {
+      thanScrollFn(params, $(this));
+    }); //滚动加载19位标准数据
     bindFn(params.parent, 'click', '.than-table .select-than', function () {
       selectThanFn(params, $(this), loadObj);
     }); //选择标准数据比对
@@ -1636,7 +1644,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -1658,7 +1666,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = function (_this) {
@@ -1670,7 +1678,7 @@ module.exports = function (_this) {
 };
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var opction = __webpack_require__(11); //门诊/住院单位
@@ -1710,7 +1718,7 @@ function textFn(_this) {
 }
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1821,7 +1829,7 @@ exports.createFrame = _utils.createFrame;
 exports.logger = _logger2['default'];
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var footerTel = __webpack_require__(56);
@@ -1832,7 +1840,7 @@ var data = {
 $('.footer').html(footerTel(data));
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = function (_this) {
@@ -1842,7 +1850,7 @@ module.exports = function (_this) {
 };
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -1876,7 +1884,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -1936,7 +1944,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1945,10 +1953,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 /**
  * 添加对比数据
  */
-var addData = __webpack_require__(25);
-var searchBox = __webpack_require__(18);
-var addDataPopupTel = __webpack_require__(24);
-var tableDiffRightTr = __webpack_require__(27); //化学药右边详情模版
+var addData = __webpack_require__(26);
+var searchBox = __webpack_require__(19);
+var addDataPopupTel = __webpack_require__(25);
+var tableDiffRightTr = __webpack_require__(28); //化学药右边详情模版
 var tbodyTel = __webpack_require__(65);
 var tr = __webpack_require__(66);
 var ajaxFn = __webpack_require__(16);
@@ -2045,7 +2053,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -2088,7 +2096,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(19)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
     + "\"><div>"
@@ -2116,7 +2124,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "</div></td>\r\n<td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"isZcyzsj",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\r\n<td class=\"icon-triangle table-diff-data-td-select\">\r\n    "
-    + ((stack1 = __default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
     + "\r\n</td>\r\n<td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"bloodPro",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\r\n<td class=\"icon-triangle table-diff-data-td-select\"><div>"
@@ -2159,14 +2167,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
     + "</div></td>";
 },"useData":true});
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-module.exports = function (index, num) {
-  return index + num;
-};
 
 /***/ }),
 /* 29 */
@@ -2267,12 +2267,12 @@ __webpack_require__(35);
 
 __webpack_require__(36);
 __webpack_require__(54);
-__webpack_require__(22);
+__webpack_require__(23);
 __webpack_require__(57);
 __webpack_require__(76);
 __webpack_require__(77);
-__webpack_require__(26);
-__webpack_require__(22);
+__webpack_require__(27);
+__webpack_require__(23);
 __webpack_require__(79);
 
 /***/ }),
@@ -2346,7 +2346,7 @@ function _interopRequireWildcard(obj) {
   }
 }
 
-var _handlebarsBase = __webpack_require__(21);
+var _handlebarsBase = __webpack_require__(22);
 
 var base = _interopRequireWildcard(_handlebarsBase);
 
@@ -2922,7 +2922,7 @@ var _exception = __webpack_require__(15);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _base = __webpack_require__(21);
+var _base = __webpack_require__(22);
 
 function checkRevision(compilerInfo) {
   var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -3316,7 +3316,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 /***/ (function(module, exports, __webpack_require__) {
 
 var tabBarTel = __webpack_require__(58);
-var Fn = __webpack_require__(17);
+var Fn = __webpack_require__(18);
 var slices = __webpack_require__(67);
 var data = __webpack_require__(9);
 var slicesData = __webpack_require__(30);
@@ -3523,7 +3523,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
   return "            <ul>\r\n                <li>\r\n                    <input type=\"checkbox\" class=\"channel-checkbox\" data-id=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\" "
-    + alias2(__default(__webpack_require__(23)).call(alias3,(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(24)).call(alias3,(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
     + "><a href=\"javascript:void(0)\" class=\"channel-name\">"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "</a>\r\n                    <ul class=\"sub-channel\">\r\n"
@@ -3535,7 +3535,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
   return "                            <li><input type=\"checkbox\" class=\"channel-checkbox\" data-id="
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + " "
-    + alias2(__default(__webpack_require__(23)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(24)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
     + "><a href=\"javascript:void(0)\" class=\"channel-name\">"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "</a></li>\r\n";
@@ -3635,7 +3635,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 /* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var searchTel = __webpack_require__(18);
+var searchTel = __webpack_require__(19);
 
 var tableDiffTel = __webpack_require__(68);
 var tableDiffLeft = __webpack_require__(69);
@@ -3648,7 +3648,7 @@ var standardThanTbody = __webpack_require__(74);
 var standardThanTr = __webpack_require__(75);
 var searchClassifyTel = __webpack_require__(29); //比对表格搜索分类
 
-var Fn = __webpack_require__(17);
+var Fn = __webpack_require__(18);
 var data = __webpack_require__(30);
 var parent = '.' + data.name;
 var loadData;
@@ -3733,7 +3733,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + " data-name=\""
     + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
     + "\">\r\n                                    <td class=\"table-num\"><div>"
-    + alias2(alias1((data && data.index), depth0))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),1,{"name":"add","hash":{},"data":data}))
     + "</div></td>\r\n                                    <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -3833,7 +3833,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + " data-name=\""
     + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
     + "\">\r\n        <td class=\"table-num\"><div>"
-    + alias2(__default(__webpack_require__(28)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
     + "</div></td>\r\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -4006,7 +4006,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
     + "\">\r\n            </lable>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                       <td><div class=\"table-text\">"
+    return "                           <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "</div></td>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -4016,9 +4016,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\r\n    <div class=\"search-than\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead\">\r\n           <table class=\"table\" cellpadding=\"0\" cellspacing=\"0\" >\r\n               <tr class=\"thead\">\r\n"
+    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead-wrap\">\r\n           <div class=\"than-thead\">\r\n               <table class=\"table\" cellpadding=\"0\" cellspacing=\"0\" >\r\n                   <tr class=\"thead\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\r\n           <div class=\"scroll-loading\">加载中...</div>\r\n           <!--<div class=\"loading\">-->\r\n               <!--<img src=\"./images/loading.gif\" class=\"loading-img\">-->\r\n           <!--</div>-->\r\n       </div>\r\n       <div class=\"loading-wrap\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n</div>";
+    + "                   </tr>\r\n               </table>\r\n           </div>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\r\n           <div class=\"scroll-loading\">加载中...</div>\r\n           <!--<div class=\"loading\">-->\r\n               <!--<img src=\"./images/loading.gif\" class=\"loading-img\">-->\r\n           <!--</div>-->\r\n       </div>\r\n       <div class=\"loading-wrap\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -4112,7 +4112,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 /**
  * 搜索区
  */
-var searchBoxTel = __webpack_require__(18);
+var searchBoxTel = __webpack_require__(19);
 var data = __webpack_require__(9);
 var $chemistry = $('.' + data.name);
 
@@ -4143,7 +4143,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
     + "\">\r\n            </lable>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                       <td><div class=\"table-text\">"
+    return "                           <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "</div></td>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -4153,9 +4153,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\r\n    <div class=\"search-than\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead\">\r\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\">\r\n               <tr class=\"thead\">\r\n"
+    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead-wrap\">\r\n           <div class=\"than-thead\">\r\n               <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\">\r\n                   <tr class=\"thead\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\r\n           </table>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\r\n           <div class=\"scroll-loading\">加载中...</div>\r\n       </div>\r\n       <div class=\"loading-wrap\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n    <div class=\"no-than\">\r\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\r\n    </div>\r\n</div>\r\n";
+    + "                   </tr>\r\n               </table>\r\n           </div>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\r\n           <div class=\"scroll-loading\">加载中...</div>\r\n       </div>\r\n       <div class=\"loading-wrap\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n    <div class=\"no-than\">\r\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 /***/ }),
@@ -4167,12 +4167,12 @@ var tableDiffTel = __webpack_require__(80); //化学药比对表格
 var tableDiffLeft = __webpack_require__(81); //化学药左边单行比对表格
 var tableDiffRight = __webpack_require__(82); //化学药右边单行比对表格
 var tableDetails = __webpack_require__(83); //化学药右边详情模版
-var tableDiffRightTr = __webpack_require__(27); //化学药右边详情模版
+var tableDiffRightTr = __webpack_require__(28); //化学药右边详情模版
 
 var standardThanTbody = __webpack_require__(84); //化学药标准表格数据模版
 var standardThanTr = __webpack_require__(85); //化学药标准单行表格数据模版
 
-var Fn = __webpack_require__(17);
+var Fn = __webpack_require__(18);
 var data = __webpack_require__(9); //化学药数据
 var parent = '.' + data.name;
 var firstResult = 0,
@@ -4258,7 +4258,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"  data-fncName=\""
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
     + "\">\r\n                                        <td class=\"table-num\"><div>"
-    + alias2(alias1((data && data.index), depth0))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),1,{"name":"add","hash":{},"data":data}))
     + "</div></td>\r\n                                        <td class=\"table-diff-drugId\" title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -4334,7 +4334,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(19)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
     + "</div></td>\r\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
     + "\"><div>"
@@ -4362,7 +4362,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"isZcyzsj",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\">\r\n                                            "
-    + ((stack1 = __default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
     + "\r\n                                        </td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"bloodPro",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
@@ -4434,7 +4434,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"  data-fncName=\""
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
     + "\">\r\n        <td class=\"table-num\"><div>"
-    + alias2(__default(__webpack_require__(28)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
     + "</div></td>\r\n        <td class=\"table-diff-drugId\" title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -4518,7 +4518,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(19)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
     + "\"><div>"
@@ -4546,7 +4546,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"isZcyzsj",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\">\r\n            "
-    + ((stack1 = __default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
     + "\r\n        </td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"bloodPro",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\"><div>"

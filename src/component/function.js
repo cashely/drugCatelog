@@ -10,13 +10,11 @@ var addDataPopupTel = require('./popupCompany/addInfo.hbs');
 var loading = false;
 var singleData = {id:null, index:null};
 var addData = require('./addData/index.hbs');
-var $parent = $('.'+data.name);
 var tableRightLeft = 0;
 var addFn= require('./addData/index');
 
 //加载查询统计
 function loadsearchClassifyTel(params,res){
-  //params.firstResult = params.firstResult + 1;
   params.data.searchDate.total = res.total;
   params.data.searchDate.jbywCount = res.content.jbywCount;
   params.data.searchDate.rsyyCount = res.content.rsyyCount;
@@ -89,7 +87,7 @@ function tableDiffRequest(params){
           params.firstResult = params.firstResult + 1;
           var data = {};
           data.ydata = res.content.rows;
-          data.tableNum = params.loadData.firstResult;
+          data.tableNum = params.loadData.firstResult + 1;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
         }else{
@@ -100,6 +98,7 @@ function tableDiffRequest(params){
     });
   }
 }
+
 //比对表格滚动事件
 function tableDiffScrollFn($parent,params){
     $parent.find('.table-diff-right .table-diff-data').on('scroll',function(e){
@@ -129,7 +128,7 @@ function tableDiffScrollFn($parent,params){
       }
     })
 }
-
+//显示操作条
 function showDiffBarFn(params){
   var $parent = $(params.parent);
   $(document).on('contextmenu',params.parent +' .table-diff-left .table-diff-data tr',function(e){
@@ -149,10 +148,9 @@ function showDiffBarFn(params){
     singleData.id = $(this).attr('data-id');
     e.preventDefault();
   });
-  //$parent.find('.table-diff-bar').on('mouseover',function(e){
-  //    $('.table-diff-bar').show();
-  //    e.preventDefault();
-  //});
+  $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
+    singleData.id = $(this).attr('data-id');
+  });
   $(document).on('mouseleave','.table-diff-left',function(){
       $('.table-diff-bar').hide();
   })
@@ -364,12 +362,13 @@ function showThan(params){
       if(!!params.slicesName){//中药饮片
         $parent.find('.search-than .'+params.slicesName).val(_prodName);
       }
-      $parent.find('.standard-than .than-tbody').on('scroll',function(){thanScrollFn(params,$(this))}); //滚动加载19位标准数据
     }
   })
 }
+
 //滚动加载19位标准数据
 function thanScrollFn(params,$this){
+  $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
    if($this.children('table').height() <= $this.scrollTop()+ $this.height() && $this.children('table').height() > 0){
     if(loading == false){
       loading = true;
@@ -860,6 +859,7 @@ module.exports = {
     }
     bindFn(params.parent,'click','.showThan',function(){showThan(params,loadObj)}); //显示标准数据比对
     bindFn(params.parent,'click','.find-than',function(){findThanFn(params)}); //查找30位标准比对数据
+    $(params.parent).find('.standard-than .than-tbody').on('scroll',function(){thanScrollFn(params,$(this))}); //滚动加载19位标准数据
     bindFn(params.parent,'click','.than-table .select-than',function(){selectThanFn(params,$(this),loadObj)});//选择标准数据比对
     if(!!params.addThanFn){
       bindFn(params.parent,'click','.add-than',function(){addThan(params,loadObj)}); //查找19位标准数据
