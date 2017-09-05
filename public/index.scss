@@ -611,8 +611,10 @@ a{
         z-index: 9;
         width: 687px;
         td,th{
+            position:relative;
             >div{
                 width: 80px;
+                overflow:hidden;
             }
         }
         .table-diff-header{
@@ -621,6 +623,18 @@ a{
             top:0;
             left:0;
             z-index: 2;
+            .resize{
+                height: 100%;
+                display: block;
+                width: 4px;
+                position: absolute;
+                right: -2px;
+                top: 0;
+                background: transparent;
+                z-index: 2147483647;
+                cursor : col-resize;
+                opacity: 0.8;
+            }
         }
         .table-diff-data{
             overflow-x: hidden;
@@ -739,7 +753,7 @@ a{
             top:0;
             width: 100%;
             overflow: hidden;
-            left:0px;
+            left:0;
             z-index: 2;
             .table-diff-header-content{
                 overflow-x: hidden;

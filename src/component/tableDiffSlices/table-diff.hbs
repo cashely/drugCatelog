@@ -11,9 +11,15 @@
                 <div class="table-diff-header">
                     <table width="100%" cellspacing="0" border="0">
                         <thead>
-                             <th style="width: 40px"><div style="width: 40px">序号</div></th>
+                             <th style="width: 40px">
+                                 <div style="width: 40px">序号</div>
+                                 <span class="resize"></span>
+                             </th>
                             {{#each tLeftHead}}
-                                <th><div>{{this}}</div></th>
+                                <th>
+                                    <div>{{this}}</div>
+                                    <span class="resize"></span>
+                                </th>
                             {{/each}}
                         </thead>
                     </table>

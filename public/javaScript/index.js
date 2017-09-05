@@ -1101,6 +1101,7 @@ function thanScrollFn(params, $this) {
     }
   }
 }
+
 //隐藏比对数据详情
 function hideDetail(e) {
   $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
@@ -1523,6 +1524,65 @@ function downloadFn(params) {
   downloadUrl += '&rsyy=' + isNull(downloadData.rsyy);
   window.location.href = downloadUrl;
 }
+
+function offsetLeftFn(obj) {
+  var tmp = obj.offsetLeft;
+  var val = obj.offsetParent;
+  while (val != null) {
+    tmp += val.offsetLeft;
+    val = val.offsetParent;
+  }
+  return tmp;
+}
+
+var xx,
+    yy,
+    tBar = {};
+function resetTableFn(params) {
+  //获取鼠标的位置
+  $(document).on('mousemove', params.parent + ' .table-diff-header', function (e) {
+    xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+    yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+  });
+  $(params.parent).on('mousedown', '.table-diff-header th .resize', function () {
+    tBar.self = $(this);
+    tBar.mouseDown = 1;
+    tBar.width = offsetLeftFn($(this)[0]);
+    tBar.tdWidth = $(this).parent()[0].offsetWidth;
+    tBar.tableWidth = $(params.parent).find('.table-diff .table-diff-left .table-diff-header table').width();
+    $(this).css({ right: -(xx - tBar.width) });
+  });
+  $(params.parent).on('mouseup', function () {
+    if (tBar.mouseDown) {
+      tBar.mouseDown = 0;
+      tBar.self.css({ right: -2 });
+      var tTh = tBar.self.parent();
+      var _index = tTh.index();
+      $(params.parent).find('.table-diff-header th .resize').css({ background: 'transparent' });
+      tBar.self.prev().css({ width: tBar.tdWidth + (xx - tBar.width) - 10 });
+      $(params.parent).find('.table-diff .table-diff-right').css({ marginLeft: tBar.tableWidth + (xx - tBar.width) });
+      $(params.parent).find('.table-diff .table-diff-left').css({ width: tBar.tableWidth + (xx - tBar.width) });
+      $(params.parent).find('.table-diff .table-diff-left .table-diff-header').css({ width: tBar.tableWidth + (xx - tBar.width) });
+      $(params.parent).find('.table-diff-data-content table tr').each(function (i, e) {
+        $(e).find('td').eq(_index).find('div').css({ width: tBar.tdWidth + (xx - tBar.width) - 10 });
+      });
+    }
+  });
+  $(params.parent).on('mousemove', '.table-diff-header th', function () {
+    $(this).find('.resize').show();
+    if (tBar.mouseDown) {
+      tBar.self.css({ right: -(xx - tBar.width) - 2 });
+    }
+  });
+  $(params.parent).on('mousemove', '.table-diff-header th .resize ', function () {
+    if (!tBar.mouseDown) {
+      $(this).css({ background: '#fff' });
+    }
+  });
+  $(params.parent).on('mouseleave', '.table-diff-left .table-diff-header th .resize', function () {
+    if (!tBar.mouseDown) $(this).css({ background: 'transparent' });
+  });
+}
 var paramsAll = [],
     paramsType = [];
 module.exports = {
@@ -1540,6 +1600,8 @@ module.exports = {
     loadChemistryTableFn(params); //加载数据
 
     showDiffBarFn(params); //显示比对按钮
+
+    resetTableFn(params); //拖动表格事件
 
     bindFn(params.parent, 'click', '.search-box .btn', function () {
       params.firstResult = 0;params.maxResult = 16;
@@ -3359,8 +3421,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "        <li class=\"tabs-item "
     + alias2(alias1((depth0 != null ? depth0.active : depth0), depth0))
-    + " "
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\" data-id=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><a href=\"javascript:void(0)\">"
@@ -3722,9 +3782,9 @@ module.exports = function () {
 var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    return "                                <th><div>"
+    return "                                <th>\r\n                                    <div>"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
+    + "</div>\r\n                                    <span class=\"resize\"></span>\r\n                                </th>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
@@ -3808,7 +3868,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#slicesStandardData\" class=\"showThan\">比对</a><span>|</span>\r\n                    <!--<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span>-->\r\n                    <a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                             <th style=\"width: 40px\"><div style=\"width: 40px\">序号</div></th>\r\n"
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#slicesStandardData\" class=\"showThan\">比对</a><span>|</span>\r\n                    <!--<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span>-->\r\n                    <a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                             <th style=\"width: 40px\">\r\n                                 <div style=\"width: 40px\">序号</div>\r\n                                 <span class=\"resize\"></span>\r\n                             </th>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -4245,9 +4305,9 @@ $(function () {
 var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    return "                                <th><div>"
+    return "                                <th>\r\n                                    <div>\r\n                                        "
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</div></th>\r\n";
+    + "\r\n                                    </div>\r\n                                    <span class=\"resize\"></span>\r\n                                </th>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
@@ -4407,7 +4467,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#standardData\" class=\"showThan\">比对</a><span>|</span><a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span><a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                            <th style=\"width: 40px\"><div style=\"width: 40px\">序号</div></th>\r\n"
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#standardData\" class=\"showThan\">比对</a><span>|</span><a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span><a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                            <th style=\"width: 40px\">\r\n                                <div style=\"width: 40px\">序号</div>\r\n                                <span class=\"resize\"></span>\r\n                            </th>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")

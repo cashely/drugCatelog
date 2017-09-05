@@ -393,6 +393,7 @@ function thanScrollFn(params,$this){
     }
   }
 }
+
 //隐藏比对数据详情
 function hideDetail(e){
   $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
@@ -787,6 +788,63 @@ function downloadFn(params){
   downloadUrl+='&rsyy='+isNull(downloadData.rsyy);
   window.location.href=downloadUrl;
 }
+
+function offsetLeftFn(obj){
+  var tmp = obj.offsetLeft;
+  var val = obj.offsetParent;
+  while(val != null){
+    tmp += val.offsetLeft;
+    val = val.offsetParent;
+  }
+  return tmp;
+}
+
+var xx,yy,tBar={};
+function resetTableFn(params){
+  //获取鼠标的位置
+  $(document).on('mousemove',params.parent+' .table-diff-header',function(e) {
+     xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+     yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+  });
+  $(params.parent).on('mousedown','.table-diff-header th .resize',function(){
+    tBar.self= $(this);
+    tBar.mouseDown = 1;
+    tBar.width = offsetLeftFn($(this)[0]);
+    tBar.tdWidth = $(this).parent()[0].offsetWidth;
+    tBar.tableWidth=$(params.parent).find('.table-diff .table-diff-left .table-diff-header table').width();
+    $(this).css({right: -(xx - tBar.width)});
+  });
+  $(params.parent).on('mouseup',function(){
+    if(tBar.mouseDown){
+      tBar.mouseDown = 0;
+      tBar.self.css({right: -2});
+      var tTh= tBar.self.parent();
+      var _index =tTh.index();
+      $(params.parent).find('.table-diff-header th .resize').css({background:'transparent'});
+      tBar.self.prev().css({width:tBar.tdWidth +(xx - tBar.width)-10});
+      $(params.parent).find('.table-diff .table-diff-right').css({marginLeft: tBar.tableWidth+ ((xx - tBar.width))});
+      $(params.parent).find('.table-diff .table-diff-left').css({width: tBar.tableWidth+ ((xx - tBar.width))});
+      $(params.parent).find('.table-diff .table-diff-left .table-diff-header').css({width: tBar.tableWidth+ ((xx - tBar.width))});
+      $(params.parent).find('.table-diff-data-content table tr').each(function(i,e){
+        $(e).find('td').eq(_index).find('div').css({width:tBar.tdWidth +(xx - tBar.width)-10});
+      })
+    }
+  });
+  $(params.parent).on('mousemove','.table-diff-header th',function(){
+    $(this).find('.resize').show();
+    if(tBar.mouseDown){
+      tBar.self.css({right: -(xx - tBar.width)-2});
+    }
+  });
+  $(params.parent).on('mousemove','.table-diff-header th .resize ',function(){
+    if(!tBar.mouseDown){
+      $(this).css({background:'#fff'})
+    }
+  });
+  $(params.parent).on('mouseleave','.table-diff-left .table-diff-header th .resize',function(){
+    if(!tBar.mouseDown)$(this).css({background:'transparent'})
+  });
+}
 var  paramsAll=[],paramsType=[];
 module.exports = {
   loadData:function(params){
@@ -803,6 +861,8 @@ module.exports = {
     loadChemistryTableFn(params);//加载数据
 
     showDiffBarFn(params);//显示比对按钮
+
+    resetTableFn(params);//拖动表格事件
 
     bindFn(params.parent,'click','.search-box .btn',function(){
       params.firstResult=0;params.maxResult=16;
