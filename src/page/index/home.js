@@ -31,8 +31,11 @@ var loadDataObj={
   tableDiffRightTr: tableDiffRightTr,
   downloadUrl:'mcdProduct30/downHisProduct',
   ypTypeValue : ['0','1'],
+  //标准数据详情
   detailUrl: 'mcdProduct30/getHistProductById',
-  tableDetails:tableDetails
+  tableDetails:tableDetails,
+  dataName: 'drugId',
+  updateValueUrl: 'mcdProduct30/updateHisProductByParmas'
 };
 
 $(function(){

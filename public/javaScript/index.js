@@ -716,12 +716,23 @@ var addFn = __webpack_require__(28);
 //加载查询统计
 function loadsearchClassifyTel(params, res) {
   params.data.searchDate.total = res.total;
+  params.data.searchDate.xyCount = res.content.xyCount;
+  params.data.searchDate.zcyCount = res.content.zcyCount;
+  params.data.searchDate.smsCount = res.content.smsCount;
   params.data.searchDate.jbywCount = res.content.jbywCount;
+  params.data.searchDate.kjywCount = res.content.kjywCount;
+  params.data.searchDate.zcyzsjCount = res.content.zcyzsjCount;
   params.data.searchDate.rsyyCount = res.content.rsyyCount;
-  params.data.searchDate.wbdCount = res.content.wbdCount;
-  params.data.searchDate.wtsjCount = res.content.wtsjCount;
-  params.data.searchDate.ybdCount = res.content.ybdCount;
+  params.data.searchDate.xyzpCount = res.content.xyzpCount;
+  params.data.searchDate.tpzjsCount = res.content.tpzjsCount;
+  params.data.searchDate.nlyyCount = res.content.nlyyCount;
+  params.data.searchDate.ppiCount = res.content.ppiCount;
+  params.data.searchDate.jmdfCount = res.content.jmdfCount;
+  params.data.searchDate.fzyyCount = res.content.fzyyCount;
   params.data.searchDate.yblbCount = res.content.yblbCount;
+  params.data.searchDate.wbdCount = res.content.wbdCount;
+  params.data.searchDate.ybdCount = res.content.ybdCount;
+  params.data.searchDate.wtsjCount = res.content.wtsjCount;
   $(params.parent).find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
 }
 
@@ -799,7 +810,62 @@ function tableDiffRequest(params) {
     });
   }
 }
-
+//通用条件搜索
+function generalSearch(params, $this, name) {
+  params.firstResult = 0;params.maxResult = 16;
+  loadChemistryTableFn(params, { name: name, val: $this.find('.text').text() });
+}
+function bindGeneralSearch(params) {
+  var _parent = params.parent + ' ';
+  $(document).on('click', _parent + '.search-data .xy', function () {
+    generalSearch(params, $(this), 'xy');
+  });
+  $(document).on('click', _parent + '.search-data .zcy', function () {
+    generalSearch(params, $(this), 'zcy');
+  });
+  $(document).on('click', _parent + '.search-data .sms', function () {
+    generalSearch(params, $(this), 'sms');
+  });
+  $(document).on('click', _parent + '.search-data .jbyw', function () {
+    generalSearch(params, $(this), 'jbyw');
+  }); //搜索基药化学药比对基药
+  $(document).on('click', _parent + '.search-data .kjyw', function () {
+    generalSearch(params, $(this), 'kjyw');
+  });
+  $(document).on('click', _parent + '.search-data .zcyzsj', function () {
+    generalSearch(params, $(this), 'zcyzsj');
+  });
+  $(document).on('click', _parent + '.search-data .rsyy', function () {
+    generalSearch(params, $(this), 'rsyy');
+  }); //搜索妊娠用药比对化学药比
+  $(document).on('click', _parent + '.search-data .xyzp', function () {
+    generalSearch(params, $(this), 'xyzp');
+  });
+  $(document).on('click', _parent + '.search-data .tpzjs', function () {
+    generalSearch(params, $(this), 'tpzjs');
+  });
+  $(document).on('click', _parent + '.search-data .ppi', function () {
+    generalSearch(params, $(this), 'ppi');
+  });
+  $(document).on('click', _parent + '.search-data .jmdf', function () {
+    generalSearch(params, $(this), 'jmdf');
+  });
+  $(document).on('click', _parent + '.search-data .fzyy', function () {
+    generalSearch(params, $(this), 'fzyy');
+  });
+  $(document).on('click', _parent + '.search-data .yblb', function () {
+    generalSearch(params, $(this), 'yblb');
+  });
+  $(document).on('click', _parent + '.search-data .wbd', function () {
+    generalSearch(params, $(this), 'wbd');
+  });
+  $(document).on('click', _parent + '.search-data .ybd', function () {
+    generalSearch(params, $(this), 'ybd');
+  });
+  $(document).on('click', _parent + '.search-data .wtsj', function () {
+    generalSearch(params, $(this), 'wtsj');
+  });
+}
 //比对表格滚动事件
 function tableDiffScrollFn($parent, params) {
   $parent.find('.table-diff-right .table-diff-data').on('scroll', function (e) {
@@ -1144,6 +1210,7 @@ function upInputFn(params) {
     });
   });
 }
+
 function upSelect(params) {
   $(document).on('blur', params.parent + ' .upSelect', function () {
     var $trLeft = $(params.parent).find('.table-diff-data-content .active');
@@ -1602,6 +1669,7 @@ function resetTableFn(params) {
     if (!tBar.mouseDown) $(this).css({ background: 'transparent' });
   });
 }
+
 var paramsAll = [],
     paramsType = [];
 module.exports = {
@@ -1614,44 +1682,24 @@ module.exports = {
       paramsAll.push(params);
     }
     console.log(paramsAll);
+
+    var parent = params.parent + ' ';
     var $parent = $(params.parent);
 
     loadChemistryTableFn(params); //加载数据
+
+    bindGeneralSearch(params); //通用条件搜索
 
     showDiffBarFn(params); //显示比对按钮
 
     resetTableFn(params); //拖动表格事件
 
-    bindFn(params.parent, 'click', '.search-box .btn', function () {
+    $(document).on('click', parent + '.search-box .btn', function () {
       params.firstResult = 0;params.maxResult = 16;
       loadChemistryTableFn(params);
     }); //搜索化学药比对
-    bindFn(params.parent, 'click', '.search-data .jbyw', function () {
-      params.firstResult = 0;params.maxResult = 16;
-      loadChemistryTableFn(params, { name: 'jbyw', val: $(this).find('.text').text() });
-    }); //搜索基药化学药比对基药
-    bindFn(params.parent, 'click', '.search-data .yblb', function () {
-      params.firstResult = 0;params.maxResult = 16;
-      loadChemistryTableFn(params, { name: 'yblb', val: $(this).find('.text').text() });
-    }); //搜索医保化学药比对
-    bindFn(params.parent, 'click', '.search-data .wtsj', function () {
-      params.firstResult = 0;params.maxResult = 16;
-      loadChemistryTableFn(params, { name: 'wtsj', val: $(this).find('.text').text() });
-    }); //搜索未比对化学药比对
-    bindFn(params.parent, 'click', '.search-data .ybd', function () {
-      params.firstResult = 0;params.maxResult = 16;
-      loadChemistryTableFn(params, { name: 'ybd', val: $(this).find('.text').text() });
-    }); //搜索问题数据化索化学药比对
-    bindFn(params.parent, 'click', '.search-data .wbd', function () {
-      params.firstResult = 0;params.maxResult = 16;
-      loadChemistryTableFn(params, { name: 'wbd', val: $(this).find('.text').text() });
-    }); //搜索已比对学药比对
-    bindFn(params.parent, 'click', '.search-data .rsyy', function () {
-      params.firstResult = 0;params.maxResult = 16;
-      loadChemistryTableFn(params, { name: 'rsyy', val: $(this).find('.text').text() });
-    }); //搜索妊娠用药比对化学药比
 
-    $(document).on('click', params.parent + ' .table-diff-data tr', function () {
+    $(document).on('click', parent + '.table-diff-data tr', function () {
       tableDiffClickFn(params, $(this));
     }); //点击表格数据事件
 
@@ -2433,17 +2481,41 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <a href=\"javaScript:void(0)\" class=\"rsyy\"><span class=\"text\">妊娠用药</span>(<span class=\"color-blue\">"
+  return "        <a href=\"javaScript:void(0)\" class=\"rsyy\"><span class=\"text\">妊娠用药</span><span class=\"color-red\">("
     + container.escapeExpression(((helper = (helper = helpers.rsyyCount || (depth0 != null ? depth0.rsyyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"rsyyCount","hash":{},"data":data}) : helper)))
-    + "</span>)</a>\r\n";
+    + ")</span></a>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<div class=\"search-data-lf lf\">\r\n    共查找出 "
     + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-    + " 条数据：\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">西药</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">中成药</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">说明书</span><span class=\"color-red\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"jbyw\"><span class=\"text\">基药</span><span class=\"color-red\">("
+    + " 条数据：\r\n    <a href=\"javaScript:void(0)\" class=\"xy\"><span class=\"text\">西药</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.xyCount || (depth0 != null ? depth0.xyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"xyCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"zcy\"><span class=\"text\">中成药</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.zcyCount || (depth0 != null ? depth0.zcyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"zcyCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"sms\"><span class=\"text\">说明书</span><span class=\"color-red\">("
+    + alias4(((helper = (helper = helpers.smsCount || (depth0 != null ? depth0.smsCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"smsCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"jbyw\"><span class=\"text\">基药</span><span class=\"color-red\">("
     + alias4(((helper = (helper = helpers.jbywCount || (depth0 != null ? depth0.jbywCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbywCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">抗菌药物</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">中成药注射剂</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">妊娠用药</span><span class=\"color-red\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">血液制品</span><span class=\"color-red\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">糖皮质激素</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">能量用药</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">营养用药</span><span class=\"color-red\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">PPI</span><span class=\"color-red\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">精麻毒放</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"noData\"><span class=\"text\">辅助用药</span><span class=\"color-blue\">()</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"yblb\"><span class=\"text\">医保</span>(<span class=\"color-red\">"
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"kjyw\"><span class=\"text\">抗菌药物</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.kjywCount || (depth0 != null ? depth0.kjywCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"kjywCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"zcyzsj\"><span class=\"text\">中成药注射剂</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.zcyzsjCount || (depth0 != null ? depth0.zcyzsjCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"zcyzsjCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showRsyyCount : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    <a href=\"javaScript:void(0)\" class=\"xyzp\"><span class=\"text\">血液制品</span><span class=\"color-red\">("
+    + alias4(((helper = (helper = helpers.xyzpCount || (depth0 != null ? depth0.xyzpCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"xyzpCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"tpzjs\"><span class=\"text\">糖皮质激素</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.tpzjsCount || (depth0 != null ? depth0.tpzjsCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tpzjsCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"nlyy\"><span class=\"text\">能量用药</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.nlyyCount || (depth0 != null ? depth0.nlyyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"nlyyCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"ppi\"><span class=\"text\">PPI</span><span class=\"color-red\">("
+    + alias4(((helper = (helper = helpers.ppiCount || (depth0 != null ? depth0.ppiCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ppiCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"jmdf\"><span class=\"text\">精麻毒放</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.jmdfCount || (depth0 != null ? depth0.jmdfCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jmdfCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"fzyy\"><span class=\"text\">辅助用药</span><span class=\"color-blue\">("
+    + alias4(((helper = (helper = helpers.fzyyCount || (depth0 != null ? depth0.fzyyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fzyyCount","hash":{},"data":data}) : helper)))
+    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"yblb\"><span class=\"text\">医保</span>(<span class=\"color-red\">"
     + alias4(((helper = (helper = helpers.yblbCount || (depth0 != null ? depth0.yblbCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblbCount","hash":{},"data":data}) : helper)))
     + "</span>)</a>&nbsp;&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"wbd\"><span class=\"text\">未比对</span>(<span class=\"color-red\">"
     + alias4(((helper = (helper = helpers.wbdCount || (depth0 != null ? depth0.wbdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wbdCount","hash":{},"data":data}) : helper)))
@@ -2451,9 +2523,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = helpers.ybdCount || (depth0 != null ? depth0.ybdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ybdCount","hash":{},"data":data}) : helper)))
     + "</span>)</a>&nbsp;&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"wtsj\"><span class=\"text\">问题数据</span>(<span class=\"color-blue\">"
     + alias4(((helper = (helper = helpers.wtsjCount || (depth0 != null ? depth0.wtsjCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wtsjCount","hash":{},"data":data}) : helper)))
-    + "</span>)</a>&nbsp;\r\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showRsyyCount : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "</div>\r\n<a href=\"javaScript:void(0)\" class=\"download color-blue rt\"><img src=\"./images/icon-download.png\" class=\"icon-download\">下载</a>";
+    + "</span>)</a>&nbsp;\r\n</div>\r\n<a href=\"javaScript:void(0)\" class=\"download color-blue rt\"><img src=\"./images/icon-download.png\" class=\"icon-download\">下载</a>";
 },"useData":true});
 
 /***/ }),
@@ -4452,8 +4522,11 @@ var loadDataObj = {
   tableDiffRightTr: tableDiffRightTr,
   downloadUrl: 'mcdProduct30/downHisProduct',
   ypTypeValue: ['0', '1'],
+  //标准数据详情
   detailUrl: 'mcdProduct30/getHistProductById',
-  tableDetails: tableDetails
+  tableDetails: tableDetails,
+  dataName: 'drugId',
+  updateValueUrl: 'mcdProduct30/updateHisProductByParmas'
 };
 
 $(function () {

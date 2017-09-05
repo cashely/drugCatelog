@@ -166,7 +166,8 @@ a {
     .content .search-box .search-data .active {
       display: inline-block;
       background: #2d8cc0;
-      color: #fff; }
+      color: #fff;
+      padding: 0 2px; }
       .content .search-box .search-data .active span {
         color: #fff; }
     .content .search-box .search-data .color-blue {

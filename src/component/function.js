@@ -16,12 +16,23 @@ var addFn= require('./addData/index');
 //加载查询统计
 function loadsearchClassifyTel(params,res){
   params.data.searchDate.total = res.total;
+  params.data.searchDate.xyCount = res.content.xyCount;
+  params.data.searchDate.zcyCount = res.content.zcyCount;
+  params.data.searchDate.smsCount = res.content.smsCount;
   params.data.searchDate.jbywCount = res.content.jbywCount;
+  params.data.searchDate.kjywCount = res.content.kjywCount;
+  params.data.searchDate.zcyzsjCount = res.content.zcyzsjCount;
   params.data.searchDate.rsyyCount = res.content.rsyyCount;
-  params.data.searchDate.wbdCount = res.content.wbdCount;
-  params.data.searchDate.wtsjCount = res.content.wtsjCount;
-  params.data.searchDate.ybdCount = res.content.ybdCount;
+  params.data.searchDate.xyzpCount = res.content.xyzpCount;
+  params.data.searchDate.tpzjsCount = res.content.tpzjsCount;
+  params.data.searchDate.nlyyCount = res.content.nlyyCount;
+  params.data.searchDate.ppiCount = res.content.ppiCount;
+  params.data.searchDate.jmdfCount = res.content.jmdfCount;
+  params.data.searchDate.fzyyCount = res.content.fzyyCount;
   params.data.searchDate.yblbCount = res.content.yblbCount;
+  params.data.searchDate.wbdCount = res.content.wbdCount;
+  params.data.searchDate.ybdCount = res.content.ybdCount;
+  params.data.searchDate.wtsjCount = res.content.wtsjCount;
   $(params.parent).find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
 }
 
@@ -99,7 +110,62 @@ function tableDiffRequest(params){
     });
   }
 }
-
+//通用条件搜索
+function generalSearch(params,$this,name){
+  params.firstResult=0;params.maxResult=16;
+  loadChemistryTableFn(params,{name:name,val:$this.find('.text').text()})
+}
+function bindGeneralSearch(params){
+  var _parent = params.parent+' ';
+  $(document).on('click',_parent+'.search-data .xy',function(){
+    generalSearch(params,$(this),'xy')
+  });
+  $(document).on('click',_parent+'.search-data .zcy',function(){
+    generalSearch(params,$(this),'zcy')
+  });
+  $(document).on('click',_parent+'.search-data .sms',function(){
+    generalSearch(params,$(this),'sms')
+  });
+  $(document).on('click',_parent+'.search-data .jbyw',function(){
+    generalSearch(params,$(this),'jbyw')
+  });//搜索基药化学药比对基药
+  $(document).on('click',_parent+'.search-data .kjyw',function(){
+    generalSearch(params,$(this),'kjyw')
+  });
+  $(document).on('click',_parent+'.search-data .zcyzsj',function(){
+    generalSearch(params,$(this),'zcyzsj')
+  });
+  $(document).on('click',_parent+'.search-data .rsyy',function(){
+    generalSearch(params,$(this),'rsyy')
+  });//搜索妊娠用药比对化学药比
+  $(document).on('click',_parent+'.search-data .xyzp',function(){
+    generalSearch(params,$(this),'xyzp')
+  });
+  $(document).on('click',_parent+'.search-data .tpzjs',function(){
+    generalSearch(params,$(this),'tpzjs')
+  });
+  $(document).on('click',_parent+'.search-data .ppi',function(){
+    generalSearch(params,$(this),'ppi')
+  });
+  $(document).on('click',_parent+'.search-data .jmdf',function(){
+    generalSearch(params,$(this),'jmdf')
+  });
+  $(document).on('click',_parent+'.search-data .fzyy',function(){
+    generalSearch(params,$(this),'fzyy')
+  });
+  $(document).on('click',_parent+'.search-data .yblb',function(){
+    generalSearch(params,$(this),'yblb')
+  });
+  $(document).on('click',_parent+'.search-data .wbd',function(){
+    generalSearch(params,$(this),'wbd')
+  });
+  $(document).on('click',_parent+'.search-data .ybd',function(){
+    generalSearch(params,$(this),'ybd')
+  });
+  $(document).on('click',_parent+'.search-data .wtsj',function(){
+    generalSearch(params,$(this),'wtsj')
+  });
+}
 //比对表格滚动事件
 function tableDiffScrollFn($parent,params){
     $parent.find('.table-diff-right .table-diff-data').on('scroll',function(e){
@@ -877,44 +943,26 @@ module.exports = {
       paramsAll.push(params)
     }
     console.log(paramsAll);
+
+    var parent = params.parent+' ';
     var $parent =$(params.parent);
 
     loadChemistryTableFn(params);//加载数据
+
+    bindGeneralSearch(params);//通用条件搜索
 
     showDiffBarFn(params);//显示比对按钮
 
     resetTableFn(params);//拖动表格事件
 
-    bindFn(params.parent,'click','.search-box .btn',function(){
+    $(document).on('click',parent+'.search-box .btn',function(){
       params.firstResult=0;params.maxResult=16;
       loadChemistryTableFn(params)
     }); //搜索化学药比对
-    bindFn(params.parent,'click','.search-data .jbyw',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'jbyw',val:$(this).find('.text').text()})
-    }); //搜索基药化学药比对基药
-    bindFn(params.parent,'click','.search-data .yblb',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'yblb',val:$(this).find('.text').text()})
-    }); //搜索医保化学药比对
-    bindFn(params.parent,'click','.search-data .wtsj',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'wtsj',val:$(this).find('.text').text()})
-    }); //搜索未比对化学药比对
-    bindFn(params.parent,'click','.search-data .ybd',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'ybd',val:$(this).find('.text').text()})
-    }); //搜索问题数据化索化学药比对
-    bindFn(params.parent,'click','.search-data .wbd',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'wbd',val:$(this).find('.text').text()})
-    }); //搜索已比对学药比对
-    bindFn(params.parent,'click','.search-data .rsyy',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'rsyy',val:$(this).find('.text').text()})
-    }); //搜索妊娠用药比对化学药比
 
-    $(document).on('click',params.parent+' .table-diff-data tr',function(){tableDiffClickFn(params,$(this))});//点击表格数据事件
+    $(document).on('click',parent+'.table-diff-data tr',function(){
+      tableDiffClickFn(params,$(this))
+    });//点击表格数据事件
 
     tableDiffHoverFn(); //鼠标表格悬停事件
 
