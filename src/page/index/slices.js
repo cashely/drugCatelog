@@ -42,12 +42,6 @@ module.exports = function(){
     }
   };
   Fn.loadData(loadData);//加载中药饮片数据
-  Fn.showDetail({
-    parent: parent,
-    url: 'mcdProduct30/getHistProductById',
-    dataName: 'drugId',
-    tableDetails:tableDetails
-  });
 
   Fn.showThan({
     parent: parent,

@@ -40,14 +40,7 @@ var loadDataObj={
 
 $(function(){
   Fn.loadData(loadDataObj);//加载化学药数据
-  //显示比对详情
-  Fn.showDetail({
-    parent: parent,
-    url: 'mcdProduct30/getHistProductById',
-    dataName: 'drugId',
-    tableDetails:tableDetails,
-    updateValueUrl: 'mcdProduct30/updateHisProductByParmas'
-  },loadDataObj);
+
   //显示标准数据
   Fn.showThan({
     parent: parent,

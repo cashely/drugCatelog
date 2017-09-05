@@ -547,8 +547,8 @@ function upSelect(params){
   });
 }
 //更新修改表格字段的值
-function updateValueFn(params,loadObj){
-  $(params.parent).find('.updateValueFn').on('blur',function(){
+function updateValueFn(params){
+  $(document).on('blur',params.parent+' .updateValueFn',function(){
     var colView = $(this).prev().text();
     colView = colView.substring(0,colView.length-1);
     var colName = $(this).prev().attr('class');
@@ -565,7 +565,7 @@ function updateValueFn(params,loadObj){
       callback:function(res){
         var _index = $('.table-diff-data-content').find('[data-id='+drugId+']').index();
         if(colName == 'ypType'){
-          if(loadObj.ypTypeValue.indexOf(aftValue) == -1){
+          if(params.ypTypeValue.indexOf(aftValue) == -1){
             $(params.parent).find('.table-diff-data-content table tr').eq(_index).remove();
             $(params.parent).find('.table-diff-right .table-diff-data  table tr').eq(_index).remove();
             if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
@@ -591,9 +591,9 @@ function updateValueFn(params,loadObj){
             }
           }
         }else{
-          $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
+          $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(params.tableDiffRightTr(res.content));
         }
-        reloadsearchClassifyTel(loadObj);
+        reloadsearchClassifyTel(params);
         $(params.parent).find('.prompt').show();
         setTimeout(function () { $(params.parent).find('.prompt').fadeOut(); }, 2000);
       }
@@ -638,7 +638,7 @@ function loadDetails(params,url,data,drugId){
 function paginationFn(params,type){
   var $parent=$(params.parent),data = {};
   var detailId = $parent.find('.table-diff-right').attr('data-id');
-  if( type == 'prev'){
+  if(type == 'prev'){
     var prevEle = $parent.find('.table-diff-data-content').find('[data-id='+detailId+']').prev();
     if(prevEle.length == 0){
       return
@@ -652,18 +652,18 @@ function paginationFn(params,type){
     data[params.dataName] = nextEle.data('id');
   }
   $parent.find('.table-diff-right').attr('data-id',data[params.dataName]);
-  loadDetails(params,params.url,data,data[params.dataName]);//请求详情数据
+  loadDetails(params,params.detailUrl,data,data[params.dataName]);//请求详情数据
 }
 
 //查看详情事件
-function showDetail(params,e,loadObj){
+function showDetail(params,e){
   if(!singleData.id){
     return;
   }
   var $parent=$(params.parent),data = {};
   data[params.dataName] = singleData.id;
   ajaxFn({
-    url: params.url,
+    url: params.detailUrl,
     data: data,
     callback:function(res){
       var tableDetailsData = res.content;
@@ -674,9 +674,9 @@ function showDetail(params,e,loadObj){
       $parent.find('.table-diff-right-single').addClass('active');
       $parent.find('.table-details-content-box').html(params.tableDetails(tableDetailsData));
       $parent.find('.btn-toggle').on('click',hideDetail); //切换详情事件
-      if(!!params.updateValueUrl){
-        updateValueFn(params,loadObj);
-      }
+      //if(!!params.updateValueUrl){
+      //  updateValueFn(params);
+      //}
       e.preventDefault();
     }
   })
@@ -968,19 +968,32 @@ module.exports = {
 
     //下载表格
     bindFn(params.parent,'click','.search-data .download',function(){downloadFn(params)});
-    //修改表格属性
-    upSelect(params);
+
+    upSelect(params);//修改表格属性
+
+    updateValueFn(params);//修改详情的属性
+
     //绑定给药途径
     bindFn(params.parent,'click','.adminRouteExclude',function(){popupChannelFn(params,$(this))});
     //取消比对
     bindFn(params.parent,'click','.table-diff-single-content .btn-cancel',function(){cancelThanPopupFn(params,$(params.parent).find('.table-diff-right').attr('data-id'))});
     bindFn(params.parent,'click','.table-diff-bar .cancel-than',function(){cancelThanPopupFn(params,singleData.id)});
-  },
-  showDetail:function(params,loadObj){
-    bindFn(params.parent,'click','.showDetail',function(e){showDetail(params,e,loadObj)}); //绑定查看详情事件
-    //查看详情页面上一条和下一条
-    bindFn(params.parent,'click','.table-diff-right-single .pagination-prev',function(){paginationFn(params,'prev')});
-    bindFn(params.parent,'click','.table-diff-right-single .pagination-next',function(){paginationFn(params,'next')});
+
+    if(!!params.detailUrl){
+
+      $(document).on('click', parent + '.showDetail', function (e) {
+        showDetail(params, e)
+      });//绑定查看详情事件
+
+      $(document).on('click', parent + '.table-diff-right-single .pagination-prev', function () {
+        paginationFn(params, 'prev')
+      }); //查看详情页面上一条
+
+      $(document).on('click', parent + '.table-diff-right-single .pagination-next', function () {
+        paginationFn(params, 'next')
+      }); //查看详情页面下一条
+
+    }
   },
   showThan:function(params,loadObj){
     if(!!params.standardThanTel){
