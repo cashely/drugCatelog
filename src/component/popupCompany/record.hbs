@@ -14,8 +14,8 @@
            {{#each content}}
                <tr>
                    <td>{{colView}}</td>
-                   <td>{{befValue}}</td>
-                   <td>{{aftValue}}</td>
+                   <td>{{recordString befValue colName type}}</td>
+                   <td>{{recordString aftValue colName type}}</td>
                    <td>{{timeFn updDate}}</td>
                    <td>{{updName}}</td>
                </tr>

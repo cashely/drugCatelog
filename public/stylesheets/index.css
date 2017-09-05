@@ -158,6 +158,17 @@ a {
     margin-top: 10px;
     line-height: 16px;
     overflow: hidden; }
+    .content .search-box .search-data .search-data-lf {
+      width: 85%; }
+      .content .search-box .search-data .search-data-lf a {
+        display: inline-block;
+        margin-bottom: 5px; }
+    .content .search-box .search-data .active {
+      display: inline-block;
+      background: #2d8cc0;
+      color: #fff; }
+      .content .search-box .search-data .active span {
+        color: #fff; }
     .content .search-box .search-data .color-blue {
       color: #2D8CC0; }
     .content .search-box .search-data .color-red {
@@ -422,7 +433,7 @@ a {
   display: block; }
 
 .table-diff {
-  margin-top: 10px;
+  margin-top: 5px;
   position: relative; }
   .table-diff .table-diff-data-td-select .value {
     display: block; }

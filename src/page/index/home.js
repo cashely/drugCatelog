@@ -30,7 +30,9 @@ var loadDataObj={
   cancelThanData:'hptid',
   tableDiffRightTr: tableDiffRightTr,
   downloadUrl:'mcdProduct30/downHisProduct',
-  ypTypeValue : ['0','1']
+  ypTypeValue : ['0','1'],
+  detailUrl: 'mcdProduct30/getHistProductById',
+  tableDetails:tableDetails
 };
 
 $(function(){
