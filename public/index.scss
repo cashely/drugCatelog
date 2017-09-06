@@ -219,14 +219,18 @@ a{
             }
         }
         .search-than{
-            padding: 10px 12px 0px;
+            padding: 10px 12px 0;
             overflow: hidden;
         }
         .than-table{
             position: relative;
+            .than-thead-wrap{
+                width: 100%;
+                background: #4EAADC;
+            }
             .than-thead{
                 background: #4EAADC;
-                padding-right: 16px;
+                margin-right: 16px;
                 overflow: hidden;
             }
             .than-tbody{

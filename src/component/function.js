@@ -10,13 +10,11 @@ var addDataPopupTel = require('./popupCompany/addInfo.hbs');
 var loading = false;
 var singleData = {id:null, index:null};
 var addData = require('./addData/index.hbs');
-var $parent = $('.'+data.name);
 var tableRightLeft = 0;
 var addFn= require('./addData/index');
 
 //加载查询统计
 function loadsearchClassifyTel(params,res){
-  //params.firstResult = params.firstResult + 1;
   params.data.searchDate.total = res.total;
   params.data.searchDate.jbywCount = res.content.jbywCount;
   params.data.searchDate.rsyyCount = res.content.rsyyCount;
@@ -76,6 +74,31 @@ function loadChemistryTableFn(params,type){
   });
 }
 
+function tableDiffRequest(params){
+  if(loading == false){
+    loading = true;
+    params.loadData.firstResult = (params.firstResult+1)*params.maxResult;
+    params.loadData.maxResult = params.maxResult;
+    ajaxFn({
+      url: params.url,
+      data:params.loadData,
+      callback:function(res){
+        if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
+          params.firstResult = params.firstResult + 1;
+          var data = {};
+          data.ydata = res.content.rows;
+          data.tableNum = params.loadData.firstResult + 1;
+          $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
+          $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+        }else{
+          $('.table-diff-header .scroll-loading').hide();
+        }
+        loading = false;
+      }
+    });
+  }
+}
+
 //比对表格滚动事件
 function tableDiffScrollFn($parent,params){
     $parent.find('.table-diff-right .table-diff-data').on('scroll',function(e){
@@ -87,44 +110,28 @@ function tableDiffScrollFn($parent,params){
         console.log('横向滚动');
         return;
       }
-        console.log('竖向滚动');
+      //console.log('竖向滚动');
       if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
-        if(loading == false){
-          loading = true;
-          params.loadData.firstResult = (params.firstResult+1)*params.maxResult;
-          params.loadData.maxResult = params.maxResult;
-          ajaxFn({
-            url: params.url,
-            data:params.loadData,
-            callback:function(res){
-              if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
-                params.firstResult = params.firstResult + 1;
-                var data = {};
-                data.ydata = res.content.rows;
-                data.tableNum = params.loadData.firstResult;
-                $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
-                $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-              }else{
-                $('.table-diff-header .scroll-loading').hide();
-              }
-              loading = false;
-            }
-          });
-        }
+        tableDiffRequest(params);
+      }
+    });
+    $parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
+      var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
+      if(_t.scrollLeft() != tableRightLeft){
+        tableRightLeft = _t.scrollLeft();
+        console.log('横向滚动');
+        return;
+      }
+      //console.log('竖向滚动');
+      if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
+        tableDiffRequest(params);
       }
     })
-    //$parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
-    //  $parent.find('.table-diff-right .table-diff-data').scrollTop($(this)[0].scrollTop);
-    //})
-
-    $parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
-        $parent.find('.table-diff-right').scrollTop($(this).scrollTop);
-    })
 }
-
+//显示操作条
 function showDiffBarFn(params){
   var $parent = $(params.parent);
-  $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
+  $(document).on('contextmenu',params.parent +' .table-diff-left .table-diff-data tr',function(e){
     var _tr = $(this);
     var _index = _tr.index();
     var trRigth = $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index);
@@ -139,10 +146,10 @@ function showDiffBarFn(params){
       left: e.pageX - _tr.offset().left
     });
     singleData.id = $(this).attr('data-id');
+    e.preventDefault();
   });
-  $parent.find('.table-diff-bar').on('mouseover',function(e){
-      $('.table-diff-bar').show();
-      e.preventDefault();
+  $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
+    singleData.id = $(this).attr('data-id');
   });
   $(document).on('mouseleave','.table-diff-left',function(){
       $('.table-diff-bar').hide();
@@ -157,6 +164,7 @@ function bindFn(parent,event,className,fn){
 function tableDiffClickFn(){
   var _index = $(this).prevAll().length;
   var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+  $('.table-diff-bar').hide();
   for(var i=0;i<_tables;i++){
     $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
   }
@@ -354,12 +362,13 @@ function showThan(params){
       if(!!params.slicesName){//中药饮片
         $parent.find('.search-than .'+params.slicesName).val(_prodName);
       }
-      $parent.find('.standard-than .than-tbody').on('scroll',function(){thanScrollFn(params,$(this))}); //滚动加载19位标准数据
     }
   })
 }
+
 //滚动加载19位标准数据
 function thanScrollFn(params,$this){
+  $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
    if($this.children('table').height() <= $this.scrollTop()+ $this.height() && $this.children('table').height() > 0){
     if(loading == false){
       loading = true;
@@ -390,6 +399,7 @@ function hideDetail(e){
   $('.table-diff-data tr').removeClass('active');
   $('.table-diff-right-all').addClass('active');
   $('.table-diff-right-single').removeClass('active');
+  $('.table-diff-right .table-diff-data').scrollTop($('.table-diff-left .table-diff-data')[0].scrollTop);
  }
 
 //更新转换比
@@ -431,6 +441,23 @@ function upSelect(params){
           if(params.ypTypeValue.indexOf(aftValue) == -1){
             $trLeft.remove();
             $trRight.remove();
+            if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
+              $('.table-diff-header .scroll-loading').show();
+            }else{
+              $('.table-diff-header .scroll-loading').hide();
+              tableDiffRequest(params)
+            }
+            var num = Math.max(aftValue-1,0);
+            switch (num){
+              case 0:
+                loadChemistryTableFn(paramsAll[num]);
+                break;
+              case 1:
+                if(!!paramsAll[num]){
+                  loadChemistryTableFn(paramsAll[num]);
+                }
+                break;
+            }
           }
         }
         reloadsearchClassifyTel(params);
@@ -462,10 +489,27 @@ function updateValueFn(params,loadObj){
           if(loadObj.ypTypeValue.indexOf(aftValue) == -1){
             $(params.parent).find('.table-diff-data-content table tr').eq(_index).remove();
             $(params.parent).find('.table-diff-right .table-diff-data  table tr').eq(_index).remove();
+            if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
+              $('.table-diff-header .scroll-loading').show();
+            }else{
+              $('.table-diff-header .scroll-loading').hide();
+              tableDiffRequest(params)
+            }
             $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
             $('.table-diff-data tr').removeClass('active');
             $('.table-diff-right-all').addClass('active');
             $('.table-diff-right-single').removeClass('active');
+            var num = Math.max(aftValue-1,0);
+            switch (num){
+              case 0:
+                loadChemistryTableFn(paramsAll[num]);
+                break;
+              case 1:
+                if(!!paramsAll[num]){
+                  loadChemistryTableFn(paramsAll[num]);
+                }
+                break;
+            }
           }
         }else{
           $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
@@ -743,12 +787,17 @@ function downloadFn(params){
   downloadUrl+='&rsyy='+isNull(downloadData.rsyy);
   window.location.href=downloadUrl;
 }
-
+var  paramsAll=[],paramsType=[];
 module.exports = {
   loadData:function(params){
     if(!!params.fn){
       params.fn();
     }
+    if(paramsType.indexOf(params.parent) == -1){
+      paramsType.push(params.parent);
+      paramsAll.push(params)
+    }
+    console.log(paramsAll);
     var $parent =$(params.parent);
 
     loadChemistryTableFn(params);//加载数据
@@ -810,6 +859,7 @@ module.exports = {
     }
     bindFn(params.parent,'click','.showThan',function(){showThan(params,loadObj)}); //显示标准数据比对
     bindFn(params.parent,'click','.find-than',function(){findThanFn(params)}); //查找30位标准比对数据
+    $(params.parent).find('.standard-than .than-tbody').on('scroll',function(){thanScrollFn(params,$(this))}); //滚动加载19位标准数据
     bindFn(params.parent,'click','.than-table .select-than',function(){selectThanFn(params,$(this),loadObj)});//选择标准数据比对
     if(!!params.addThanFn){
       bindFn(params.parent,'click','.add-than',function(){addThan(params,loadObj)}); //查找19位标准数据

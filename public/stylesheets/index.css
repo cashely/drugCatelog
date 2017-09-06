@@ -191,13 +191,16 @@ a {
         .content .standard-than .title .toggle .icon-arrow-down {
           background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAABGdBTUEAALGPC/xhBQAAAJRJREFUCB1j1O09eJSBiSn2cqHtPQYsQLf/sBLDv3+LmRgZGOsY/v7brDf9qBi6OrAYUA6khulSsd1eoOqm/1//bHGYepUHphjEBokxMjE2g9QwwiT0eg/k/Wdg9GHj4fYGif368nUr43+GrZdK7CeC+HCFIA5QcRuQUgAK///PyPDocpF9JUgcKwAqnq3Xe3AOuiQAW8w5UkDrKnkAAAAASUVORK5CYII=) center center no-repeat; }
     .content .standard-than .search-than {
-      padding: 10px 12px 0px;
+      padding: 10px 12px 0;
       overflow: hidden; }
     .content .standard-than .than-table {
       position: relative; }
+      .content .standard-than .than-table .than-thead-wrap {
+        width: 100%;
+        background: #4EAADC; }
       .content .standard-than .than-table .than-thead {
         background: #4EAADC;
-        padding-right: 16px;
+        margin-right: 16px;
         overflow: hidden; }
       .content .standard-than .than-table .than-tbody {
         position: relative;

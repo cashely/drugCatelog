@@ -369,7 +369,7 @@ module.exports = function (time) {
   Y = date.getFullYear() + '-';
   M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
   // D = date.getDate() + ' ';
-  D = date.getDate();
+  D = date.getDate().length > 1 ? date.getDate() : '0' + date.getDate();
 
   h = date.getHours() + ':';
   m = date.getMinutes() + ':';
@@ -392,7 +392,7 @@ module.exports = {
   },
   diffData: {
     tLeftHead: ['医院药品ID', '药品名称', '规格厂家', '转换比', '门诊/住院单位', '是否停用', '修订时间'],
-    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格', '转换比', '企业简称', '批准文号/注册证号', '说明书', '说明书版本', '基药', '抗菌药物', 'DDD值(mg)', '抗菌药物分类', '是否计算强度', '给药途径(不计算强度)', '中成药注射剂', '妊娠用药', '血液制品', '糖皮质激素', '能量用药', '营养用药', 'PPI（质子泵抑制剂)', '精麻毒放', '辅助用药', '医保', '医保编码', 'YPID', '品种代码', '人社分类', '药理分类']
+    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格', '转换比', '企业简称', '批准文号/注册证号', '说明书', '说明书版本', '基药', '抗菌药物', 'DDD值', '抗菌药物分类', '是否计算强度', '给药途径(不计算强度)', '中成药注射剂', '妊娠用药', '血液制品', '糖皮质激素', '能量用药', '营养用药', 'PPI（质子泵抑制剂)', '精麻毒放', '辅助用药', '医保', '医保编码', 'YPID', '品种代码', '人社分类', '药理分类']
   },
   thanData: {
     thead: ['YPID', '品种代码', '药交ID', '药品编码', '药品类型', '药品名称', '商品名', '剂型', '规格', '生产企业', '批准文号/注册证号', '操作'],
@@ -688,6 +688,14 @@ module.exports = ajaxFn;
 
 /***/ }),
 /* 17 */
+/***/ (function(module, exports) {
+
+module.exports = function (index, num) {
+  return index + num;
+};
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ajaxFn = __webpack_require__(16); //请求方法
@@ -698,17 +706,15 @@ var popupCompanyTal = __webpack_require__(60);
 var popupCancelThanTal = __webpack_require__(62);
 var popupRecordTal = __webpack_require__(63);
 var popupChannelTal = __webpack_require__(64);
-var addDataPopupTel = __webpack_require__(24);
+var addDataPopupTel = __webpack_require__(25);
 var loading = false;
 var singleData = { id: null, index: null };
-var addData = __webpack_require__(25);
-var $parent = $('.' + data.name);
+var addData = __webpack_require__(26);
 var tableRightLeft = 0;
-var addFn = __webpack_require__(26);
+var addFn = __webpack_require__(27);
 
 //加载查询统计
 function loadsearchClassifyTel(params, res) {
-  //params.firstResult = params.firstResult + 1;
   params.data.searchDate.total = res.total;
   params.data.searchDate.jbywCount = res.content.jbywCount;
   params.data.searchDate.rsyyCount = res.content.rsyyCount;
@@ -768,6 +774,31 @@ function loadChemistryTableFn(params, type) {
   });
 }
 
+function tableDiffRequest(params) {
+  if (loading == false) {
+    loading = true;
+    params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
+    params.loadData.maxResult = params.maxResult;
+    ajaxFn({
+      url: params.url,
+      data: params.loadData,
+      callback: function (res) {
+        if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total) {
+          params.firstResult = params.firstResult + 1;
+          var data = {};
+          data.ydata = res.content.rows;
+          data.tableNum = params.loadData.firstResult + 1;
+          $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
+          $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+        } else {
+          $('.table-diff-header .scroll-loading').hide();
+        }
+        loading = false;
+      }
+    });
+  }
+}
+
 //比对表格滚动事件
 function tableDiffScrollFn($parent, params) {
   $parent.find('.table-diff-right .table-diff-data').on('scroll', function (e) {
@@ -781,40 +812,30 @@ function tableDiffScrollFn($parent, params) {
       console.log('横向滚动');
       return;
     }
-    console.log('竖向滚动');
+    //console.log('竖向滚动');
     if (trHeight * trLength <= _t.scrollTop() + _t.height()) {
-      if (loading == false) {
-        loading = true;
-        params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
-        params.loadData.maxResult = params.maxResult;
-        ajaxFn({
-          url: params.url,
-          data: params.loadData,
-          callback: function (res) {
-            if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total) {
-              params.firstResult = params.firstResult + 1;
-              var data = {};
-              data.ydata = res.content.rows;
-              data.tableNum = params.loadData.firstResult;
-              $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
-              $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-            } else {
-              $('.table-diff-header .scroll-loading').hide();
-            }
-            loading = false;
-          }
-        });
-      }
+      tableDiffRequest(params);
     }
   });
-  //$parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
-  //  $parent.find('.table-diff-right .table-diff-data').scrollTop($(this)[0].scrollTop);
-  //})
+  $parent.find('.table-diff-left .table-diff-data').on('scroll', function (e) {
+    var _t = $(this),
+        trHeight = $(this).find('tr:first').height(),
+        trLength = $(this).find('tr').length;
+    if (_t.scrollLeft() != tableRightLeft) {
+      tableRightLeft = _t.scrollLeft();
+      console.log('横向滚动');
+      return;
+    }
+    //console.log('竖向滚动');
+    if (trHeight * trLength <= _t.scrollTop() + _t.height()) {
+      tableDiffRequest(params);
+    }
+  });
 }
-
+//显示操作条
 function showDiffBarFn(params) {
   var $parent = $(params.parent);
-  $(document).on('mouseover', params.parent + ' .table-diff-left .table-diff-data tr', function (e) {
+  $(document).on('contextmenu', params.parent + ' .table-diff-left .table-diff-data tr', function (e) {
     var _tr = $(this);
     var _index = _tr.index();
     var trRigth = $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index);
@@ -829,10 +850,10 @@ function showDiffBarFn(params) {
       left: e.pageX - _tr.offset().left
     });
     singleData.id = $(this).attr('data-id');
-  });
-  $parent.find('.table-diff-bar').on('mouseover', function (e) {
-    $('.table-diff-bar').show();
     e.preventDefault();
+  });
+  $(document).on('mouseover', params.parent + ' .table-diff-left .table-diff-data tr', function (e) {
+    singleData.id = $(this).attr('data-id');
   });
   $(document).on('mouseleave', '.table-diff-left', function () {
     $('.table-diff-bar').hide();
@@ -847,6 +868,7 @@ function bindFn(parent, event, className, fn) {
 function tableDiffClickFn() {
   var _index = $(this).prevAll().length;
   var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+  $('.table-diff-bar').hide();
   for (var i = 0; i < _tables; i++) {
     $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
   }
@@ -1048,14 +1070,13 @@ function showThan(params) {
         //中药饮片
         $parent.find('.search-than .' + params.slicesName).val(_prodName);
       }
-      $parent.find('.standard-than .than-tbody').on('scroll', function () {
-        thanScrollFn(params, $(this));
-      }); //滚动加载19位标准数据
     }
   });
 }
+
 //滚动加载19位标准数据
 function thanScrollFn(params, $this) {
+  $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
   if ($this.children('table').height() <= $this.scrollTop() + $this.height() && $this.children('table').height() > 0) {
     if (loading == false) {
       loading = true;
@@ -1086,6 +1107,7 @@ function hideDetail(e) {
   $('.table-diff-data tr').removeClass('active');
   $('.table-diff-right-all').addClass('active');
   $('.table-diff-right-single').removeClass('active');
+  $('.table-diff-right .table-diff-data').scrollTop($('.table-diff-left .table-diff-data')[0].scrollTop);
 }
 
 //更新转换比
@@ -1131,6 +1153,23 @@ function upSelect(params) {
           if (params.ypTypeValue.indexOf(aftValue) == -1) {
             $trLeft.remove();
             $trRight.remove();
+            if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult) {
+              $('.table-diff-header .scroll-loading').show();
+            } else {
+              $('.table-diff-header .scroll-loading').hide();
+              tableDiffRequest(params);
+            }
+            var num = Math.max(aftValue - 1, 0);
+            switch (num) {
+              case 0:
+                loadChemistryTableFn(paramsAll[num]);
+                break;
+              case 1:
+                if (!!paramsAll[num]) {
+                  loadChemistryTableFn(paramsAll[num]);
+                }
+                break;
+            }
           }
         }
         reloadsearchClassifyTel(params);
@@ -1164,10 +1203,27 @@ function updateValueFn(params, loadObj) {
           if (loadObj.ypTypeValue.indexOf(aftValue) == -1) {
             $(params.parent).find('.table-diff-data-content table tr').eq(_index).remove();
             $(params.parent).find('.table-diff-right .table-diff-data  table tr').eq(_index).remove();
+            if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult) {
+              $('.table-diff-header .scroll-loading').show();
+            } else {
+              $('.table-diff-header .scroll-loading').hide();
+              tableDiffRequest(params);
+            }
             $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
             $('.table-diff-data tr').removeClass('active');
             $('.table-diff-right-all').addClass('active');
             $('.table-diff-right-single').removeClass('active');
+            var num = Math.max(aftValue - 1, 0);
+            switch (num) {
+              case 0:
+                loadChemistryTableFn(paramsAll[num]);
+                break;
+              case 1:
+                if (!!paramsAll[num]) {
+                  loadChemistryTableFn(paramsAll[num]);
+                }
+                break;
+            }
           }
         } else {
           $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
@@ -1467,12 +1523,18 @@ function downloadFn(params) {
   downloadUrl += '&rsyy=' + isNull(downloadData.rsyy);
   window.location.href = downloadUrl;
 }
-
+var paramsAll = [],
+    paramsType = [];
 module.exports = {
   loadData: function (params) {
     if (!!params.fn) {
       params.fn();
     }
+    if (paramsType.indexOf(params.parent) == -1) {
+      paramsType.push(params.parent);
+      paramsAll.push(params);
+    }
+    console.log(paramsAll);
     var $parent = $(params.parent);
 
     loadChemistryTableFn(params); //加载数据
@@ -1552,6 +1614,9 @@ module.exports = {
     bindFn(params.parent, 'click', '.find-than', function () {
       findThanFn(params);
     }); //查找30位标准比对数据
+    $(params.parent).find('.standard-than .than-tbody').on('scroll', function () {
+      thanScrollFn(params, $(this));
+    }); //滚动加载19位标准数据
     bindFn(params.parent, 'click', '.than-table .select-than', function () {
       selectThanFn(params, $(this), loadObj);
     }); //选择标准数据比对
@@ -1579,7 +1644,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -1601,7 +1666,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = function (_this) {
@@ -1613,7 +1678,7 @@ module.exports = function (_this) {
 };
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var opction = __webpack_require__(11); //门诊/住院单位
@@ -1653,7 +1718,7 @@ function textFn(_this) {
 }
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1764,7 +1829,7 @@ exports.createFrame = _utils.createFrame;
 exports.logger = _logger2['default'];
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var footerTel = __webpack_require__(56);
@@ -1775,7 +1840,7 @@ var data = {
 $('.footer').html(footerTel(data));
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = function (_this) {
@@ -1785,7 +1850,7 @@ module.exports = function (_this) {
 };
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -1819,7 +1884,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -1879,7 +1944,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"useData":true});
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1888,10 +1953,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 /**
  * 添加对比数据
  */
-var addData = __webpack_require__(25);
-var searchBox = __webpack_require__(18);
-var addDataPopupTel = __webpack_require__(24);
-var tableDiffRightTr = __webpack_require__(27); //化学药右边详情模版
+var addData = __webpack_require__(26);
+var searchBox = __webpack_require__(19);
+var addDataPopupTel = __webpack_require__(25);
+var tableDiffRightTr = __webpack_require__(28); //化学药右边详情模版
 var tbodyTel = __webpack_require__(65);
 var tr = __webpack_require__(66);
 var ajaxFn = __webpack_require__(16);
@@ -1988,7 +2053,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Handlebars = __webpack_require__(1);
@@ -2031,7 +2096,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "</div></td>\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(19)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
     + "</div></td>\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
     + "\"><div>"
@@ -2059,7 +2124,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "</div></td>\n<td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"isZcyzsj",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\n<td class=\"icon-triangle table-diff-data-td-select\">\n    "
-    + ((stack1 = __default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
     + "\n</td>\n<td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"bloodPro",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\n<td class=\"icon-triangle table-diff-data-td-select\"><div>"
@@ -2102,14 +2167,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(alias1((depth0 != null ? depth0.ylflName : depth0), depth0))
     + "</div></td>";
 },"useData":true});
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-module.exports = function (index, num) {
-  return index + num;
-};
 
 /***/ }),
 /* 29 */
@@ -2210,12 +2267,12 @@ __webpack_require__(35);
 
 __webpack_require__(36);
 __webpack_require__(54);
-__webpack_require__(22);
+__webpack_require__(23);
 __webpack_require__(57);
 __webpack_require__(76);
 __webpack_require__(77);
-__webpack_require__(26);
-__webpack_require__(22);
+__webpack_require__(27);
+__webpack_require__(23);
 __webpack_require__(79);
 
 /***/ }),
@@ -2289,7 +2346,7 @@ function _interopRequireWildcard(obj) {
   }
 }
 
-var _handlebarsBase = __webpack_require__(21);
+var _handlebarsBase = __webpack_require__(22);
 
 var base = _interopRequireWildcard(_handlebarsBase);
 
@@ -2865,7 +2922,7 @@ var _exception = __webpack_require__(15);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _base = __webpack_require__(21);
+var _base = __webpack_require__(22);
 
 function checkRevision(compilerInfo) {
   var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -3259,7 +3316,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 /***/ (function(module, exports, __webpack_require__) {
 
 var tabBarTel = __webpack_require__(58);
-var Fn = __webpack_require__(17);
+var Fn = __webpack_require__(18);
 var slices = __webpack_require__(67);
 var data = __webpack_require__(9);
 var slicesData = __webpack_require__(30);
@@ -3466,7 +3523,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
   return "            <ul>\n                <li>\n                    <input type=\"checkbox\" class=\"channel-checkbox\" data-id=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\" "
-    + alias2(__default(__webpack_require__(23)).call(alias3,(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(24)).call(alias3,(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
     + "><a href=\"javascript:void(0)\" class=\"channel-name\">"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "</a>\n                    <ul class=\"sub-channel\">\n"
@@ -3478,7 +3535,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
   return "                            <li><input type=\"checkbox\" class=\"channel-checkbox\" data-id="
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + " "
-    + alias2(__default(__webpack_require__(23)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(24)).call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.checked : depth0),{"name":"isChecked","hash":{},"data":data}))
     + "><a href=\"javascript:void(0)\" class=\"channel-name\">"
     + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
     + "</a></li>\n";
@@ -3578,7 +3635,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 /* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var searchTel = __webpack_require__(18);
+var searchTel = __webpack_require__(19);
 
 var tableDiffTel = __webpack_require__(68);
 var tableDiffLeft = __webpack_require__(69);
@@ -3591,7 +3648,7 @@ var standardThanTbody = __webpack_require__(74);
 var standardThanTr = __webpack_require__(75);
 var searchClassifyTel = __webpack_require__(29); //比对表格搜索分类
 
-var Fn = __webpack_require__(17);
+var Fn = __webpack_require__(18);
 var data = __webpack_require__(30);
 var parent = '.' + data.name;
 var loadData;
@@ -3676,7 +3733,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + " data-name=\""
     + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
     + "\">\n                                    <td class=\"table-num\"><div>"
-    + alias2(alias1((data && data.index), depth0))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),1,{"name":"add","hash":{},"data":data}))
     + "</div></td>\n                                    <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -3776,7 +3833,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + " data-name=\""
     + alias2(alias1((depth0 != null ? depth0.drugNameFormat : depth0), depth0))
     + "\">\n        <td class=\"table-num\"><div>"
-    + alias2(__default(__webpack_require__(28)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
     + "</div></td>\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -3949,7 +4006,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
     + "\">\n            </lable>\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                       <td><div class=\"table-text\">"
+    return "                           <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "</div></td>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -3959,9 +4016,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\n    <div class=\"search-than\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\n    </div>\n   <div class=\"than-table\">\n       <div class=\"than-thead\">\n           <table class=\"table\" cellpadding=\"0\" cellspacing=\"0\" >\n               <tr class=\"thead\">\n"
+    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\n    </div>\n   <div class=\"than-table\">\n       <div class=\"than-thead-wrap\">\n           <div class=\"than-thead\">\n               <table class=\"table\" cellpadding=\"0\" cellspacing=\"0\" >\n                   <tr class=\"thead\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\n           </table>\n       </div>\n       <div class=\"than-tbody\">\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\n           <div class=\"scroll-loading\">加载中...</div>\n           <!--<div class=\"loading\">-->\n               <!--<img src=\"./images/loading.gif\" class=\"loading-img\">-->\n           <!--</div>-->\n       </div>\n       <div class=\"loading-wrap\">\n           <div class=\"loading\">\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\n           </div>\n       </div>\n   </div>\n</div>";
+    + "                   </tr>\n               </table>\n           </div>\n       </div>\n       <div class=\"than-tbody\">\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\n           <div class=\"scroll-loading\">加载中...</div>\n           <!--<div class=\"loading\">-->\n               <!--<img src=\"./images/loading.gif\" class=\"loading-img\">-->\n           <!--</div>-->\n       </div>\n       <div class=\"loading-wrap\">\n           <div class=\"loading\">\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\n           </div>\n       </div>\n   </div>\n</div>";
 },"useData":true});
 
 /***/ }),
@@ -4055,7 +4112,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 /**
  * 搜索区
  */
-var searchBoxTel = __webpack_require__(18);
+var searchBoxTel = __webpack_require__(19);
 var data = __webpack_require__(9);
 var $chemistry = $('.' + data.name);
 
@@ -4086,7 +4143,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
     + "\">\n            </lable>\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                       <td><div class=\"table-text\">"
+    return "                           <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "</div></td>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -4096,9 +4153,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\n    <div class=\"search-than\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\n    </div>\n   <div class=\"than-table\">\n       <div class=\"than-thead\">\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\">\n               <tr class=\"thead\">\n"
+    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\n    </div>\n   <div class=\"than-table\">\n       <div class=\"than-thead-wrap\">\n           <div class=\"than-thead\">\n               <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\">\n                   <tr class=\"thead\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "               </tr>\n           </table>\n       </div>\n       <div class=\"than-tbody\">\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\n           <div class=\"scroll-loading\">加载中...</div>\n       </div>\n       <div class=\"loading-wrap\">\n           <div class=\"loading\">\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\n           </div>\n       </div>\n   </div>\n    <div class=\"no-than\">\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\n    </div>\n</div>\n";
+    + "                   </tr>\n               </table>\n           </div>\n       </div>\n       <div class=\"than-tbody\">\n           <table cellpadding=\"0\" cellspacing=\"0\" class=\"table\"></table>\n           <div class=\"scroll-loading\">加载中...</div>\n       </div>\n       <div class=\"loading-wrap\">\n           <div class=\"loading\">\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\n           </div>\n       </div>\n   </div>\n    <div class=\"no-than\">\n        如查询不到所需数据，请点击 <a href=\"javaScript:void(0)\" class=\"add-than\">添加数据</a>\n    </div>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -4110,12 +4167,12 @@ var tableDiffTel = __webpack_require__(80); //化学药比对表格
 var tableDiffLeft = __webpack_require__(81); //化学药左边单行比对表格
 var tableDiffRight = __webpack_require__(82); //化学药右边单行比对表格
 var tableDetails = __webpack_require__(83); //化学药右边详情模版
-var tableDiffRightTr = __webpack_require__(27); //化学药右边详情模版
+var tableDiffRightTr = __webpack_require__(28); //化学药右边详情模版
 
 var standardThanTbody = __webpack_require__(84); //化学药标准表格数据模版
 var standardThanTr = __webpack_require__(85); //化学药标准单行表格数据模版
 
-var Fn = __webpack_require__(17);
+var Fn = __webpack_require__(18);
 var data = __webpack_require__(9); //化学药数据
 var parent = '.' + data.name;
 var firstResult = 0,
@@ -4201,7 +4258,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"  data-fncName=\""
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
     + "\">\n                                        <td class=\"table-num\"><div>"
-    + alias2(alias1((data && data.index), depth0))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),1,{"name":"add","hash":{},"data":data}))
     + "</div></td>\n                                        <td class=\"table-diff-drugId\" title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -4277,7 +4334,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(19)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
     + "</div></td>\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
     + "\"><div>"
@@ -4305,7 +4362,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\n                                        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"isZcyzsj",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\n                                        <td class=\"icon-triangle table-diff-data-td-select\">\n                                            "
-    + ((stack1 = __default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
     + "\n                                        </td>\n                                        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"bloodPro",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\n                                        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
@@ -4377,7 +4434,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"  data-fncName=\""
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
     + "\">\n        <td class=\"table-num\"><div style=\"width:40px\">"
-    + alias2(__default(__webpack_require__(28)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(17)).call(alias3,(data && data.index),(depths[1] != null ? depths[1].tableNum : depths[1]),{"name":"add","hash":{},"data":data}))
     + "</div></td>\n        <td class=\"table-diff-drugId\" title=\""
     + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\"><div>"
@@ -4461,7 +4518,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
     + "\"><div>"
-    + alias2(__default(__webpack_require__(19)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"isNull","hash":{},"data":data}))
     + "</div></td>\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.smsDate : depth0), depth0))
     + "\"><div>"
@@ -4489,7 +4546,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\n        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isZcyzsj : depth0),"isZcyzsj",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\n        <td class=\"icon-triangle table-diff-data-td-select\">\n            "
-    + ((stack1 = __default(__webpack_require__(20)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(21)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),{"name":"pregnancyLevelSelect","hash":{},"data":data})) != null ? stack1 : "")
     + "\n        </td>\n        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"bloodPro",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\n        <td class=\"icon-triangle table-diff-data-td-select\"><div>"
@@ -4603,7 +4660,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
     + ">限制使用级</option>\n                <option value=\"3\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
-    + ">特殊使用级</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span data-name=\"ddd\">DDD值(mg):</span>\n            <input type=\"text\" class=\"input upInputFn\" value=\""
+    + ">特殊使用级</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span data-name=\"ddd\">DDD值:</span>\n            <input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
     + "\">\n        </li>\n        <li class=\"input-group\">\n            <span class=\"kjyw\">抗菌药物分类:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
@@ -4667,7 +4724,15 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
-    + ">是</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"bloodPro\">血液制品:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
+    + ">A</option>\n                <option value=\"2\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + ">B</option>\n                <option value=\"3\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + ">C</option>\n                <option value=\"4\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
+    + ">D</option>\n                <option value=\"5\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.pregnancyLevel : depth0),"5",{"name":"isTrue","hash":{},"data":data}))
+    + ">X</option>\n            </select>\n        </li>\n        <li class=\"input-group\">\n            <span class=\"bloodPro\">血液制品:</span>\n            <select class=\"select updateValueFn\">\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.bloodPro : depth0),"1",{"name":"isTrue","hash":{},"data":data}))

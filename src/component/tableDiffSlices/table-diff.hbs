@@ -24,7 +24,7 @@
                             <tbody>
                             {{#each ydata}}
                                 <tr data-id={{id}} data-name="{{drugNameFormat}}">
-                                    <td class="table-num"><div>{{@index}}</div></td>
+                                    <td class="table-num"><div>{{add @index 1}}</div></td>
                                     <td  title="{{id}}"><div>{{id}}</div></td>
                                     <td  title="{{drugName}}"><div>{{drugName}}</div></td>
                                     <td title="{{spec}}{{manufacturerName}}"><div>{{spec}}{{manufacturerName}}</div></td>
