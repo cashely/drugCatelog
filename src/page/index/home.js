@@ -30,19 +30,17 @@ var loadDataObj={
   cancelThanData:'hptid',
   tableDiffRightTr: tableDiffRightTr,
   downloadUrl:'mcdProduct30/downHisProduct',
-  ypTypeValue : ['0','1']
+  ypTypeValue : ['0','1'],
+  //标准数据详情
+  detailUrl: 'mcdProduct30/getHistProductById',
+  tableDetails:tableDetails,
+  dataName: 'drugId',
+  updateValueUrl: 'mcdProduct30/updateHisProductByParmas'
 };
 
 $(function(){
   Fn.loadData(loadDataObj);//加载化学药数据
-  //显示比对详情
-  Fn.showDetail({
-    parent: parent,
-    url: 'mcdProduct30/getHistProductById',
-    dataName: 'drugId',
-    tableDetails:tableDetails,
-    updateValueUrl: 'mcdProduct30/updateHisProductByParmas'
-  },loadDataObj);
+
   //显示标准数据
   Fn.showThan({
     parent: parent,

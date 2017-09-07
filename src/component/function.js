@@ -16,12 +16,23 @@ var addFn= require('./addData/index');
 //加载查询统计
 function loadsearchClassifyTel(params,res){
   params.data.searchDate.total = res.total;
+  params.data.searchDate.xyCount = res.content.xyCount;
+  params.data.searchDate.zcyCount = res.content.zcyCount;
+  params.data.searchDate.smsCount = res.content.smsCount;
   params.data.searchDate.jbywCount = res.content.jbywCount;
+  params.data.searchDate.kjywCount = res.content.kjywCount;
+  params.data.searchDate.zcyzsjCount = res.content.zcyzsjCount;
   params.data.searchDate.rsyyCount = res.content.rsyyCount;
-  params.data.searchDate.wbdCount = res.content.wbdCount;
-  params.data.searchDate.wtsjCount = res.content.wtsjCount;
-  params.data.searchDate.ybdCount = res.content.ybdCount;
+  params.data.searchDate.xyzpCount = res.content.xyzpCount;
+  params.data.searchDate.tpzjsCount = res.content.tpzjsCount;
+  params.data.searchDate.nlyyCount = res.content.nlyyCount;
+  params.data.searchDate.ppiCount = res.content.ppiCount;
+  params.data.searchDate.jmdfCount = res.content.jmdfCount;
+  params.data.searchDate.fzyyCount = res.content.fzyyCount;
   params.data.searchDate.yblbCount = res.content.yblbCount;
+  params.data.searchDate.wbdCount = res.content.wbdCount;
+  params.data.searchDate.ybdCount = res.content.ybdCount;
+  params.data.searchDate.wtsjCount = res.content.wtsjCount;
   $(params.parent).find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
 }
 
@@ -53,6 +64,7 @@ function loadChemistryTableFn(params,type){
    if(!!type){
      params.searchType = type.name;
      params.loadData[params.searchType] = type.val;
+     $parent.find('.search-data .'+params.searchType).addClass('active').siblings('a').removeClass('active')
    }
   ajaxFn({
     url: params.url,
@@ -98,7 +110,62 @@ function tableDiffRequest(params){
     });
   }
 }
-
+//通用条件搜索
+function generalSearch(params,$this,name){
+  params.firstResult=0;params.maxResult=16;
+  loadChemistryTableFn(params,{name:name,val:$this.find('.text').text()})
+}
+function bindGeneralSearch(params){
+  var _parent = params.parent+' ';
+  $(document).on('click',_parent+'.search-data .xy',function(){
+    generalSearch(params,$(this),'xy')
+  });
+  $(document).on('click',_parent+'.search-data .zcy',function(){
+    generalSearch(params,$(this),'zcy')
+  });
+  $(document).on('click',_parent+'.search-data .sms',function(){
+    generalSearch(params,$(this),'sms')
+  });
+  $(document).on('click',_parent+'.search-data .jbyw',function(){
+    generalSearch(params,$(this),'jbyw')
+  });//搜索基药化学药比对基药
+  $(document).on('click',_parent+'.search-data .kjyw',function(){
+    generalSearch(params,$(this),'kjyw')
+  });
+  $(document).on('click',_parent+'.search-data .zcyzsj',function(){
+    generalSearch(params,$(this),'zcyzsj')
+  });
+  $(document).on('click',_parent+'.search-data .rsyy',function(){
+    generalSearch(params,$(this),'rsyy')
+  });//搜索妊娠用药比对化学药比
+  $(document).on('click',_parent+'.search-data .xyzp',function(){
+    generalSearch(params,$(this),'xyzp')
+  });
+  $(document).on('click',_parent+'.search-data .tpzjs',function(){
+    generalSearch(params,$(this),'tpzjs')
+  });
+  $(document).on('click',_parent+'.search-data .ppi',function(){
+    generalSearch(params,$(this),'ppi')
+  });
+  $(document).on('click',_parent+'.search-data .jmdf',function(){
+    generalSearch(params,$(this),'jmdf')
+  });
+  $(document).on('click',_parent+'.search-data .fzyy',function(){
+    generalSearch(params,$(this),'fzyy')
+  });
+  $(document).on('click',_parent+'.search-data .yblb',function(){
+    generalSearch(params,$(this),'yblb')
+  });
+  $(document).on('click',_parent+'.search-data .wbd',function(){
+    generalSearch(params,$(this),'wbd')
+  });
+  $(document).on('click',_parent+'.search-data .ybd',function(){
+    generalSearch(params,$(this),'ybd')
+  });
+  $(document).on('click',_parent+'.search-data .wtsj',function(){
+    generalSearch(params,$(this),'wtsj')
+  });
+}
 //比对表格滚动事件
 function tableDiffScrollFn($parent,params){
     $parent.find('.table-diff-right .table-diff-data').on('scroll',function(e){
@@ -142,15 +209,15 @@ function showDiffBarFn(params){
     }
     $('.table-diff-bar').css({
       display: 'block',
-      top: _tr.position().top + _tr.height() - 1,
+      top: e.pageY,
       left: e.pageX - _tr.offset().left
     });
     singleData.id = $(this).attr('data-id');
     e.preventDefault();
   });
-  $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
-    singleData.id = $(this).attr('data-id');
-  });
+  // $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
+  //   singleData.id = $(this).attr('data-id');
+  // });
   $(document).on('mouseleave','.table-diff-left',function(){
       $('.table-diff-bar').hide();
   })
@@ -161,12 +228,20 @@ function bindFn(parent,event,className,fn){
 }
 
 //点击表格数据事件
-function tableDiffClickFn(){
-  var _index = $(this).prevAll().length;
-  var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+function tableDiffClickFn(params,$this){
+  var _index = $this.prevAll().length;
+  var _tables = $this.parents('.table-diff').find('.table-diff-data').length;
+  var $parent = $(params.parent);
   $('.table-diff-bar').hide();
-  for(var i=0;i<_tables;i++){
-    $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
+  if($parent.find('.table-details-content-box').is(':visible')){
+    var data={};
+    data.drugId = $parent.find('.table-diff-data-content tr').eq(_index).attr('data-id');
+    $parent.find('.table-diff-right').attr('data-id',data.drugId);
+    loadDetails(params,params.detailUrl,data,data.drugId);//请求详情数据
+  }else{
+    for(var i=0;i<_tables;i++){
+      $this.parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
+    }
   }
 }
 
@@ -197,6 +272,7 @@ function selectThanFn(params,$this,loadObj){
     url: params.saveUrl,
     data: selectThanData,
     callback:function(res){
+      
       reloadsearchClassifyTel(loadObj);
       var _index = $('.table-diff-data-content').find('[data-id='+drugId+']').index();
       $(params.parent).find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
@@ -393,6 +469,7 @@ function thanScrollFn(params,$this){
     }
   }
 }
+
 //隐藏比对数据详情
 function hideDetail(e){
   $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
@@ -400,6 +477,8 @@ function hideDetail(e){
   $('.table-diff-right-all').addClass('active');
   $('.table-diff-right-single').removeClass('active');
   $('.table-diff-right .table-diff-data').scrollTop($('.table-diff-left .table-diff-data')[0].scrollTop);
+  $('.popup .popup-record').hide();
+  $('.popup .popup-cancel-than').hide();
  }
 
 //更新转换比
@@ -421,6 +500,7 @@ function upInputFn(params){
     })
   });
 }
+
 function upSelect(params){
   $(document).on('blur',params.parent+' .upSelect',function(){
     var $trLeft = $(params.parent).find('.table-diff-data-content .active');
@@ -468,8 +548,8 @@ function upSelect(params){
   });
 }
 //更新修改表格字段的值
-function updateValueFn(params,loadObj){
-  $(params.parent).find('.updateValueFn').on('blur',function(){
+function updateValueFn(params){
+  $(document).on('blur',params.parent+' .updateValueFn',function(){
     var colView = $(this).prev().text();
     colView = colView.substring(0,colView.length-1);
     var colName = $(this).prev().attr('class');
@@ -486,7 +566,7 @@ function updateValueFn(params,loadObj){
       callback:function(res){
         var _index = $('.table-diff-data-content').find('[data-id='+drugId+']').index();
         if(colName == 'ypType'){
-          if(loadObj.ypTypeValue.indexOf(aftValue) == -1){
+          if(params.ypTypeValue.indexOf(aftValue) == -1){
             $(params.parent).find('.table-diff-data-content table tr').eq(_index).remove();
             $(params.parent).find('.table-diff-right .table-diff-data  table tr').eq(_index).remove();
             if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
@@ -512,9 +592,9 @@ function updateValueFn(params,loadObj){
             }
           }
         }else{
-          $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
+          $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(params.tableDiffRightTr(res.content));
         }
-        reloadsearchClassifyTel(loadObj);
+        reloadsearchClassifyTel(params);
         $(params.parent).find('.prompt').show();
         setTimeout(function () { $(params.parent).find('.prompt').fadeOut(); }, 2000);
       }
@@ -544,11 +624,22 @@ function updateValueFn(params,loadObj){
     })
   });
 }
-
+//请求详情数据
+function loadDetails(params,url,data,drugId){
+  ajaxFn({
+    url: url,
+    data: data,
+    callback:function(res){
+      var tableDetailsData = res.content;
+      $(params.parent).find('.table-details-content-box').html(params.tableDetails(tableDetailsData));
+      $(params.parent).find('.table-diff-data-content [data-id='+drugId+']').addClass('active').siblings().removeClass('active');
+    }
+  })
+}
 function paginationFn(params,type){
   var $parent=$(params.parent),data = {};
   var detailId = $parent.find('.table-diff-right').attr('data-id');
-  if( type == 'prev'){
+  if(type == 'prev'){
     var prevEle = $parent.find('.table-diff-data-content').find('[data-id='+detailId+']').prev();
     if(prevEle.length == 0){
       return
@@ -562,26 +653,18 @@ function paginationFn(params,type){
     data[params.dataName] = nextEle.data('id');
   }
   $parent.find('.table-diff-right').attr('data-id',data[params.dataName]);
-  ajaxFn({
-    url: params.url,
-    data: data,
-    callback:function(res){
-      var tableDetailsData = res.content;
-      $parent.find('.table-details-content-box').html(params.tableDetails(tableDetailsData));
-      $parent.find('.table-diff-data-content [data-id='+data[params.dataName]+']').addClass('active').siblings().removeClass('active');
-    }
-  })
+  loadDetails(params,params.detailUrl,data,data[params.dataName]);//请求详情数据
 }
 
 //查看详情事件
-function showDetail(params,e,loadObj){
+function showDetail(params,e){
   if(!singleData.id){
     return;
   }
   var $parent=$(params.parent),data = {};
   data[params.dataName] = singleData.id;
   ajaxFn({
-    url: params.url,
+    url: params.detailUrl,
     data: data,
     callback:function(res){
       var tableDetailsData = res.content;
@@ -592,9 +675,9 @@ function showDetail(params,e,loadObj){
       $parent.find('.table-diff-right-single').addClass('active');
       $parent.find('.table-details-content-box').html(params.tableDetails(tableDetailsData));
       $parent.find('.btn-toggle').on('click',hideDetail); //切换详情事件
-      if(!!params.updateValueUrl){
-        updateValueFn(params,loadObj);
-      }
+      //if(!!params.updateValueUrl){
+      //  updateValueFn(params);
+      //}
       e.preventDefault();
     }
   })
@@ -659,6 +742,11 @@ function recordFn(params){
     },
     callback:function(res){
       var recordData ={};
+      $(res.content).each(function(i,e){
+        if($('.table-details-content-box .'+e.colName).next('select').length > 0){
+          e.type = 'select'
+        }
+      });
       recordData.content= res.content;
       $('.popup').html(popupRecordTal(recordData)).show();
       $('.popup-close').on('click',function(){$('.popup').hide()});
@@ -787,6 +875,64 @@ function downloadFn(params){
   downloadUrl+='&rsyy='+isNull(downloadData.rsyy);
   window.location.href=downloadUrl;
 }
+
+function offsetLeftFn(obj){
+  var tmp = obj.offsetLeft;
+  var val = obj.offsetParent;
+  while(val != null){
+    tmp += val.offsetLeft;
+    val = val.offsetParent;
+  }
+  return tmp;
+}
+
+var xx,yy,tBar={};
+function resetTableFn(params){
+  //获取鼠标的位置
+  $(document).on('mousemove',params.parent+' .table-diff-header',function(e) {
+     xx = e.originalEvent.x || e.originalEvent.layerX || 0;
+     yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+  });
+  $(params.parent).on('mousedown','.table-diff-header th .resize',function(){
+    tBar.self= $(this);
+    tBar.mouseDown = 1;
+    tBar.width = offsetLeftFn($(this)[0]);
+    tBar.tdWidth = $(this).parent()[0].offsetWidth;
+    tBar.tableWidth=$(params.parent).find('.table-diff .table-diff-left .table-diff-header table').width();
+    $(this).css({right: -(xx - tBar.width)});
+  });
+  $(params.parent).on('mouseup',function(){
+    if(tBar.mouseDown){
+      tBar.mouseDown = 0;
+      tBar.self.css({right: -2});
+      var tTh= tBar.self.parent();
+      var _index =tTh.index();
+      $(params.parent).find('.table-diff-header th .resize').css({background:'transparent'});
+      tBar.self.prev().css({width:tBar.tdWidth +(xx - tBar.width)-10});
+      $(params.parent).find('.table-diff .table-diff-right').css({marginLeft: tBar.tableWidth+ ((xx - tBar.width))});
+      $(params.parent).find('.table-diff .table-diff-left').css({width: tBar.tableWidth+ ((xx - tBar.width))});
+      $(params.parent).find('.table-diff .table-diff-left .table-diff-header').css({width: tBar.tableWidth+ ((xx - tBar.width))});
+      $(params.parent).find('.table-diff-data-content table tr').each(function(i,e){
+        $(e).find('td').eq(_index).find('div').css({width:tBar.tdWidth +(xx - tBar.width)-10});
+      })
+    }
+  });
+  $(params.parent).on('mousemove','.table-diff-header th',function(){
+    $(this).find('.resize').show();
+    if(tBar.mouseDown){
+      tBar.self.css({right: -(xx - tBar.width)-2});
+    }
+  });
+  $(params.parent).on('mousemove','.table-diff-header th .resize ',function(){
+    if(!tBar.mouseDown){
+      $(this).css({background:'#fff'})
+    }
+  });
+  $(params.parent).on('mouseleave','.table-diff-left .table-diff-header th .resize',function(){
+    if(!tBar.mouseDown)$(this).css({background:'transparent'})
+  });
+}
+
 var  paramsAll=[],paramsType=[];
 module.exports = {
   loadData:function(params){
@@ -798,60 +944,57 @@ module.exports = {
       paramsAll.push(params)
     }
     console.log(paramsAll);
+
+    var parent = params.parent+' ';
     var $parent =$(params.parent);
 
     loadChemistryTableFn(params);//加载数据
 
+    bindGeneralSearch(params);//通用条件搜索
+
     showDiffBarFn(params);//显示比对按钮
 
-    bindFn(params.parent,'click','.search-box .btn',function(){
+    resetTableFn(params);//拖动表格事件
+
+    $(document).on('click',parent+'.search-top-lf .btn',function(){
       params.firstResult=0;params.maxResult=16;
       loadChemistryTableFn(params)
     }); //搜索化学药比对
-    bindFn(params.parent,'click','.search-data .jbywCount',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'jbyw',val:$parent.find('.jbywCount .text').text()})
-    }); //搜索基药化学药比对基药
-    bindFn(params.parent,'click','.search-data .yblbCount',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'yblb',val:$parent.find('.yblbCount .text').text()})
-    }); //搜索医保化学药比对
-    bindFn(params.parent,'click','.search-data .wtsjCount',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'wtsj',val:$parent.find('.wtsjCount .text').text()})
-    }); //搜索未比对化学药比对
-    bindFn(params.parent,'click','.search-data .ybdCount',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'ybd',val:$parent.find('.ybdCount .text').text()})
-    }); //搜索问题数据化索化学药比对
-    bindFn(params.parent,'click','.search-data .wbdCount',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'wbd',val:$parent.find('.wbdCount .text').text()})
-    }); //搜索已比对学药比对
-    bindFn(params.parent,'click','.search-data .rsyyCount',function(){
-      params.firstResult=0;params.maxResult=16;
-      loadChemistryTableFn(params,{name:'rsyy',val:$parent.find('.rsyyCount .text').text()})
-    }); //搜索妊娠用药比对化学药比
 
-    $(document).on('click',params.parent+' .table-diff-data tr',tableDiffClickFn);//点击表格数据事件
+    $(document).on('click',parent+'.table-diff-data tr',function(){
+      tableDiffClickFn(params,$(this))
+    });//点击表格数据事件
 
     tableDiffHoverFn(); //鼠标表格悬停事件
 
     //下载表格
     bindFn(params.parent,'click','.search-data .download',function(){downloadFn(params)});
-    //修改表格属性
-    upSelect(params);
+
+    upSelect(params);//修改表格属性
+
+    updateValueFn(params);//修改详情的属性
+
     //绑定给药途径
     bindFn(params.parent,'click','.adminRouteExclude',function(){popupChannelFn(params,$(this))});
     //取消比对
     bindFn(params.parent,'click','.table-diff-single-content .btn-cancel',function(){cancelThanPopupFn(params,$(params.parent).find('.table-diff-right').attr('data-id'))});
     bindFn(params.parent,'click','.table-diff-bar .cancel-than',function(){cancelThanPopupFn(params,singleData.id)});
-  },
-  showDetail:function(params,loadObj){
-    bindFn(params.parent,'click','.showDetail',function(e){showDetail(params,e,loadObj)}); //绑定查看详情事件
-    //查看详情页面上一条和下一条
-    bindFn(params.parent,'click','.table-diff-right-single .pagination-prev',function(){paginationFn(params,'prev')});
-    bindFn(params.parent,'click','.table-diff-right-single .pagination-next',function(){paginationFn(params,'next')});
+
+    if(!!params.detailUrl){
+
+      $(document).on('click', parent + '.showDetail', function (e) {
+        showDetail(params, e)
+      });//绑定查看详情事件
+
+      $(document).on('click', parent + '.table-diff-right-single .pagination-prev', function () {
+        paginationFn(params, 'prev')
+      }); //查看详情页面上一条
+
+      $(document).on('click', parent + '.table-diff-right-single .pagination-next', function () {
+        paginationFn(params, 'next')
+      }); //查看详情页面下一条
+
+    }
   },
   showThan:function(params,loadObj){
     if(!!params.standardThanTel){
@@ -875,3 +1018,27 @@ module.exports = {
     upInputFn(params);//更新输入框
   }
 };
+
+
+function compileAllDrug(){
+    var text = $('.prompt').text();
+    $('.prompt').text('操作中...').show();
+    ajaxFn({
+      url: 'mcdProduct30/compileAllDrug',
+      callback:function(res){
+        $('.prompt').text(text).hide();
+      }
+    })
+}
+function initCode(){
+    var text = $('.prompt').text();
+    $('.prompt').text('操作中...').show();
+    ajaxFn({
+      url: 'mcdProduct30/initCode',
+      callback:function(res){
+        $('.prompt').text(text).hide();
+      }
+    })
+}
+$(document).on('click','#initCode',initCode);
+$(document).on('click','#compileAllDrug',compileAllDrug);

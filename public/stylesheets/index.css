@@ -158,6 +158,18 @@ a {
     margin-top: 10px;
     line-height: 16px;
     overflow: hidden; }
+    .content .search-box .search-data .search-data-lf {
+      width: 85%; }
+      .content .search-box .search-data .search-data-lf a {
+        display: inline-block;
+        margin-bottom: 5px; }
+    .content .search-box .search-data .active {
+      display: inline-block;
+      background: #2d8cc0;
+      color: #fff;
+      padding: 0 2px; }
+      .content .search-box .search-data .active span {
+        color: #fff; }
     .content .search-box .search-data .color-blue {
       color: #2D8CC0; }
     .content .search-box .search-data .color-red {
@@ -422,7 +434,7 @@ a {
   display: block; }
 
 .table-diff {
-  margin-top: 10px;
+  margin-top: 5px;
   position: relative; }
   .table-diff .table-diff-data-td-select .value {
     display: block; }
@@ -477,14 +489,28 @@ a {
     position: relative;
     z-index: 9;
     width: 687px; }
-    .table-diff .table-diff-left td > div, .table-diff .table-diff-left th > div {
-      width: 80px; }
+    .table-diff .table-diff-left td, .table-diff .table-diff-left th {
+      position: relative; }
+      .table-diff .table-diff-left td > div, .table-diff .table-diff-left th > div {
+        width: 80px;
+        overflow: hidden; }
     .table-diff .table-diff-left .table-diff-header {
       position: absolute;
       width: 687px;
       top: 0;
       left: 0;
       z-index: 2; }
+      .table-diff .table-diff-left .table-diff-header .resize {
+        height: 100%;
+        display: block;
+        width: 4px;
+        position: absolute;
+        right: -2px;
+        top: 0;
+        background: transparent;
+        z-index: 2147483647;
+        cursor: col-resize;
+        opacity: 0.8; }
     .table-diff .table-diff-left .table-diff-data {
       overflow-x: hidden;
       overflow-y: hidden;
@@ -572,7 +598,7 @@ a {
       top: 0;
       width: 100%;
       overflow: hidden;
-      left: 0px;
+      left: 0;
       z-index: 2; }
       .table-diff .table-diff-right .table-diff-header .table-diff-header-content {
         overflow-x: hidden; }
