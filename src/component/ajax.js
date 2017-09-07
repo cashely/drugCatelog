@@ -14,7 +14,7 @@ function ajaxFn(params){
           $('.login').show();
           $('.header .login-out').removeClass('active').text('登录');
         }else{
-          console.log(res.message);
+          //console.log(res.message);
           error(res);
         }
       }
