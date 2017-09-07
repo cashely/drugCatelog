@@ -10,6 +10,9 @@ body {
   width: 100%;
   min-width: 960px; }
 
+table {
+  font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif; }
+
 ul, li, p, h1, h2, h3, h4, h5, h6, dl, dt, dd {
   margin: 0;
   padding: 0;
@@ -61,35 +64,43 @@ a {
     margin-left: 12px; }
 
 /*页面切换条样式*/
-.tabs-box {
-  width: 96.43%;
-  height: 30px;
-  margin: 18px auto 16px;
-  background: #fafafa;
-  border-bottom: 1px solid #4EAADC; }
-  .tabs-box .tabs {
-    height: 31px;
-    line-height: 30px;
-    margin: 0 10px;
-    overflow: hidden; }
-    .tabs-box .tabs .tabs-item {
-      float: left;
-      height: 30px;
-      padding: 0 20px;
-      background: #fafafa; }
-    .tabs-box .tabs .active {
-      border-bottom: 0;
-      color: #2D8CC0;
-      background: #fff;
-      line-height: 27px;
-      border-top: 3px solid #4EAADC;
-      border-left: 2px solid #4EAADC;
-      border-right: 2px solid #4EAADC; }
+.tabs-box-wrap {
+  text-align: center; }
+  .tabs-box-wrap .tabs-box {
+    width: 96.43%;
+    height: 30px;
+    margin: 18px auto 16px;
+    background: #fafafa;
+    border-bottom: 1px solid #4EAADC; }
+    .tabs-box-wrap .tabs-box .tabs {
+      height: 31px;
+      line-height: 30px;
+      margin: 0 10px;
+      overflow: hidden; }
+      .tabs-box-wrap .tabs-box .tabs .tabs-item {
+        float: left;
+        height: 30px;
+        padding: 0 20px;
+        background: #fafafa; }
+      .tabs-box-wrap .tabs-box .tabs .active {
+        border-bottom: 0;
+        color: #2D8CC0;
+        background: #fff;
+        line-height: 27px;
+        border-top: 3px solid #4EAADC;
+        border-left: 2px solid #4EAADC;
+        border-right: 2px solid #4EAADC; }
 
 /*页面内容样式*/
+.content-wrap {
+  text-align: center; }
+
 .content {
   width: 96.43%;
   margin: 18px auto;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
   /*输入框样式*/
   /*按钮样式*/
   /*查找药品数据*/ }
@@ -154,13 +165,24 @@ a {
       float: right; }
       .content .search-box .search-top .search-top-rt .create-btn {
         margin-right: 10px; }
+      .content .search-box .search-top .search-top-rt .download {
+        float: left;
+        line-height: 16px;
+        margin: 8px 20px; }
+        .content .search-box .search-top .search-top-rt .download .icon-download {
+          vertical-align: top;
+          margin-right: 4px; }
   .content .search-box .search-data {
     margin-top: 10px;
     line-height: 16px;
     overflow: hidden; }
     .content .search-box .search-data .search-data-lf {
-      width: 85%; }
-      .content .search-box .search-data .search-data-lf a {
+      float: left; }
+    .content .search-box .search-data .search-data-rt {
+      float: right;
+      width: 65%;
+      text-align: justify; }
+      .content .search-box .search-data .search-data-rt a {
         display: inline-block;
         margin-bottom: 5px; }
     .content .search-box .search-data .active {
@@ -174,12 +196,6 @@ a {
       color: #2D8CC0; }
     .content .search-box .search-data .color-red {
       color: red; }
-    .content .search-box .search-data .download {
-      float: right;
-      line-height: 16px; }
-      .content .search-box .search-data .download .icon-download {
-        vertical-align: top;
-        margin-right: 4px; }
   .content .standard-than {
     display: none;
     margin-top: 30px;
@@ -205,7 +221,18 @@ a {
     .content .standard-than .search-than {
       padding: 10px 12px 0;
       overflow: hidden; }
+      .content .standard-than .search-than .input {
+        display: inline-block;
+        width: 108px;
+        height: 24px;
+        line-height: 24px;
+        margin-left: 8px;
+        margin-right: 20px;
+        padding: 1px 5px;
+        border: 1px solid #CACACA;
+        vertical-align: middle; }
     .content .standard-than .than-table {
+      margin-top: 10px;
       position: relative; }
       .content .standard-than .than-table .than-thead-wrap {
         width: 100%;
@@ -274,8 +301,7 @@ a {
         color: #2D8CC0;
         cursor: pointer; }
   .content .add-data {
-    display: none;
-    margin-top: -8px; }
+    display: none; }
     .content .add-data .goback {
       display: block;
       color: #2D8CC0;
@@ -312,7 +338,7 @@ a {
   .content .popup-company {
     width: 320px;
     position: absolute;
-    top: 250px;
+    top: 175px;
     left: 50%;
     z-index: 99;
     margin-left: -161px;
@@ -346,14 +372,21 @@ a {
             border-right-width: 1px; }
       .content .popup-company .popup-content .btn-group {
         margin-top: 20px;
-        text-align: center; }
+        text-align: left;
+        overflow: hidden; }
+        .content .popup-company .popup-content .btn-group .btn {
+          padding: 8px 0;
+          width: 60px;
+          text-align: center;
+          float: left; }
         .content .popup-company .popup-content .btn-group .add-unit {
           background: #BCBCBC;
-          margin-right: 30px; }
+          margin-right: 30px;
+          margin-left: 15px; }
   .content .popup-record {
     width: 482px;
     position: absolute;
-    top: 250px;
+    top: 175px;
     left: 50%;
     z-index: 99;
     margin-left: -241px;
@@ -376,7 +409,7 @@ a {
   .content .popup-channel {
     width: 380px;
     position: absolute;
-    top: 250px;
+    top: 175px;
     left: 50%;
     z-index: 99;
     margin-left: -241px;
@@ -397,7 +430,7 @@ a {
   .content .popup-cancel-than {
     width: 250px;
     position: absolute;
-    top: 250px;
+    top: 175px;
     left: 50%;
     z-index: 99;
     margin-left: -125px;
@@ -433,9 +466,15 @@ a {
 .table-diff-data tr.hover .table-diff-data-td-select .select, .table-diff-data tr.active .table-diff-data-td-select .select {
   display: block; }
 
+.table-diff-data .has-instruction:hover {
+  color: #2D8CC0;
+  cursor: pointer;
+  text-decoration: underline; }
+
 .table-diff {
   margin-top: 5px;
-  position: relative; }
+  position: relative;
+  height: 476px; }
   .table-diff .table-diff-data-td-select .value {
     display: block; }
   .table-diff .table-diff-data-td-select .select {
@@ -453,10 +492,12 @@ a {
     z-index: 10;
     color: #fff;
     background-color: #4DA9DB;
-    display: none; }
+    display: none;
+    height: 32px;
+    line-height: 32px; }
     .table-diff .table-diff-bar a {
       color: #fff;
-      padding: 10px;
+      padding: 0 10px;
       display: inline-block; }
   .table-diff .table-diff-header .scroll-loading {
     position: absolute;
@@ -473,7 +514,7 @@ a {
     border-right: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
     white-space: nowrap; }
-    .table-diff .table-diff td > div, .table-diff .table-diff th > div {
+    .table-diff .table-diff td div, .table-diff .table-diff th div {
       display: block;
       width: 100px;
       overflow: hidden;
@@ -491,7 +532,7 @@ a {
     width: 687px; }
     .table-diff .table-diff-left td, .table-diff .table-diff-left th {
       position: relative; }
-      .table-diff .table-diff-left td > div, .table-diff .table-diff-left th > div {
+      .table-diff .table-diff-left td div, .table-diff .table-diff-left th div {
         width: 80px;
         overflow: hidden; }
     .table-diff .table-diff-left .table-diff-header {
@@ -512,6 +553,7 @@ a {
         cursor: col-resize;
         opacity: 0.8; }
     .table-diff .table-diff-left .table-diff-data {
+      position: relative;
       overflow-x: hidden;
       overflow-y: hidden;
       height: 448px; }
@@ -597,7 +639,6 @@ a {
       position: absolute;
       top: 0;
       width: 100%;
-      overflow: hidden;
       left: 0;
       z-index: 2; }
       .table-diff .table-diff-right .table-diff-header .table-diff-header-content {
@@ -607,9 +648,11 @@ a {
           .table-diff .table-diff-right .table-diff-header .table-diff-header-content table th {
             background: #4EAADC; }
     .table-diff .table-diff-right .table-diff-data {
-      overflow-y: scroll;
-      width: auto;
-      height: 448px; }
+      overflow: scroll;
+      width: 100%;
+      height: 448px;
+      color: #666;
+      position: absolute; }
   .table-diff table {
     background-color: #d9d9d9;
     border-top: 1px solid #d9d9d9;

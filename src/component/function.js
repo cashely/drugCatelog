@@ -174,7 +174,7 @@ function tableDiffScrollFn($parent,params){
       var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
       if(_t.scrollLeft() != tableRightLeft){
         tableRightLeft = _t.scrollLeft();
-        console.log('横向滚动');
+        //console.log('横向滚动');
         return;
       }
       //console.log('竖向滚动');
@@ -186,7 +186,7 @@ function tableDiffScrollFn($parent,params){
       var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
       if(_t.scrollLeft() != tableRightLeft){
         tableRightLeft = _t.scrollLeft();
-        console.log('横向滚动');
+        //console.log('横向滚动');
         return;
       }
       //console.log('竖向滚动');
@@ -209,7 +209,7 @@ function showDiffBarFn(params){
     }
     $('.table-diff-bar').css({
       display: 'block',
-      top: e.pageY,
+      top: e.pageY-_tr.parents('.table-diff-left').offset().top,
       left: e.pageX - _tr.offset().left
     });
     singleData.id = $(this).attr('data-id');
@@ -272,7 +272,7 @@ function selectThanFn(params,$this,loadObj){
     url: params.saveUrl,
     data: selectThanData,
     callback:function(res){
-      
+
       reloadsearchClassifyTel(loadObj);
       var _index = $('.table-diff-data-content').find('[data-id='+drugId+']').index();
       $(params.parent).find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
@@ -327,7 +327,6 @@ function addThanInfo(params,loadObj,$this) {
                 convert: $('.popup-add-info .convert').val()
               },
               callback: function (res) {
-                console.log(res.content);
                 ajaxFn({
                   url: 'mcdProduct30/saveMatch',
                   data: {
@@ -368,7 +367,6 @@ function findThanFn(params){
   params.maxResultThan = 16;
   params.findThanData.firstResult =  params.firstResultThan;
   params.findThanData.maxResult =  params.maxResultThan;
-  console.log(params.findThanData,'findThanFn');
    $(params.findThanDataName).each(function(i,e){
      params.findThanData[e] = $parent.find('.'+e).val()
   });
@@ -380,12 +378,14 @@ function findThanFn(params){
       if(res.content.length >=  params.findThanData.maxResult){
         $(params.parent).find('.standard-than .scroll-loading').show();
       }else{
+        console.log('hide');
         $(params.parent).find('.standard-than .scroll-loading').hide();
       }
       var tbodyData = {};
       $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
-      $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(tbodyData));
+      var _table= $('.than-tbody .than-tbody-top')[0];
+      _table.innerHTML = params.standardThanTbody(tbodyData);
       $parent.find('.standard-than .than-tbody').scrollTop(0);
     }
   })
@@ -445,12 +445,11 @@ function showThan(params){
 //滚动加载19位标准数据
 function thanScrollFn(params,$this){
   $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
-   if($this.children('table').height() <= $this.scrollTop()+ $this.height() && $this.children('table').height() > 0){
+   if($this.find('table').height() <= $this.scrollTop()+ $this.height() && $this.find('table').height() > 0){
     if(loading == false){
       loading = true;
       params.findThanData.firstResult = (params.firstResultThan+1) * params.maxResultThan;
       params.findThanData.maxResult = params.maxResultThan;
-      console.log(params.firstResultThan);
       ajaxFn({
         url: params.url,
         data:params.findThanData,
@@ -459,7 +458,7 @@ function thanScrollFn(params,$this){
             params.firstResultThan = params.firstResultThan + 1;
             var tbodyData = {};
             tbodyData.tbody = res.content;
-            $(params.parent).find('.standard-than .than-tbody .table').append(params.standardThanTr(tbodyData));
+            $(params.parent).find('.standard-than .than-tbody .table tbody').append(params.standardThanTr(tbodyData));
           }else{
             $(params.parent).find('.standard-than .scroll-loading').hide();
           }
@@ -886,6 +885,15 @@ function offsetLeftFn(obj){
   return tmp;
 }
 
+//说明书
+function instructionFn(params,$this){
+  var _index = $this.parents('tr').index();
+  var _drugId = $(params.parent).find('.table-diff-left .table-diff-data tr').eq(_index).attr('data-id');
+  if($this.hasClass('has-instruction')){
+    window.open(http+'hpms/api/mcdProduct30/getHisSms?ypmcid='+_drugId)
+  }
+}
+
 var xx,yy,tBar={};
 function resetTableFn(params){
   //获取鼠标的位置
@@ -934,19 +942,20 @@ function resetTableFn(params){
 }
 
 var  paramsAll=[],paramsType=[];
+
 module.exports = {
   loadData:function(params){
-    if(!!params.fn){
+    var parent = params.parent + ' ';
+    var $parent = $(params.parent);
+
+    if (!!params.fn) {
       params.fn();
     }
-    if(paramsType.indexOf(params.parent) == -1){
+    if (paramsType.indexOf(params.parent) == -1) {
       paramsType.push(params.parent);
       paramsAll.push(params)
     }
-    console.log(paramsAll);
-
-    var parent = params.parent+' ';
-    var $parent =$(params.parent);
+    //console.log(paramsAll);
 
     loadChemistryTableFn(params);//加载数据
 
@@ -955,20 +964,33 @@ module.exports = {
     showDiffBarFn(params);//显示比对按钮
 
     resetTableFn(params);//拖动表格事件
-
-    $(document).on('click',parent+'.search-top-lf .btn',function(){
-      params.firstResult=0;params.maxResult=16;
+    $(document).on('click', parent + '.search-top-lf .btn', function () {
+      params.firstResult = 0;
+      params.maxResult = 16;
       loadChemistryTableFn(params)
     }); //搜索化学药比对
 
-    $(document).on('click',parent+'.table-diff-data tr',function(){
-      tableDiffClickFn(params,$(this))
+    $(document).on('click', parent + '.search-data .search-all', function () {
+      params.firstResult = 0;
+      params.maxResult = 16;
+      loadChemistryTableFn(params)
+    });//关键词-全部
+
+    $(document).on('click', parent + '.table-diff-data tr', function () {
+      tableDiffClickFn(params, $(this))
     });//点击表格数据事件
 
     tableDiffHoverFn(); //鼠标表格悬停事件
 
+    //说明书
+    $(document).on('click',parent + '.table-diff-right .instruction',function () {
+      instructionFn(params,$(this))
+    }); //搜索化学药比对
+
     //下载表格
-    bindFn(params.parent,'click','.search-data .download',function(){downloadFn(params)});
+    bindFn(params.parent, 'click', '.search-data .download', function () {
+      downloadFn(params)
+    });
 
     upSelect(params);//修改表格属性
 
