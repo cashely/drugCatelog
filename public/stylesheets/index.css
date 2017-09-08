@@ -136,6 +136,8 @@ a {
     background: #2D8CC0;
     border-radius: 4px;
     cursor: pointer; }
+    .content .btn:hover {
+      background: #267FB0; }
   .content .popup {
     display: none;
     width: 482px;
@@ -167,10 +169,10 @@ a {
     overflow: hidden; }
     .content .search-box .search-top .search-top-lf {
       float: left; }
-    .content .search-box .search-top .btn {
-      border-radius: 0; }
     .content .search-box .search-top .search-top-rt {
       float: right; }
+      .content .search-box .search-top .search-top-rt .btn {
+        border-radius: 0; }
       .content .search-box .search-top .search-top-rt .download {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px; }
@@ -269,7 +271,7 @@ a {
             overflow: hidden;
             padding: 9px 7px; }
         .content .standard-than .than-table .table .table-text {
-          width: 70px; }
+          width: 100px; }
         .content .standard-than .than-table .table .select-than {
           cursor: pointer;
           color: #2D8CC0; }
@@ -304,7 +306,7 @@ a {
         overflow: hidden;
         border: 1px solid #D8D8D8; }
       .content .add-than-table .table .table-text {
-        width: 70px; }
+        width: 100px; }
       .content .add-than-table .table .add-than-info {
         color: #2D8CC0;
         cursor: pointer; }
@@ -380,8 +382,7 @@ a {
             border-right-width: 1px; }
       .content .popup-company .popup-content .btn-group .add-unit {
         background: #BCBCBC;
-        margin-right: 30px;
-        margin-left: 15px; }
+        margin-right: 30px; }
   .content .popup-record {
     width: 482px;
     position: absolute;
