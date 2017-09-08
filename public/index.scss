@@ -145,8 +145,6 @@ a{
         display: none;
         width: 482px;
         background: #FFFFFF;
-        //border: 1px solid #FFFFFF;
-        //box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
         border-radius: 2px;
         .popup-title{
             height: 28px;
@@ -164,6 +162,14 @@ a{
                 right: 10px;
                 cursor: pointer;
                 background: url(./images/icon-close.png) center center no-repeat;
+            }
+        }
+        .btn-group {
+            margin-top: 20px;
+            text-align: center;
+            .btn {
+                display: inline;
+                text-align: center;
             }
         }
     }
@@ -461,15 +467,6 @@ a{
                 }
             }
             .btn-group{
-                margin-top: 20px;
-                text-align: left;
-                overflow: hidden;
-                .btn{
-                    padding: 8px 0 ;
-                    width: 60px;
-                    text-align: center;
-                    float: left;
-                }
                 .add-unit{
                     background: #BCBCBC;
                     margin-right: 30px;

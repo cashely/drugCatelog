@@ -775,14 +775,12 @@ function loadChemistryTableFn(params, type) {
       }
       $parent.find('.table-diff .loading-wrap').hide();
       params.data.diffData.ydata = res.content.rows;
+      $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
       if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult) {
-        console.log($('.table-diff-header .scroll-loading')[0], 'show');
         $('.table-diff-header .scroll-loading').show();
       } else {
-        console.log('hide');
         $('.table-diff-header .scroll-loading').hide();
       }
-      $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
       tableDiffScrollFn($parent, params);
     }
   });
@@ -791,6 +789,7 @@ function loadChemistryTableFn(params, type) {
 function tableDiffRequest(params) {
   if (loading == false) {
     loading = true;
+    $(params.parent).find('.table-diff .loading-wrap').show();
     params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
     params.loadData.maxResult = params.maxResult;
     ajaxFn({
@@ -804,6 +803,7 @@ function tableDiffRequest(params) {
           data.tableNum = params.loadData.firstResult + 1;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+          $(params.parent).find('.table-diff .loading-wrap').hide();
         } else {
           $('.table-diff-header .scroll-loading').hide();
         }
@@ -1083,13 +1083,12 @@ function findThanFn(params) {
       if (res.content.length >= params.findThanData.maxResult) {
         $(params.parent).find('.standard-than .scroll-loading').show();
       } else {
-        console.log('hide');
         $(params.parent).find('.standard-than .scroll-loading').hide();
       }
       var tbodyData = {};
       $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
-      var _table = $('.than-tbody .than-tbody-top')[0];
+      var _table = $parent.find('.than-tbody .than-tbody-top')[0];
       _table.innerHTML = params.standardThanTbody(tbodyData);
       $parent.find('.standard-than .than-tbody').scrollTop(0);
     }
@@ -1109,6 +1108,8 @@ function showThan(params) {
   $parent.find('.than-table .loading-wrap').show();
   var _prodName = $parent.find('.table-diff-data-content [data-id=' + singleDataId + ']').attr('data-name');
   var _index = $('.table-diff-data-content').find('[data-id=' + singleDataId + ']').index();
+  var promptText = $parent.find('.prompt').text();
+  $('.prompt').text('比对中...').show();
   $parent.find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
   $parent.find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
   if (!!params.homeProdName) {
@@ -1133,6 +1134,10 @@ function showThan(params) {
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id', singleDataId);
       $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(params.data.thanData));
+      $('.prompt').text('比对成功');
+      setTimeout(function () {
+        $('.prompt').hide().text(promptText);
+      }, 500);
       if ($(params.parent).find('.standard-than .than-tbody tr').length >= params.findThanData.maxResult) {
         $(params.parent).find('.standard-than .scroll-loading').show();
       } else {
@@ -1157,6 +1162,7 @@ function thanScrollFn(params, $this) {
   if ($this.find('table').height() <= $this.scrollTop() + $this.height() && $this.find('table').height() > 0) {
     if (loading == false) {
       loading = true;
+      $(params.parent).find('.than-table .loading-wrap').show();
       params.findThanData.firstResult = (params.firstResultThan + 1) * params.maxResultThan;
       params.findThanData.maxResult = params.maxResultThan;
       ajaxFn({
@@ -1168,6 +1174,7 @@ function thanScrollFn(params, $this) {
             var tbodyData = {};
             tbodyData.tbody = res.content;
             $(params.parent).find('.standard-than .than-tbody .table tbody').append(params.standardThanTr(tbodyData));
+            $(params.parent).find('.than-table .loading-wrap').hide();
           } else {
             $(params.parent).find('.standard-than .scroll-loading').hide();
           }
@@ -1203,10 +1210,11 @@ function upInputFn(params) {
         aftValue: $(this).val()
       },
       callback: function (res) {
+        console.log($(params.parent).find('.prompt').text());
         $(params.parent).find('.prompt').show();
         setTimeout(function () {
-          $(params.parent).find('.prompt').fadeOut();
-        }, 2000);
+          $(params.parent).find('.prompt').hide();
+        }, 500);
       }
     });
   });
@@ -1255,8 +1263,8 @@ function upSelect(params) {
         reloadsearchClassifyTel(params);
         $(params.parent).find('.prompt').show();
         setTimeout(function () {
-          $(params.parent).find('.prompt').fadeOut();
-        }, 2000);
+          $(params.parent).find('.prompt').hide();
+        }, 500);
       }
     });
   });
@@ -1311,8 +1319,8 @@ function updateValueFn(params) {
         reloadsearchClassifyTel(params);
         $(params.parent).find('.prompt').show();
         setTimeout(function () {
-          $(params.parent).find('.prompt').fadeOut();
-        }, 2000);
+          $(params.parent).find('.prompt').hide();
+        }, 500);
       }
     });
   });
@@ -1336,8 +1344,8 @@ function updateValueFn(params) {
         reloadsearchClassifyTel(loadObj);
         $(params.parent).find('.prompt').show();
         setTimeout(function () {
-          $(params.parent).find('.prompt').fadeOut();
-        }, 2000);
+          $(params.parent).find('.prompt').hide();
+        }, 500);
       }
     });
   });
@@ -1551,11 +1559,12 @@ function saveChannelFn(params, $this, _drugId) {
       $('.popup').hide();
       $(params.parent).find('.prompt').show();
       setTimeout(function () {
-        $(params.parent).find('.prompt').fadeOut();
-      }, 2000);
+        $(params.parent).find('.prompt').hide();
+      }, 500);
     }
   });
 }
+
 //取消比对
 function cancelThanPopupFn(params, hptid) {
   var _index = $('.table-diff-data-content').find('[data-id=' + hptid + ']').index();
@@ -1572,6 +1581,7 @@ function cancelThanPopupFn(params, hptid) {
     cancelThanFn(params, cancelThanData, _index);
   });
 }
+
 function cancelThanFn(params, cancelThanData, _index) {
   ajaxFn({
     url: params.cancelUrl,
@@ -1589,6 +1599,7 @@ function cancelThanFn(params, cancelThanData, _index) {
     }
   });
 }
+
 function isNull(_this) {
   if (!!_this && typeof _this != undefined) {
     return _this;
@@ -1695,7 +1706,6 @@ module.exports = {
       paramsType.push(params.parent);
       paramsAll.push(params);
     }
-    //console.log(paramsAll);
 
     loadChemistryTableFn(params); //加载数据
 
@@ -2311,6 +2321,8 @@ function addDataFn(drugName) {
     data: listProductData,
     callback: function (res) {
       data.addData.tbody = res.content;
+      //var _table=  $('.add-than-tbody')[0];
+      //_table.innerHTML = 111;
       $('.add-than-tbody .table').html(tbodyTel(data.addData));
       if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
         $('.add-than-tbody .scroll-loading').show();
@@ -2354,6 +2366,7 @@ function addDataFn(drugName) {
       $('.add-than-table .add-than-tbody').on('scroll', function () {
         var _t = $(this);
         if (_t.children('table').height() <= _t.scrollTop() + _t.height()) {
+          $('.add-than-table .loading-wrap').show();
           listProductData.firstResult = (firstResult + 1) * maxResult;
           listProductData.maxResult = maxResult;
           if (loading == false) {
@@ -2367,6 +2380,7 @@ function addDataFn(drugName) {
                   var trData = {};
                   trData.tbody = res.content;
                   $('.add-than-tbody .table').append(tr(trData));
+                  $('.add-than-table .loading-wrap').hide();
                 } else {
                   $('.add-than-tbody .scroll-loading').hide();
                 }
@@ -4385,13 +4399,13 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "            <lable class=\"input-group\">\r\n                "
+  return "                 <lable class=\"input-group\">\r\n                     "
     + alias4(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"text","hash":{},"data":data}) : helper)))
-    + "\r\n                <input type=\"text\" class=\"input "
+    + "\r\n                     <input type=\"text\" class=\"input "
     + alias4(((helper = (helper = helpers.inputClass || (depth0 != null ? depth0.inputClass : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"inputClass","hash":{},"data":data}) : helper)))
     + "\" value=\""
     + alias4(((helper = (helper = helpers.val || (depth0 != null ? depth0.val : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"val","hash":{},"data":data}) : helper)))
-    + "\">\r\n            </lable>\r\n";
+    + "\">\r\n                 </lable>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
     return "                           <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
@@ -4399,11 +4413,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"title\">标准数据比对\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
+  return "<div class=\"title\">\r\n    <span class=\"lf\">标准数据比对</span>\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n    <div class=\"search-than\">\r\n"
+    + "\">\r\n    <div class=\"search-than\">\r\n         <div class=\"lf\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead-wrap\">\r\n           <div class=\"than-thead\">\r\n               <table class=\"table\" cellpadding=\"0\" cellspacing=\"0\" >\r\n                   <tr class=\"thead\">\r\n"
+    + "         </div>\r\n        <a href=\"javaScript:void(0)\" class=\"btn find-than\">查找</a>\r\n    </div>\r\n   <div class=\"than-table\">\r\n       <div class=\"than-thead-wrap\">\r\n           <div class=\"than-thead\">\r\n               <table class=\"table\" cellpadding=\"0\" cellspacing=\"0\" >\r\n                   <tr class=\"thead\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                   </tr>\r\n               </table>\r\n           </div>\r\n       </div>\r\n       <div class=\"than-tbody\">\r\n           <div class=\"than-tbody-top\"></div>\r\n           <div class=\"scroll-loading\">加载中...</div>\r\n       </div>\r\n       <div class=\"loading-wrap\">\r\n           <div class=\"loading\">\r\n               <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n           </div>\r\n       </div>\r\n   </div>\r\n</div>";
 },"useData":true});

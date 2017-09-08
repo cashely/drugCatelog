@@ -1,16 +1,19 @@
-<div class="title">标准数据比对
+<div class="title">
+    <span class="lf">标准数据比对</span>
     <a href="javascript:void(0)" class="toggle" onClick="toggleFn(this)">
         <span class="toggle-text">收起</span><i class="icon-arrow"></i>
     </a>
 </div>
 <div class="than-content" data-id="{{id}}">
     <div class="search-than">
-        {{#each input}}
-            <lable class="input-group">
-                {{text}}
-                <input type="text" class="input {{inputClass}}" value="{{val}}">
-            </lable>
-        {{/each}}
+         <div class="lf">
+             {{#each input}}
+                 <lable class="input-group">
+                     {{text}}
+                     <input type="text" class="input {{inputClass}}" value="{{val}}">
+                 </lable>
+             {{/each}}
+         </div>
         <a href="javaScript:void(0)" class="btn find-than">查找</a>
     </div>
    <div class="than-table">
