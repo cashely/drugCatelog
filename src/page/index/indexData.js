@@ -10,7 +10,11 @@ module.exports = {
     showRsyyCount: 1
   },
   diffData: {
-    tLeftHead:['医院药品ID','药品名称','规格厂家','转换比','门诊/住院单位','是否停用','修订时间'],
+    tLeftHead:[
+      {text:'医院药品ID',resize:1}, {text:'药品名称',resize:1}, {text:'规格厂家',resize:1},
+      {text:'转换比',resize:1},{text:'门诊/住院单位',resize:1},{text:'是否停用',resize:1},
+      {text:'修订时间'}
+    ],
     tRightHead: [
       '药品编码', '药品类型', '药品名称', '剂型', '规格','规格属性','包材', '转换比', '企业简称', '批准文号/注册证号',
       '说明书', '说明书版本', '基药', '抗菌药物', 'DDD值', '抗菌药物分类', '是否计算强度', '给药途径(不计算强度)',

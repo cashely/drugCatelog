@@ -5,8 +5,8 @@
     <title>医院药事管理软件</title>
     <link rel="stylesheet" href="stylesheets/index.css">
     <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+    <script src="./javaScript/es5-shim.min.js"></script>
+    <script src="./javaScript/es5-sham.min.js"></script>
     <![endif]-->
     <!--引入handlebars-->
     <script type="text/javascript" src="./javaScript/handlebars-v4.0.10.js"></script>
@@ -15,36 +15,36 @@
 <body>
     <!--药品目录-->
     <div id="home">
-            <div class="header"></div>
-            <div class="login-box"></div>
-            <div class="tabs-box-wrap">
-                <div class="tabs-box"></div>
-            </div>
-            <div class="content-wrap">
-                <div class="content">
-                    <div class="content-box chemistryMain active">
-                        <div class="content-box-main">
-                            <div class="search-box"></div>
-                            <div class="tabBar"></div>
-                            <div class="table-diff"></div>
-                            <div class="standard-than" id="standardData"></div>
-                        </div>
-                        <div class="add-data"></div>
+        <div class="header"></div>
+        <div class="login-box"></div>
+        <div class="tabs-box-wrap">
+            <div class="tabs-box"></div>
+        </div>
+        <div class="content-wrap">
+            <div class="content">
+                <div class="content-box chemistryMain active">
+                    <div class="content-box-main">
+                        <div class="search-box"></div>
+                        <div class="tabBar"></div>
+                        <div class="table-diff"></div>
+                        <div class="standard-than" id="standardData"></div>
                     </div>
-                    <div class="popup"></div>
+                    <div class="add-data"></div>
                 </div>
+                <div class="popup"></div>
             </div>
-            <div class="footer"></div>
+        </div>
+        <div class="footer"></div>
     </div>
     <!--webpack打包后的文件-->
     <script src="javaScript/index.js"></script>
     <script>
-        function toggleFn(e){
-            if($(e).children('.icon-arrow').hasClass('icon-arrow-down')){
+        function toggleFn(e) {
+            if ($(e).children('.icon-arrow').hasClass('icon-arrow-down')) {
                 $(e).children('.toggle-text').text('收起');
                 $('.than-content').show();
                 $(e).children('.icon-arrow').removeClass('icon-arrow-down');
-            }else{
+            } else {
                 $(e).children('.toggle-text').text('展开');
                 $('.than-content').hide();
                 $(e).children('.icon-arrow').addClass('icon-arrow-down');

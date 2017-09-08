@@ -75,34 +75,36 @@ function loadChemistryTableFn(params,type){
       }
       $parent.find('.table-diff .loading-wrap').hide();
       params.data.diffData.ydata = res.content.rows;
+      $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
       if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
         $('.table-diff-header .scroll-loading').show();
       }else{
         $('.table-diff-header .scroll-loading').hide();
       }
-      $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
       tableDiffScrollFn($parent,params);
     }
   });
 }
 
-function tableDiffRequest(params){
-  if(loading == false){
+function tableDiffRequest(params) {
+  if (loading == false) {
     loading = true;
-    params.loadData.firstResult = (params.firstResult+1)*params.maxResult;
+    $(params.parent).find('.table-diff .loading-wrap').show();
+    params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
     params.loadData.maxResult = params.maxResult;
     ajaxFn({
       url: params.url,
-      data:params.loadData,
-      callback:function(res){
-        if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total){
+      data: params.loadData,
+      callback: function (res) {
+        if ($(params.parent).find('.table-diff-left .table-diff-data-content tr').length < res.total) {
           params.firstResult = params.firstResult + 1;
           var data = {};
           data.ydata = res.content.rows;
           data.tableNum = params.loadData.firstResult + 1;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-        }else{
+          $(params.parent).find('.table-diff .loading-wrap').hide();
+        } else {
           $('.table-diff-header .scroll-loading').hide();
         }
         loading = false;
@@ -378,13 +380,12 @@ function findThanFn(params){
       if(res.content.length >=  params.findThanData.maxResult){
         $(params.parent).find('.standard-than .scroll-loading').show();
       }else{
-        console.log('hide');
         $(params.parent).find('.standard-than .scroll-loading').hide();
       }
       var tbodyData = {};
       $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
-      var _table= $('.than-tbody .than-tbody-top')[0];
+      var _table= $parent.find('.than-tbody .than-tbody-top')[0];
       _table.innerHTML = params.standardThanTbody(tbodyData);
       $parent.find('.standard-than .than-tbody').scrollTop(0);
     }
@@ -404,6 +405,8 @@ function showThan(params){
   $parent.find('.than-table .loading-wrap').show();
   var _prodName = $parent.find('.table-diff-data-content [data-id='+singleDataId+']').attr('data-name');
   var _index = $('.table-diff-data-content').find('[data-id='+singleDataId+']').index();
+  var promptText = $parent.find('.prompt').text();
+  $('.prompt').text('比对中...').show();
   $parent.find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
   $parent.find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
   if(!!params.homeProdName){//西药
@@ -426,6 +429,8 @@ function showThan(params){
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id',singleDataId);
       $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(params.data.thanData));
+      $('.prompt').text('比对成功');
+      setTimeout(function () {$('.prompt').hide().text(promptText)}, 500);
       if($(params.parent).find('.standard-than .than-tbody tr').length >=  params.findThanData.maxResult){
         $(params.parent).find('.standard-than .scroll-loading').show();
       }else{
@@ -448,6 +453,7 @@ function thanScrollFn(params,$this){
    if($this.find('table').height() <= $this.scrollTop()+ $this.height() && $this.find('table').height() > 0){
     if(loading == false){
       loading = true;
+      $(params.parent).find('.than-table .loading-wrap').show();
       params.findThanData.firstResult = (params.firstResultThan+1) * params.maxResultThan;
       params.findThanData.maxResult = params.maxResultThan;
       ajaxFn({
@@ -459,6 +465,7 @@ function thanScrollFn(params,$this){
             var tbodyData = {};
             tbodyData.tbody = res.content;
             $(params.parent).find('.standard-than .than-tbody .table tbody').append(params.standardThanTr(tbodyData));
+            $(params.parent).find('.than-table .loading-wrap').hide();
           }else{
             $(params.parent).find('.standard-than .scroll-loading').hide();
           }
@@ -493,8 +500,9 @@ function upInputFn(params){
         aftValue: $(this).val()
       },
       callback:function(res){
+        console.log( $(params.parent).find('.prompt').text())
         $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').fadeOut(); }, 2000);
+        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
       }
     })
   });
@@ -541,7 +549,7 @@ function upSelect(params){
         }
         reloadsearchClassifyTel(params);
         $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').fadeOut(); }, 2000);
+        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
       }
     })
   });
@@ -595,7 +603,7 @@ function updateValueFn(params){
         }
         reloadsearchClassifyTel(params);
         $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').fadeOut(); }, 2000);
+        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
       }
     })
   });
@@ -618,7 +626,7 @@ function updateValueFn(params){
         $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
         reloadsearchClassifyTel(loadObj);
         $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').fadeOut(); }, 2000);
+        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
       }
     })
   });
@@ -819,10 +827,11 @@ function saveChannelFn(params,$this,_drugId){
     callback:function(res){
       $('.popup').hide();
       $(params.parent).find('.prompt').show();
-      setTimeout(function () {$(params.parent).find('.prompt').fadeOut();}, 2000);
+      setTimeout(function () {$(params.parent).find('.prompt').hide();}, 500);
     }
   })
 }
+
 //取消比对
 function cancelThanPopupFn(params,hptid){
   var _index = $('.table-diff-data-content').find('[data-id='+hptid+']').index();
@@ -835,6 +844,7 @@ function cancelThanPopupFn(params,hptid){
     cancelThanFn(params,cancelThanData,_index)
   })
 }
+
 function cancelThanFn(params,cancelThanData,_index){
   ajaxFn({
     url: params.cancelUrl,
@@ -852,6 +862,7 @@ function cancelThanFn(params,cancelThanData,_index){
     }
   })
 }
+
 function isNull(_this){
   if(!!_this && typeof _this != undefined ){
     return _this;
@@ -955,7 +966,6 @@ module.exports = {
       paramsType.push(params.parent);
       paramsAll.push(params)
     }
-    //console.log(paramsAll);
 
     loadChemistryTableFn(params);//加载数据
 

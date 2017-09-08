@@ -10,14 +10,13 @@
                         <thead>
                             <th style="width: 40px">
                                 <div style="width: 40px">序号</div>
-                                <span class="resize"></span>
                             </th>
                             {{#each tLeftHead}}
                                 <th>
                                     <div>
-                                        {{this}}
+                                        {{text}}
                                     </div>
-                                    <span class="resize"></span>
+                                    {{#if resize}}<span class="resize"></span>{{/if}}
                                 </th>
                             {{/each}}
                         </thead>
@@ -33,14 +32,10 @@
                                         <td class="table-diff-drugId" title="{{id}}"><div>{{id}}</div></td>
                                         <td title="{{drugName}}"><div>{{drugName}}</div></td>
                                         <td title="{{specName}} {{manufacturerName}}"><div>{{specName}} {{manufacturerName}}</div></td>
-                                        <td title="{{convertRatio}}">
-                                            <div><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div>
-                                        </td>
-                                        <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}">
-                                            <div>{{{unitInput unitOps}}}</div>
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot isStop "isStop"}}}</td>
-                                        <td title="{{timeFn updateDate}}"><div>{{timeFn updateDate}}</div></td>
+                                        <td title="{{convertRatio}}"><div><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div></td>
+                                        <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}"><div>{{{unitInput unitOps}}}</div></td>
+                                        <!--最后两个td不能换行，为了解决ie9下的bug-->
+                                        <td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot isStop "isStop"}}}</td><td title="{{timeFn updateDate}}"><div>{{timeFn updateDate}}</div></td>
                                     </tr>
                                 {{/each}}
                             </tbody>
