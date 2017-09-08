@@ -175,7 +175,8 @@ a {
   .content .search-box .search-data {
     margin-top: 10px;
     line-height: 16px;
-    overflow: hidden; }
+    overflow: hidden;
+    width: 100%; }
     .content .search-box .search-data .search-data-lf {
       float: left; }
     .content .search-box .search-data .search-data-rt {
@@ -466,7 +467,7 @@ a {
 .table-diff-data tr.hover .table-diff-data-td-select .select, .table-diff-data tr.active .table-diff-data-td-select .select {
   display: block; }
 
-.table-diff-data .has-instruction:hover {
+.table-diff-data .has-instruction {
   color: #2D8CC0;
   cursor: pointer;
   text-decoration: underline; }

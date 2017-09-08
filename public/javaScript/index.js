@@ -2569,7 +2569,7 @@ module.exports = {
   },
   diffData: {
     tLeftHead: ['医院药品ID', '药品名称', '规格厂家', '转换比', '门诊／住院单位', '是否停用', '修订时间'],
-    tRightHead: ['药品编码', '药品类型', '品种名称', '饮片名称', '片型', '基药', '医保', '医保编码']
+    tRightHead: ['药品编码', '药品类型', '最小使用单位', '最小包装单位', '整散比', '品种名称', '饮片名称', '片型', '基药', '医保', '医保编码']
   },
   thanData: {
     input: [{ text: '药品名称:', inputClass: 'name' }],
@@ -4129,7 +4129,19 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),0,{"name":"ypTypeSelect","hash":{},"data":data}))
     + "\">\r\n                                        "
     + ((stack1 = __default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSelect","hash":{},"data":data})) != null ? stack1 : "")
-    + "\r\n                                    </td>\r\n                                    <td title=\""
+    + "\r\n                                    </td>\r\n                                    <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n                                        <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\" data-name=\"minUseUnit\"></div>\r\n                                    </td>\r\n                                    <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
+    + "\">\r\n                                        <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
+    + "\" data-name=\"wrapUnit\"></div>\r\n                                    </td>\r\n                                    <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n                                        <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
+    + "\" data-name=\"convertRatio\"></div>\r\n                                    </td>\r\n                                    <td title=\""
     + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
@@ -4237,7 +4249,19 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),0,{"name":"ypTypeSelect","hash":{},"data":data}))
     + "\">\r\n            "
     + ((stack1 = __default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSelect","hash":{},"data":data})) != null ? stack1 : "")
-    + "\r\n        </td>\r\n        <td title=\""
+    + "\r\n        </td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n            <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\" data-name=\"minUseUnit\"></div>\r\n        </td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
+    + "\">\r\n            <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
+    + "\" data-name=\"wrapUnit\"></div>\r\n        </td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n            <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
+    + "\" data-name=\"convertRatio\"></div>\r\n        </td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
@@ -4311,7 +4335,19 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),0,{"name":"ypTypeSelect","hash":{},"data":data}))
     + "\">\r\n    "
     + ((stack1 = __default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.ypType : depth0),{"name":"ypTypeSelect","hash":{},"data":data})) != null ? stack1 : "")
-    + "\r\n</td>\r\n<td title=\""
+    + "\r\n</td>\r\n<td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n    <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\" data-name=\"minUseUnit\"></div>\r\n</td>\r\n<td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
+    + "\">\r\n    <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.wrapUnit : depth0), depth0))
+    + "\" data-name=\"wrapUnit\"></div>\r\n</td>\r\n<td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
+    + "\">\r\n    <div><input class=\"upInput\" value=\""
+    + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
+    + "\" data-name=\"convertRatio\"></div>\r\n</td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.pzName : depth0), depth0))
@@ -4626,17 +4662,17 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
     + "</div></td>\r\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
-    + "\">\r\n                                            <div><input class=\"upInput "
+    + "\"><div><input class=\"upInput "
     + alias2(__default(__webpack_require__(32)).call(alias3,(depth0 != null ? depth0.convertRatio : depth0),(depth0 != null ? depth0.fConvertRatio : depth0),{"name":"convertRatioFn","hash":{},"data":data}))
     + "\" value=\""
     + alias2(alias1((depth0 != null ? depth0.convertRatio : depth0), depth0))
-    + "\" data-name=\"convertRatio\"></div>\r\n                                        </td>\r\n                                        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
+    + "\" data-name=\"convertRatio\"></div></td>\r\n                                        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
-    + "\">\r\n                                            <div>"
+    + "\"><div>"
     + ((stack1 = __default(__webpack_require__(33)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
-    + "</div>\r\n                                        </td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\">"
+    + "</div></td>\r\n                                        <!--最后两个td不能换行，为了解决ie9下的bug-->\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\">"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isStop : depth0),"isStop",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
-    + "</td>\r\n                                        <td title=\""
+    + "</td><td title=\""
     + alias2(__default(__webpack_require__(8)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))
     + "\"><div>"
     + alias2(__default(__webpack_require__(8)).call(alias3,(depth0 != null ? depth0.updateDate : depth0),{"name":"timeFn","hash":{},"data":data}))

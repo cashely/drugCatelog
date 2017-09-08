@@ -195,6 +195,7 @@ a{
             margin-top: 10px;
             line-height: 16px;
             overflow: hidden;
+            width: 100%;
             .search-data-lf{
                 float: left;
             }
@@ -583,11 +584,9 @@ a{
         }
     }
     .has-instruction{
-        &:hover{
-            color: #2D8CC0;
-            cursor: pointer;
-            text-decoration: underline;
-        }
+        color: #2D8CC0;
+        cursor: pointer;
+        text-decoration: underline;
     }
 }
 .table-diff{
