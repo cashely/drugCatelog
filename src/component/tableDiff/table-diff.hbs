@@ -10,14 +10,13 @@
                         <thead>
                             <th style="width: 40px">
                                 <div style="width: 40px">序号</div>
-                                <span class="resize"></span>
                             </th>
                             {{#each tLeftHead}}
                                 <th>
                                     <div>
-                                        {{this}}
+                                        {{text}}
                                     </div>
-                                    <span class="resize"></span>
+                                    {{#if resize}}<span class="resize"></span>{{/if}}
                                 </th>
                             {{/each}}
                         </thead>

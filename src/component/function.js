@@ -78,6 +78,7 @@ function loadChemistryTableFn(params,type){
       if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
         $('.table-diff-header .scroll-loading').show();
       }else{
+        console.log('hide')
         $('.table-diff-header .scroll-loading').hide();
       }
       $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
