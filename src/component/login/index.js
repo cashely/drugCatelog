@@ -14,6 +14,7 @@ $('.login .login-btn').click(function(){
     },
     callback:function(){
       $('.login').hide();
+      location.reload();
       $('.header .login-out').addClass('active').text('注销');
     }
   })

@@ -890,7 +890,7 @@ function instructionFn(params,$this){
   var _index = $this.parents('tr').index();
   var _drugId = $(params.parent).find('.table-diff-left .table-diff-data tr').eq(_index).attr('data-id');
   if($this.hasClass('has-instruction')){
-    window.open(http+'hpms/api/mcdProduct30/getHisSms?ypmcid='+_drugId)
+    window.open(http+'mcdProduct30/getHisSms?ypmcid='+_drugId)
   }
 }
 
@@ -988,7 +988,7 @@ module.exports = {
     }); //搜索化学药比对
 
     //下载表格
-    bindFn(params.parent, 'click', '.search-data .download', function () {
+    bindFn(params.parent, 'click', '.search-top-rt .download', function () {
       downloadFn(params)
     });
 

@@ -179,7 +179,7 @@ a {
     .content .search-box .search-data .search-data-lf {
       float: left; }
     .content .search-box .search-data .search-data-rt {
-      float: right;
+      float: left;
       width: 65%;
       text-align: justify; }
       .content .search-box .search-data .search-data-rt a {
