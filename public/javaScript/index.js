@@ -2326,9 +2326,8 @@ function addDataFn(drugName) {
     data: listProductData,
     callback: function (res) {
       data.addData.tbody = res.content;
-      //var _table=  $('.add-than-tbody')[0];
-      //_table.innerHTML = 111;
-      $('.add-than-tbody .table').html(tbodyTel(data.addData));
+      var _table = $('.add-than-tbody')[0];
+      _table.innerHTML = tbodyTel(data.addData);
       if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
         $('.add-than-tbody .scroll-loading').show();
       } else {
@@ -2357,7 +2356,8 @@ function addDataFn(drugName) {
             callback: function (res) {
               $('.add-than-table .loading-wrap').hide();
               data.addData.tbody = res.content;
-              $('.add-than-tbody .table').html(tbodyTel(data.addData));
+              var _table = $('.add-than-tbody')[0];
+              _table.innerHTML = tbodyTel(data.addData);
               if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
                 $('.add-than-tbody .scroll-loading').show();
               } else {
@@ -2384,7 +2384,7 @@ function addDataFn(drugName) {
                   firstResult = firstResult + 1;
                   var trData = {};
                   trData.tbody = res.content;
-                  $('.add-than-tbody .table').append(tr(trData));
+                  $('.add-than-tbody .table tbody').append(tr(trData));
                   $('.add-than-table .loading-wrap').hide();
                 } else {
                   $('.add-than-tbody .scroll-loading').hide();
@@ -3932,37 +3932,39 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "    <tr data-id=\""
+  return "        <tr data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\r\n        <td title=\""
+    + "\">\r\n            <td title=\""
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text codePro\">"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td title=\""
+    + "</div></td>\r\n            <td title=\""
     + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text name\">"
     + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td title=\""
+    + "</div></td>\r\n            <td title=\""
     + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td title=\""
+    + "</div></td>\r\n            <td title=\""
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text spec\">"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td title=\""
+    + "</div></td>\r\n            <td title=\""
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text manufacturerName\">"
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td title=\""
+    + "</div></td>\r\n            <td title=\""
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text pzwh\">"
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div class=\"table-text add-than-info\">新增</div></td>\r\n    </tr>\r\n";
+    + "</div></td>\r\n            <td><div class=\"table-text add-than-info\">新增</div></td>\r\n        </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+  return "<table class=\"table\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</table>";
 },"useData":true});
 
 /***/ }),
