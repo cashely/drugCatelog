@@ -890,12 +890,6 @@ function tableDiffScrollFn($parent, params) {
     var _t = $(this),
         trHeight = $(this).find('tr:first').height(),
         trLength = $(this).find('tr').length;
-    if (_t.scrollLeft() != tableRightLeft) {
-      tableRightLeft = _t.scrollLeft();
-      //console.log('横向滚动');
-      return;
-    }
-    //console.log('竖向滚动');
     if (trHeight * trLength <= _t.scrollTop() + _t.height()) {
       tableDiffRequest(params);
     }
@@ -939,6 +933,7 @@ function tableDiffClickFn(params, $this) {
   var _tables = $this.parents('.table-diff').find('.table-diff-data').length;
   var $parent = $(params.parent);
   $('.table-diff-bar').hide();
+  singleData.id = $this.attr('data-id');
   if ($parent.find('.table-details-content-box').is(':visible')) {
     var data = {};
     data.drugId = $parent.find('.table-diff-data-content tr').eq(_index).attr('data-id');
@@ -974,6 +969,8 @@ function selectThanFn(params, $this, loadObj) {
   var drugId = $(params.parent).find('.than-content').attr('data-id');
   var selectThanData = { drugId: drugId };
   selectThanData[params.selectThanData] = $this.parents('tr').data('id');
+  var promptText = $(params.parent).find('.prompt').text();
+  $('.prompt').text('比对中...').show();
   ajaxFn({
     url: params.saveUrl,
     data: selectThanData,
@@ -985,6 +982,10 @@ function selectThanFn(params, $this, loadObj) {
       $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
       $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
       $(document).scrollTop(0);
+      $('.prompt').text('比对成功');
+      setTimeout(function () {
+        $('.prompt').hide().text(promptText);
+      }, 500);
     },
     error: function (res) {
       alert(res.message);
@@ -1411,6 +1412,7 @@ function showDetail(params, e) {
     }
   });
 }
+
 //保存门诊/住院单位
 function saveUnitFn() {
   var arr = [];
@@ -1440,21 +1442,23 @@ function addUnitFn(unitData) {
   $('.popup-company .popup-content .popup-list').append(unitTel(unitData));
 }
 //弹窗修改门诊／住院单位
-function ymzzyPopupFn(params) {
+function ymzzyPopupFn(params, $this) {
   var $parent = $(params.parent);
-  var popupTitle = $parent.find('.table-diff-data-content [data-id=' + singleData.id + '] td').eq(1).text();
+  var _tr = $this.parents('tr');
+  var hisProdId = _tr.attr('data-id');
+  var popupTitle = _tr.find('td').eq(2).text();
   ajaxFn({
     url: 'unitConversion/getListByHisProdId',
     data: {
-      hisProdId: singleData.id
+      hisProdId: hisProdId
     },
     callback: function (res) {
       var formatUnit = [],
           unitArr = [];
-      unitArr = $parent.find('.table-diff-data-content [data-id=' + singleData.id + ']').find('.ymzzy').text();
+      unitArr = _tr.find('.ymzzy').text();
       unitArr = unitArr.replace(/(^\s*)|(\s*$)/g, "").split(",");
-      formatUnit = $parent.find('.table-diff-data-content [data-id=' + singleData.id + ']').find('.ymzzy').attr('data-minUseUnit');
-      var companyData = { popupTitle: popupTitle, id: singleData.id, unitArr: unitArr, formatUnit: formatUnit };
+      formatUnit = _tr.find('.ymzzy').attr('data-minUseUnit');
+      var companyData = { popupTitle: popupTitle, id: hisProdId, unitArr: unitArr, formatUnit: formatUnit };
       companyData.content = res.content;
       $('.popup').html(popupCompanyTal(companyData)).show();
       $('.popup-close').on('click', function () {
@@ -1467,6 +1471,7 @@ function ymzzyPopupFn(params) {
     }
   });
 }
+
 //弹窗查看属性修改纪录
 function recordFn(params) {
   ajaxFn({
@@ -1802,7 +1807,7 @@ module.exports = {
   popupFn: function (params) {
     //弹窗框方法
     bindFn(params.parent, 'click', '.ymzzy', function () {
-      ymzzyPopupFn(params);
+      ymzzyPopupFn(params, $(this));
     });
     bindFn(params.parent, 'click', '.btn-record', function () {
       recordFn(params);
@@ -2344,9 +2349,8 @@ function addDataFn(drugName) {
     data: listProductData,
     callback: function (res) {
       data.addData.tbody = res.content;
-      //var _table=  $('.add-than-tbody')[0];
-      //_table.innerHTML = 111;
-      $('.add-than-tbody .table').html(tbodyTel(data.addData));
+      var _table = $('.add-than-tbody')[0];
+      _table.innerHTML = tbodyTel(data.addData);
       if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
         $('.add-than-tbody .scroll-loading').show();
       } else {
@@ -2375,7 +2379,8 @@ function addDataFn(drugName) {
             callback: function (res) {
               $('.add-than-table .loading-wrap').hide();
               data.addData.tbody = res.content;
-              $('.add-than-tbody .table').html(tbodyTel(data.addData));
+              var _table = $('.add-than-tbody')[0];
+              _table.innerHTML = tbodyTel(data.addData);
               if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
                 $('.add-than-tbody .scroll-loading').show();
               } else {
@@ -2402,7 +2407,7 @@ function addDataFn(drugName) {
                   firstResult = firstResult + 1;
                   var trData = {};
                   trData.tbody = res.content;
-                  $('.add-than-tbody .table').append(tr(trData));
+                  $('.add-than-tbody .table tbody').append(tr(trData));
                   $('.add-than-table .loading-wrap').hide();
                 } else {
                   $('.add-than-tbody .scroll-loading').hide();
@@ -3959,37 +3964,39 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "    <tr data-id=\""
+  return "        <tr data-id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n        <td title=\""
+    + "\">\n            <td title=\""
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text codePro\">"
     + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "</div></td>\n        <td title=\""
+    + "</div></td>\n            <td title=\""
     + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text name\">"
     + alias4(((helper = (helper = helpers.name5 || (depth0 != null ? depth0.name5 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name5","hash":{},"data":data}) : helper)))
-    + "</div></td>\n        <td title=\""
+    + "</div></td>\n            <td title=\""
     + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text\">"
     + alias4(((helper = (helper = helpers.flmc || (depth0 != null ? depth0.flmc : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"flmc","hash":{},"data":data}) : helper)))
-    + "</div></td>\n        <td title=\""
+    + "</div></td>\n            <td title=\""
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text spec\">"
     + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "</div></td>\n        <td title=\""
+    + "</div></td>\n            <td title=\""
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text manufacturerName\">"
     + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "</div></td>\n        <td title=\""
+    + "</div></td>\n            <td title=\""
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
     + "\"><div class=\"table-text pzwh\">"
     + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\n        <td><div class=\"table-text add-than-info\">新增</div></td>\n    </tr>\n";
+    + "</div></td>\n            <td><div class=\"table-text add-than-info\">新增</div></td>\n        </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+  return "<table class=\"table\">\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</table>";
 },"useData":true});
 
 /***/ }),

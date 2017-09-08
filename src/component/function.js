@@ -186,12 +186,6 @@ function tableDiffScrollFn($parent,params){
     });
     $parent.find('.table-diff-left .table-diff-data').on('scroll',function(e){
       var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
-      if(_t.scrollLeft() != tableRightLeft){
-        tableRightLeft = _t.scrollLeft();
-        //console.log('横向滚动');
-        return;
-      }
-      //console.log('竖向滚动');
       if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
         tableDiffRequest(params);
       }
@@ -235,6 +229,7 @@ function tableDiffClickFn(params,$this){
   var _tables = $this.parents('.table-diff').find('.table-diff-data').length;
   var $parent = $(params.parent);
   $('.table-diff-bar').hide();
+  singleData.id = $this.attr('data-id');
   if($parent.find('.table-details-content-box').is(':visible')){
     var data={};
     data.drugId = $parent.find('.table-diff-data-content tr').eq(_index).attr('data-id');
@@ -270,6 +265,8 @@ function selectThanFn(params,$this,loadObj){
   var drugId = $(params.parent).find('.than-content').attr('data-id');
   var selectThanData = {drugId: drugId};
   selectThanData[params.selectThanData]= $this.parents('tr').data('id');
+  var promptText = $(params.parent).find('.prompt').text();
+  $('.prompt').text('比对中...').show();
   ajaxFn({
     url: params.saveUrl,
     data: selectThanData,
@@ -280,7 +277,9 @@ function selectThanFn(params,$this,loadObj){
       $(params.parent).find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
       $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
       $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
-      $(document).scrollTop(0)
+      $(document).scrollTop(0);
+      $('.prompt').text('比对成功');
+      setTimeout(function () {$('.prompt').hide().text(promptText)}, 500);
     },
     error:function(res){
       alert(res.message);
@@ -689,6 +688,7 @@ function showDetail(params,e){
     }
   })
 }
+
 //保存门诊/住院单位
 function saveUnitFn(){
   var arr = [];
@@ -718,20 +718,22 @@ function addUnitFn(unitData){
    $('.popup-company .popup-content .popup-list').append(unitTel(unitData))
 }
 //弹窗修改门诊／住院单位
-function ymzzyPopupFn(params){
+function ymzzyPopupFn(params,$this){
   var $parent = $(params.parent);
-  var popupTitle = $parent.find('.table-diff-data-content [data-id='+singleData.id+'] td').eq(1).text();
+  var _tr = $this.parents('tr');
+  var hisProdId = _tr.attr('data-id');
+  var popupTitle = _tr.find('td').eq(2).text();
   ajaxFn({
     url: 'unitConversion/getListByHisProdId',
     data:{
-      hisProdId: singleData.id
+      hisProdId: hisProdId
     },
     callback:function(res){
       var formatUnit=[],unitArr=[];
-      unitArr= $parent.find('.table-diff-data-content [data-id='+singleData.id+']').find('.ymzzy').text();
+      unitArr= _tr.find('.ymzzy').text();
       unitArr = unitArr.replace(/(^\s*)|(\s*$)/g, "").split(",");
-      formatUnit = $parent.find('.table-diff-data-content [data-id='+singleData.id+']').find('.ymzzy').attr('data-minUseUnit');
-      var companyData = {popupTitle: popupTitle,id: singleData.id,unitArr:unitArr,formatUnit:formatUnit};
+      formatUnit = _tr.find('.ymzzy').attr('data-minUseUnit');
+      var companyData = {popupTitle: popupTitle,id: hisProdId,unitArr:unitArr,formatUnit:formatUnit};
       companyData.content = res.content;
       $('.popup').html(popupCompanyTal(companyData)).show();
       $('.popup-close').on('click',function(){$('.popup').hide()});
@@ -740,6 +742,7 @@ function ymzzyPopupFn(params){
     }
   });
 }
+
 //弹窗查看属性修改纪录
 function recordFn(params){
   ajaxFn({
@@ -1043,7 +1046,7 @@ module.exports = {
   },
   popupFn:function(params){
     //弹窗框方法
-    bindFn(params.parent,'click','.ymzzy',function(){ymzzyPopupFn(params)});
+    bindFn(params.parent,'click','.ymzzy',function(){ymzzyPopupFn(params,$(this))});
     bindFn(params.parent,'click','.btn-record',function(){recordFn(params)});
   },
   updateConvertRatio:function(params){
