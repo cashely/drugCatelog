@@ -6,8 +6,6 @@
  */
 var addData = require('./index.hbs');
 var searchBox = require('../searchBox/searchBox.hbs');
-var addDataPopupTel = require('../popupCompany/addInfo.hbs');
-var tableDiffRightTr = require('../tableDiff/table-diff-right-tr.hbs');//化学药右边详情模版
 var tbodyTel = require('./tbody.hbs');
 var tr = require('./tr.hbs');
 var ajaxFn = require('../ajax');
