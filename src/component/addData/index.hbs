@@ -1,11 +1,13 @@
 <a href="javascript:void(0)" class="goback"><i class="icon-arrow-left"></i>返回</a>
 <div class="add-search-than">
-    {{#each input}}
-        <lable class="input-group">
-            {{this.text}}
-            <input type="text" class="input {{this.inputClass}}">
-        </lable>
-    {{/each}}
+    <div class="lf">
+        {{#each input}}
+            <lable class="input-group">
+                {{this.text}}
+                <input type="text" class="input {{this.inputClass}}">
+            </lable>
+        {{/each}}
+    </div>
     <a href="javaScript:void(0)" class="btn find-add-than">查找</a>
 </div>
 <div class="add-than-table">

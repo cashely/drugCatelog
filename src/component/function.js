@@ -405,7 +405,7 @@ function showThan(params){
   var _prodName = $parent.find('.table-diff-data-content [data-id='+singleDataId+']').attr('data-name');
   var _index = $('.table-diff-data-content').find('[data-id='+singleDataId+']').index();
   var promptText = $parent.find('.prompt').text();
-  $('.prompt').text('比对中...').show();
+  $('.prompt').text('加载中...').show();
   $parent.find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
   $parent.find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
   if(!!params.homeProdName){//西药
@@ -428,7 +428,7 @@ function showThan(params){
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id',singleDataId);
       $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(params.data.thanData));
-      $('.prompt').text('比对成功');
+      $('.prompt').text('加载成功');
       setTimeout(function () {$('.prompt').hide().text(promptText)}, 500);
       if($(params.parent).find('.standard-than .than-tbody tr').length >=  params.findThanData.maxResult){
         $(params.parent).find('.standard-than .scroll-loading').show();
@@ -499,7 +499,7 @@ function upInputFn(params){
         aftValue: $(this).val()
       },
       callback:function(res){
-        console.log( $(params.parent).find('.prompt').text())
+        //console.log( $(params.parent).find('.prompt').text())
         $(params.parent).find('.prompt').show();
         setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
       }
@@ -681,10 +681,7 @@ function showDetail(params,e){
       $parent.find('.table-diff-right-single').addClass('active');
       $parent.find('.table-details-content-box').html(params.tableDetails(tableDetailsData));
       $parent.find('.btn-toggle').on('click',hideDetail); //切换详情事件
-      //if(!!params.updateValueUrl){
-      //  updateValueFn(params);
-      //}
-      e.preventDefault();
+      //e.preventDefault();ie6下显示找不到成员
     }
   })
 }
@@ -890,6 +887,8 @@ function downloadFn(params){
   downloadUrl+='&wbd='+isNull(downloadData.wbd);
   downloadUrl+='&rsyy='+isNull(downloadData.rsyy);
   window.location.href=downloadUrl;
+  window.event.returnValue = false;
+  return false;
 }
 
 function offsetLeftFn(obj){
@@ -911,13 +910,24 @@ function instructionFn(params,$this){
   }
 }
 
-var xx,yy,tBar={};
+var xx=0,tBar={};
 function resetTableFn(params){
   //获取鼠标的位置
-  $(document).on('mousemove',params.parent+' .table-diff-header',function(e) {
-     xx = e.originalEvent.x || e.originalEvent.layerX || 0;
-     yy = e.originalEvent.y || e.originalEvent.layerY || 0;
+  $(document).on('mousemove',params.parent + ' .table-diff-header', function (e) {
+      if(!!e.originalEvent.x || !!e.originalEvent.layerX){
+      xx = e.originalEvent.x || e.originalEvent.layerX ;
+    }else{
+        //var xPos,yPos;
+        //var evt=e || window.event;
+        //if(evt.pageX){
+        //  xPos=evt.pageX;
+        //} else {
+        //  xPos=evt.clientX+document.body.scrollLeft -document.body.clientLeft;
+        //}
+        //$('.header-right .time').html(xPos)
+      }
   });
+
   $(params.parent).on('mousedown','.table-diff-header th .resize',function(){
     tBar.self= $(this);
     tBar.mouseDown = 1;
@@ -957,9 +967,74 @@ function resetTableFn(params){
     if(!tBar.mouseDown)$(this).css({background:'transparent'})
   });
 }
+//解决ie7以下JSON.stringify()保错
+function ieJson(){
+  if (!window.JSON) {
+    window.JSON = {
+      parse: function(jsonStr) {
+        return eval('(' + jsonStr + ')');
+      },
+      stringify: function(jsonObj) {
+        var result = '',
+          curVal;
+        if (jsonObj === null) {
+          return String(jsonObj);
+        }
+        switch (typeof jsonObj) {
+          case 'number':
+          case 'boolean':
+            return String(jsonObj);
+          case 'string':
+            return '"' + jsonObj + '"';
+          case 'undefined':
+          case 'function':
+            return undefined;
+        }
 
+        switch (Object.prototype.toString.call(jsonObj)) {
+          case '[object Array]':
+            result += '[';
+            for (var i = 0, len = jsonObj.length; i < len; i++) {
+              curVal = JSON.stringify(jsonObj[i]);
+              result += (curVal === undefined ? null : curVal) + ",";
+            }
+            if (result !== '[') {
+              result = result.slice(0, -1);
+            }
+            result += ']';
+            return result;
+          case '[object Date]':
+            return '"' + (jsonObj.toJSON ? jsonObj.toJSON() : jsonObj.toString()) + '"';
+          case '[object RegExp]':
+            return "{}";
+          case '[object Object]':
+            result += '{';
+            for (i in jsonObj) {
+              if (jsonObj.hasOwnProperty(i)) {
+                curVal = JSON.stringify(jsonObj[i]);
+                if (curVal !== undefined) {
+                  result += '"' + i + '":' + curVal + ',';
+                }
+              }
+            }
+            if (result !== '{') {
+              result = result.slice(0, -1);
+            }
+            result += '}';
+            return result;
+
+          case '[object String]':
+            return '"' + jsonObj.toString() + '"';
+          case '[object Number]':
+          case '[object Boolean]':
+            return jsonObj.toString();
+        }
+      }
+    };
+  }
+}
 var  paramsAll=[],paramsType=[];
-
+ieJson();
 module.exports = {
   loadData:function(params){
     var parent = params.parent + ' ';
@@ -1080,3 +1155,4 @@ function initCode(){
 }
 $(document).on('click','#initCode',initCode);
 $(document).on('click','#compileAllDrug',compileAllDrug);
+

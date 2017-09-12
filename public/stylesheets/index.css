@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-width: 960px; }
+  min-width: 1000px; }
 
 table {
   font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif; }
@@ -293,7 +293,6 @@ a {
       height: 350px;
       overflow-y: scroll; }
     .content .add-than-table .table {
-      width: 100%;
       text-align: left;
       border-collapse: collapse;
       border-spacing: 0; }
@@ -306,7 +305,8 @@ a {
         overflow: hidden;
         border: 1px solid #D8D8D8; }
       .content .add-than-table .table .table-text {
-        width: 100px; }
+        width: 168px;
+        overflow: hidden; }
       .content .add-than-table .table .add-than-info {
         color: #2D8CC0;
         cursor: pointer; }
@@ -316,11 +316,22 @@ a {
       display: block;
       color: #2D8CC0;
       margin-bottom: 20px; }
+    .content .add-data .add-search-than .input {
+      display: inline-block;
+      width: 108px;
+      height: 24px;
+      line-height: 24px;
+      margin-left: 8px;
+      margin-right: 20px;
+      padding: 1px 5px;
+      border: 1px solid #CACACA;
+      vertical-align: middle; }
   .content .popup-add-info {
     width: 482px;
     position: absolute;
     top: 50%;
     left: 50%;
+    z-index: 9999;
     margin-left: -242px;
     margin-top: -134px;
     background: #FFFFFF;
@@ -329,15 +340,24 @@ a {
     border-radius: 2px; }
     .content .popup-add-info .popup-content {
       padding: 30px;
-      overflow: hidden; }
+      overflow: hidden;
+      line-height: 1.6; }
       .content .popup-add-info .popup-content .content-lf {
         float: left;
-        width: 212px; }
-      .content .popup-add-info .popup-content .content-right {
-        float: left; }
+        width: 211px; }
+      .content .popup-add-info .popup-content .content-rt {
+        float: left;
+        width: 211px; }
+      .content .popup-add-info .popup-content .text-lf {
+        width: 84px;
+        display: inline-block; }
+      .content .popup-add-info .popup-content li {
+        overflow: hidden; }
       .content .popup-add-info .popup-content .input-group .input {
         width: 60px;
         margin-bottom: 0; }
+      .content .popup-add-info .popup-content .input-group .select {
+        width: 100px; }
       .content .popup-add-info .popup-content li {
         margin-bottom: 10px; }
       .content .popup-add-info .popup-content .popup-btn {
@@ -350,34 +370,55 @@ a {
     position: absolute;
     top: 175px;
     left: 50%;
-    z-index: 99;
+    z-index: 9999;
     margin-left: -161px;
     background: #fff;
     border: 1px solid #FFFFFF;
     box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
-    border-radius: 2px; }
+    border-radius: 2px;
+    text-align: center; }
     .content .popup-company .popup-content {
-      padding: 20px 74px; }
-      .content .popup-company .popup-content .popup-list {
-        width: 200px;
+      padding: 20px 0;
+      width: 320px; }
+      .content .popup-company .popup-content .popup-list-wrap {
         overflow: auto;
+        width: 200px;
+        margin: 0 auto;
+        height: 174px;
         max-height: 174px; }
+      .content .popup-company .popup-content .popup-list {
+        width: 180px; }
         .content .popup-company .popup-content .popup-list .popup-item {
+          width: 100%;
           margin-top: 10px;
           overflow: hidden; }
           .content .popup-company .popup-content .popup-list .popup-item .item-input {
             width: 34px;
-            height: 26px;
             float: left;
-            padding: 0 5px;
+            padding: 5px;
             border: 1px solid #CACACA; }
-          .content .popup-company .popup-content .popup-list .popup-item .item-select {
-            height: 28px;
-            width: 40px;
+          .content .popup-company .popup-content .popup-list .popup-item .standard_select {
+            /*边框*/
             float: left;
-            border-left-width: 0;
-            border-right-width: 0;
-            border-color: #CACACA; }
+            display: inline-block;
+            border: solid 1px #CACACA;
+            padding: 2px 0;
+            *padding: 3px 0;
+            /*调整此处改变select高度*/ }
+            .content .popup-company .popup-content .popup-list .popup-item .standard_select .select_shelter {
+              /*遮挡默认边框*/
+              display: inline-block;
+              width: 40px;
+              *width: 38px;
+              height: 20px;
+              overflow: hidden; }
+              .content .popup-company .popup-content .popup-list .popup-item .standard_select .select_shelter .item-select {
+                *margin: -2px;
+                *margin-bottom: -4px;
+                padding: 1px;
+                border: 0;
+                width: 40px;
+                /*select的宽度*/ }
           .content .popup-company .popup-content .popup-list .popup-item .last-select {
             border-right-width: 1px; }
       .content .popup-company .popup-content .btn-group .add-unit {
@@ -388,7 +429,7 @@ a {
     position: absolute;
     top: 175px;
     left: 50%;
-    z-index: 99;
+    z-index: 9999;
     margin-left: -241px;
     background: #fff;
     border: 1px solid #FFFFFF;
@@ -411,7 +452,7 @@ a {
     position: absolute;
     top: 175px;
     left: 50%;
-    z-index: 99;
+    z-index: 9999;
     margin-left: -241px;
     background: #fff;
     border: 1px solid #FFFFFF;
@@ -432,7 +473,7 @@ a {
     position: absolute;
     top: 175px;
     left: 50%;
-    z-index: 99;
+    z-index: 9999;
     margin-left: -125px;
     background: #fff;
     border: 1px solid #FFFFFF;
@@ -556,7 +597,8 @@ a {
       position: relative;
       overflow-x: hidden;
       overflow-y: hidden;
-      height: 448px; }
+      height: 448px;
+      width: 687px; }
       .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
         overflow-y: auto; }
     .table-diff .table-diff-left .table-diff-data-content {
@@ -592,6 +634,7 @@ a {
         border: 1px solid #D8D8D8;
         padding: 10px 10px 20px; }
         .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box {
+          width: 100%;
           overflow-y: scroll;
           height: 332px; }
           .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list {

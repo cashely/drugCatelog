@@ -8,7 +8,7 @@ body{
     margin:0;
     padding:0;
     width: 100%;
-    min-width: 960px;
+    min-width: 1000px;
 }
 table{
     font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif;
@@ -352,7 +352,7 @@ a{
             overflow-y: scroll;
         }
         .table{
-            width: 100%;
+            //width: 100%;
             text-align: left;
             border-collapse: collapse;
             border-spacing: 0;
@@ -369,7 +369,8 @@ a{
                 }
             }
             .table-text{
-                width: 100px;
+                width: 168px;
+                overflow: hidden;
             }
             .add-than-info{
                 color: #2D8CC0;
@@ -387,13 +388,28 @@ a{
             color: #2D8CC0;
             margin-bottom: 20px;
         }
-        //药品目录-添加对比信息弹窗
+        //ie
+        .add-search-than{
+            .input{
+                display: inline-block;
+                width: 108px;
+                height: 24px;
+                line-height: 24px;
+                margin-left: 8px;
+                margin-right: 20px;
+                padding: 1px 5px;
+                border: 1px solid #CACACA;
+                vertical-align: middle;
+            }
+        }
     }
+
     .popup-add-info{
         width: 482px;
         position: absolute;
         top: 50%;
         left: 50%;
+        z-index: 9999;
         margin-left: -242px;
         margin-top: -134px;
         background: #FFFFFF;
@@ -403,17 +419,29 @@ a{
         .popup-content{
             padding: 30px;
             overflow: hidden;
+            line-height: 1.6;
             .content-lf{
                 float: left;
-                width: 212px;
+                width: 211px;
             }
-            .content-right{
+            .content-rt{
                 float: left;
+                width: 211px;
+            }
+            .text-lf{
+                width: 84px;
+                display: inline-block;
+            }
+            li{
+                overflow: hidden;
             }
             .input-group{
                 .input{
                     width: 60px;
                     margin-bottom: 0;
+                }
+                .select{
+                    width: 100px;
                 }
             }
             li{
@@ -427,42 +455,62 @@ a{
             }
         }
     }
-
     //门诊／住院单位
     .popup-company{
         width: 320px;
         position: absolute;
         top: 175px;
         left: 50%;
-        z-index: 99;
+        z-index: 9999;
         margin-left: -161px;
         background: #fff;
         border: 1px solid #FFFFFF;
         box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
         border-radius: 2px;
+        text-align: center;
         .popup-content{
-            padding: 20px 74px;
-            .popup-list{
-                width: 200px;
+            //padding: 20px 74px;
+            padding: 20px 0;
+            width: 320px;
+            .popup-list-wrap{
                 overflow: auto;
+                width: 200px;
+                margin: 0 auto;
+                height: 174px;
                 max-height: 174px;
+            }
+            .popup-list{
+                width: 180px;
                 .popup-item{
+                    width: 100%;
                     margin-top: 10px;
                     overflow: hidden;
                     .item-input{
                         width: 34px;
-                        height: 26px;
                         float: left;
-                        padding: 0 5px;
+                        padding: 5px;
                         border: 1px solid #CACACA;
                     }
-                    .item-select{
-                        height: 28px;
-                        width: 40px;
+                    .standard_select{ /*边框*/
                         float: left;
-                        border-left-width: 0;
-                        border-right-width: 0;
-                        border-color: #CACACA;
+                        display:inline-block;
+                        border:solid 1px #CACACA;
+                        padding:2px 0;
+                        *padding:3px 0; /*调整此处改变select高度*/
+                        .select_shelter{ /*遮挡默认边框*/
+                            display:inline-block;
+                            width:40px;
+                            *width:38px;
+                            height:20px;
+                            overflow:hidden;
+                            .item-select{
+                                *margin:-2px;
+                                *margin-bottom: -4px;
+                                padding:1px;
+                                border:0;
+                                width: 40px; /*select的宽度*/
+                            }
+                        }
                     }
                     .last-select{
                         border-right-width: 1px;
@@ -482,7 +530,7 @@ a{
         position: absolute;
         top: 175px;
         left: 50%;
-        z-index: 99;
+        z-index: 9999;
         margin-left: -241px;
         background: #fff;
         border: 1px solid #FFFFFF;
@@ -511,7 +559,7 @@ a{
         position: absolute;
         top: 175px;
         left: 50%;
-        z-index: 99;
+        z-index: 9999;
         margin-left: -241px;
         background: #fff;
         border: 1px solid #FFFFFF;
@@ -538,7 +586,7 @@ a{
         position: absolute;
         top: 175px;
         left: 50%;
-        z-index: 99;
+        z-index: 9999;
         margin-left: -125px;
         background: #fff;
         border: 1px solid #FFFFFF;
@@ -706,6 +754,7 @@ a{
             overflow-x: hidden;
             overflow-y: hidden;
             height: 448px;
+            width: 687px;
             &.table-diff-show-detail{
                 overflow-y: auto;
             }
@@ -751,6 +800,7 @@ a{
                 border: 1px solid #D8D8D8;
                 padding: 10px 10px 20px;
                 .table-details-content-box{
+                    width: 100%;
                     overflow-y: scroll;
                     height: 332px;
                     .content-list{

@@ -1,36 +1,55 @@
 <div class="popup-company" data-id="{{id}}">
     <div class="popup-title">
-        {{popupTitle}}<span class="popup-close"></span>
+        {{popupTitle}}
+        <span class="popup-close"><img src="./images/icon-close.png" alt=""></span>
     </div>
     <div class="popup-content">
         门诊／住院单位：
-        <div class="popup-list">
-            {{#each content.standard}}
-                <div class="popup-item" data-id="{{id}}">
-                    <input type="text" class="item-input convertRatio" value={{convertRatio}} disabled>
-                    <select  class="item-select unit">
-                        <option value="{{unit}}">{{unit}}</option>
-                    </select>
-                    <input type="text" class="item-input fConvertRatio" value={{fConvertRatio}} disabled>
-                    <select  class="item-select last-select formatUnit">
-                        <option value="{{formatUnit}}">{{formatUnit}}</option>
-                    </select>
-                </div>
-            {{/each}}
-            {{#each content.unstandard}}
-                <div class="popup-item unstandard" data-id="{{id}}">
-                    <input type="text" class="item-input convertRatio" value={{convertRatio}}>
-                    <select class="item-select unit">
-                        {{#each ../unitArr}}
-                            <option value="{{this}}" {{selectedFn ../unit this}}>{{this}}</option>
-                        {{/each}}
-                    </select>
-                    <input type="text" class="item-input fConvertRatio" value={{fConvertRatio}}>
-                    <select  class="item-select last-select formatUnit">
-                        <option value="{{formatUnit}}">{{formatUnit}}</option>
-                    </select>
-                </div>
-            {{/each}}
+        <div class="popup-list-wrap">
+            <div class="popup-list">
+                {{#each content.standard}}
+                    <div class="popup-item" data-id="{{id}}">
+                        <input type="text" class="item-input convertRatio" value={{convertRatio}} disabled>
+                        <span class="standard_select"><!--边框-->
+                            <span class="select_shelter"><!--遮挡默认边框-->
+                                <select  class="item-select unit">
+                                    <option value="{{unit}}">{{unit}}</option>
+                                </select>
+                            </span>
+                        </span>
+                        <input type="text" class="item-input fConvertRatio" value={{fConvertRatio}} disabled>
+                         <span class="standard_select"><!--边框-->
+                            <span class="select_shelter"><!--遮挡默认边框-->
+                                <select  class="item-select last-select formatUnit">
+                                    <option value="{{formatUnit}}">{{formatUnit}}</option>
+                                </select>
+                            </span>
+                        </span>
+                    </div>
+                {{/each}}
+                {{#each content.unstandard}}
+                    <div class="popup-item unstandard" data-id="{{id}}">
+                        <input type="text" class="item-input convertRatio" value={{convertRatio}}>
+                         <span class="standard_select"><!--边框-->
+                            <span class="select_shelter"><!--遮挡默认边框-->
+                                <select class="item-select unit">
+                                    {{#each ../unitArr}}
+                                        <option value="{{this}}" {{selectedFn ../unit this}}>{{this}}</option>
+                                    {{/each}}
+                                </select>
+                            </span>
+                        </span>
+                        <input type="text" class="item-input fConvertRatio" value={{fConvertRatio}}>
+                          <span class="standard_select"><!--边框-->
+                            <span class="select_shelter"><!--遮挡默认边框-->
+                                <select  class="item-select last-select formatUnit">
+                                    <option value="{{formatUnit}}">{{formatUnit}}</option>
+                                </select>
+                            </span>
+                        </span>
+                    </div>
+                {{/each}}
+            </div>
         </div>
         <div class="btn-group">
             <div class="btn add-unit">新增</div>
