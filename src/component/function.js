@@ -730,8 +730,11 @@ function ymzzyPopupFn(params,$this){
     },
     callback:function(res){
       var formatUnit=[],unitArr=[];
-      unitArr= _tr.find('.ymzzy').text();
-      unitArr = unitArr.replace(/(^\s*)|(\s*$)/g, "").split(",");
+    //   unitArr= _tr.find('.ymzzy').text();
+    //   unitArr = unitArr.replace(/(^\s*)|(\s*$)/g, "").split(",");
+      for(var unit_i=0;i<res.content.length;i++){
+          unitArr.push(res.content[i].unit)
+      }
       formatUnit = _tr.find('.ymzzy').attr('data-minUseUnit');
       var companyData = {popupTitle: popupTitle,id: hisProdId,unitArr:unitArr,formatUnit:formatUnit};
       companyData.content = res.content;
@@ -904,7 +907,7 @@ function instructionFn(params,$this){
   var _index = $this.parents('tr').index();
   var _drugId = $(params.parent).find('.table-diff-left .table-diff-data tr').eq(_index).attr('data-id');
   if($this.hasClass('has-instruction')){
-    window.open(http+'mcdProduct30/getHisSms?ypmcid='+_drugId)
+    window.open('/hpms/getHisSms?ypmcid='+_drugId)
   }
 }
 

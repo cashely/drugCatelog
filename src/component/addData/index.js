@@ -23,10 +23,12 @@ function addDataFn(drugName){
     maxResult: maxResult,
     drugName: drugName
   };
+  console.log(1);
   ajaxFn({
     url: 'product/listProduct',
     data:listProductData,
     callback: function (res) {
+        console.log(2);
       data.addData.tbody = res.content;
       var _table=  $('.add-than-tbody')[0];
       _table.innerHTML = tbodyTel(data.addData);
