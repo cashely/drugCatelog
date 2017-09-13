@@ -1,7 +1,7 @@
 module.exports = function(_this) {
  if(!!_this){
-  return '是'
+  return '有'
  }else{
-  return '否'
+  return '无'
  }
 };
