@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-width: 1000px; }
+  min-width: 960px; }
 
 table {
   font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif; }
@@ -61,7 +61,8 @@ a {
     padding: 4px 14px;
     margin: 0 54px 0 42px; }
   .header .time {
-    margin-left: 12px; }
+    margin-left: 12px;
+    margin-right: 35px; }
 
 /*页面切换条样式*/
 .tabs-box-wrap {
@@ -157,8 +158,7 @@ a {
         height: 16px;
         top: 6px;
         right: 10px;
-        cursor: pointer;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAATFJREFUOBGdkzFKBEEQRbcHBVMFQzHwAHqKFeYabmpqKBsbGhjpCcxX8BLDHmAD3XDBTQ3E8T3pWptmgsGCT1X9rl/d1dOTJpX1fX8KdQkuwDHowQZ04DWl9I7fWYoI4R7xDLRgx8d69t/4BXii0Zfcb2EWz8nPJUfYkpq5TZpc7M5jxUqsVTNp8sweO+yDYBVJ4eVcC2vVeoIpKGfekt8CjxlmLOdamJppossDwUmw2Su4Azc5j7gec22DZ4oOcmHpoomcjWqx/Gdcosm/zAY+ktpid3cWjiBX28YGXcV62+XMHj2a1F+n8w58uvcgxvFTbcEZKE3xITjKpE/8uuE1vRG8ZFJnQS2Wlwux+UJt7PoIMTSjhUNmrZq/B8Qo++RXoC154tKGf6ayIt/J6N/5BwNkXKktE4jdAAAAAElFTkSuQmCC) center center no-repeat; }
+        cursor: pointer; }
     .content .popup .btn-group {
       margin-top: 20px;
       text-align: center; }
@@ -208,6 +208,8 @@ a {
       color: red; }
   .content .standard-than {
     display: none;
+    width: 100%;
+    overflow: hidden;
     margin-top: 30px;
     border: 1px solid #D8D8D8; }
     .content .standard-than .title {
@@ -243,7 +245,9 @@ a {
         vertical-align: middle; }
     .content .standard-than .than-table {
       margin-top: 10px;
-      position: relative; }
+      position: relative;
+      width: 100%;
+      overflow: hidden; }
       .content .standard-than .than-table .than-thead-wrap {
         width: 100%;
         background: #4EAADC; }
@@ -254,7 +258,8 @@ a {
       .content .standard-than .than-table .than-tbody {
         position: relative;
         height: 168px;
-        overflow-y: scroll; }
+        overflow: scroll;
+        width: 100%; }
       .content .standard-than .than-table .table {
         width: 100%;
         text-align: left;
@@ -460,6 +465,7 @@ a {
     .content .popup-channel .popup-content {
       padding: 10px 10px 10px;
       max-height: 200px;
+      _height: expression(this.scrollHeight > 200 ? "200px" : "auto");
       overflow: auto; }
       .content .popup-channel .popup-content .channel-checkbox {
         vertical-align: middle; }
@@ -467,7 +473,12 @@ a {
         display: none;
         margin-left: 15px; }
     .content .popup-channel .save-channel {
-      margin: 10px; }
+      display: block;
+      margin: 0 10px 10px;
+      width: 60px;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0; }
   .content .popup-cancel-than {
     width: 250px;
     position: absolute;
@@ -570,7 +581,7 @@ a {
     padding-top: 28px;
     position: relative;
     z-index: 9;
-    width: 687px; }
+    width: 689px; }
     .table-diff .table-diff-left td, .table-diff .table-diff-left th {
       position: relative; }
       .table-diff .table-diff-left td div, .table-diff .table-diff-left th div {
@@ -578,7 +589,7 @@ a {
         overflow: hidden; }
     .table-diff .table-diff-left .table-diff-header {
       position: absolute;
-      width: 687px;
+      width: 689px;
       top: 0;
       left: 0;
       z-index: 2; }
@@ -589,16 +600,15 @@ a {
         position: absolute;
         right: -2px;
         top: 0;
+        float: right;
         background: transparent;
         z-index: 2147483647;
         cursor: col-resize;
         opacity: 0.8; }
     .table-diff .table-diff-left .table-diff-data {
       position: relative;
-      overflow-x: hidden;
-      overflow-y: hidden;
-      height: 448px;
-      width: 687px; }
+      overflow: hidden;
+      height: 448px; }
       .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
         overflow-y: auto; }
     .table-diff .table-diff-left .table-diff-data-content {
@@ -611,7 +621,7 @@ a {
   .table-diff .table-diff-right {
     position: relative;
     padding-top: 28px;
-    margin-left: 687px; }
+    margin-left: 689px; }
     .table-diff .table-diff-right .table-diff-right-single {
       display: none; }
       .table-diff .table-diff-right .table-diff-right-single.active {
@@ -636,6 +646,7 @@ a {
         .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box {
           width: 100%;
           overflow-y: scroll;
+          *overflow: scroll;
           height: 332px; }
           .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list {
             display: block;
@@ -750,12 +761,13 @@ a {
   color: #fff;
   text-align: center;
   position: fixed;
+  _position: absolute;
   background: black;
   bottom: 0;
+  right: 0;
   line-height: 2;
   padding: 10px 40px;
-  z-index: 99;
-  right: 0; }
+  z-index: 99; }
 
 .login {
   display: none;
@@ -790,6 +802,7 @@ a {
       width: 308px;
       margin-top: 5px; }
   .login .login-btn {
+    float: left;
     background-color: #2d8cc0;
     margin: 20px 30px;
     border: 0;
@@ -799,11 +812,12 @@ a {
     color: #fff; }
   .login .popup-close {
     position: absolute;
-    width: 26px;
-    height: 26px;
-    top: 6px;
-    right: 10px;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAATFJREFUOBGdkzFKBEEQRbcHBVMFQzHwAHqKFeYabmpqKBsbGhjpCcxX8BLDHmAD3XDBTQ3E8T3pWptmgsGCT1X9rl/d1dOTJpX1fX8KdQkuwDHowQZ04DWl9I7fWYoI4R7xDLRgx8d69t/4BXii0Zfcb2EWz8nPJUfYkpq5TZpc7M5jxUqsVTNp8sweO+yDYBVJ4eVcC2vVeoIpKGfekt8CjxlmLOdamJppossDwUmw2Su4Azc5j7gec22DZ4oOcmHpoomcjWqx/Gdcosm/zAY+ktpid3cWjiBX28YGXcV62+XMHj2a1F+n8w58uvcgxvFTbcEZKE3xITjKpE/8uuE1vRG8ZFJnQS2Wlwux+UJt7PoIMTSjhUNmrZq/B8Qo++RXoC154tKGf6ayIt/J6N/5BwNkXKktE4jdAAAAAElFTkSuQmCC) center center no-repeat; }
+    width: 16px;
+    height: 16px;
+    top: 11px;
+    right: 10px; }
+    .login .popup-close img {
+      width: 100%; }
   .login .login-cancel {
     float: right;
     margin: 20px 30px;

@@ -48,7 +48,7 @@ $(function(){
     homeProdName:'prodName',
     homeFncName:'fncName',
     findThanData:findThanData,
-    findThanDataName:['ypid','yjId','prodName','fncName','prodPzwh'],
+    findThanDataName:['ypid','yjId','prodName','fncName','prodPzwh','spec'],
     inputName:'prodName',
     data: data,
     standardThanTbody: standardThanTbody,

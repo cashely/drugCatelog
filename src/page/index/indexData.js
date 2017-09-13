@@ -32,7 +32,8 @@ module.exports = {
       {text:'药交ID:',inputClass:'yjId'},
       {text:'药品名称/商品名:',inputClass:'prodName'},
       {text:'生产企业:',inputClass:'fncName'},
-      {text:'批准文号/注册证号:',inputClass:'prodPzwh'}
+      {text:'批准文号/注册证号:',inputClass:'prodPzwh'},
+      {text: '规格',inputClass:'spec'}
     ]
   },
   tabsData:{

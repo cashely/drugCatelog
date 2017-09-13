@@ -103,10 +103,10 @@ function tableDiffRequest(params) {
           data.tableNum = params.loadData.firstResult + 1;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-          $(params.parent).find('.table-diff .loading-wrap').hide();
         } else {
           $('.table-diff-header .scroll-loading').hide();
         }
+        $(params.parent).find('.table-diff .loading-wrap').hide();
         loading = false;
       }
     });
@@ -225,8 +225,9 @@ function bindFn(parent,event,className,fn){
 
 //点击表格数据事件
 function tableDiffClickFn(params,$this){
-  var _index = $this.prevAll().length;
-  var _tables = $this.parents('.table-diff').find('.table-diff-data').length;
+  var _index = $this.index();
+  //var _index = $this.prevAll().length;
+  //var _tables = $this.parents('.table-diff').find('.table-diff-data').length;
   var $parent = $(params.parent);
   $('.table-diff-bar').hide();
   singleData.id = $this.attr('data-id');
@@ -236,27 +237,51 @@ function tableDiffClickFn(params,$this){
     $parent.find('.table-diff-right').attr('data-id',data.drugId);
     loadDetails(params,params.detailUrl,data,data.drugId);//请求详情数据
   }else{
-    for(var i=0;i<_tables;i++){
-      $this.parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
+    $('.table-diff-data tr').removeClass('active');
+    $this.addClass('active');
+    if (!!$this.parents('.table-diff-left').length) {
+      $('.table-diff-right .table-diff-data tr').eq(_index).addClass('active');
+    } else {
+      $('.table-diff-left .table-diff-data tr').eq(_index).addClass('active');
     }
+    //ie6下兼容不行，造成卡死
+    //for(var i=0;i<_tables;i++){
+    //  $this.parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
+    //}
   }
 }
-
 //鼠标表格悬停事件
-function tableDiffHoverFn(){
+function tableDiffHoverFn(params){
   $(document).on("mouseover",'.table-diff-data tr',function(){
-    var _index = $(this).prevAll().length;
-    var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    for(var i=0;i<_tables;i++){
-      $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('hover');
+    var _index = $(this).index();
+    $(this).addClass('hover');
+    if(!!$(this).parents('.table-diff-left').length){
+      $('.table-diff-right').css({position:'relative'});
+      $('.table-diff-right .table-diff-data tr').eq(_index).addClass('hover');
+    }else{
+      $('.table-diff-left .table-diff-data tr').eq(_index).addClass('hover');
     }
+    //ie6下兼容不行，造成卡死
+    //var _index = $(this).prevAll().length;
+    //var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+    //for(var i=0;i<_tables;i++){
+    //  $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('hover');
+    //}
   });
   $(document).on("mouseout",'.table-diff-data tr',function(){
-    var _index = $(this).prevAll().length;
-    var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    for(var i=0;i<_tables;i++){
-      $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
+    var _index = $(this).index();
+    $(this).removeClass('hover');
+    if(!!$(this).parents('.table-diff-left').length){
+      $('.table-diff-right .table-diff-data  tr').eq(_index).removeClass('hover');
+    }else{
+      $('.table-diff-left .table-diff-data tr').eq(_index).removeClass('hover');
     }
+    //ie6下兼容不行，造成卡死
+    //var _index = $(this).prevAll().length;
+    //var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
+    //for(var i=0;i<_tables;i++){
+    //  $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
+    //}
   });
 }
 
@@ -265,7 +290,7 @@ function selectThanFn(params,$this,loadObj){
   var drugId = $(params.parent).find('.than-content').attr('data-id');
   var selectThanData = {drugId: drugId};
   selectThanData[params.selectThanData]= $this.parents('tr').data('id');
-  var promptText = $(params.parent).find('.prompt').text();
+  var promptText = $('.prompt').text();
   $('.prompt').text('比对中...').show();
   ajaxFn({
     url: params.saveUrl,
@@ -404,8 +429,7 @@ function showThan(params){
   $parent.find('.than-table .loading-wrap').show();
   var _prodName = $parent.find('.table-diff-data-content [data-id='+singleDataId+']').attr('data-name');
   var _index = $('.table-diff-data-content').find('[data-id='+singleDataId+']').index();
-  var promptText = $parent.find('.prompt').text();
-  $('.prompt').text('加载中...').show();
+  var promptText = $('.prompt').text();
   $parent.find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
   $parent.find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
   if(!!params.homeProdName){//西药
@@ -419,6 +443,7 @@ function showThan(params){
     $parent.find('.search-than .'+params.slicesName).val(_prodName);
     params.findThanData[params.slicesName] = _prodName;
   }
+  $('.prompt').text('加载中...').show();
   ajaxFn({
     url: params.url,
     data: params.findThanData,
@@ -464,10 +489,10 @@ function thanScrollFn(params,$this){
             var tbodyData = {};
             tbodyData.tbody = res.content;
             $(params.parent).find('.standard-than .than-tbody .table tbody').append(params.standardThanTr(tbodyData));
-            $(params.parent).find('.than-table .loading-wrap').hide();
           }else{
             $(params.parent).find('.standard-than .scroll-loading').hide();
           }
+          $(params.parent).find('.than-table .loading-wrap').hide();
           loading = false;
         }
       });
@@ -476,7 +501,8 @@ function thanScrollFn(params,$this){
 }
 
 //隐藏比对数据详情
-function hideDetail(e){
+function hideDetail($parent){
+  $parent.find('.table-diff-left').css({overflow:'hidden'});//ie6
   $('.table-diff-left .table-diff-data').removeClass('table-diff-show-detail');
   $('.table-diff-data tr').removeClass('active');
   $('.table-diff-right-all').addClass('active');
@@ -488,7 +514,7 @@ function hideDetail(e){
 
 //更新转换比
 function upInputFn(params){
-  bindFn(params.parent,'blur','.upInput',function(){
+  $(document).on('blur',params.parent+' .upInput',function(){
     var $tr = $('.table-diff-data-content .active'),index=$(this).parents('td').index();
     ajaxFn({
       url: 'mcdProduct30/updateHisProductByParmas',
@@ -499,11 +525,10 @@ function upInputFn(params){
         aftValue: $(this).val()
       },
       callback:function(res){
-        //console.log( $(params.parent).find('.prompt').text())
-        $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
+        $('.prompt').show();
+        setTimeout(function () { $('.prompt').hide(); }, 500);
       }
-    })
+    });
   });
 }
 
@@ -547,8 +572,8 @@ function upSelect(params){
           }
         }
         reloadsearchClassifyTel(params);
-        $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
+        $('.prompt').show();
+        setTimeout(function () { $('.prompt').hide(); }, 500);
       }
     })
   });
@@ -601,8 +626,8 @@ function updateValueFn(params){
           $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(params.tableDiffRightTr(res.content));
         }
         reloadsearchClassifyTel(params);
-        $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
+        $('.prompt').show();
+        setTimeout(function () { $('.prompt').hide(); }, 500);
       }
     })
   });
@@ -624,8 +649,8 @@ function updateValueFn(params){
         var _index = $('.table-diff-data-content').find('[data-id='+drugId+']').index();
         $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
         reloadsearchClassifyTel(loadObj);
-        $(params.parent).find('.prompt').show();
-        setTimeout(function () { $(params.parent).find('.prompt').hide(); }, 500);
+        $('.prompt').show();
+        setTimeout(function () { $('.prompt').hide(); }, 500);
       }
     })
   });
@@ -642,6 +667,7 @@ function loadDetails(params,url,data,drugId){
     }
   })
 }
+
 function paginationFn(params,type){
   var $parent=$(params.parent),data = {};
   var detailId = $parent.find('.table-diff-right').attr('data-id');
@@ -680,7 +706,7 @@ function showDetail(params,e){
       $parent.find('.table-diff-right-all').removeClass('active');
       $parent.find('.table-diff-right-single').addClass('active');
       $parent.find('.table-details-content-box').html(params.tableDetails(tableDetailsData));
-      $parent.find('.btn-toggle').on('click',hideDetail); //切换详情事件
+      $parent.find('.btn-toggle').on('click',function(){hideDetail($parent)}); //切换详情事件
       //e.preventDefault();ie6下显示找不到成员
     }
   })
@@ -763,6 +789,7 @@ function recordFn(params){
     }
   })
 }
+
 //弹窗给药途径不计算强度
 function popupChannelFn(params,$this){
   var $parent = $(params.parent);
@@ -829,8 +856,8 @@ function saveChannelFn(params,$this,_drugId){
     contentType: "application/json",
     callback:function(res){
       $('.popup').hide();
-      $(params.parent).find('.prompt').show();
-      setTimeout(function () {$(params.parent).find('.prompt').hide();}, 500);
+      $('.prompt').show();
+      setTimeout(function () {$('.prompt').hide();}, 500);
     }
   })
 }
@@ -912,23 +939,53 @@ function instructionFn(params,$this){
 
 var xx=0,tBar={};
 function resetTableFn(params){
+  function getLeft(obj) {
+    if (obj == null)
+      return null;
+    var mendingObj = obj;
+    var mendingLeft = mendingObj.offsetLeft;
+    while (mendingObj != null && mendingObj.offsetParent != null && mendingObj.offsetParent.tagName != "BODY") {
+      mendingLeft = mendingLeft + mendingObj.offsetParent.offsetLeft;
+      mendingObj = mendingObj.offsetParent;
+    }
+
+    return mendingLeft;
+  };
+  function getTop(obj) {
+    if (obj == null)
+      return null;
+    var mendingObj = obj;
+    var mendingTop = mendingObj.offsetTop;
+    while (mendingObj != null && mendingObj.offsetParent != null && mendingObj.offsetParent.tagName != "BODY") {
+      mendingTop = mendingTop + mendingObj.offsetParent.offsetTop;
+      mendingObj = mendingObj.offsetParent;
+    }
+    return mendingTop;
+  };
+//获取鼠标的位置
+  function getMousePosition(event) {
+    var position = {
+      MouseX: 0,
+      MouseY: 0
+    }
+    if (event.pageX != undefined) {
+      position.MouseX = event.pageX;
+      position.MouseY = event.pageY;
+    } else {
+      var target = EventUtil.getTarget(event);
+      position.MouseX = event.offsetX + getLeft(target);
+      position.MouseY = event.offsetY + getTop(target);
+
+    }
+    return position;
+  }
   //获取鼠标的位置
   $(document).on('mousemove',params.parent + ' .table-diff-header', function (e) {
-      if(!!e.originalEvent.x || !!e.originalEvent.layerX){
-      xx = e.originalEvent.x || e.originalEvent.layerX ;
-    }else{
-        //var xPos,yPos;
-        //var evt=e || window.event;
-        //if(evt.pageX){
-        //  xPos=evt.pageX;
-        //} else {
-        //  xPos=evt.clientX+document.body.scrollLeft -document.body.clientLeft;
-        //}
-        //$('.header-right .time').html(xPos)
-      }
+     /*xx = e.originalEvent.x || e.originalEvent.layerX ;*/
+    xx=getMousePosition(e).MouseX;//兼容IE6
   });
 
-  $(params.parent).on('mousedown','.table-diff-header th .resize',function(){
+    $(params.parent).on('mousedown','.table-diff-header th .resize',function(){
     tBar.self= $(this);
     tBar.mouseDown = 1;
     tBar.width = offsetLeftFn($(this)[0]);
@@ -946,17 +1003,19 @@ function resetTableFn(params){
       tBar.self.prev().css({width:tBar.tdWidth +(xx - tBar.width)-10});
       $(params.parent).find('.table-diff .table-diff-right').css({marginLeft: tBar.tableWidth+ ((xx - tBar.width))});
       $(params.parent).find('.table-diff .table-diff-left').css({width: tBar.tableWidth+ ((xx - tBar.width))});
+      $(params.parent).find('.table-diff .table-diff-left .table-diff-data').css({width: tBar.tableWidth+ ((xx - tBar.width))});
       $(params.parent).find('.table-diff .table-diff-left .table-diff-header').css({width: tBar.tableWidth+ ((xx - tBar.width))});
       $(params.parent).find('.table-diff-data-content table tr').each(function(i,e){
         $(e).find('td').eq(_index).find('div').css({width:tBar.tdWidth +(xx - tBar.width)-10});
       })
     }
   });
-  $(params.parent).on('mousemove','.table-diff-header th',function(){
+  $(params.parent).on('mousemove','.table-diff-header th',function(e){
     $(this).find('.resize').show();
     if(tBar.mouseDown){
       tBar.self.css({right: -(xx - tBar.width)-2});
     }
+    e.preventDefault()
   });
   $(params.parent).on('mousemove','.table-diff-header th .resize ',function(){
     if(!tBar.mouseDown){
@@ -1033,6 +1092,7 @@ function ieJson(){
     };
   }
 }
+
 var  paramsAll=[],paramsType=[];
 ieJson();
 module.exports = {
@@ -1055,6 +1115,7 @@ module.exports = {
     showDiffBarFn(params);//显示比对按钮
 
     resetTableFn(params);//拖动表格事件
+
     $(document).on('click', parent + '.search-top-lf .btn', function () {
       params.firstResult = 0;
       params.maxResult = 16;
@@ -1071,7 +1132,7 @@ module.exports = {
       tableDiffClickFn(params, $(this))
     });//点击表格数据事件
 
-    tableDiffHoverFn(); //鼠标表格悬停事件
+    tableDiffHoverFn(params); //鼠标表格悬停事件
 
     //说明书
     $(document).on('click',parent + '.table-diff-right .instruction',function () {

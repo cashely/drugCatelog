@@ -1,20 +1,22 @@
 <div class="popup-channel">
     <div class="popup-title">
-        给药途径不计算强度  <span class="popup-close"><img src="./images/icon-close.png" alt=""></span>
+        给药途径不计算强度  <span class="popup-close"><img src="./images/icon-close.jpg" alt=""></span>
     </div>
-    <ul class="popup-content">
-        {{#each tree}}
-            <ul>
-                <li>
-                    <input type="checkbox" class="channel-checkbox" data-id="{{this.id}}" {{isChecked checked}}><a href="javascript:void(0)" class="channel-name">{{this.name}}</a>
-                    <ul class="sub-channel">
-                        {{#each this.chirden}}
-                            <li><input type="checkbox" class="channel-checkbox" data-id={{this.id}} {{isChecked checked}}><a href="javascript:void(0)" class="channel-name">{{this.name}}</a></li>
-                        {{/each}}
-                    </ul>
-                </li>
-            </ul>
-        {{/each}}
-    </ul>
-    <div class="save-channel btn">保存</div>
+      <div>
+          <ul class="popup-content">
+              {{#each tree}}
+                  <ul>
+                      <li>
+                          <input type="checkbox" class="channel-checkbox" data-id="{{this.id}}" {{isChecked checked}}><a href="javascript:void(0)" class="channel-name">{{this.name}}</a>
+                          <ul class="sub-channel">
+                              {{#each this.chirden}}
+                                  <li><input type="checkbox" class="channel-checkbox" data-id={{this.id}} {{isChecked checked}}><a href="javascript:void(0)" class="channel-name">{{this.name}}</a></li>
+                              {{/each}}
+                          </ul>
+                      </li>
+                  </ul>
+              {{/each}}
+          </ul>
+          <div class="save-channel btn">保存</div>
+      </div>
 </div>
