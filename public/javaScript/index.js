@@ -871,7 +871,11 @@ function bindGeneralSearch(params) {
 //比对表格滚动事件
 function tableDiffScrollFn($parent, params) {
   $parent.find('.table-diff-right .table-diff-data').on('scroll', function (e) {
-    $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
+    if (isIe6()) {
+      $('.table-diff-right .table-diff-header-content table').css({ marginLeft: -$(this)[0].scrollLeft });
+    } else {
+      $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
+    }
     $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
     var _t = $(this),
         trHeight = $(this).find('tr:first').height(),
@@ -930,8 +934,6 @@ function bindFn(parent, event, className, fn) {
 //点击表格数据事件
 function tableDiffClickFn(params, $this) {
   var _index = $this.index();
-  //var _index = $this.prevAll().length;
-  //var _tables = $this.parents('.table-diff').find('.table-diff-data').length;
   var $parent = $(params.parent);
   $('.table-diff-bar').hide();
   singleData.id = $this.attr('data-id');
@@ -948,10 +950,6 @@ function tableDiffClickFn(params, $this) {
     } else {
       $('.table-diff-left .table-diff-data tr').eq(_index).addClass('active');
     }
-    //ie6下兼容不行，造成卡死
-    //for(var i=0;i<_tables;i++){
-    //  $this.parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
-    //}
   }
 }
 //鼠标表格悬停事件
@@ -965,12 +963,6 @@ function tableDiffHoverFn(params) {
     } else {
       $('.table-diff-left .table-diff-data tr').eq(_index).addClass('hover');
     }
-    //ie6下兼容不行，造成卡死
-    //var _index = $(this).prevAll().length;
-    //var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    //for(var i=0;i<_tables;i++){
-    //  $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('hover');
-    //}
   });
   $(document).on("mouseout", '.table-diff-data tr', function () {
     var _index = $(this).index();
@@ -980,12 +972,6 @@ function tableDiffHoverFn(params) {
     } else {
       $('.table-diff-left .table-diff-data tr').eq(_index).removeClass('hover');
     }
-    //ie6下兼容不行，造成卡死
-    //var _index = $(this).prevAll().length;
-    //var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    //for(var i=0;i<_tables;i++){
-    //  $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
-    //}
   });
 }
 
@@ -1183,9 +1169,17 @@ function showThan(params) {
   });
 }
 
+function isIe6() {
+  return (/msie 6/i.test(navigator.userAgent)
+  );
+}
 //滚动加载19位标准数据
 function thanScrollFn(params, $this) {
-  $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
+  if (isIe6()) {
+    $('.than-table .than-thead table').css({ marginLeft: -$this[0].scrollLeft });
+  } else {
+    $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
+  }
   if ($this.find('table').height() <= $this.scrollTop() + $this.height() && $this.find('table').height() > 0) {
     if (loading == false) {
       loading = true;
@@ -1482,6 +1476,9 @@ function ymzzyPopupFn(params, $this) {
           unitArr = [];
       unitArr = _tr.find('.ymzzy').text();
       unitArr = unitArr.replace(/(^\s*)|(\s*$)/g, "").split(",");
+      //  for(var i=0;i<res.content.length;i++){
+      //      unitArr.push(res.content[i].unit)
+      //  }
       formatUnit = _tr.find('.ymzzy').attr('data-minUseUnit');
       var companyData = { popupTitle: popupTitle, id: hisProdId, unitArr: unitArr, formatUnit: formatUnit };
       companyData.content = res.content;
@@ -1672,7 +1669,7 @@ function instructionFn(params, $this) {
   var _index = $this.parents('tr').index();
   var _drugId = $(params.parent).find('.table-diff-left .table-diff-data tr').eq(_index).attr('data-id');
   if ($this.hasClass('has-instruction')) {
-    window.open(http + 'mcdProduct30/getHisSms?ypmcid=' + _drugId);
+    window.open('/hpms/getHisSms?ypmcid=' + _drugId);
   }
 }
 
@@ -2003,9 +2000,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
 module.exports = function (_this) {
   if (!!_this) {
-    return '是';
+    return '有';
   } else {
-    return '否';
+    return '无';
   }
 };
 
@@ -2369,7 +2366,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.inputClass : depth0), depth0))
     + "\">\r\n            </lable>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                    <td><div class=\"table-text\">"
+    return "                            <td><div class=\"table-text\">"
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "</div></td>\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
@@ -2407,9 +2404,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "<a href=\"javascript:void(0)\" class=\"goback\"><i class=\"icon-arrow-left\"></i>返回</a>\r\n<div class=\"add-search-than\">\r\n    <div class=\"lf\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    </div>\r\n    <a href=\"javaScript:void(0)\" class=\"btn find-add-than\">查找</a>\r\n</div>\r\n<div class=\"add-than-table\">\r\n    <div class=\"than-thead\">\r\n        <table class=\"table\">\r\n            <tr class=\"thead\">\r\n"
+    + "    </div>\r\n    <a href=\"javaScript:void(0)\" class=\"btn find-add-than\">查找</a>\r\n</div>\r\n<div class=\"add-than-table\">\r\n    <div style=\"background: #4EAADC\">\r\n        <div class=\"than-thead-wrap\">\r\n            <div class=\"than-thead\">\r\n                <table class=\"table\">\r\n                    <tr class=\"thead\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.thead : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "            </tr>\r\n        </table>\r\n    </div>\r\n    <div class=\"than-tbody-wrap\">\r\n        <div class=\"than-tbody add-than-tbody\">\r\n            <table class=\"table\">\r\n"
+    + "                    </tr>\r\n                </table>\r\n            </div>\r\n    </div>\r\n    </div>\r\n    <div class=\"than-tbody-wrap\">\r\n        <div class=\"than-tbody add-than-tbody\">\r\n            <table class=\"table\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "            </table>\r\n            <div class=\"scroll-loading\">加载中...</div>\r\n        </div>\r\n        <div class=\"loading-wrap\">\r\n            <div class=\"loading\">\r\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
 },"useData":true});
@@ -2433,7 +2430,8 @@ var data = __webpack_require__(9); //化学药数据
 var parent = '.' + data.name;
 var firstResult = 0,
     maxResult = 16;loading = false;
-var listProductData = {};
+var listProductData = {},
+    addTableRightLeft = 0;
 function addDataFn(drugName) {
   $('.add-data').html(addData(data.addData));
   $('.add-search-than .add-drug-name').val(drugName);
@@ -2455,7 +2453,18 @@ function addDataFn(drugName) {
         $('.add-than-tbody .scroll-loading').hide();
       }
       $('.add-than-table .add-than-tbody').on('scroll', function () {
-        var _t = $(this);
+        if (/msie 6/i.test(navigator.userAgent)) {
+          $('.add-than-table .than-thead table').css({ marginLeft: -$(this)[0].scrollLeft });
+        } else {
+          $('.add-than-table .than-thead').scrollLeft($(this)[0].scrollLeft);
+        }
+        var _t = $(this),
+            trHeight = $(this).find('tr:first').height(),
+            trLength = $(this).find('tr').length;
+        if (_t.scrollLeft() != addTableRightLeft) {
+          tableRightLeft = _t.scrollLeft();
+          return;
+        }
         if (_t.children('table').height() <= _t.scrollTop() + _t.height()) {
           $('.add-than-table .loading-wrap').show();
           listProductData.firstResult = (firstResult + 1) * maxResult;
@@ -2695,7 +2704,7 @@ $('.login .login-cancel').click(function () {
 var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"login\">\r\n    <div class=\"login-title\">欢迎登录医院药事管理软件\r\n        <span class=\"popup-close\">\r\n            <img src=\"./images/icon-close.jpg\" alt=\"\">\r\n        </span>\r\n    </div>\r\n    <label class=\"login-input\">\r\n        用户名：<br>\r\n        <input type=\"text\" class=\"input userName\">\r\n    </label>\r\n    <label class=\"login-input\">\r\n        密码：<br>\r\n        <input type=\"text\" class=\"input password\">\r\n    </label>\r\n    <div>\r\n        <button class=\"login-btn\">登录</button>\r\n        <button class=\"login-cancel\">取消</button>\r\n    </div>\r\n</div>\r\n";
+    return "<div class=\"login\">\r\n    <div class=\"login-title\">欢迎登录医院药事管理软件\r\n        <span class=\"popup-close\">\r\n            <img src=\"./images/icon-close.jpg\" alt=\"\">\r\n        </span>\r\n    </div>\r\n    <label class=\"login-input\">\r\n        用户名：<br>\r\n        <input type=\"text\" class=\"input userName\">\r\n    </label>\r\n    <label class=\"login-input\">\r\n        密码：<br>\r\n        <input type=\"password\" class=\"input password\">\r\n    </label>\r\n    <div>\r\n        <button class=\"login-btn\">登录</button>\r\n        <button class=\"login-cancel\">取消</button>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 /***/ }),
@@ -3838,7 +3847,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\r\n        <span class=\"popup-close\"><img src=\"./images/icon-close.jpg\" alt=\"\"></span>\r\n    </div>\r\n    <div class=\"popup-content\">\r\n        门诊／住院单位：\r\n        <div class=\"popup-list-wrap\">\r\n            <div class=\"popup-list\">\r\n"
     + ((stack1 = helpers.each.call(alias3,((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.standard : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers.each.call(alias3,((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.unstandard : stack1),{"name":"each","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "            </div>\r\n        </div>\r\n        <div class=\"btn-group\">\r\n            <div class=\"btn add-unit\">新增</div>\r\n            <div class=\"btn save-unit\">保存</div>\r\n        </div>\r\n    </div>\r\n</div>";
+    + "            </div>\r\n        </div>\r\n        <div class=\"btn-group\">\r\n            <div class=\"btn add-unit\">新增</div>\r\n            <div class=\"btn save-unit\">保存</div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 },"useData":true,"useDepths":true});
 
 /***/ }),
@@ -5148,54 +5157,54 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
     + ">特殊使用级</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span data-name=\"ddd\">DDD值:</span>\r\n            <input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "\">\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"kjyw\">抗菌药物分类:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
+    + "\">\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"kjywType\">抗菌药物分类:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">无</option>\r\n                <option value=\"1\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
     + ">四环素类</option>\r\n                <option value=\"2\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"2",{"name":"isTrue","hash":{},"data":data}))
     + ">氯霉素类</option>\r\n                <option value=\"3\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
     + ">广谱青霉素</option>\r\n                <option value=\"4\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"4",{"name":"isTrue","hash":{},"data":data}))
     + ">对青霉素酶不稳定的青霉素类</option>\r\n                <option value=\"5\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"5",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"5",{"name":"isTrue","hash":{},"data":data}))
     + ">对青霉素酶稳定的青霉素类</option>\r\n                <option value=\"6\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"6",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"6",{"name":"isTrue","hash":{},"data":data}))
     + ">β-内酰胺酶抑制剂</option>\r\n                <option value=\"7\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"7",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"7",{"name":"isTrue","hash":{},"data":data}))
     + ">青霉素类复方制剂（β-内酰胺酶抑制剂）</option>\r\n                <option value=\"8\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"8",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"8",{"name":"isTrue","hash":{},"data":data}))
     + ">第一代头孢菌素类</option>\r\n                <option value=\"9\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"9",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"9",{"name":"isTrue","hash":{},"data":data}))
     + ">第二代头孢菌素类</option>\r\n                <option value=\"10\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"10",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"10",{"name":"isTrue","hash":{},"data":data}))
     + ">第三（四）代头孢菌素类</option>\r\n                <option value=\"11\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"11",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"11",{"name":"isTrue","hash":{},"data":data}))
     + ">其他β内酰胺类</option>\r\n                <option value=\"12\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"12",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"12",{"name":"isTrue","hash":{},"data":data}))
     + ">碳青霉烯类</option>\r\n                <option value=\"13\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"13",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"13",{"name":"isTrue","hash":{},"data":data}))
     + ">磺胺类和甲氧苄啶</option>\r\n                <option value=\"14\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"14",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"14",{"name":"isTrue","hash":{},"data":data}))
     + ">大环内酯类</option>\r\n                <option value=\"15\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"15",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"15",{"name":"isTrue","hash":{},"data":data}))
     + ">林可酰胺类</option>\r\n                <option value=\"16\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"16",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"16",{"name":"isTrue","hash":{},"data":data}))
     + ">氨基糖苷类</option>\r\n                <option value=\"17\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"17",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"17",{"name":"isTrue","hash":{},"data":data}))
     + ">喹诺酮类</option>\r\n                <option value=\"18\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"18",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"18",{"name":"isTrue","hash":{},"data":data}))
     + ">糖肽类</option>\r\n                <option value=\"19\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"19",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"19",{"name":"isTrue","hash":{},"data":data}))
     + ">多粘菌素类</option>\r\n                <option value=\"20\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"20",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"20",{"name":"isTrue","hash":{},"data":data}))
     + ">咪唑衍生物</option>\r\n                <option value=\"21\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"21",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"21",{"name":"isTrue","hash":{},"data":data}))
     + ">硝基呋喃衍生物</option>\r\n                <option value=\"22\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"22",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"22",{"name":"isTrue","hash":{},"data":data}))
     + ">其它抗菌药物</option>\r\n                <option value=\"23\" "
-    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjyw : depth0),"23",{"name":"isTrue","hash":{},"data":data}))
+    + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"23",{"name":"isTrue","hash":{},"data":data}))
     + ">抗真菌药N</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isCalcKjyw\">是否计算强度:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
@@ -5460,16 +5469,8 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\r\n            </div>\r\n        </td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
-    + " "
-    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
-    + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
-    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\">\r\n            <div class=\"table-text\">\r\n                "
     + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
-    + " "
-    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
-    + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
-    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\r\n            </div>\r\n        </td>\r\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
     + "\"><div class=\"table-text\">"
