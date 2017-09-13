@@ -5,7 +5,7 @@ module.exports = function(time) {
   Y = date.getFullYear() + '-';
   M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
   // D = date.getDate() + ' ';
-  D = (date.getDate().length>=1 ? date.getDate() : '0'+date.getDate());
+  D = (date.getDate().toString().length>1 ? date.getDate() : '0'+date.getDate());
 
   h = date.getHours() + ':';
   m = date.getMinutes() + ':';
