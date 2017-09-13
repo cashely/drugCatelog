@@ -8,7 +8,7 @@ body{
     margin:0;
     padding:0;
     width: 100%;
-    min-width: 1000px;
+    min-width: 960px;
 }
 table{
     font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif;
@@ -56,6 +56,7 @@ a{
     }
     .time{
         margin-left: 12px;
+        margin-right: 35px;
     }
 }
 /*页面切换条样式*/
@@ -164,7 +165,7 @@ a{
                 top: 6px;
                 right: 10px;
                 cursor: pointer;
-                background: url(./images/icon-close.png) center center no-repeat;
+                //background: url(./images/icon-close.jpg) center center no-repeat;
             }
         }
         .btn-group {
@@ -240,7 +241,8 @@ a{
     //标准数据比对
     .standard-than{
         display: none;
-        //display: block;
+        width: 100%;
+        overflow:hidden;
         margin-top: 30px;
         border: 1px solid #D8D8D8;
         .title{
@@ -283,6 +285,8 @@ a{
         .than-table{
             margin-top: 10px;
             position: relative;
+            width: 100%;
+            overflow: hidden;
             .than-thead-wrap{
                 width: 100%;
                 background: #4EAADC;
@@ -295,7 +299,8 @@ a{
             .than-tbody{
                 position: relative;
                 height: 168px;
-                overflow-y: scroll;
+                overflow: scroll;
+                width: 100%;
             }
             .table{
                 width: 100%;
@@ -567,6 +572,7 @@ a{
         .popup-content{
             padding: 10px 10px 10px;
             max-height: 200px;
+            _height:expression(this.scrollHeight > 200 ? "200px" : "auto");
             overflow: auto;
             .channel-checkbox{
                 vertical-align: middle;
@@ -577,7 +583,12 @@ a{
             }
         }
         .save-channel{
-            margin: 10px;
+            display: block;
+            margin: 0 10px 10px;
+            width: 60px;
+            text-align: center;
+            padding-left: 0;
+            padding-right: 0;
         }
     }
     //取消比对
@@ -722,9 +733,9 @@ a{
         padding-top: 28px;
         position: relative;
         z-index: 9;
-        width: 687px;
+        width: 689px;
         td,th{
-            position:relative;
+           position:relative;
             div{
                 width: 80px;
                 overflow:hidden;
@@ -732,7 +743,7 @@ a{
         }
         .table-diff-header{
             position: absolute;
-            width: 687px;
+            width: 689px;
             top:0;
             left:0;
             z-index: 2;
@@ -743,6 +754,7 @@ a{
                 position: absolute;
                 right: -2px;
                 top: 0;
+                float: right;
                 background: transparent;
                 z-index: 2147483647;
                 cursor : col-resize;
@@ -751,10 +763,9 @@ a{
         }
         .table-diff-data{
             position: relative;//解决：父对象有overflow：hidden属性，子对象中的position属性是relative或者absolute，那么在ie6和ie7下父对象的overflow会失效。
-            overflow-x: hidden;
-            overflow-y: hidden;
+            overflow: hidden;
             height: 448px;
-            width: 687px;
+            //width: 689px;//ie6下会出错
             &.table-diff-show-detail{
                 overflow-y: auto;
             }
@@ -774,7 +785,7 @@ a{
     .table-diff-right{
         position: relative;
         padding-top: 28px;
-        margin-left: 687px;
+        margin-left: 689px;
         //overflow: hidden;//IE
         .table-diff-right-single{
             display: none;
@@ -802,6 +813,7 @@ a{
                 .table-details-content-box{
                     width: 100%;
                     overflow-y: scroll;
+                    *overflow: scroll;
                     height: 332px;
                     .content-list{
                         display: block;
@@ -961,14 +973,14 @@ a{
     display: none;
     color: #fff;
     text-align: center;
-    // position: absolute;
     position: fixed;
+    _position: absolute;
     background: black;
     bottom:0;
+    right:0;
     line-height: 2;
     padding: 10px 40px;
     z-index: 99;
-    right:0;
 }
 //登录框
 .login{
@@ -1007,6 +1019,7 @@ a{
         }
     }
     .login-btn{
+        float: left;
         background-color: #2d8cc0;
         margin: 20px 30px;
         border: 0;
@@ -1017,11 +1030,13 @@ a{
     }
     .popup-close{
         position: absolute;
-        width: 26px;
-        height: 26px;
-        top: 6px;
+        width: 16px;
+        height: 16px;
+        top: 11px;
         right: 10px;
-        background: url(./images/icon-close.png) center center no-repeat;
+        img{
+            width: 100%;
+        }
     }
     .login-cancel{
         float: right;
