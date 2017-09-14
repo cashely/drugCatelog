@@ -6,8 +6,13 @@
             <td title="{{flmc}}"><div class="table-text">{{flmc}}</div></td>
             <td title="{{spec}}"><div class="table-text spec">{{spec}}</div></td>
             <td title="{{manufacturerName}}"><div class="table-text manufacturerName">{{manufacturerName}}</div></td>
-            <td title="{{pzwh}}"><div class="table-text pzwh">{{pzwh}}</div></td>
+            <td title="{{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}">
+                <div class="table-text">
+                    {{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}
+                </div>
+            </td>
             <td><div class="table-text add-than-info">新增</div></td>
         </tr>
     {{/each}}
 </table>
+<div class="scroll-loading">加载中...</div>

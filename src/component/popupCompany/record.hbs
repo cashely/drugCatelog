@@ -1,25 +1,26 @@
 <div class="popup-record">
     <div class="popup-title">
-        属性修改纪录  <span class="popup-close"><img src="./images/icon-close.jpg" alt=""></span>
+        属性修改纪录 <span class="popup-close"><img src="./images/icon-close.jpg" alt=""></span>
     </div>
-   <div class="popup-content">
-       <table class="popup-table">
-           <tr>
-               <td>修改列名</td>
-               <td>修改前</td>
-               <td>修改后</td>
-               <td>修改时间</td>
-               <td>修改人</td>
-           </tr>
-           {{#each content}}
-               <tr>
-                   <td>{{colView}}</td>
-                   <td>{{recordString befValue colName type}}</td>
-                   <td>{{recordString aftValue colName type}}</td>
-                   <td>{{timeFn updDate}}</td>
-                   <td>{{updName}}</td>
-               </tr>
-           {{/each}}
-       </table>
-   </div>
+    <div class="popup-content">
+        <table class="popup-table">
+            <tr>
+                <td>修改列名</td>
+                <td>修改前</td>
+                <td>修改后</td>
+                <td>修改时间</td>
+                <td>修改人</td>
+            </tr>
+            {{#each content}}
+                <tr>
+                    <td>{{colView}}</td>
+                    <td>{{recordString befValue colName type}}</td>
+                    <td>{{recordString aftValue colName type}}</td>
+                    <td>{{timeFn updDate}}</td>
+                    <td>{{updName}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="iframe"></div>
 </div>
