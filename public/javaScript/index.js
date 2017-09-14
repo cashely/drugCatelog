@@ -2661,17 +2661,24 @@ module.exports = function (convertRatio, fConvertRatio) {
 /* 32 */
 /***/ (function(module, exports) {
 
-module.exports = function (arr) {
-  var newArr = [];
-  $(arr).each(function (i, e) {
-    if (e.sign == 0) {
-      newArr.push('<span class="color-red">' + e.unit + '</span>');
-    } else {
-      newArr.push('<span>' + e.unit + '</span>');
-    }
-  });
-  newArr = newArr.join(",");
-  return newArr;
+module.exports = function (string, arr) {
+  if (!!string && string != '') {
+    var newArr = [],
+        stringArr = [];
+    stringArr = string.split(',');
+    $(arr).each(function (i, e) {
+      if (e.sign == 0) {
+        newArr.push(e.unit);
+      }
+    });
+    $(stringArr).each(function (i, e) {
+      if (newArr.indexOf(e) != -1) {
+        stringArr[i] = '<span class="color-red">' + e + '</span>';
+      }
+    });
+    stringArr = stringArr.join(",");
+    return stringArr;
+  }
 };
 
 /***/ }),
@@ -4805,7 +4812,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\" data-name=\"convertRatio\"></div></td>\r\n                                        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
     + "\"><div>"
-    + ((stack1 = __default(__webpack_require__(32)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(32)).call(alias3,(depth0 != null ? depth0.unitName : depth0),(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\r\n                                        <!--最后两个td不能换行，为了解决ie9下的bug-->\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\">"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isStop : depth0),"isStop",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</td><td title=\""
