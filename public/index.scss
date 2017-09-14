@@ -241,7 +241,6 @@ a{
     //标准数据比对
     .standard-than{
         display: none;
-        width: 100%;
         overflow:hidden;
         margin-top: 30px;
         border: 1px solid #D8D8D8;
@@ -345,16 +344,23 @@ a{
     }
     .add-than-table{
         margin-top: 26px;
+        .than-thead-wrap{
+            margin-right: 16px;
+        }
         .than-thead{
-            padding-right: 16px;
             background: #4EAADC;
+            overflow: hidden;
         }
         .than-tbody-wrap{
             position: relative;
+            width: 100%;
+            overflow: hidden;
         }
         .than-tbody{
             height: 350px;
-            overflow-y: scroll;
+            width: 100%;
+            //overflow-y: scroll;
+            overflow: scroll;
         }
         .table{
             //width: 100%;
@@ -384,6 +390,11 @@ a{
         }
     }
 
+    #slicesStandardData{
+        .than-table .table .table-text {
+            width: 157px;
+        }
+    }
     //药品目录-添加对比数据
     .add-data{
         display: none;
@@ -392,6 +403,7 @@ a{
             display: block;
             color: #2D8CC0;
             margin-bottom: 20px;
+            width: 50px;
         }
         //ie
         .add-search-than{
@@ -673,7 +685,7 @@ a{
         left:0;
         white-space: nowrap;
         top:0;
-        z-index: 10;
+        z-index: 999999;
         color: #fff;
         background-color: #4DA9DB;
         //display: inline-block;

@@ -171,7 +171,11 @@ function bindGeneralSearch(params){
 //比对表格滚动事件
 function tableDiffScrollFn($parent,params){
     $parent.find('.table-diff-right .table-diff-data').on('scroll',function(e){
-      $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
+      if(isIe6()){
+        $('.table-diff-right .table-diff-header-content table').css({marginLeft:-$(this)[0].scrollLeft});
+      }else{
+        $('.table-diff-right .table-diff-header-content').scrollLeft($(this)[0].scrollLeft);
+      }
       $('.table-diff-left .table-diff-data').scrollTop($(this)[0].scrollTop);
       var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
       if(_t.scrollLeft() != tableRightLeft){
@@ -226,8 +230,6 @@ function bindFn(parent,event,className,fn){
 //点击表格数据事件
 function tableDiffClickFn(params,$this){
   var _index = $this.index();
-  //var _index = $this.prevAll().length;
-  //var _tables = $this.parents('.table-diff').find('.table-diff-data').length;
   var $parent = $(params.parent);
   $('.table-diff-bar').hide();
   singleData.id = $this.attr('data-id');
@@ -244,10 +246,6 @@ function tableDiffClickFn(params,$this){
     } else {
       $('.table-diff-left .table-diff-data tr').eq(_index).addClass('active');
     }
-    //ie6下兼容不行，造成卡死
-    //for(var i=0;i<_tables;i++){
-    //  $this.parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('active').siblings('tr').removeClass('active');
-    //}
   }
 }
 //鼠标表格悬停事件
@@ -261,12 +259,6 @@ function tableDiffHoverFn(params){
     }else{
       $('.table-diff-left .table-diff-data tr').eq(_index).addClass('hover');
     }
-    //ie6下兼容不行，造成卡死
-    //var _index = $(this).prevAll().length;
-    //var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    //for(var i=0;i<_tables;i++){
-    //  $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).addClass('hover');
-    //}
   });
   $(document).on("mouseout",'.table-diff-data tr',function(){
     var _index = $(this).index();
@@ -276,12 +268,6 @@ function tableDiffHoverFn(params){
     }else{
       $('.table-diff-left .table-diff-data tr').eq(_index).removeClass('hover');
     }
-    //ie6下兼容不行，造成卡死
-    //var _index = $(this).prevAll().length;
-    //var _tables = $(this).parents('.table-diff').find('.table-diff-data').length;
-    //for(var i=0;i<_tables;i++){
-    //  $(this).parents('.table-diff').find('.table-diff-data').eq(i).find('table tr').eq(_index).removeClass('hover');
-    //}
   });
 }
 
@@ -471,9 +457,16 @@ function showThan(params){
   })
 }
 
+function isIe6(){
+  return /msie 6/i.test(navigator.userAgent);
+}
 //滚动加载19位标准数据
 function thanScrollFn(params,$this){
-  $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
+    if(isIe6()){
+      $('.than-table .than-thead table').css({marginLeft:-$this[0].scrollLeft});
+    }else{
+      $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
+    }
    if($this.find('table').height() <= $this.scrollTop()+ $this.height() && $this.find('table').height() > 0){
     if(loading == false){
       loading = true;
@@ -753,11 +746,11 @@ function ymzzyPopupFn(params,$this){
     },
     callback:function(res){
       var formatUnit=[],unitArr=[];
-    //   unitArr= _tr.find('.ymzzy').text();
-    //   unitArr = unitArr.replace(/(^\s*)|(\s*$)/g, "").split(",");
-      for(var unit_i=0;i<res.content.length;i++){
-          unitArr.push(res.content[i].unit)
-      }
+       unitArr= _tr.find('.ymzzy').text();
+       unitArr = unitArr.replace(/(^\s*)|(\s*$)/g, "").split(",");
+    //  for(var i=0;i<res.content.length;i++){
+    //      unitArr.push(res.content[i].unit)
+    //  }
       formatUnit = _tr.find('.ymzzy').attr('data-minUseUnit');
       var companyData = {popupTitle: popupTitle,id: hisProdId,unitArr:unitArr,formatUnit:formatUnit};
       companyData.content = res.content;

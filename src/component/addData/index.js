@@ -12,7 +12,7 @@ var ajaxFn = require('../ajax');
 var data = require('../../page/index/indexData');//化学药数据
 var parent = '.'+data.name;
 var firstResult =0,maxResult= 16;loading = false;
-var listProductData ={};
+var listProductData ={},addTableRightLeft=0;
 function addDataFn(drugName){
   $('.add-data').html(addData(data.addData));
   $('.add-search-than .add-drug-name').val(drugName);
@@ -34,7 +34,16 @@ function addDataFn(drugName){
         $('.add-than-tbody .scroll-loading').hide();
       }
       $('.add-than-table .add-than-tbody').on('scroll',function(){
-        var _t = $(this);
+        if(/msie 6/i.test(navigator.userAgent)){
+          $('.add-than-table .than-thead table').css({marginLeft:-$(this)[0].scrollLeft});
+        }else{
+          $('.add-than-table .than-thead').scrollLeft($(this)[0].scrollLeft);
+        }
+        var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
+        if(_t.scrollLeft() != addTableRightLeft){
+          tableRightLeft = _t.scrollLeft();
+          return;
+        }
         if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){
           $('.add-than-table .loading-wrap').show();
           listProductData.firstResult =(firstResult+1)*maxResult;

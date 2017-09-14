@@ -208,7 +208,6 @@ a {
       color: red; }
   .content .standard-than {
     display: none;
-    width: 100%;
     overflow: hidden;
     margin-top: 30px;
     border: 1px solid #D8D8D8; }
@@ -289,14 +288,19 @@ a {
         text-decoration: underline; }
   .content .add-than-table {
     margin-top: 26px; }
+    .content .add-than-table .than-thead-wrap {
+      margin-right: 16px; }
     .content .add-than-table .than-thead {
-      padding-right: 16px;
-      background: #4EAADC; }
+      background: #4EAADC;
+      overflow: hidden; }
     .content .add-than-table .than-tbody-wrap {
-      position: relative; }
+      position: relative;
+      width: 100%;
+      overflow: hidden; }
     .content .add-than-table .than-tbody {
       height: 350px;
-      overflow-y: scroll; }
+      width: 100%;
+      overflow: scroll; }
     .content .add-than-table .table {
       text-align: left;
       border-collapse: collapse;
@@ -315,12 +319,15 @@ a {
       .content .add-than-table .table .add-than-info {
         color: #2D8CC0;
         cursor: pointer; }
+  .content #slicesStandardData .than-table .table .table-text {
+    width: 157px; }
   .content .add-data {
     display: none; }
     .content .add-data .goback {
       display: block;
       color: #2D8CC0;
-      margin-bottom: 20px; }
+      margin-bottom: 20px;
+      width: 50px; }
     .content .add-data .add-search-than .input {
       display: inline-block;
       width: 108px;
@@ -541,7 +548,7 @@ a {
     left: 0;
     white-space: nowrap;
     top: 0;
-    z-index: 10;
+    z-index: 999999;
     color: #fff;
     background-color: #4DA9DB;
     display: none;
