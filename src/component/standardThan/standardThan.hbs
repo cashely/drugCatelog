@@ -6,15 +6,15 @@
 </div>
 <div class="than-content" data-id="{{id}}">
     <div class="search-than">
-      <div class="lf">
+      <div class="lf" style="overflow: hidden">
           {{#each input}}
-              <lable class="input-group">
+              <div class="input-group">
                   {{text}}
                   <input type="text" class="input {{inputClass}}" value="{{val}}">
-              </lable>
+              </div>
           {{/each}}
+          <a href="javaScript:void(0)" style="float: left" class="btn find-than">查找</a>
       </div>
-        <a href="javaScript:void(0)" class="btn find-than">查找</a>
     </div>
    <div class="than-table">
        <div class="than-thead-wrap">

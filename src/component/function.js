@@ -220,9 +220,6 @@ function showDiffBarFn(params){
     singleData.id = $(this).attr('data-id');
     e.preventDefault();
   });
-  // $(document).on('mouseover',params.parent +' .table-diff-left .table-diff-data tr',function(e){
-  //   singleData.id = $(this).attr('data-id');
-  // });
   $(document).on('mouseleave','.table-diff-left',function(){
       $('.table-diff-bar').hide();
   })
@@ -237,7 +234,6 @@ function tableDiffClickFn(params,$this){
   var _index = $this.index();
   var $parent = $(params.parent);
   $('.table-diff-bar').hide();
-  singleData.id = $this.attr('data-id');
   if($parent.find('.table-details-content-box').is(':visible')){
     var data={};
     data.drugId = $parent.find('.table-diff-data-content tr').eq(_index).attr('data-id');
@@ -251,6 +247,7 @@ function tableDiffClickFn(params,$this){
     } else {
       $parent.find('.table-diff-left .table-diff-data tr').eq(_index).addClass('active');
     }
+    singleData.id = $parent.find('.table-diff-left .table-diff-data tr').eq(_index).attr('data-id');
   }
 }
 //鼠标表格悬停事件
@@ -524,20 +521,22 @@ function hideDetail($parent){
  }
 
 //更新转换比
-function upInputFn(params){
-  $(document).on('blur',params.parent+' .upInput',function(){
-    var $tr = $('.table-diff-data-content .active'),index=$(this).parents('td').index();
+function upInputFn(params) {
+  $(document).on('blur', params.parent + ' .upInput', function () {
+    var index = $(this).parents('td').index();
     ajaxFn({
       url: 'mcdProduct30/updateHisProductByParmas',
       data: {
-        drugId: $tr.attr('data-id'),
+        drugId: singleData.id,
         colName: $(this).attr('data-name'),
-        colView: $(this).parents('.table-diff-data').prev().find('th').eq(index).text(),
+        colView: $(this).parents('.table-diff-data').prev().find('th').eq(index).find('div').text(),
         aftValue: $(this).val()
       },
-      callback:function(res){
+      callback: function (res) {
         $('.prompt').show();
-        setTimeout(function () { $('.prompt').hide(); }, 500);
+        setTimeout(function () {
+          $('.prompt').hide();
+        }, 500);
       }
     });
   });
@@ -553,9 +552,9 @@ function upSelect(params){
     ajaxFn({
       url:'mcdProduct30/updateHisProductByParmas',
       data: {
-        drugId: $trLeft.attr('data-id'),
+        drugId: singleData.id,
         colName: colName,
-        colView: $(this).parents('.table-diff-data').prev().find('th').eq(index).text(),
+        colView: $(this).parents('.table-diff-data').prev().find('th').eq(index).find('div').text(),
         aftValue: aftValue
       },
       callback:function(res){
@@ -1148,7 +1147,8 @@ module.exports = {
     });//关键词-全部
 
     $(document).on('click', parent + '.table-diff-data tr', function () {
-      tableDiffClickFn(params, $(this))
+      $(this).css({background:'red'});
+      tableDiffClickFn(params, $(this));
     });//点击表格数据事件
 
     tableDiffHoverFn(params); //鼠标表格悬停事件
