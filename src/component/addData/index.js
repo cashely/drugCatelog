@@ -39,9 +39,9 @@ function addDataFn(drugName){
         }else{
           $('.add-than-table .than-thead').scrollLeft($(this)[0].scrollLeft);
         }
-        var _t = $(this),trHeight = $(this).find('tr:first').height(),trLength = $(this).find('tr').length;
+        var _t = $(this);
         if(_t.scrollLeft() != addTableRightLeft){
-          tableRightLeft = _t.scrollLeft();
+          addTableRightLeft = _t.scrollLeft();
           return;
         }
         if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){

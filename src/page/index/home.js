@@ -12,7 +12,7 @@ var Fn = require('./../../component/function');
 var data =  require('./indexData');//化学药数据
 var parent = '.'+data.name;
 var firstResult= 0, maxResult= 16,firstResultThan =0,maxResultThan= 16;
-var loading = false;
+var loadingType = 1,loadingThanType=1;
 var findThanData ={firstResult:0,maxResult:16};
 var loadData;
 var loadDataObj={
@@ -31,6 +31,8 @@ var loadDataObj={
   tableDiffRightTr: tableDiffRightTr,
   downloadUrl:'mcdProduct30/downHisProduct',
   ypTypeValue : ['0','1'],
+  loadingType:loadingType,
+  loadingThanType:loadingThanType,
   //标准数据详情
   detailUrl: 'mcdProduct30/getHistProductById',
   tableDetails:tableDetails,

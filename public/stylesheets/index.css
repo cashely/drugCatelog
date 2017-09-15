@@ -396,8 +396,8 @@ a {
         overflow: auto;
         width: 200px;
         margin: 0 auto;
-        height: 174px;
-        max-height: 174px; }
+        max-height: 174px;
+        _height: expression(this.scrollHeight > 174 ? "174px" : "auto"); }
       .content .popup-company .popup-content .popup-list {
         width: 180px; }
         .content .popup-company .popup-content .popup-list .popup-item {
@@ -503,6 +503,14 @@ a {
         background: #BCBCBC; }
       .content .popup-cancel-than .btn-group .cancel-than-btn {
         margin-left: 30px; }
+  .content .popup-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: alpha(opacity=0);
+    width: 100%;
+    z-index: -1;
+    border: 0; }
 
 .table-diff-data tr input {
   width: 100%;
@@ -515,7 +523,7 @@ a {
   color: red; }
 
 .table-diff-data tr.hover input, .table-diff-data tr.active input {
-  width: 100%;
+  width: 97%;
   border-color: #d9d9d9;
   background-color: #fff; }
 

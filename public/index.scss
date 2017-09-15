@@ -177,7 +177,6 @@ a{
             }
         }
     }
-
     /*查找药品数据*/
     .search-box{
         .search-top{
@@ -493,8 +492,8 @@ a{
                 overflow: auto;
                 width: 200px;
                 margin: 0 auto;
-                height: 174px;
                 max-height: 174px;
+                _height:expression(this.scrollHeight > 174 ? "174px" : "auto");
             }
             .popup-list{
                 width: 180px;
@@ -625,6 +624,15 @@ a{
             }
         }
     }
+    .popup-iframe{
+        position:absolute;
+        top:0;
+        left:0;
+        filter:alpha(opacity=0);
+        width:100%;
+        z-index: -1;
+        border: 0;
+    }
 }
 //药品数据
 .table-diff-data{
@@ -641,7 +649,7 @@ a{
         }
         &.hover,&.active{
             input{
-                width: 100%;
+                width: 97%;
                 border-color:#d9d9d9;
                 background-color: #fff;
             }

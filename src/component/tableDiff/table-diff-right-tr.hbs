@@ -5,11 +5,15 @@
 <td title="{{proName}}"><div>{{proName}}</div></td>
 <td title="{{prepName}}"><div>{{prepName}}</div></td>
 <td title="{{spec}}"><div>{{spec}}</div></td>
-<td title="{{specProperty}}"><div>{{spec}}</div></td>
+<td title="{{specProperty}}"><div>{{specProperty}}</div></td>
 <td title="{{warpNameF}}"><div>{{warpNameF}}</div></td>
 <td title="{{fConvertRatio}}"><div>{{fConvertRatio}}</div></td>
 <td title="{{facAbbrF}}"><div>{{facAbbrF}}</div></td>
-<td title="{{prodPzwhF}}"><div>{{prodPzwhF}}</div></td>
+<td title="{{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}">
+    <div>
+        {{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}
+    </div>
+</td>
 <td class="instruction {{#if instruction}}has-instruction{{/if}}" title="{{instruction}}"><div>{{isNull instruction}}</div></td>
 <td title="{{smsDate}}"><div>{{smsDate}}</div></td>
 <td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
@@ -24,21 +28,21 @@
 <td class="icon-triangle table-diff-data-td-select" title="{{kjywTypeSelect kjywType 0}}">
     {{{kjywTypeSelect kjywType}}}
 </td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isCalcKjyw 'isCalcKjyw'}}}</div></td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot isCalcKjyw 'isCalcKjyw'}}}</td>
 <td class="icon-triangle adminRouteExclude" title="{{adminRouteExclude}}"><div>{{adminRouteExclude}}</div></td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot isZcyzsj 'isZcyzsj'}}}</div></td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot isZcyzsj 'isZcyzsj'}}}</td>
 <td class="icon-triangle table-diff-data-td-select">
     {{{pregnancyLevelSelect pregnancyLevel}}}
 </td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot bloodPro 'bloodPro'}}}</div></td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot tpzjs 'tpzjs'}}}</div></td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot energy 'energy'}}}</div></td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot yyyy 'yyyy'}}}</div></td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot flag5 'flag5'}}}</div></td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot bloodPro 'bloodPro'}}}</td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot tpzjs 'tpzjs'}}}</td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot energy 'energy'}}}</td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot yyyy 'yyyy'}}}</td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot flag5 'flag5'}}}</td>
 <td class="icon-triangle table-diff-data-td-select" title="{{jmdfSelect jmdf 0}}">
     {{{jmdfSelect jmdf}}}
 </td>
-<td class="icon-triangle table-diff-data-td-select"><div>{{{isStopOrNot jkyw 'jkyw'}}}</div></td>
+<td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot jkyw 'jkyw'}}}</td>
 <td class="icon-triangle table-diff-data-td-select" title="{{yblbSelect yblb 0}}">
     {{{yblbSelect yblb}}}
 </td>

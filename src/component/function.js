@@ -10,7 +10,7 @@ var addDataPopupTel = require('./popupCompany/addInfo.hbs');
 var loading = false;
 var singleData = {id:null, index:null};
 var addData = require('./addData/index.hbs');
-var tableRightLeft = 0;
+var tableRightLeft = 0,thanTableRightLeft=0;
 var addFn= require('./addData/index');
 
 //加载查询统计
@@ -53,6 +53,7 @@ function reloadsearchClassifyTel(params){
 //加载化学药数据方法
 function loadChemistryTableFn(params,type){
   var $parent = $(params.parent);
+  params.loadingType = 1;
   $parent.find('.table-diff .loading-wrap').show();
   params.loadData = {
     drugId:$parent.find('.search-box .drug-id').val(),
@@ -87,7 +88,7 @@ function loadChemistryTableFn(params,type){
 }
 
 function tableDiffRequest(params) {
-  if (loading == false) {
+  if (loading == false && params.loadingType) {
     loading = true;
     $(params.parent).find('.table-diff .loading-wrap').show();
     params.loadData.firstResult = (params.firstResult + 1) * params.maxResult;
@@ -103,6 +104,10 @@ function tableDiffRequest(params) {
           data.tableNum = params.loadData.firstResult + 1;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
+          if( $(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= res.total){
+            params.loadingType = 0;
+            $('.table-diff-header .scroll-loading').hide();
+          }
         } else {
           $('.table-diff-header .scroll-loading').hide();
         }
@@ -242,9 +247,9 @@ function tableDiffClickFn(params,$this){
     $('.table-diff-data tr').removeClass('active');
     $this.addClass('active');
     if (!!$this.parents('.table-diff-left').length) {
-      $('.table-diff-right .table-diff-data tr').eq(_index).addClass('active');
+      $parent.find('.table-diff-right .table-diff-data tr').eq(_index).addClass('active');
     } else {
-      $('.table-diff-left .table-diff-data tr').eq(_index).addClass('active');
+      $parent.find('.table-diff-left .table-diff-data tr').eq(_index).addClass('active');
     }
   }
 }
@@ -254,19 +259,19 @@ function tableDiffHoverFn(params){
     var _index = $(this).index();
     $(this).addClass('hover');
     if(!!$(this).parents('.table-diff-left').length){
-      $('.table-diff-right').css({position:'relative'});
-      $('.table-diff-right .table-diff-data tr').eq(_index).addClass('hover');
+      $(params.parent).find('.table-diff-right').css({position:'relative'});
+      $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).addClass('hover');
     }else{
-      $('.table-diff-left .table-diff-data tr').eq(_index).addClass('hover');
+      $(params.parent).find('.table-diff-left .table-diff-data tr').eq(_index).addClass('hover');
     }
   });
   $(document).on("mouseout",'.table-diff-data tr',function(){
     var _index = $(this).index();
     $(this).removeClass('hover');
     if(!!$(this).parents('.table-diff-left').length){
-      $('.table-diff-right .table-diff-data  tr').eq(_index).removeClass('hover');
+      $(params.parent).find('.table-diff-right .table-diff-data  tr').eq(_index).removeClass('hover');
     }else{
-      $('.table-diff-left .table-diff-data tr').eq(_index).removeClass('hover');
+      $(params.parent).find('.table-diff-left .table-diff-data tr').eq(_index).removeClass('hover');
     }
   });
 }
@@ -323,10 +328,12 @@ function addThanInfo(params,loadObj,$this) {
         },
         callback: function (res) {
           data.packUnit = res.content;
-          $('.popup').html(addDataPopupTel(data));
-          $('.popup').show();
+          $('.popup').html(addDataPopupTel(data)).show();
+          var popupHeight = $('.popup-add-info').height();
+          $('.popup-add-info .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
           $('.popup-add-info .popup-close').on('click', function () {
-            $('.popup-add-info').hide()
+            //$('.popup-add-info').hide()
+            $('.popup ').hide().find('.popup-iframe').remove()
           });
           $('.popup-add-info .saveOrUpdate').on('click', function () {
             var  drugId = $('.than-content').attr('data-id');
@@ -346,7 +353,7 @@ function addThanInfo(params,loadObj,$this) {
                     proId: res.content.proId
                   },
                   callback: function (res) {
-                    $('.popup').hide();
+                    $('.popup ').hide().find('.popup-iframe').remove();
                     $('.content .add-data').hide();
                     $('.content  .content-box-main').show();
                     var _index = $(params.parent).find('.table-diff-data-content [data-id='+drugId+']').index();
@@ -375,6 +382,7 @@ function addThan(params,loadObj){
 //查找标准比对数据
 function findThanFn(params){
   var $parent = $(params.parent);
+  params.loadingThanType = 1;
   params.firstResultThan = 0;
   params.maxResultThan = 16;
   params.findThanData.firstResult =  params.firstResultThan;
@@ -395,7 +403,7 @@ function findThanFn(params){
       var tbodyData = {};
       $parent.find('.than-table .loading-wrap').hide();
       tbodyData.tbody = res.content;
-      var _table= $parent.find('.than-tbody .than-tbody-top')[0];
+      var _table= $parent.find('.standard-than .than-tbody')[0];
       _table.innerHTML = params.standardThanTbody(tbodyData);
       $parent.find('.standard-than .than-tbody').scrollTop(0);
     }
@@ -411,6 +419,7 @@ function showThan(params){
   }
   var singleDataId = singleData.id;
   var  $parent= $(params.parent);
+  params.loadingThanType = 1;
   $parent.find('.standard-than').show();
   $parent.find('.than-table .loading-wrap').show();
   var _prodName = $parent.find('.table-diff-data-content [data-id='+singleDataId+']').attr('data-name');
@@ -424,6 +433,7 @@ function showThan(params){
     params.findThanData[params.homeProdName] = _prodName;
     $parent.find('.search-than .'+params.homeFncName).val(_homeFncName);
     params.findThanData[params.homeFncName] = _homeFncName;
+    $parent.find('.search-than .spec').val('');
   }
   if(!!params.slicesName){//中药饮片
     $parent.find('.search-than .'+params.slicesName).val(_prodName);
@@ -438,7 +448,7 @@ function showThan(params){
       params.data.thanData.id = singleDataId;
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id',singleDataId);
-      $parent.find('.standard-than .than-tbody .table').html(params.standardThanTbody(params.data.thanData));
+      $parent.find('.standard-than .than-tbody').html(params.standardThanTbody(params.data.thanData));
       $('.prompt').text('加载成功');
       setTimeout(function () {$('.prompt').hide().text(promptText)}, 500);
       if($(params.parent).find('.standard-than .than-tbody tr').length >=  params.findThanData.maxResult){
@@ -467,8 +477,12 @@ function thanScrollFn(params,$this){
     }else{
       $('.than-table .than-thead').scrollLeft($this[0].scrollLeft);
     }
-   if($this.find('table').height() <= $this.scrollTop()+ $this.height() && $this.find('table').height() > 0){
-    if(loading == false){
+    if($this.scrollLeft() != thanTableRightLeft){
+      thanTableRightLeft = $this.scrollLeft();
+      return;
+    }
+  if($this.find('table').height() <= $this.scrollTop()+ $this.height() && $this.find('table').height() > 0){
+    if(loading == false && params.loadingThanType){
       loading = true;
       $(params.parent).find('.than-table .loading-wrap').show();
       params.findThanData.firstResult = (params.firstResultThan+1) * params.maxResultThan;
@@ -482,6 +496,10 @@ function thanScrollFn(params,$this){
             var tbodyData = {};
             tbodyData.tbody = res.content;
             $(params.parent).find('.standard-than .than-tbody .table tbody').append(params.standardThanTr(tbodyData));
+            if($(params.parent).find('.standard-than .than-tbody tr').length >= res.total){
+              params.loadingThanType = 0;
+              $(params.parent).find('.standard-than .scroll-loading').hide();
+            }
           }else{
             $(params.parent).find('.standard-than .scroll-loading').hide();
           }
@@ -755,7 +773,9 @@ function ymzzyPopupFn(params,$this){
       var companyData = {popupTitle: popupTitle,id: hisProdId,unitArr:unitArr,formatUnit:formatUnit};
       companyData.content = res.content;
       $('.popup').html(popupCompanyTal(companyData)).show();
-      $('.popup-close').on('click',function(){$('.popup').hide()});
+      var popupHeight = $('.popup-company').height();
+      $('.popup-company .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
+      $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
       $('.popup-company .add-unit').on('click',function(){addUnitFn({formatUnit:formatUnit,unitArr:unitArr})});
       $('.popup-company .save-unit').on('click',saveUnitFn)
     }
@@ -778,7 +798,9 @@ function recordFn(params){
       });
       recordData.content= res.content;
       $('.popup').html(popupRecordTal(recordData)).show();
-      $('.popup-close').on('click',function(){$('.popup').hide()});
+      var popupHeight = $('.popup-record').height();
+      $('.popup-record .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
+      $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
     }
   })
 }
@@ -800,7 +822,9 @@ function popupChannelFn(params,$this){
       var channelData={};
       channelData.tree = res.content;
       $('.popup').html( popupChannelTal(channelData)).show();
-      $('.popup-close').on('click',function(){$('.popup').hide()});
+      var popupHeight = $('.popup-channel').height();
+      $('.popup-channel .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
+      $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
       $('.channel-name').on('click',function(){
         if($(this).hasClass('tree-active')){
           $(this).removeClass('tree-active').siblings('.sub-channel').hide();
@@ -861,8 +885,10 @@ function cancelThanPopupFn(params,hptid){
   var cancelThanData = {};
   cancelThanData[params.cancelThanData] = hptid;
   $('.popup').html(popupCancelThanTal()).show();
-  $('.popup-close').on('click',function(){$('.popup').hide()});
-  $('.cancel-btn').on('click',function(){$('.popup').hide()});
+  var popupHeight = $('.popup-cancel-than').height();
+  $('.popup-cancel-than .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
+  $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
+  $('.cancel-btn').on('click',function(){$('.popup').hide().find('.popup-iframe').remove()});
   $('.popup .cancel-than-btn').on('click',function(){
     cancelThanFn(params,cancelThanData,_index)
   })

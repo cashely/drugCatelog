@@ -14,6 +14,7 @@ var searchClassifyTel =  require('./../../component/searchBox/searchClassify.hbs
 var Fn = require('./../../component/function');
 var data =  require('./slicesData');
 var parent =  '.'+data.name;
+var loadingType= 1,loadingThanType=1;
 var loadData;
 var firstResult =0,maxResult= 16,firstResultThan =0,maxResultThan= 16;
 var findThanData ={firstResult:0,maxResult:16};
@@ -39,7 +40,9 @@ module.exports = function(){
     ypTypeValue : ['2'],
     fn:function(){
       $(parent).find(".search-box").html(searchTel(data.searchDate));
-    }
+    },
+    loadingType:loadingType,
+    loadingThanType:loadingThanType
   };
   Fn.loadData(loadData);//加载中药饮片数据
 
