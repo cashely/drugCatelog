@@ -2661,17 +2661,24 @@ module.exports = function (convertRatio, fConvertRatio) {
 /* 32 */
 /***/ (function(module, exports) {
 
-module.exports = function (arr) {
-  var newArr = [];
-  $(arr).each(function (i, e) {
-    if (e.sign == 0) {
-      newArr.push('<span class="color-red">' + e.unit + '</span>');
-    } else {
-      newArr.push('<span>' + e.unit + '</span>');
-    }
-  });
-  newArr = newArr.join(",");
-  return newArr;
+module.exports = function (string, arr) {
+  if (!!string && string != '') {
+    var newArr = [],
+        stringArr = [];
+    stringArr = string.split(',');
+    $(arr).each(function (i, e) {
+      if (e.sign == 0) {
+        newArr.push(e.unit);
+      }
+    });
+    $(stringArr).each(function (i, e) {
+      if (newArr.indexOf(e) != -1) {
+        stringArr[i] = '<span class="color-red">' + e + '</span>';
+      }
+    });
+    stringArr = stringArr.join(",");
+    return stringArr;
+  }
 };
 
 /***/ }),
@@ -4004,7 +4011,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.name : stack1), depth0))
     + "</span>\n            </li>\n            <li>\n                <span class=\"text-lf\">规格：</span>\n                <span class=\"text-rt\"> "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.spec : stack1), depth0))
-    + "</span>\n            </li>\n            <li class=\"input-group\">\n                <span class=\"text-lf\">包装(转化比)：</span>\n                <input type=\"text\" class=\"input convert\">\n            </li>\n            <li class=\"input-group\">\n                <span class=\"text-lf\">包装单位：</span>\n                <select class=\"select packUnit\">\n"
+    + "</span>\n            </li>\n            <li class=\"input-group\">\n                <span class=\"text-lf\">包装(转换比)：</span>\n                <input type=\"text\" class=\"input convert\">\n            </li>\n            <li class=\"input-group\">\n                <span class=\"text-lf\">包装单位：</span>\n                <select class=\"select packUnit\">\n"
     + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.packUnit : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                </select>\n            </li>\n        </ul>\n        <ul class=\"content-rt\">\n            <li>\n                <span class=\"text-lf\">生产企业：</span>\n                <span class=\"text-rt\"> "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.manufacturerName : stack1), depth0))
@@ -4012,7 +4019,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1(((stack1 = (depth0 != null ? depth0["default"] : depth0)) != null ? stack1.pzwh : stack1), depth0))
     + "</span>\n            </li>\n            <li class=\"input-group\">\n                 <span class=\"text-lf\">最小使用单位：</span>\n                    <select class=\"select minUseUnit\">\n"
     + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.minUseUnit : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                    </select>\n            </li>\n        </ul>\n        <div class=\"popup-btn\">\n            <a href=\"javaScript:void(0)\" class=\"btn saveOrUpdate\">保存并比对</a>\n        </div>\n    </div>\n    <div class=\"iframe\"></div>\n</div>";
+    + "                    </select>\n            </li>\n        </ul>\n        <div class=\"popup-btn\">\n            <a href=\"javaScript:void(0)\" class=\"btn saveOrUpdate\">保存并比对</a>\n        </div>\n    </div>\n    <div class=\"iframe\"></div>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -4805,7 +4812,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\" data-name=\"convertRatio\"></div></td>\n                                        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
     + "\"><div>"
-    + ((stack1 = __default(__webpack_require__(32)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(32)).call(alias3,(depth0 != null ? depth0.unitName : depth0),(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
     + "</div></td>\n                                        <!--最后两个td不能换行，为了解决ie9下的bug-->\n                                        <td class=\"icon-triangle table-diff-data-td-select\">"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isStop : depth0),"isStop",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</td><td title=\""
@@ -4843,7 +4850,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
@@ -4952,7 +4959,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tRightHead : depth0),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                                    </tr>\n                                </thead>\n                            </table>\n                        </div>\n                    </div>\n                    <div class=\"table-diff-data\">\n                        <table cellspacing=\"0\" border=\"0\">\n                            <tbody>\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <div class=\"table-details-content-box\">\n                            <!--标准数据详情-->\n                        </div>\n                        <div class=\"tool\">\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\n                        </div>\n                        <div class=\"pagination\">\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"scroll-loading\">加载中...</div>\n        </div>\n        <div class=\"loading-wrap\">\n            <div class=\"loading\">\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\n            </div>\n        </div>\n        <!--<div class=\"prompt\">保存成功</div>-->\n    </div>\n</div>";
+    + "                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"table-diff-right-single\">\n                    <h2 class=\"table-diff-single-title\">标准数据</h2>\n                    <div class=\"table-diff-single-content\">\n                        <div class=\"table-details-content-box\">\n                            <!--标准数据详情-->\n                        </div>\n                        <div class=\"tool\">\n                            <a href=\"javaScript:void(0)\" class=\"btn-toggle\"><i class=\"icon-arrow-left\"></i>切换</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn btn-cancel\">取消比对</a>\n                            <a href=\"javaScript:void(0)\" class=\"btn-record\">属性更改记录</a>\n                        </div>\n                        <div class=\"pagination\">\n                            <a href=\"javaScript:void(0)\" class=\"pagination-prev\">上一条</a>\n                            <a href=\"javaScript:void(0)\" class=\"pagination-next\">下一条</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"scroll-loading\">加载中...</div>\n        </div>\n        <div class=\"loading-wrap\">\n            <div class=\"loading\">\n                <img src=\"./images/loading.gif\" class=\"loading-img\">\n            </div>\n        </div>\n        <!--<div class=\"prompt\">保存成功</div>-->\n    </div>\n</div>\n";
 },"useData":true});
 
 /***/ }),
@@ -4997,7 +5004,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\" data-name=\"convertRatio\"></div>\n        </td>\n        <td class=\"icon-triangle ymzzy\" data-minUseUnit=\""
     + alias2(alias1((depth0 != null ? depth0.minUseUnit : depth0), depth0))
     + "\">\n            <div>"
-    + ((stack1 = __default(__webpack_require__(32)).call(alias3,(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = __default(__webpack_require__(32)).call(alias3,(depth0 != null ? depth0.unitName : depth0),(depth0 != null ? depth0.unitOps : depth0),{"name":"unitInput","hash":{},"data":data})) != null ? stack1 : "")
     + "</div>\n        </td>\n        <td class=\"icon-triangle table-diff-data-td-select\">"
     + ((stack1 = __default(__webpack_require__(2)).call(alias3,(depth0 != null ? depth0.isStop : depth0),"isStop",{"name":"isStopOrNot","hash":{},"data":data})) != null ? stack1 : "")
     + "</td>\n        <td title=\""
@@ -5043,7 +5050,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
@@ -5056,11 +5063,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.facAbbrF : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.facAbbrF : depth0), depth0))
-    + "</div></td>\n<<<<<<< HEAD\n        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.prodPzwhF : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.prodPzwhF : depth0), depth0))
-    + "</div></td>\n=======\n        <td title=\""
+    + "</div></td>\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.prodPzwhF : depth0), depth0))
     + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.prodPzwhF : depth0),(depth0 != null ? depth0.prodZczhF : depth0),"/",{"name":"prodSwitchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.prodZczhF : depth0), depth0))
@@ -5068,7 +5071,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.prodPzwhF : depth0), depth0))
     + alias2(__default(__webpack_require__(4)).call(alias3,(depth0 != null ? depth0.prodPzwhF : depth0),(depth0 != null ? depth0.prodZczhF : depth0),"/",{"name":"prodSwitchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.prodZczhF : depth0), depth0))
-    + "\n            </div>\n        </td>\n>>>>>>> origin/master\n        <td class=\"instruction "
+    + "\n            </div>\n        </td>\n        <td class=\"instruction "
     + ((stack1 = helpers["if"].call(alias3,(depth0 != null ? depth0.instruction : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\" title=\""
     + alias2(alias1((depth0 != null ? depth0.instruction : depth0), depth0))
@@ -5383,7 +5386,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
@@ -5539,13 +5542,13 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\n            </div>\n        </td>\n        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
     + "\">\n            <div class=\"table-text\">\n                "
-    + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
     + "\n            </div>\n        </td>\n        <td  title=\""
-    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
     + "\"><div class=\"table-text\">"
-    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
     + "</div></td>\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.WARP_NAME_F : depth0), depth0))
     + "\"><div class=\"table-text\">"
