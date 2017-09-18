@@ -1133,6 +1133,10 @@ function showThan(params) {
   }
   var singleDataId = singleData.id;
   var $parent = $(params.parent);
+  console.log($('.standard-than').height(), $(window).height(), $parent.find('.table-diff-left .table-diff-data tr.active').offset().top);
+  if ($(window).height() - $parent.find('.table-diff-left .table-diff-data tr.active').offset().top > $('.standard-than').height()) {
+    alert('1');
+  }
   params.loadingThanType = 1;
   $parent.find('.standard-than').show();
   $parent.find('.than-table .loading-wrap').show();
@@ -2579,48 +2583,118 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "        <a href=\"javaScript:void(0)\" class=\"rsyy\"><span class=\"text\">妊娠用药</span><span class=\"color-blue\">("
-    + container.escapeExpression(((helper = (helper = helpers.rsyyCount || (depth0 != null ? depth0.rsyyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"rsyyCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>\r\n";
+  return container.escapeExpression(((helper = (helper = helpers.xyCount || (depth0 != null ? depth0.xyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"xyCount","hash":{},"data":data}) : helper)));
+},"3":function(container,depth0,helpers,partials,data) {
+    return "0";
+},"5":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.zcyCount || (depth0 != null ? depth0.zcyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"zcyCount","hash":{},"data":data}) : helper)));
+},"7":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.smsCount || (depth0 != null ? depth0.smsCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"smsCount","hash":{},"data":data}) : helper)));
+},"9":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.jbywCount || (depth0 != null ? depth0.jbywCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"jbywCount","hash":{},"data":data}) : helper)));
+},"11":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.kjywCount || (depth0 != null ? depth0.kjywCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"kjywCount","hash":{},"data":data}) : helper)));
+},"13":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.zcyzsjCount || (depth0 != null ? depth0.zcyzsjCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"zcyzsjCount","hash":{},"data":data}) : helper)));
+},"15":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "        <a href=\"javaScript:void(0)\" class=\"rsyy\"><span class=\"text\">妊娠用药</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.rsyyCount : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>\r\n";
+},"16":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.rsyyCount || (depth0 != null ? depth0.rsyyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"rsyyCount","hash":{},"data":data}) : helper)));
+},"18":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.xyzpCount || (depth0 != null ? depth0.xyzpCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"xyzpCount","hash":{},"data":data}) : helper)));
+},"20":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.tpzjsCount || (depth0 != null ? depth0.tpzjsCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"tpzjsCount","hash":{},"data":data}) : helper)));
+},"22":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.nlyyCount || (depth0 != null ? depth0.nlyyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"nlyyCount","hash":{},"data":data}) : helper)));
+},"24":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.ppiCount || (depth0 != null ? depth0.ppiCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ppiCount","hash":{},"data":data}) : helper)));
+},"26":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.jmdfCount || (depth0 != null ? depth0.jmdfCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"jmdfCount","hash":{},"data":data}) : helper)));
+},"28":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.fzyyCount || (depth0 != null ? depth0.fzyyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"fzyyCount","hash":{},"data":data}) : helper)));
+},"30":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.yblbCount || (depth0 != null ? depth0.yblbCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"yblbCount","hash":{},"data":data}) : helper)));
+},"32":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.ybdCount || (depth0 != null ? depth0.ybdCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ybdCount","hash":{},"data":data}) : helper)));
+},"34":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.wbdCount || (depth0 != null ? depth0.wbdCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"wbdCount","hash":{},"data":data}) : helper)));
+},"36":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.wtsjCount || (depth0 != null ? depth0.wtsjCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"wtsjCount","hash":{},"data":data}) : helper)));
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "<div class=\"search-data-lf\">\r\n    共查找出 "
-    + alias4(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
-    + " 条数据：\r\n</div>\r\n<div class=\"search-data-rt\">\r\n    <a href=\"javaScript:void(0)\" class=\"search-all\"><span class=\"text\">全部</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"xy\"><span class=\"text\">西药</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.xyCount || (depth0 != null ? depth0.xyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"xyCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"zcy\"><span class=\"text\">中成药</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.zcyCount || (depth0 != null ? depth0.zcyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"zcyCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"sms\"><span class=\"text\">说明书</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.smsCount || (depth0 != null ? depth0.smsCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"smsCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"jbyw\"><span class=\"text\">基药</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.jbywCount || (depth0 != null ? depth0.jbywCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jbywCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"kjyw\"><span class=\"text\">抗菌药物</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.kjywCount || (depth0 != null ? depth0.kjywCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"kjywCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"zcyzsj\"><span class=\"text\">中成药注射剂</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.zcyzsjCount || (depth0 != null ? depth0.zcyzsjCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"zcyzsjCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showRsyyCount : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <a href=\"javaScript:void(0)\" class=\"xyzp\"><span class=\"text\">血液制品</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.xyzpCount || (depth0 != null ? depth0.xyzpCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"xyzpCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"tpzjs\"><span class=\"text\">糖皮质激素</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.tpzjsCount || (depth0 != null ? depth0.tpzjsCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"tpzjsCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"nlyy\"><span class=\"text\">能量用药</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.nlyyCount || (depth0 != null ? depth0.nlyyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"nlyyCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"ppi\"><span class=\"text\">PPI</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.ppiCount || (depth0 != null ? depth0.ppiCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ppiCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"jmdf\"><span class=\"text\">精麻毒放</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.jmdfCount || (depth0 != null ? depth0.jmdfCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"jmdfCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"fzyy\"><span class=\"text\">辅助用药</span><span class=\"color-blue\">("
-    + alias4(((helper = (helper = helpers.fzyyCount || (depth0 != null ? depth0.fzyyCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fzyyCount","hash":{},"data":data}) : helper)))
-    + ")</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"yblb\"><span class=\"text\">医保</span>(<span class=\"color-blue\">"
-    + alias4(((helper = (helper = helpers.yblbCount || (depth0 != null ? depth0.yblbCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"yblbCount","hash":{},"data":data}) : helper)))
+    + container.escapeExpression(((helper = (helper = helpers.total || (depth0 != null ? depth0.total : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"total","hash":{},"data":data}) : helper)))
+    + " 条数据：\r\n</div>\r\n<div class=\"search-data-rt\">\r\n    <a href=\"javaScript:void(0)\" class=\"search-all\"><span class=\"text\">全部</span></a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"xy\"><span class=\"text\">西药</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.xyCount : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"zcy\"><span class=\"text\">中成药</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.zcyCount : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"sms\"><span class=\"text\">说明书</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.smsCount : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"jbyw\"><span class=\"text\">基药</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.jbywCount : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"kjyw\"><span class=\"text\">抗菌药物</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.kjywCount : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"zcyzsj\"><span class=\"text\">中成药注射剂</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.zcyzsjCount : depth0),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.showRsyyCount : depth0),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    <a href=\"javaScript:void(0)\" class=\"xyzp\"><span class=\"text\">血液制品</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.xyzpCount : depth0),{"name":"if","hash":{},"fn":container.program(18, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"tpzjs\"><span class=\"text\">糖皮质激素</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tpzjsCount : depth0),{"name":"if","hash":{},"fn":container.program(20, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"nlyy\"><span class=\"text\">能量用药</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.nlyyCount : depth0),{"name":"if","hash":{},"fn":container.program(22, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"ppi\"><span class=\"text\">PPI</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.ppiCount : depth0),{"name":"if","hash":{},"fn":container.program(24, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"jmdf\"><span class=\"text\">精麻毒放</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.jmdfCount : depth0),{"name":"if","hash":{},"fn":container.program(26, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"fzyy\"><span class=\"text\">辅助用药</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.fzyyCount : depth0),{"name":"if","hash":{},"fn":container.program(28, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"yblb\"><span class=\"text\">医保</span>(<span class=\"color-blue\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.yblbCount : depth0),{"name":"if","hash":{},"fn":container.program(30, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "</span>)</a>&nbsp;&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"ybd\"><span class=\"text\">已比对</span>(<span class=\"color-blue\">"
-    + alias4(((helper = (helper = helpers.ybdCount || (depth0 != null ? depth0.ybdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ybdCount","hash":{},"data":data}) : helper)))
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.ybdCount : depth0),{"name":"if","hash":{},"fn":container.program(32, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "</span>)</a>&nbsp;&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"wbd\"><span class=\"text\">未比对</span>(<span class=\"color-red\">"
-    + alias4(((helper = (helper = helpers.wbdCount || (depth0 != null ? depth0.wbdCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wbdCount","hash":{},"data":data}) : helper)))
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.wbdCount : depth0),{"name":"if","hash":{},"fn":container.program(34, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"wtsj\"><span class=\"text\">问题数据</span>(<span class=\"color-red\">"
-    + alias4(((helper = (helper = helpers.wtsjCount || (depth0 != null ? depth0.wtsjCount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"wtsjCount","hash":{},"data":data}) : helper)))
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.wtsjCount : depth0),{"name":"if","hash":{},"fn":container.program(36, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "</span>)</a>&nbsp;\r\n</div>";
 },"useData":true});
 
@@ -4839,7 +4913,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\r\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
@@ -5039,7 +5113,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
@@ -5374,7 +5448,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
