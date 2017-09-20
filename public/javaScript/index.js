@@ -402,7 +402,7 @@ module.exports = {
   },
   diffData: {
     tLeftHead: [{ text: '医院药品ID', resize: 1 }, { text: '药品名称', resize: 1 }, { text: '规格厂家', resize: 1 }, { text: '转换比', resize: 1 }, { text: '门诊/住院单位', resize: 1 }, { text: '是否停用', resize: 1 }, { text: '修订时间' }],
-    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格', '规格属性', '包材', '转换比', '企业简称', '批准文号/注册证号', '说明书', '说明书版本', '基药', '抗菌药物', 'DDD值', '抗菌药物分类', '是否计算强度', '给药途径(不计算强度)', '中成药注射剂', '妊娠用药', '血液制品', '糖皮质激素', '能量用药', '营养用药', 'PPI（质子泵抑制剂)', '精麻毒放', '辅助用药', '医保', '医保编码', 'YPID', '品种代码', '人社分类', '药理分类']
+    tRightHead: ['药品编码', '药品类型', '药品名称', '剂型', '规格包装', '包材', '转换比', '企业简称', '批准文号/注册证号', '说明书', '说明书版本', '基药', '抗菌药物', 'DDD值', '抗菌药物分类', '是否计算强度', '给药途径(不计算强度)', '中成药注射剂', '妊娠用药', '血液制品', '糖皮质激素', '能量用药', '营养用药', 'PPI（质子泵抑制剂)', '精麻毒放', '辅助用药', '医保', '医保编码', 'YPID', '品种代码', '人社分类', '药理分类']
   },
   thanData: {
     thead: ['YPID', '品种代码', '药交ID', '药品编码', '药品类型', '药品名称', '商品名', '剂型', '规格', '规格属性', '包材', '生产企业', '批准文号/注册证号', '操作'],
@@ -1087,12 +1087,16 @@ function addThanInfo(params, loadObj, $this) {
 //显示19位标准数据
 function addThan(params, loadObj) {
   $('.popup').hide();
+  closeShade();
   $(params.parent).find('.content-box-main').hide();
   $(params.parent).find('.add-data').show();
   var prodName = $(params.parent).find('.search-than .prodName').val();
   addFn.loadAddData(prodName);
 }
-
+function closeShade() {
+  $('#shade').hide();
+  $('.standard-than').hide();
+}
 //查找标准比对数据
 function findThanFn(params) {
   var $parent = $(params.parent);
@@ -1128,15 +1132,22 @@ function showThan(params) {
   if (!singleData.id) {
     return;
   }
-  if ($('.standard-than .than-content:hidden')) {
-    $('.standard-than .than-content').show();
-  }
   var singleDataId = singleData.id;
   var $parent = $(params.parent);
-  console.log($('.standard-than').height(), $(window).height(), $parent.find('.table-diff-left .table-diff-data tr.active').offset().top);
-  if ($(window).height() - $parent.find('.table-diff-left .table-diff-data tr.active').offset().top > $('.standard-than').height()) {
-    alert('1');
+  var trHeight = $parent.find('.table-diff-left .table-diff-data tr').first().height();
+  var trOffsetHeight = $parent.find('.table-diff-data-content').find('[data-id=' + singleData.id + ']').offset().top;
+  var thanPaddingHeight = trOffsetHeight - $('.content-box.active').offset().top;
+  var thanHeight = $parent.find('.standard-than').height();
+  if (trOffsetHeight >= thanHeight) {
+    if (thanHeight > thanPaddingHeight) {
+      $('.standard-than').css({ top: -(thanHeight - thanPaddingHeight) + 'px' });
+    } else {
+      $('.standard-than').css({ top: thanPaddingHeight - thanHeight + 'px' });
+    }
+  } else {
+    $('.standard-than').css({ top: thanPaddingHeight + trHeight + 'px' });
   }
+  $('#shade').show();
   params.loadingThanType = 1;
   $parent.find('.standard-than').show();
   $parent.find('.than-table .loading-wrap').show();
@@ -1797,7 +1808,7 @@ function resetTableFn(params) {
     if (!tBar.mouseDown) $(this).css({ background: 'transparent' });
   });
 }
-//解决ie7以下JSON.stringify()保错
+//解决ie7以下JSON.stringify()报错
 function ieJson() {
   if (!window.JSON) {
     window.JSON = {
@@ -1969,9 +1980,11 @@ module.exports = {
         addThan(params, loadObj);
       }); //查找19位标准数据
     }
+    $(document).on('click', '.standard-than .toggle-text', closeShade);
     $(document).on('click', '.add-than-info', function () {
       addThanInfo(params, loadObj, $(this));
     });
+    $('#shade').on('click', closeShade);
   },
   popupFn: function (params) {
     //弹窗框方法
@@ -4208,7 +4221,7 @@ var firstResult = 0,
     maxResultThan = 16;
 var findThanData = { firstResult: 0, maxResult: 16 };
 module.exports = function () {
-  var content = '<div class="content-box active ' + data.name + '"><div class="search-box"></div><div class="table-diff"></div><div class="standard-than" id="slicesStandardData"></div></div>';
+  var content = '<div class="content-box active ' + data.name + '"><div class="search-box"></div><div class="table-diff"></div><div class="standard-than"></div></div>';
   $('.content').append(content);
 
   var loadData = {
@@ -4366,7 +4379,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#slicesStandardData\" class=\"showThan\">比对</a><span>|</span>\r\n                    <!--<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span>-->\r\n                    <a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                             <th style=\"width: 40px\">\r\n                                 <div style=\"width: 40px\">序号</div>\r\n                                 <span class=\"resize\"></span>\r\n                             </th>\r\n"
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"javascript:void(0)\" class=\"showThan\">比对</a><span>|</span>\r\n                    <!--<a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span>-->\r\n                    <a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                             <th style=\"width: 40px\">\r\n                                 <div style=\"width: 40px\">序号</div>\r\n                                 <span class=\"resize\"></span>\r\n                             </th>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -4594,7 +4607,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"title\">\r\n    <span class=\"lf\">标准数据比对</span>\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
+  return "<div class=\"title\">\r\n    <span class=\"lf\">标准数据比对</span>\r\n    <a href=\"javascript:void(0)\" class=\"toggle\">\r\n        <span class=\"toggle-text\">关闭</span>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\r\n    <div class=\"search-than\">\r\n         <div class=\"lf\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -4733,7 +4746,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"title\">\r\n    <span class=\"lf\">标准数据比对</span>\r\n    <a href=\"javascript:void(0)\" class=\"toggle\" onClick=\"toggleFn(this)\">\r\n        <span class=\"toggle-text\">收起</span><i class=\"icon-arrow\"></i>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
+  return "<div class=\"title\">\r\n    <span class=\"lf\">标准数据比对</span>\r\n    <a href=\"javascript:void(0)\" class=\"toggle\">\r\n        <span class=\"toggle-text\">关闭</span>\r\n    </a>\r\n</div>\r\n<div class=\"than-content\" data-id=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\r\n    <div class=\"search-than\">\r\n      <div class=\"lf\" style=\"overflow: hidden\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.input : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -4911,10 +4924,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + "</div></td>\r\n                                        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
-    + "</div></td>\r\n                                        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
@@ -4954,7 +4963,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = __default(__webpack_require__(13)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),{"name":"flag1Select","hash":{},"data":data})) != null ? stack1 : "")
     + "\r\n                                        </td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\">\r\n                                            <div><input class=\"upInput\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "\" data-name=\"ddd\"></div>\r\n                                        </td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + "\" data-name=\"ddd\" "
+    + ((stack1 = helpers["if"].call(alias3,(depth0 != null ? depth0.dddUnit : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">"
+    + ((stack1 = helpers["if"].call(alias3,(depth0 != null ? depth0.dddUnit : depth0),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div>\r\n                                        </td>\r\n                                        <td class=\"icon-triangle table-diff-data-td-select\" title=\""
     + alias2(__default(__webpack_require__(14)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),0,{"name":"kjywTypeSelect","hash":{},"data":data}))
     + "\">\r\n                                            "
     + ((stack1 = __default(__webpack_require__(14)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),{"name":"kjywTypeSelect","hash":{},"data":data})) != null ? stack1 : "")
@@ -5011,10 +5024,16 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n                                    </tr>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
     return "has-instruction";
+},"11":function(container,depth0,helpers,partials,data) {
+    return "style=\"width: 60%\"";
+},"13":function(container,depth0,helpers,partials,data) {
+    return "<span style=\"margin-left: 10px\">"
+    + container.escapeExpression(container.lambda((depth0 != null ? depth0.dddUnit : depth0), depth0))
+    + "</span>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"#standardData\" class=\"showThan\">比对</a><span>|</span><a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span><a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                            <th style=\"width: 40px\">\r\n                                <div style=\"width: 40px\">序号</div>\r\n                            </th>\r\n"
+  return "<div class=\"table-diff\">\r\n    <div class=\"table-diff-content\">\r\n        <div class=\"table-diff-header\">\r\n            <div class=\"table-diff-left\">\r\n                <div class=\"table-diff-bar\">\r\n                    <a href=\"javascript:void(0)\" class=\"showThan\">比对</a><span>|</span><a href=\"javascript:void(0)\" class=\"showDetail\">查看详情</a><span>|</span><a href=\"javascript:void(0)\" class=\"cancel-than\">取消比对</a>\r\n                </div>\r\n                <div class=\"table-diff-header\">\r\n                    <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                        <thead>\r\n                            <th style=\"width: 40px\">\r\n                                <div style=\"width: 40px\">序号</div>\r\n                            </th>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tLeftHead : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "                        </thead>\r\n                    </table>\r\n                </div>\r\n                <div class=\"table-diff-data\">\r\n                    <div class=\"table-diff-data-content\">\r\n                        <table width=\"100%\" cellspacing=\"0\" border=\"0\">\r\n                            <tbody>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.ydata : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -5111,10 +5130,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
@@ -5154,7 +5169,11 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = __default(__webpack_require__(13)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),{"name":"flag1Select","hash":{},"data":data})) != null ? stack1 : "")
     + "\r\n        </td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\">\r\n            <div><input class=\"upInput\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "\" data-name=\"ddd\"></div>\r\n        </td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\" title=\""
+    + "\" data-name=\"ddd\" "
+    + ((stack1 = helpers["if"].call(alias3,(depth0 != null ? depth0.dddUnit : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">"
+    + ((stack1 = helpers["if"].call(alias3,(depth0 != null ? depth0.dddUnit : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div>\r\n        </td>\r\n        <td class=\"icon-triangle table-diff-data-td-select\" title=\""
     + alias2(__default(__webpack_require__(14)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),0,{"name":"kjywTypeSelect","hash":{},"data":data}))
     + "\">\r\n            "
     + ((stack1 = __default(__webpack_require__(14)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),{"name":"kjywTypeSelect","hash":{},"data":data})) != null ? stack1 : "")
@@ -5211,6 +5230,12 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + "</div></td>\r\n    </tr>\r\n";
 },"2":function(container,depth0,helpers,partials,data) {
     return "has-instruction";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "style=\"width: 60%\"";
+},"6":function(container,depth0,helpers,partials,data) {
+    return "<span style=\"margin-left: 10px\">"
+    + container.escapeExpression(container.lambda((depth0 != null ? depth0.dddUnit : depth0), depth0))
+    + "</span>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -5223,8 +5248,12 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
 var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    return "<span style=\"margin-left: -15px\">"
+    + container.escapeExpression(container.lambda((depth0 != null ? depth0.dddUnit : depth0), depth0))
+    + "</span>";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "<div>\r\n    <ul class=\"content-list\">\r\n        <li>药品编码："
     + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
@@ -5289,7 +5318,9 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.flag1 : depth0),"3",{"name":"isTrue","hash":{},"data":data}))
     + ">特殊使用级</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span data-name=\"ddd\">DDD值:</span>\r\n            <input type=\"text\" class=\"input upInputFn\" value=\""
     + alias2(alias1((depth0 != null ? depth0.ddd : depth0), depth0))
-    + "\">\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"kjywType\">抗菌药物分类:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + "\">\r\n            "
+    + ((stack1 = helpers["if"].call(alias3,(depth0 != null ? depth0.dddUnit : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"kjywType\">抗菌药物分类:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">无</option>\r\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"1",{"name":"isTrue","hash":{},"data":data}))
@@ -5445,10 +5476,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + "\"><div>"
     + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
-    + "</div></td>\r\n<td title=\""
-    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
-    + "\"><div>"
-    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\r\n<td title=\""
     + alias2(alias1((depth0 != null ? depth0.warpNameF : depth0), depth0))
     + "\"><div>"
