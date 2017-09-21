@@ -1237,7 +1237,11 @@ function compileAllDrug(){
       url: 'mcdProduct30/compileAllDrug',
       callback:function(res){
         $('.prompt').text(text).hide();
+      },
+      error:function(){
+        $('.prompt').text(text).hide();
       }
+
     })
 }
 function initCode(){
@@ -1247,9 +1251,11 @@ function initCode(){
       url: 'mcdProduct30/initCode',
       callback:function(res){
         $('.prompt').text(text).hide();
+      },
+      error:function(){
+        $('.prompt').text(text).hide();
       }
     })
 }
 $(document).on('click','#initCode',initCode);
 $(document).on('click','#compileAllDrug',compileAllDrug);
-
