@@ -2049,7 +2049,11 @@ function compileAllDrug() {
     url: 'mcdProduct30/compileAllDrug',
     callback: function (res) {
       $('.prompt').text(text).hide();
+    },
+    error: function () {
+      $('.prompt').text(text).hide();
     }
+
   });
 }
 function initCode() {
@@ -2058,6 +2062,9 @@ function initCode() {
   ajaxFn({
     url: 'mcdProduct30/initCode',
     callback: function (res) {
+      $('.prompt').text(text).hide();
+    },
+    error: function () {
       $('.prompt').text(text).hide();
     }
   });
@@ -5620,75 +5627,83 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "    <tr data-id=\""
+  return "        <tr data-id=\""
     + alias2(alias1((depth0 != null ? depth0.ID : depth0), depth0))
-    + "\">\r\n        <td title=\""
+    + "\">\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.YPID : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.YPID : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.PZ_CODE : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.PZ_CODE : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.YJ_ID : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.YJ_ID : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.CODE : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.CODE : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.DRUG_TYPE : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.DRUG_TYPE : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.NAME_CN_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.NAME_CN_F : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.PROD_TRADE_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.PROD_TRADE_F : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.SML_NAME_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.SML_NAME_F : depth0), depth0))
-    + "</div></td>\r\n        <td title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.SPEC_F : depth0), depth0))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
-    + "\">\r\n            <div class=\"table-text\">\r\n                "
+    + "\">\r\n                <div class=\"table-text\">\r\n                    "
     + alias2(alias1((depth0 != null ? depth0.SPEC_F : depth0), depth0))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.CONVERT_F : depth0),"*",{"name":"switchFn","hash":{},"data":data}))
     + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
-    + "\r\n            </div>\r\n        </td>\r\n        <td title=\""
+    + "\r\n                </div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
-    + "\">\r\n            <div class=\"table-text\">\r\n                "
+    + "\">\r\n                <div class=\"table-text\">\r\n                    "
     + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
-    + "\r\n            </div>\r\n        </td>\r\n        <td  title=\""
-    + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
-    + alias2(alias1((depth0 != null ? depth0.CONVERT_F : depth0), depth0))
-    + "</div></td>\r\n        <td  title=\""
+    + "\r\n                </div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.WARP_NAME_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.WARP_NAME_F : depth0), depth0))
-    + "</div></td>\r\n        <td  title=\""
+    + "</div>\r\n            </td>\r\n            <td title=\""
+    + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
+    + " "
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + "\">\r\n                <div class=\"table-text\">\r\n                    "
+    + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
+    + " "
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
+    + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
+    + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
+    + "\r\n                </div>\r\n            </td>\r\n            <td title=\""
     + alias2(alias1((depth0 != null ? depth0.PROD_PZWH_F : depth0), depth0))
     + " "
     + alias2(alias1((depth0 != null ? depth0.PROD_ZCZH_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
+    + "\">\r\n                <div class=\"table-text\">"
     + alias2(alias1((depth0 != null ? depth0.PROD_PZWH_F : depth0), depth0))
     + " "
     + alias2(alias1((depth0 != null ? depth0.PROD_ZCZH_F : depth0), depth0))
-    + "</div></td>\r\n        <td><div class=\"table-text select-than\">选取</div></td>\r\n    </tr>\r\n";
+    + "</div>\r\n            </td>\r\n            <td>\r\n                <div class=\"table-text select-than\">选取</div>\r\n            </td>\r\n        </tr>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -5754,7 +5769,15 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),{"name":"switchFn","hash":{},"data":data}))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.ATTR_NAME_F : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
-    + "\r\n            </div>\r\n        </td>\r\n        <td title=\""
+    + "\r\n            </div>\r\n        </td>\r\n        <td  title=\""
+    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
+    + "</div></td>\r\n        <td  title=\""
+    + alias2(alias1((depth0 != null ? depth0.WARP_NAME_F : depth0), depth0))
+    + "\"><div class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.WARP_NAME_F : depth0), depth0))
+    + "</div></td>\r\n        <td title=\""
     + alias2(alias1((depth0 != null ? depth0.FAC_NAME_F : depth0), depth0))
     + " "
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"[",{"name":"switchFn","hash":{},"data":data}))
@@ -5767,14 +5790,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1((depth0 != null ? depth0.BRAND_NAME : depth0), depth0))
     + alias2(__default(__webpack_require__(3)).call(alias3,(depth0 != null ? depth0.BRAND_NAME : depth0),"]",{"name":"switchFn","hash":{},"data":data}))
     + "\r\n            </div>\r\n        </td>\r\n        <td  title=\""
-    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
-    + alias2(alias1((depth0 != null ? depth0.ATTR_NAME_F : depth0), depth0))
-    + "</div></td>\r\n        <td  title=\""
-    + alias2(alias1((depth0 != null ? depth0.WARP_NAME_F : depth0), depth0))
-    + "\"><div class=\"table-text\">"
-    + alias2(alias1((depth0 != null ? depth0.WARP_NAME_F : depth0), depth0))
-    + "</div></td>\r\n        <td  title=\""
     + alias2(alias1((depth0 != null ? depth0.PROD_PZWH_F : depth0), depth0))
     + " "
     + alias2(alias1((depth0 != null ? depth0.PROD_ZCZH_F : depth0), depth0))
