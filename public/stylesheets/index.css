@@ -325,10 +325,11 @@ a {
         color: #fff;
         background: #4EAADC; }
       .content .add-than-table .table tr td {
-        padding: 9px 7px;
         white-space: nowrap;
         overflow: hidden;
         border: 1px solid #D8D8D8; }
+        .content .add-than-table .table tr td div {
+          padding: 9px 7px; }
       .content .add-than-table .table .table-text {
         width: 168px;
         overflow: hidden; }
@@ -379,6 +380,7 @@ a {
       .content .popup-add-info .popup-content .text-lf {
         width: 84px;
         display: inline-block;
+        text-align: right;
         *float: left; }
       .content .popup-add-info .popup-content li {
         overflow: hidden;

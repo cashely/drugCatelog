@@ -411,6 +411,23 @@ function findThanFn(params){
     }
   })
 }
+function upThanHeightFn(params,id) {
+  if (!id) {return;}
+  var $parent = $(params.parent);
+  var trHeight = $parent.find('.table-diff-left .table-diff-data tr').first().height();
+  var trOffsetHeight = $parent.find('.table-diff-data-content').find('[data-id=' + id + ']').offset().top;
+  var thanHeight = $parent.find('.standard-than').height();
+  if (trOffsetHeight >= thanHeight) {
+    $('.standard-than').css({top: trOffsetHeight - thanHeight + 'px'});
+  } else {
+    var downHeight = trOffsetHeight + trHeight;
+    var trDownHeight = $(window).height() - trOffsetHeight - trHeight;
+    if (trDownHeight < thanHeight) {
+      $('.standard-than .than-content').css({height: trDownHeight - 60})
+    }
+    $('.standard-than').css({top: downHeight + 'px'})
+  }
+}
 //显示比对事件
 function showThan(params){
   if (!singleData.id) {
@@ -418,25 +435,7 @@ function showThan(params){
   }
   var singleDataId = singleData.id;
   var $parent = $(params.parent);
-  var trHeight = $parent.find('.table-diff-left .table-diff-data tr').first().height();
-  var trOffsetHeight = $parent.find('.table-diff-data-content').find('[data-id='+singleData.id+']').offset().top;
-  var thanPaddingHeight = trOffsetHeight - $('.content-box.active').offset().top;
-  var thanHeight = $parent.find('.standard-than').height();
-  if(trOffsetHeight >= thanHeight){
-    //if(thanHeight > thanPaddingHeight){
-    //  $('.standard-than').css({top: -(thanHeight-thanPaddingHeight)+'px'})
-    //}else{
-    //  $('.standard-than').css({top:thanPaddingHeight - thanHeight+'px'})
-    //}
-    $('.standard-than').css({top:trOffsetHeight - thanHeight+'px'})
-  }else{
-    var downHeight = trOffsetHeight + trHeight;
-    var trDownHeight = $(window).height()-trOffsetHeight - trHeight;
-    if(trDownHeight < thanHeight){
-      $('.standard-than .than-content').css({height:trDownHeight - 60})
-    }
-    $('.standard-than').css({top: downHeight+'px'})
-  }
+  upThanHeightFn(params,singleData.id);
   $('.shade').css({
     //height: $(document).height(),
     //top: -$('.content-box.active').offset().top,
@@ -952,12 +951,23 @@ function downloadFn(params){
   downloadUrl+='?drugId='+isNull(downloadData.drugId);
   downloadUrl+='&drugName='+isNull(downloadData.drugName);
   downloadUrl+='&specName='+isNull(downloadData.specName);
+  downloadUrl+='&xy='+isNull(downloadData.xy);
+  downloadUrl+='&zcy='+isNull(downloadData.zcy);
+  downloadUrl+='&sms='+isNull(downloadData.sms);
   downloadUrl+='&jbyw='+isNull(downloadData.jbyw);
+  downloadUrl+='&kjyw='+isNull(downloadData.kjyw);
+  downloadUrl+='&zcyzsj='+isNull(downloadData.zcyzsj);
+  downloadUrl+='&rsyy='+isNull(downloadData.rsyy);
+  downloadUrl+='&xyzp='+isNull(downloadData.xyzp);
+  downloadUrl+='&tpzjs='+isNull(downloadData.tpzjs);
+  downloadUrl+='&nlyy='+isNull(downloadData.nlyy);
+  downloadUrl+='&ppi='+isNull(downloadData.ppi);
+  downloadUrl+='&jmdf='+isNull(downloadData.jmdf);
+  downloadUrl+='&fzyy='+isNull(downloadData.fzyy);
   downloadUrl+='&yblb='+isNull(downloadData.yblb);
-  downloadUrl+='&wtsj='+isNull(downloadData.wtsj);
   downloadUrl+='&ybd='+isNull(downloadData.ybd);
   downloadUrl+='&wbd='+isNull(downloadData.wbd);
-  downloadUrl+='&rsyy='+isNull(downloadData.rsyy);
+  downloadUrl+='&wtsj='+isNull(downloadData.wtsj);
   window.location.href=downloadUrl;
   window.event.returnValue = false;
   return false;
@@ -1141,11 +1151,12 @@ function ieJson(){
 function resizeFn(params){
   var $parent = $(params.parent),
     _height = $(window).height(),
-    tableHeight = _height - $('.table-diff').offset().top - $('.footer').height() - 10;
-  $('.table-diff').height(tableHeight);
-  $('.table-diff-left .table-diff-data').height(tableHeight-28);
-  $('.table-diff-right .table-diff-data').height(tableHeight-28);
-  $('.table-diff-single-content').height(tableHeight-28);
+    tableHeight = _height - $parent.find('.table-diff').offset().top - $('.footer').height() - 10;
+  $('.table-diff').css({height:tableHeight});
+  $parent.find('.table-diff-left .table-diff-data').height(tableHeight-28);
+  $parent.find('.table-diff-right .table-diff-data').height(tableHeight-28);
+  $parent.find('.table-diff-single-content').height(tableHeight-28);
+  closeShade()
 }
 
 var  paramsAll=[],paramsType=[];
@@ -1226,6 +1237,9 @@ module.exports = {
       }); //查看详情页面下一条
     }
     $(window).on('resize',function () {
+      resizeFn(params)
+    });
+    $(document).on('click','.tabs .tabs-item',function(){
       resizeFn(params)
     });
   },

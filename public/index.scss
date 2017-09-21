@@ -402,10 +402,12 @@ a{
             }
             tr{
                 td{
-                    padding: 9px 7px;
                     white-space: nowrap;
                     overflow: hidden;
                     border: 1px solid #D8D8D8;
+                    div{
+                        padding: 9px 7px;
+                    }
                 }
             }
             .table-text{
@@ -477,6 +479,7 @@ a{
             .text-lf{
                 width: 84px;
                 display: inline-block;
+                text-align: right;
                 *float:left;
             }
             li{
