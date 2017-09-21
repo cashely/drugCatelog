@@ -793,6 +793,7 @@ function loadChemistryTableFn(params, type) {
       } else {
         $('.table-diff-header .scroll-loading').hide();
       }
+      resizeFn(params); //从新计算表格的高度
       tableDiffScrollFn($parent, params);
     }
   });
@@ -1094,8 +1095,8 @@ function addThan(params, loadObj) {
   addFn.loadAddData(prodName);
 }
 function closeShade() {
-  $('#shade').hide();
-  $('.standard-than').hide();
+  $('.shade').hide();
+  $('.standard-than').hide().find('.than-content').css({ height: 'auto' });
 }
 //查找标准比对数据
 function findThanFn(params) {
@@ -1139,15 +1140,26 @@ function showThan(params) {
   var thanPaddingHeight = trOffsetHeight - $('.content-box.active').offset().top;
   var thanHeight = $parent.find('.standard-than').height();
   if (trOffsetHeight >= thanHeight) {
-    if (thanHeight > thanPaddingHeight) {
-      $('.standard-than').css({ top: -(thanHeight - thanPaddingHeight) + 'px' });
-    } else {
-      $('.standard-than').css({ top: thanPaddingHeight - thanHeight + 'px' });
-    }
+    //if(thanHeight > thanPaddingHeight){
+    //  $('.standard-than').css({top: -(thanHeight-thanPaddingHeight)+'px'})
+    //}else{
+    //  $('.standard-than').css({top:thanPaddingHeight - thanHeight+'px'})
+    //}
+    $('.standard-than').css({ top: trOffsetHeight - thanHeight + 'px' });
   } else {
-    $('.standard-than').css({ top: thanPaddingHeight + trHeight + 'px' });
+    var downHeight = trOffsetHeight + trHeight;
+    var trDownHeight = $(window).height() - trOffsetHeight - trHeight;
+    if (trDownHeight < thanHeight) {
+      $('.standard-than .than-content').css({ height: trDownHeight - 60 });
+    }
+    $('.standard-than').css({ top: downHeight + 'px' });
   }
-  $('#shade').show();
+  $('.shade').css({
+    //height: $(document).height(),
+    //top: -$('.content-box.active').offset().top,
+    //left: -22,
+    //right: -22
+  }).show();
   params.loadingThanType = 1;
   $parent.find('.standard-than').show();
   $parent.find('.than-table .loading-wrap').show();
@@ -1875,6 +1887,16 @@ function ieJson() {
   }
 }
 
+function resizeFn(params) {
+  var $parent = $(params.parent),
+      _height = $(window).height(),
+      tableHeight = _height - $('.table-diff').offset().top - $('.footer').height() - 10;
+  $('.table-diff').height(tableHeight);
+  $('.table-diff-left .table-diff-data').height(tableHeight - 28);
+  $('.table-diff-right .table-diff-data').height(tableHeight - 28);
+  $('.table-diff-single-content').height(tableHeight - 28);
+}
+
 var paramsAll = [],
     paramsType = [];
 ieJson();
@@ -1886,6 +1908,7 @@ module.exports = {
     if (!!params.fn) {
       params.fn();
     }
+
     if (paramsType.indexOf(params.parent) == -1) {
       paramsType.push(params.parent);
       paramsAll.push(params);
@@ -1958,12 +1981,15 @@ module.exports = {
         paginationFn(params, 'next');
       }); //查看详情页面下一条
     }
+    $(window).on('resize', function () {
+      resizeFn(params);
+    });
   },
   showThan: function (params, loadObj) {
     if (!!params.standardThanTel) {
       $(params.parent).find('.standard-than').html(params.standardThanTel(params.data.thanData));
     }
-    bindFn(params.parent, 'click', '.showThan', function () {
+    $(document).on('click', params.parent + ' .showThan', function () {
       showThan(params, loadObj);
     }); //显示标准数据比对
     bindFn(params.parent, 'click', '.find-than', function () {
@@ -1984,7 +2010,7 @@ module.exports = {
     $(document).on('click', '.add-than-info', function () {
       addThanInfo(params, loadObj, $(this));
     });
-    $('#shade').on('click', closeShade);
+    $('.shade').on('click', closeShade);
   },
   popupFn: function (params) {
     //弹窗框方法
@@ -4221,7 +4247,7 @@ var firstResult = 0,
     maxResultThan = 16;
 var findThanData = { firstResult: 0, maxResult: 16 };
 module.exports = function () {
-  var content = '<div class="content-box active ' + data.name + '"><div class="search-box"></div><div class="table-diff"></div><div class="standard-than"></div></div>';
+  var content = '<div class="content-box active ' + data.name + '"><div class="search-box"></div><div class="table-diff"></div><div class="standard-than"></div><div class="shade"></div></div>';
   $('.content').append(content);
 
   var loadData = {

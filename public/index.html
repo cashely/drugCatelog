@@ -14,7 +14,7 @@
     <script type="text/javascript" src="./javaScript/jquery-1.11.3.js"></script>
 <body>
     <!--药品目录-->
-    <div id="home" class="chemistryMain">
+    <div id="home">
         <div class="header"></div>
         <div class="login-box"></div>
         <div class="tabs-box-wrap">
@@ -22,12 +22,12 @@
         </div>
         <div class="content-wrap">
             <div class="content">
-                <div class="content-box active">
+                <div class="content-box active chemistryMain">
                     <div class="content-box-main">
                         <div class="search-box"></div>
-                        <div class="tabBar"></div>
                         <div class="table-diff"></div>
                         <div class="standard-than"></div>
+                        <div class="shade"></div>
                     </div>
                     <div class="add-data"></div>
                 </div>
@@ -36,7 +36,6 @@
         </div>
         <div class="prompt">保存成功</div>
         <div class="footer"></div>
-        <div id="shade" style="display:none;height: 100%;position: absolute;top: 0;z-index: 9999;width: 100%;background: black;opacity:0.1;filter:Alpha(opacity=10)"></div>
     </div>
     <!--webpack打包后的文件-->
     <script src="javaScript/index.js"></script>

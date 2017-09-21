@@ -19,7 +19,7 @@ var loadData;
 var firstResult =0,maxResult= 16,firstResultThan =0,maxResultThan= 16;
 var findThanData ={firstResult:0,maxResult:16};
 module.exports = function(){
-  var content = '<div class="content-box active '+data.name +'"><div class="search-box"></div><div class="table-diff"></div><div class="standard-than"></div></div>';
+  var content = '<div class="content-box active '+data.name +'"><div class="search-box"></div><div class="table-diff"></div><div class="standard-than"></div><div class="shade"></div></div>';
   $('.content').append(content);
 
   var loadData = {
