@@ -219,7 +219,11 @@ a {
       background: #FAFAFA;
       border-bottom: 1px solid #D8D8D8; }
       .content .standard-than .title .toggle {
-        float: right; }
+        float: right;
+        height: 30px;
+        line-height: 30px; }
+        .content .standard-than .title .toggle .toggle-text {
+          display: inline-block; }
         .content .standard-than .title .toggle .icon-arrow {
           display: inline-block;
           width: 10px;
@@ -292,7 +296,8 @@ a {
       margin-right: 16px; }
     .content .add-than-table .than-thead {
       background: #4EAADC;
-      overflow: hidden; }
+      overflow: hidden;
+      width: 100%; }
     .content .add-than-table .than-tbody-wrap {
       position: relative;
       width: 100%;
@@ -300,7 +305,8 @@ a {
     .content .add-than-table .than-tbody {
       height: 350px;
       width: 100%;
-      overflow: scroll; }
+      overflow: auto;
+      _overflow: scroll; }
     .content .add-than-table .table {
       text-align: left;
       border-collapse: collapse;
@@ -351,7 +357,7 @@ a {
     box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
     border-radius: 2px; }
     .content .popup-add-info .popup-content {
-      padding: 30px;
+      padding: 30px 30px 0;
       overflow: hidden;
       line-height: 1.6; }
       .content .popup-add-info .popup-content .content-lf {
@@ -362,21 +368,24 @@ a {
         width: 211px; }
       .content .popup-add-info .popup-content .text-lf {
         width: 84px;
-        display: inline-block; }
+        display: inline-block;
+        *float: left; }
       .content .popup-add-info .popup-content li {
-        overflow: hidden; }
+        overflow: hidden;
+        width: 100%;
+        margin-bottom: 10px; }
       .content .popup-add-info .popup-content .input-group .input {
         width: 60px;
         margin-bottom: 0; }
       .content .popup-add-info .popup-content .input-group .select {
-        width: 100px; }
-      .content .popup-add-info .popup-content li {
-        margin-bottom: 10px; }
+        width: 100px;
+        *float: left; }
       .content .popup-add-info .popup-content .popup-btn {
         float: left;
         width: 100%;
         margin-top: 20px;
-        text-align: center; }
+        text-align: center;
+        margin-bottom: 30px; }
   .content .popup-company {
     width: 320px;
     position: absolute;
@@ -399,7 +408,8 @@ a {
         max-height: 174px;
         _height: expression(this.scrollHeight > 174 ? "174px" : "auto"); }
       .content .popup-company .popup-content .popup-list {
-        width: 180px; }
+        width: 180px;
+        margin: 0 auto; }
         .content .popup-company .popup-content .popup-list .popup-item {
           width: 100%;
           margin-top: 10px;
@@ -434,7 +444,6 @@ a {
           .content .popup-company .popup-content .popup-list .popup-item .last-select {
             border-right-width: 1px; }
       .content .popup-company .popup-content .btn-group .add-unit {
-        background: #BCBCBC;
         margin-right: 30px; }
   .content .popup-record {
     width: 482px;
@@ -609,7 +618,7 @@ a {
       left: 0;
       z-index: 2; }
       .table-diff .table-diff-left .table-diff-header .resize {
-        height: 100%;
+        height: 28px;
         display: block;
         width: 4px;
         position: absolute;
@@ -661,7 +670,7 @@ a {
         .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box {
           width: 100%;
           overflow-y: scroll;
-          *overflow: scroll;
+          _overflow: scroll;
           height: 332px; }
           .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list {
             display: block;
@@ -669,13 +678,18 @@ a {
             .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list li {
               float: left;
               margin-right: 30px;
-              margin-bottom: 10px; }
-            .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list .input-group .input {
+              padding-bottom: 10px; }
+            .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list .input-group {
+              height: 30px;
               margin-bottom: 0; }
-            .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list .input-group .select {
-              width: 106px;
-              margin-bottom: 0; }
+              .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list .input-group .input {
+                margin-bottom: 0; }
+              .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list .input-group .select {
+                display: inline-block;
+                width: 106px;
+                margin-bottom: 0; }
             .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list .adminRouteExclude {
+              display: inline-block;
               overflow: hidden; }
         .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool {
           position: relative;
@@ -709,13 +723,13 @@ a {
       top: 0;
       width: 100%;
       left: 0;
-      z-index: 2; }
+      z-index: 2;
+      background: #4EAADC; }
       .table-diff .table-diff-right .table-diff-header .table-diff-header-content {
-        overflow-x: hidden; }
-        .table-diff .table-diff-right .table-diff-header .table-diff-header-content table {
-          padding-right: 20px; }
-          .table-diff .table-diff-right .table-diff-header .table-diff-header-content table th {
-            background: #4EAADC; }
+        overflow-x: hidden;
+        margin-right: 20px; }
+        .table-diff .table-diff-right .table-diff-header .table-diff-header-content table th {
+          background: #4EAADC; }
     .table-diff .table-diff-right .table-diff-data {
       overflow: scroll;
       width: 100%;
@@ -794,7 +808,7 @@ a {
   color: #666;
   width: 380px;
   font-size: 14px;
-  z-index: 999;
+  z-index: 2147483647;
   border: 1px solid #FFFFFF;
   box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5); }
   .login .login-title {

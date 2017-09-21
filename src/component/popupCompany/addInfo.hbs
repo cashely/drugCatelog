@@ -4,46 +4,48 @@
         <span class="popup-close"><img src="./images/icon-close.jpg" alt=""></span>
     </div>
     <div class="popup-content">
-        <ul class="content-lf">
-            <li>
-                <span class="text-lf">药品名称：</span>
-                <span class="text-rt">{{default.name}}</span>
-            </li>
-            <li>
-                <span class="text-lf">规格：</span>
-                <span class="text-rt"> {{default.spec}}</span>
-            </li>
-            <li class="input-group">
-                <span class="text-lf">包装(转换比)：</span>
-                <input type="text" class="input convert">
-            </li>
-            <li class="input-group">
-                <span class="text-lf">包装单位：</span>
-                <select class="select packUnit">
-                    {{#each packUnit}}
-                        <option value="{{name}}">{{name}}</option>
-                    {{/each}}
-                </select>
-            </li>
-        </ul>
-        <ul class="content-rt">
-            <li>
-                <span class="text-lf">生产企业：</span>
-                <span class="text-rt"> {{default.manufacturerName}}</span>
-            </li>
-            <li>
-                <span class="text-lf">批准文号：</span>
-                <span class="text-rt">{{default.pzwh}}</span>
-            </li>
-            <li class="input-group">
-                 <span class="text-lf">最小使用单位：</span>
+        <div style="overflow: hidden">
+            <ul class="content-lf">
+                <li>
+                    <span class="text-lf">药品名称：</span>
+                    <span class="text-rt">{{default.name}}</span>
+                </li>
+                <li>
+                    <span class="text-lf">规格：</span>
+                    <span class="text-rt"> {{default.spec}}</span>
+                </li>
+                <li class="input-group">
+                    <span class="text-lf">包装(转化比)：</span>
+                    <input type="text" class="input convert">
+                </li>
+                <li class="input-group">
+                    <span class="text-lf">包装单位：</span>
+                    <select class="select packUnit">
+                        {{#each packUnit}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </li>
+            </ul>
+            <ul class="content-rt">
+                <li>
+                    <span class="text-lf">生产企业：</span>
+                    <span class="text-rt"> {{default.manufacturerName}}</span>
+                </li>
+                <li>
+                    <span class="text-lf">批准文号：</span>
+                    <span class="text-rt">{{default.pzwh}}</span>
+                </li>
+                <li class="input-group">
+                    <span class="text-lf">最小使用单位：</span>
                     <select class="select minUseUnit">
                         {{#each minUseUnit}}
                             <option value="{{name}}">{{name}}</option>
                         {{/each}}
                     </select>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
         <div class="popup-btn">
             <a href="javaScript:void(0)" class="btn saveOrUpdate">保存并比对</a>
         </div>
