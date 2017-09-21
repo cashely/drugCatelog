@@ -1,6 +1,7 @@
 @charset "UTF-8";
 html {
-  height: 100%; }
+  height: 100%;
+  _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1100?"1100px":"auto"); }
 
 body {
   font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif;
@@ -8,7 +9,8 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-width: 960px; }
+  min-width: 1100px;
+  _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1100?"1100px":"auto"); }
 
 table {
   font: 12px/1 "Microsoft YaHei" ,Arial ,sans-serif; }
@@ -44,6 +46,9 @@ a {
   margin-right: 5px;
   display: inline-block;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAYAAACXDi8zAAAABGdBTUEAALGPC/xhBQAAAKBJREFUCB1jZEADer2HChgY/kszIovr9x6q/c/wz4qbkS2IBSah13Og6////8rqcqL+q8O0fzEDOYzreZ2mAxUIqcvZx6wOE/sDVqzXc3CBXu+BaSAFMN0gmomBEQj/M/5HFgRLBBXZJQLVMuv3HVoQuuo/M0wBXDvQyB6gXgV1WZEokOVwCZBK/b4Ddf//M1iCnIsiAZLU7TtUyPj/vxQAJd40h3XMECUAAAAASUVORK5CYII=) center no-repeat; }
+
+#home {
+  position: relative; }
 
 /*页面头部样式*/
 .header {
@@ -101,7 +106,6 @@ a {
   margin: 18px auto;
   position: relative;
   text-align: left;
-  overflow: hidden;
   /*输入框样式*/
   /*按钮样式*/
   /*查找药品数据*/ }
@@ -113,10 +117,10 @@ a {
     display: inline-block;
     white-space: nowrap;
     float: left;
-    margin-bottom: 10px; }
+    padding-bottom: 10px; }
     .content .input-group .input {
       display: inline-block;
-      width: 108px;
+      width: 100px;
       height: 24px;
       line-height: 24px;
       margin-left: 8px;
@@ -208,8 +212,13 @@ a {
       color: red; }
   .content .standard-than {
     display: none;
+    position: absolute;
+    top: 0;
+    z-index: 99999;
+    left: 0;
+    right: 0;
+    background: #FAFAFA;
     overflow: hidden;
-    margin-top: 30px;
     border: 1px solid #D8D8D8; }
     .content .standard-than .title {
       height: 30px;
@@ -224,30 +233,20 @@ a {
         line-height: 30px; }
         .content .standard-than .title .toggle .toggle-text {
           display: inline-block; }
-        .content .standard-than .title .toggle .icon-arrow {
-          display: inline-block;
-          width: 10px;
-          height: 6px;
-          vertical-align: 2px;
-          margin-left: 4px;
-          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAABGdBTUEAALGPC/xhBQAAAJxJREFUCB1jYEADer0H5+j1HpiNJszAhCyg23uwA8jnBGJuoOI2ZDm4Qr2eg/lACSNWHu4EVh6e+P//GUyBivNgisEK9foORfxnYIgW5hAJOptu8huEhTlFA///Z4zR7z0YDlLMqNd7yPn///+TGLlZHC9lWr+CmQCi9aYfFfv/9c9+RkbGPKb/DP+bGJiZfNEVgRSCxNjYWPxAagAUxjTY/FktpQAAAABJRU5ErkJggg==) center center no-repeat; }
-        .content .standard-than .title .toggle .icon-arrow-down {
-          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAABGdBTUEAALGPC/xhBQAAAJRJREFUCB1j1O09eJSBiSn2cqHtPQYsQLf/sBLDv3+LmRgZGOsY/v7brDf9qBi6OrAYUA6khulSsd1eoOqm/1//bHGYepUHphjEBokxMjE2g9QwwiT0eg/k/Wdg9GHj4fYGif368nUr43+GrZdK7CeC+HCFIA5QcRuQUgAK///PyPDocpF9JUgcKwAqnq3Xe3AOuiQAW8w5UkDrKnkAAAAASUVORK5CYII=) center center no-repeat; }
     .content .standard-than .search-than {
       padding: 10px 12px 0;
       overflow: hidden; }
       .content .standard-than .search-than .input {
         display: inline-block;
-        width: 108px;
+        width: 50px;
         height: 24px;
         line-height: 24px;
-        margin-left: 8px;
+        margin-left: 4px;
         margin-right: 20px;
         padding: 1px 5px;
         border: 1px solid #CACACA;
         vertical-align: middle; }
     .content .standard-than .than-table {
-      margin-top: 10px;
       position: relative;
       width: 100%;
       overflow: hidden; }
@@ -262,7 +261,10 @@ a {
         position: relative;
         height: 168px;
         overflow: scroll;
-        width: 100%; }
+        width: 100%;
+        background: #fff; }
+        .content .standard-than .than-table .than-tbody tr:nth-child(odd) {
+          background: #fff; }
       .content .standard-than .than-table .table {
         width: 100%;
         text-align: left;
@@ -277,16 +279,19 @@ a {
           .content .standard-than .than-table .table tr td div {
             white-space: nowrap;
             overflow: hidden;
-            padding: 9px 7px; }
+            padding: 8px 7px; }
         .content .standard-than .than-table .table .table-text {
           width: 100px; }
         .content .standard-than .than-table .table .select-than {
           cursor: pointer;
           color: #2D8CC0; }
+      .content .standard-than .than-table .loading-wrap {
+        background: #fff; }
     .content .standard-than .no-than {
       height: 28px;
       line-height: 28px;
-      text-align: center; }
+      text-align: center;
+      background: #fff; }
       .content .standard-than .no-than .add-than {
         color: #2D8CC0;
         text-decoration: underline; }
@@ -336,7 +341,7 @@ a {
       width: 50px; }
     .content .add-data .add-search-than .input {
       display: inline-block;
-      width: 108px;
+      width: 100px;
       height: 24px;
       line-height: 24px;
       margin-left: 8px;
@@ -550,7 +555,8 @@ a {
 .table-diff {
   margin-top: 5px;
   position: relative;
-  height: 476px; }
+  height: 378px;
+  overflow: hidden; }
   .table-diff .table-diff-data-td-select .value {
     display: block; }
   .table-diff .table-diff-data-td-select .select {
@@ -632,7 +638,7 @@ a {
     .table-diff .table-diff-left .table-diff-data {
       position: relative;
       overflow: hidden;
-      height: 448px; }
+      height: 349px; }
       .table-diff .table-diff-left .table-diff-data.table-diff-show-detail {
         overflow-y: auto; }
     .table-diff .table-diff-left .table-diff-data-content {
@@ -662,16 +668,16 @@ a {
         color: #fff;
         width: 100%; }
       .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content {
-        height: 416px;
+        height: 349px;
         line-height: 1.4;
         background: #F0FAFF;
         border: 1px solid #D8D8D8;
-        padding: 10px 10px 20px; }
+        padding: 10px 10px 0; }
         .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box {
           width: 100%;
           overflow-y: scroll;
           _overflow: scroll;
-          height: 332px; }
+          height: 260px; }
           .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list {
             display: block;
             overflow: hidden; }
@@ -695,7 +701,7 @@ a {
           position: relative;
           text-align: center;
           height: 28px;
-          padding: 20px 0; }
+          padding: 10px 0; }
           .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool .btn-toggle {
             float: left;
             padding-top: 8px;
@@ -709,7 +715,8 @@ a {
             left: 50%;
             margin-left: -42px; }
         .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .pagination {
-          text-align: center; }
+          text-align: center;
+          padding: 7px 0; }
           .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .pagination .pagination-prev {
             margin-right: 30px; }
     .table-diff .table-diff-right .table-diff-right-all {
@@ -733,7 +740,7 @@ a {
     .table-diff .table-diff-right .table-diff-data {
       overflow: scroll;
       width: 100%;
-      height: 448px;
+      height: 349px;
       color: #666;
       position: absolute; }
   .table-diff table {
@@ -796,7 +803,7 @@ a {
   right: 0;
   line-height: 2;
   padding: 10px 40px;
-  z-index: 99; }
+  z-index: 99999; }
 
 .login {
   display: none;

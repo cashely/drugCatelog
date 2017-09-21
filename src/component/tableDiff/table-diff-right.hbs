@@ -7,7 +7,6 @@
         <td title="{{proName}}"><div>{{proName}}</div></td>
         <td title="{{prepName}}"><div>{{prepName}}</div></td>
         <td title="{{spec}}"><div>{{spec}}</div></td>
-        <td title="{{specProperty}}"><div>{{specProperty}}</div></td>
         <td title="{{warpNameF}}"><div>{{warpNameF}}</div></td>
         <td title="{{fConvertRatio}}"><div>{{fConvertRatio}}</div></td>
         <td title="{{facAbbrF}}"><div>{{facAbbrF}}</div></td>
@@ -25,7 +24,7 @@
             {{{flag1Select flag1}}}
         </td>
         <td class="icon-triangle table-diff-data-td-select">
-            <div><input class="upInput" value="{{ddd}}{{dddUnit}}" data-name="ddd"></div>
+            <div><input class="upInput" value="{{ddd}}" data-name="ddd" {{#if dddUnit}}style="width: 60%"{{/if}}>{{#if dddUnit}}<span style="margin-left: 10px">{{dddUnit}}</span>{{/if}}</div>
         </td>
         <td class="icon-triangle table-diff-data-td-select" title="{{kjywTypeSelect kjywType 0}}">
             {{{kjywTypeSelect kjywType}}}

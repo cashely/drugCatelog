@@ -370,12 +370,16 @@ function addThanInfo(params,loadObj,$this) {
 //显示19位标准数据
 function addThan(params,loadObj){
   $('.popup').hide();
+  closeShade();
   $(params.parent).find('.content-box-main').hide();
   $(params.parent).find('.add-data').show();
   var prodName = $(params.parent).find('.search-than .prodName').val();
   addFn.loadAddData(prodName);
 }
-
+function closeShade(){
+  $('#shade').hide();
+  $('.standard-than').hide();
+}
 //查找标准比对数据
 function findThanFn(params){
   var $parent = $(params.parent);
@@ -408,14 +412,25 @@ function findThanFn(params){
 }
 //显示比对事件
 function showThan(params){
-  if(!singleData.id){
+  if (!singleData.id) {
     return;
   }
-  if($('.standard-than .than-content:hidden')){
-    $('.standard-than .than-content').show()
-  }
   var singleDataId = singleData.id;
-  var  $parent= $(params.parent);
+  var $parent = $(params.parent);
+  var trHeight = $parent.find('.table-diff-left .table-diff-data tr').first().height();
+  var trOffsetHeight = $parent.find('.table-diff-data-content').find('[data-id='+singleData.id+']').offset().top;
+  var thanPaddingHeight = trOffsetHeight - $('.content-box.active').offset().top;
+  var thanHeight = $parent.find('.standard-than').height();
+  if(trOffsetHeight >= thanHeight){
+    if(thanHeight > thanPaddingHeight){
+      $('.standard-than').css({top: -(thanHeight-thanPaddingHeight)+'px'})
+    }else{
+      $('.standard-than').css({top:thanPaddingHeight- thanHeight+'px'})
+    }
+  }else{
+    $('.standard-than').css({top: thanPaddingHeight + trHeight+'px'})
+  }
+  $('#shade').show();
   params.loadingThanType = 1;
   $parent.find('.standard-than').show();
   $parent.find('.than-table .loading-wrap').show();
@@ -1044,7 +1059,7 @@ function resetTableFn(params){
     if(!tBar.mouseDown)$(this).css({background:'transparent'})
   });
 }
-//解决ie7以下JSON.stringify()保错
+//解决ie7以下JSON.stringify()报错
 function ieJson(){
   if (!window.JSON) {
     window.JSON = {
@@ -1200,7 +1215,9 @@ module.exports = {
     if(!!params.addThanFn){
       bindFn(params.parent,'click','.add-than',function(){addThan(params,loadObj)}); //查找19位标准数据
     }
+    $(document).on('click','.standard-than .toggle-text',closeShade);
     $(document).on('click','.add-than-info', function(){addThanInfo(params,loadObj,$(this))});
+    $('#shade').on('click',closeShade);
   },
   popupFn:function(params){
     //弹窗框方法
