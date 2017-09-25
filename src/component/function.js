@@ -226,10 +226,6 @@ function showDiffBarFn(params){
   })
 }
 
-function bindFn(parent,event,className,fn){
-  $(document).on(event,parent+' '+className,fn);
-}
-
 //点击表格数据事件
 function tableDiffClickFn(params,$this){
   var _index = $this.index();
@@ -251,6 +247,7 @@ function tableDiffClickFn(params,$this){
     singleData.id = $parent.find('.table-diff-left .table-diff-data tr').eq(_index).attr('data-id');
   }
 }
+
 //鼠标表格悬停事件
 function tableDiffHoverFn(params){
   $(document).on("mouseover",'.table-diff-data tr',function(){
@@ -293,7 +290,7 @@ function selectThanFn(params,$this,loadObj){
       $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
       $(document).scrollTop(0);
       $('.prompt').text('比对成功');
-      setTimeout(function () {$('.prompt').hide().text(promptText)}, 500);
+      setTimeout(function () {$('.prompt').hide().text(promptText)}, 800);
     },
     error:function(res){
       alert(res.message);
@@ -326,7 +323,7 @@ function addThanInfo(params,loadObj,$this) {
         },
         callback: function (res) {
           data.packUnit = res.content;
-          $('.popup').html(addDataPopupTel(data)).show();
+          $('.popup').html(addDataPopupTel(data)).show().find('.popup-shade').show();
           var popupHeight = $('.popup-add-info').height();
           $('.popup-add-info .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
           $('.popup-add-info .popup-close').on('click', function () {
@@ -376,10 +373,20 @@ function addThan(params,loadObj){
   $(params.parent).find('.add-data').show();
   var prodName = $(params.parent).find('.search-than .prodName').val();
   addFn.loadAddData(prodName);
+  $(document).on('click','.add-data .goback', function () {
+    $('.content .add-data').hide();
+    $('.content  .content-box-main').show();
+    $('.popup').hide();
+    resizeFn(params)
+  });
 }
 function closeShade(){
   $('.shade').hide();
   $('.standard-than').hide().find('.than-content').css({height:'auto'});
+}
+function closePopup(){
+  $('.popup-shade').hide();
+  $('.popup').hide();
 }
 //查找标准比对数据
 function findThanFn(params){
@@ -473,7 +480,7 @@ function showThan(params){
       $parent.find('.than-content').attr('data-id',singleDataId);
       $parent.find('.standard-than .than-tbody').html(params.standardThanTbody(params.data.thanData));
       $('.prompt').text('加载成功');
-      setTimeout(function () {$('.prompt').hide().text(promptText)}, 500);
+      setTimeout(function () {$('.prompt').hide().text(promptText)}, 800);
       if($(params.parent).find('.standard-than .than-tbody tr').length >=  params.findThanData.maxResult){
         $(params.parent).find('.standard-than .scroll-loading').show();
       }else{
@@ -562,7 +569,7 @@ function upInputFn(params) {
         $('.prompt').show();
         setTimeout(function () {
           $('.prompt').hide();
-        }, 500);
+        }, 800);
       }
     });
   });
@@ -609,7 +616,7 @@ function upSelect(params){
         }
         reloadsearchClassifyTel(params);
         $('.prompt').show();
-        setTimeout(function () { $('.prompt').hide(); }, 500);
+        setTimeout(function () { $('.prompt').hide(); }, 800);
       }
     })
   });
@@ -663,7 +670,7 @@ function updateValueFn(params){
         }
         reloadsearchClassifyTel(params);
         $('.prompt').show();
-        setTimeout(function () { $('.prompt').hide(); }, 500);
+        setTimeout(function () { $('.prompt').hide(); }, 800);
       }
     })
   });
@@ -686,7 +693,7 @@ function updateValueFn(params){
         $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
         reloadsearchClassifyTel(loadObj);
         $('.prompt').show();
-        setTimeout(function () { $('.prompt').hide(); }, 500);
+        setTimeout(function () { $('.prompt').hide(); }, 800);
       }
     })
   });
@@ -797,7 +804,7 @@ function ymzzyPopupFn(params,$this){
       formatUnit = _tr.find('.ymzzy').attr('data-minUseUnit');
       var companyData = {popupTitle: popupTitle,id: hisProdId,unitArr:unitArr,formatUnit:formatUnit};
       companyData.content = res.content;
-      $('.popup').html(popupCompanyTal(companyData)).show();
+      $('.popup').html(popupCompanyTal(companyData)).show().find('.popup-shade').show();
       var popupHeight = $('.popup-company').height();
       $('.popup-company .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
       $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
@@ -822,7 +829,7 @@ function recordFn(params){
         }
       });
       recordData.content= res.content;
-      $('.popup').html(popupRecordTal(recordData)).show();
+      $('.popup').html(popupRecordTal(recordData)).show().find('.popup-shade').show();;
       var popupHeight = $('.popup-record').height();
       $('.popup-record .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
       $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
@@ -846,7 +853,7 @@ function popupChannelFn(params,$this){
     callback:function(res){
       var channelData={};
       channelData.tree = res.content;
-      $('.popup').html( popupChannelTal(channelData)).show();
+      $('.popup').html( popupChannelTal(channelData)).show().find('.popup-shade').show();
       var popupHeight = $('.popup-channel').height();
       $('.popup-channel .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
       $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
@@ -899,7 +906,7 @@ function saveChannelFn(params,$this,_drugId){
     callback:function(res){
       $('.popup').hide();
       $('.prompt').show();
-      setTimeout(function () {$('.prompt').hide();}, 500);
+      setTimeout(function () {$('.prompt').hide();}, 800);
     }
   })
 }
@@ -909,7 +916,7 @@ function cancelThanPopupFn(params,hptid){
   var _index = $('.table-diff-data-content').find('[data-id='+hptid+']').index();
   var cancelThanData = {};
   cancelThanData[params.cancelThanData] = hptid;
-  $('.popup').html(popupCancelThanTal()).show();
+  $('.popup').html(popupCancelThanTal()).show().find('.popup-shade').show();
   var popupHeight = $('.popup-cancel-than').height();
   $('.popup-cancel-than .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
   $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});
@@ -1150,8 +1157,8 @@ function ieJson(){
 
 function resizeFn(params){
   var $parent = $(params.parent),
-    _height = $(window).height(),
-    tableHeight = _height - $parent.find('.table-diff').offset().top - $('.footer').height() - 10;
+    _height = $(window).height();
+  var tableHeight = _height - $parent.find('.table-diff').offset().top - $('.footer').height() - 10;
   $('.table-diff').css({height:tableHeight});
   $parent.find('.table-diff-left .table-diff-data').height(tableHeight-28);
   $parent.find('.table-diff-right .table-diff-data').height(tableHeight-28);
@@ -1208,7 +1215,7 @@ module.exports = {
     }); //搜索化学药比对
 
     //下载表格
-    bindFn(params.parent, 'click', '.search-top-rt .download', function () {
+    $(document).on('click', parent + '.search-top-rt .download', function () {
       downloadFn(params)
     });
 
@@ -1217,13 +1224,19 @@ module.exports = {
     updateValueFn(params);//修改详情的属性
 
     //绑定给药途径
-    bindFn(params.parent,'click','.adminRouteExclude',function(){popupChannelFn(params,$(this))});
+    $(document).on('click', parent + '.adminRouteExclude', function () {
+      popupChannelFn(params,$(this))
+    });
     //取消比对
-    bindFn(params.parent,'click','.table-diff-single-content .btn-cancel',function(){cancelThanPopupFn(params,$(params.parent).find('.table-diff-right').attr('data-id'))});
-    bindFn(params.parent,'click','.table-diff-bar .cancel-than',function(){cancelThanPopupFn(params,singleData.id)});
+    $(document).on('click', parent + '.table-diff-single-content .btn-cancel', function () {
+      cancelThanPopupFn(params,$(params.parent).find('.table-diff-right').attr('data-id'))
+    });
+    $(document).on('click', parent + '.table-diff-bar .cancel-than', function () {
+      cancelThanPopupFn(params,singleData.id)
+    });
+    $(document).on('click','.popup-shade',closePopup);
 
     if(!!params.detailUrl){
-
       $(document).on('click', parent + '.showDetail', function (e) {
         showDetail(params, e)
       });//绑定查看详情事件
@@ -1244,28 +1257,49 @@ module.exports = {
     });
   },
   showThan:function(params,loadObj){
-    if(!!params.standardThanTel){
+    var parent = params.parent + ' ';
+    if (!!params.standardThanTel) {
       $(params.parent).find('.standard-than').html(params.standardThanTel(params.data.thanData));
     }
-    $(document).on('click',params.parent+' .showThan', function () {
-      showThan(params,loadObj)
+
+    $(document).on('click', parent + '.showThan', function () {
+      showThan(params, loadObj)
     });//显示标准数据比对
-    bindFn(params.parent,'click','.find-than',function(){findThanFn(params)}); //查找30位标准比对数据
+
+    $(document).on('click', parent + '.find-than', function () {
+      findThanFn(params)
+    });//查找30位标准比对数据
+
     $(params.parent).find('.standard-than .than-tbody').on('scroll',function(){thanScrollFn(params,$(this))}); //滚动加载19位标准数据
-    bindFn(params.parent,'click','.than-table .select-than',function(){selectThanFn(params,$(this),loadObj)});//选择标准数据比对
-    if(!!params.addThanFn){
-      bindFn(params.parent,'click','.add-than',function(){addThan(params,loadObj)}); //查找19位标准数据
+
+    $(document).on('click', parent + '.than-table .select-than', function () {
+      selectThanFn(params, $(this), loadObj)
+    });//选择标准数据比对
+
+    if (!!params.addThanFn) {
+      $(document).on('click', parent + '.add-than', function () {
+        addThan(params, loadObj)
+      });//查找19位标准数据
     }
-    $(document).on('click','.standard-than .toggle-text',closeShade);
-    $(document).on('click','.add-than-info', function(){addThanInfo(params,loadObj,$(this))});
+    $(document).on('click', '.standard-than .toggle-text', closeShade);
+
+    $(document).on('click', '.add-than-info', function () {
+      addThanInfo(params, loadObj, $(this))
+    });
+
     $('.shade').on('click',closeShade);
   },
   popupFn:function(params){
+    var parent = params.parent + ' ';
     //弹窗框方法
-    bindFn(params.parent,'click','.ymzzy',function(){ymzzyPopupFn(params,$(this))});
-    bindFn(params.parent,'click','.btn-record',function(){recordFn(params)});
+    $(document).on('click', parent + '.ymzzy', function () {
+      ymzzyPopupFn(params, $(this))
+    });
+    $(document).on('click', parent + '.btn-record', function () {
+      recordFn(params)
+    });
   },
-  updateConvertRatio:function(params){
+  updateConvertRatio: function (params) {
     upInputFn(params);//更新输入框
   }
 };

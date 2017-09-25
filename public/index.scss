@@ -100,7 +100,43 @@ a{
         }
     }
 }
-/*页面内容样式*/
+/*输入框样式*/
+.input-group{
+    display: inline-block;
+    white-space: nowrap;
+    float: left;
+    padding-bottom: 10px;
+    .input{
+        display: inline-block;
+        width: 100px;
+        height: 24px;
+        line-height: 24px;
+        margin-left: 8px;
+        margin-right: 20px;
+        padding: 1px 5px;
+        border: 1px solid #CACACA;
+        vertical-align: middle;
+    }
+    .select{
+        width: 120px;
+        height: 28px;
+        margin: 0 0 10px 8px;
+        padding: 1px 5px;
+        border: 1px solid #CACACA;
+    }
+}
+/*按钮样式*/
+.btn{
+    display: inline-block;
+    padding: 8px 18px;
+    color: #FFFFFF;
+    background: #2D8CC0;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover{
+        background: #267FB0;
+    }
+}
 .content-wrap{
     text-align: center;//IE
     padding: 0 22px;
@@ -117,76 +153,6 @@ a{
     }
     .active{
         display: block;
-    }
-    /*输入框样式*/
-    .input-group{
-        display: inline-block;
-        white-space: nowrap;
-        float: left;
-        padding-bottom: 10px;
-        .input{
-            display: inline-block;
-            width: 100px;
-            height: 24px;
-            line-height: 24px;
-            margin-left: 8px;
-            margin-right: 20px;
-            padding: 1px 5px;
-            border: 1px solid #CACACA;
-            vertical-align: middle;
-        }
-        .select{
-            width: 120px;
-            height: 28px;
-            margin: 0 0 10px 8px;
-            padding: 1px 5px;
-            border: 1px solid #CACACA;
-        }
-    }
-    /*按钮样式*/
-    .btn{
-        display: inline-block;
-        padding: 8px 18px;
-        color: #FFFFFF;
-        background: #2D8CC0;
-        border-radius: 4px;
-        cursor: pointer;
-        &:hover{
-            background: #267FB0;
-        }
-    }
-    //弹窗
-    .popup{
-        display: none;
-        width: 482px;
-        background: #FFFFFF;
-        border-radius: 2px;
-        .popup-title{
-            height: 28px;
-            line-height: 28px;
-            color: #fff;
-            text-align: center;
-            position: relative;
-            background: #4EAADC;
-            border-radius: 2px 2px 0 0;
-            .popup-close{
-                position: absolute;
-                width: 16px;
-                height: 16px;
-                top: 6px;
-                right: 10px;
-                cursor: pointer;
-                //background: url(./images/icon-close.jpg) center center no-repeat;
-            }
-        }
-        .btn-group {
-            margin-top: 20px;
-            text-align: center;
-            .btn {
-                display: inline;
-                text-align: center;
-            }
-        }
     }
     /*查找药品数据*/
     .search-box{
@@ -254,7 +220,8 @@ a{
         display: none;
         position: absolute;
         top: 0;
-        z-index: 999999;
+        z-index: 9999;
+        width: 100%;
         left: 22px;
         right: 22px;
         background: #FAFAFA;
@@ -289,6 +256,10 @@ a{
         }
         .than-content{
             overflow: auto;
+            position:relative;//ie6\7
+            left:0;
+            top:0;
+            width: 100%;
         }
         .search-than{
             padding: 10px 12px 0;
@@ -321,7 +292,7 @@ a{
                 overflow: hidden;
             }
             .than-tbody{
-                position: relative;
+                //position: relative;
                 height: 168px;
                 overflow: scroll;
                 width: 100%;
@@ -451,224 +422,274 @@ a{
             }
         }
     }
-
-    .popup-add-info{
-        width: 482px;
+}
+//弹窗
+.popup{
+    display: none;
+    //width: 482px;
+    //background: #FFFFFF;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    bottom:0;
+    left:0;
+    right:0;
+    width:100%;
+    height:100%;
+    z-index: 99;
+    .popup-title{
+        height: 28px;
+        line-height: 28px;
+        color: #fff;
+        text-align: center;
+        position: relative;
+        background: #4EAADC;
+        border-radius: 2px 2px 0 0;
+        .popup-close{
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 6px;
+            right: 10px;
+            cursor: pointer;
+            //background: url(./images/icon-close.jpg) center center no-repeat;
+        }
+    }
+    .btn-group {
+        margin-top: 20px;
+        text-align: center;
+        .btn {
+            display: inline;
+            text-align: center;
+        }
+    }
+    .popup-shade{
+        display:none;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 9999;
-        margin-left: -242px;
-        margin-top: -134px;
-        background: #FFFFFF;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
-        border-radius: 2px;
-        .popup-content{
-            padding: 30px 30px 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        background: black;
+        opacity:0.1;
+        filter:Alpha(opacity=10);
+    }
+}
+/*页面内容样式*/
+.popup-add-info{
+    width: 482px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    margin-left: -242px;
+    margin-top: -134px;
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+    border-radius: 2px;
+    .popup-content{
+        padding: 30px;
+        overflow: hidden;
+        line-height: 1.6;
+        .content-lf{
+            float: left;
+            width: 211px;
+        }
+        .content-rt{
+            float: left;
+            width: 211px;
+        }
+        .text-lf{
+            width: 84px;
+            display: inline-block;
+            text-align: right;
+            *float:left;
+        }
+        li{
             overflow: hidden;
-            line-height: 1.6;
-            .content-lf{
-                float: left;
-                width: 211px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .input-group{
+            .input{
+                width: 60px;
+                margin-bottom: 0;
             }
-            .content-rt{
-                float: left;
-                width: 211px;
-            }
-            .text-lf{
-                width: 84px;
-                display: inline-block;
-                text-align: right;
+            .select{
+                width: 100px;
                 *float:left;
             }
-            li{
-                overflow: hidden;
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            .input-group{
-                .input{
-                    width: 60px;
-                    margin-bottom: 0;
-                }
-                .select{
-                    width: 100px;
-                    *float:left;
-                }
-            }
-            .popup-btn{
-                float: left;
-                width: 100%;
-                margin-top: 20px;
-                text-align: center;
-                margin-bottom: 30px;
-            }
+        }
+        .popup-btn{
+            float: left;
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
         }
     }
-    //门诊／住院单位
-    .popup-company{
+}
+//门诊／住院单位
+.popup-company{
+    width: 320px;
+    position: absolute;
+    top: 175px;
+    left: 50%;
+    z-index: 999;
+    margin-left: -161px;
+    background: #fff;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+    border-radius: 2px;
+    text-align: center;
+    .popup-content{
+        //padding: 20px 74px;
+        padding: 20px 0;
         width: 320px;
-        position: absolute;
-        top: 175px;
-        left: 50%;
-        z-index: 9999;
-        margin-left: -161px;
-        background: #fff;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
-        border-radius: 2px;
-        text-align: center;
-        .popup-content{
-            //padding: 20px 74px;
-            padding: 20px 0;
-            width: 320px;
-            .popup-list-wrap{
-                overflow: auto;
-                width: 200px;
-                margin: 0 auto;
-                max-height: 174px;
-                _height:expression(this.scrollHeight > 174 ? "174px" : "auto");
-            }
-            .popup-list{
-                width: 180px;
-                margin: 0 auto;
-                .popup-item{
-                    width: 100%;
-                    margin-top: 10px;
-                    overflow: hidden;
-                    .item-input{
-                        width: 34px;
-                        float: left;
-                        padding: 5px;
-                        border: 1px solid #CACACA;
-                    }
-                    .standard_select{ /*边框*/
-                        float: left;
+        .popup-list-wrap{
+            overflow: auto;
+            width: 200px;
+            margin: 0 auto;
+            max-height: 174px;
+            _height:expression(this.scrollHeight > 174 ? "174px" : "auto");
+        }
+        .popup-list{
+            width: 180px;
+            margin: 0 auto;
+            .popup-item{
+                width: 100%;
+                margin-top: 10px;
+                overflow: hidden;
+                .item-input{
+                    width: 34px;
+                    float: left;
+                    padding: 5px;
+                    border: 1px solid #CACACA;
+                }
+                .standard_select{ /*边框*/
+                    float: left;
+                    display:inline-block;
+                    border:solid 1px #CACACA;
+                    padding:2px 0;
+                    *padding:3px 0; /*调整此处改变select高度*/
+                    .select_shelter{ /*遮挡默认边框*/
                         display:inline-block;
-                        border:solid 1px #CACACA;
-                        padding:2px 0;
-                        *padding:3px 0; /*调整此处改变select高度*/
-                        .select_shelter{ /*遮挡默认边框*/
-                            display:inline-block;
-                            width:40px;
-                            *width:38px;
-                            height:20px;
-                            overflow:hidden;
-                            .item-select{
-                                *margin:-2px;
-                                *margin-bottom: -4px;
-                                padding:1px;
-                                border:0;
-                                width: 40px; /*select的宽度*/
-                            }
+                        width:40px;
+                        *width:38px;
+                        height:20px;
+                        overflow:hidden;
+                        .item-select{
+                            *margin:-2px;
+                            *margin-bottom: -4px;
+                            padding:1px;
+                            border:0;
+                            width: 40px; /*select的宽度*/
                         }
                     }
-                    .last-select{
-                        border-right-width: 1px;
-                    }
                 }
-            }
-            .btn-group{
-                .add-unit{
-                    //background: #BCBCBC;
-                    margin-right: 30px;
+                .last-select{
+                    border-right-width: 1px;
                 }
             }
         }
-    }
-    .popup-record{
-        width: 482px;
-        position: absolute;
-        top: 175px;
-        left: 50%;
-        z-index: 9999;
-        margin-left: -241px;
-        background: #fff;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
-        .popup-content{
-            max-height: 250px;
-            overflow: auto;
-            padding: 10px 10px 19px;
-            .popup-table{
-                width: 100%;
-                padding: 10px;
-                border-collapse: collapse;
-                border-spacing: 0;
-                tr{
-                    td{
-                        border: 1px solid #D8D8D8;
-                        height: 25px;
-                        padding: 0 5px;
-                    }
-                }
-            }
-        }
-    }
-    .popup-channel{
-        width: 380px;
-        position: absolute;
-        top: 175px;
-        left: 50%;
-        z-index: 9999;
-        margin-left: -241px;
-        background: #fff;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
-        .popup-content{
-            padding: 10px 10px 10px;
-            max-height: 200px;
-            _height:expression(this.scrollHeight > 200 ? "200px" : "auto");
-            overflow: auto;
-            .channel-checkbox{
-                vertical-align: middle;
-            }
-            .sub-channel{
-                display: none;
-                margin-left: 15px;
-            }
-        }
-        .save-channel{
-            display: block;
-            margin: 0 10px 10px;
-            width: 60px;
-            text-align: center;
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }
-    //取消比对
-    .popup-cancel-than{
-        width: 250px;
-        position: absolute;
-        top: 175px;
-        left: 50%;
-        z-index: 9999;
-        margin-left: -125px;
-        background: #fff;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
         .btn-group{
-            margin: 20px 0;
-            text-align: center;
-            .cancel-btn{
-                background: #BCBCBC;
-            }
-            .cancel-than-btn{
-                margin-left: 30px;
+            .add-unit{
+                //background: #BCBCBC;
+                margin-right: 30px;
             }
         }
     }
-    .popup-iframe{
-        position:absolute;
-        top:0;
-        left:0;
-        filter:alpha(opacity=0);
-        width:100%;
-        z-index: -1;
-        border: 0;
+}
+.popup-record{
+    width: 482px;
+    position: absolute;
+    top: 175px;
+    left: 50%;
+    z-index: 999;
+    margin-left: -241px;
+    background: #fff;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+    .popup-content{
+        max-height: 250px;
+        overflow: auto;
+        padding: 10px 10px 19px;
+        .popup-table{
+            width: 100%;
+            padding: 10px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            tr{
+                td{
+                    border: 1px solid #D8D8D8;
+                    height: 25px;
+                    padding: 0 5px;
+                }
+            }
+        }
     }
+}
+.popup-channel{
+    width: 380px;
+    position: absolute;
+    top: 175px;
+    left: 50%;
+    z-index: 999;
+    margin-left: -241px;
+    background: #fff;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+    .popup-content{
+        padding: 10px 10px 10px;
+        max-height: 200px;
+        _height:expression(this.scrollHeight > 200 ? "200px" : "auto");
+        overflow: auto;
+        .channel-checkbox{
+            vertical-align: middle;
+        }
+        .sub-channel{
+            display: none;
+            margin-left: 15px;
+        }
+    }
+    .save-channel{
+        display: block;
+        margin: 0 10px 10px;
+        width: 60px;
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+//取消比对
+.popup-cancel-than{
+    width: 250px;
+    position: absolute;
+    top: 175px;
+    left: 50%;
+    z-index: 999;
+    margin-left: -125px;
+    background: #fff;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 0 9px 0 rgba(148, 148, 148, 0.5);
+    .btn-group{
+        margin: 20px 0;
+        text-align: center;
+        .cancel-btn{
+            background: #BCBCBC;
+        }
+        .cancel-than-btn{
+            margin-left: 30px;
+        }
+    }
+}
+.popup-iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    filter:alpha(opacity=0);
+    width:100%;
+    z-index: -1;
+    border: 0;
 }
 //药品数据
 .table-diff-data{
@@ -730,7 +751,7 @@ a{
         left:0;
         white-space: nowrap;
         top:0;
-        z-index: 999999;
+        z-index: 9999;
         color: #fff;
         background-color: #4DA9DB;
         //display: inline-block;
@@ -1002,7 +1023,7 @@ a{
     position: absolute;
     bottom: 0;
     width: 100%;
-    z-index: 99999;
+    z-index: 999;
     .footer-item{
         margin: 30px;
     }
@@ -1013,7 +1034,7 @@ a{
     height: 100%;
     position: absolute;
     top: 0;
-    z-index: 9999;
+    z-index: 99;
     width: 100%;
     background: rgba(0,0,0,0.1);
 }
@@ -1048,7 +1069,7 @@ a{
     right:0;
     line-height: 2;
     padding: 10px 40px;
-    z-index: 999999;
+    z-index: 9999;
 }
 //登录框
 .login{
@@ -1123,7 +1144,7 @@ a{
     bottom:0;
     left:0;
     right:0;
-    z-index: 9999;
+    z-index: 99;
     background: black;
     opacity:0.1;
     filter:Alpha(opacity=10);

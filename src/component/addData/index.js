@@ -75,11 +75,6 @@ function addDataFn(drugName){
 module.exports = {
   loadAddData:function(drugName){
     addDataFn(drugName);
-    $(document).on('click','.add-data .goback', function () {
-      $('.content .add-data').hide();
-      $('.content  .content-box-main').show();
-      $('.popup').hide();
-    });
     $(document).on('click','.find-add-than', function () {
       $('.add-than-table .loading-wrap').show();
       firstResult=0 ;maxResult=16;
