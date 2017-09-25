@@ -1,16 +1,20 @@
 {{#each ydata}}
     <tr data-id="{{id}}" data-name="{{drugNameFormat}}"  data-fncName="{{manufacturerName}}">
         <td class="table-num"><div style="width:40px">{{add @index ../tableNum}}</div></td>
-        <td class="table-diff-drugId" title="{{id}}"><div>{{id}}</div></td>
-        <td title="{{drugName}}"><div>{{drugName}}</div></td>
-        <td title="{{specName}} {{manufacturerName}}"><div>{{specName}} {{manufacturerName}}</div></td>
+        <td class="table-diff-drugId" title="{{id}}"><div style="width:{{divWidth ../divWidthArr 1}}px">{{id}}</div></td>
+        <td title="{{drugName}}"><div style="width:{{divWidth ../divWidthArr 2}}px">{{drugName}}</div></td>
+        <td title="{{specName}} {{manufacturerName}}"><div style="width:{{divWidth ../divWidthArr 3}}px">{{specName}} {{manufacturerName}}</div></td>
         <td title="{{convertRatio}}">
-            <div><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div>
+            <div style="width:{{divWidth ../divWidthArr 4}}px"><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div>
         </td>
         <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}">
-            <div>{{{unitInput unitName unitOps}}}</div>
+            <div style="width:{{divWidth ../divWidthArr 5}}px">{{{unitInput unitName unitOps}}}</div>
         </td>
-        <td class="icon-triangle table-diff-data-td-select">{{{isStopOrNot isStop "isStop"}}}</td>
-        <td title="{{timeFn updateDate}}"><div>{{timeFn updateDate}}</div></td>
+        <td class="icon-triangle table-diff-data-td-select">
+            <div style="width:{{divWidth ../divWidthArr 6}}px" class="value showValue">{{{isStopOrNot isStop "isStop"}}}</div>
+        </td>
+        <td title="{{timeFn updateDate}}">
+            <div style="width:{{divWidth ../divWidthArr 7}}px">{{timeFn updateDate}}</div>
+        </td>
     </tr>
 {{/each}}

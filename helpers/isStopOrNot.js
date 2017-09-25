@@ -1,6 +1,6 @@
 // 是否停用
 module.exports = function(value,name){
-    var string = '<div class="value showValue">';
+    var string = '';
 
     if(value == 1){
         string += '是';
@@ -16,6 +16,6 @@ module.exports = function(value,name){
         string += '<option value=1>是</option><option selected="selected" value=0>否</option>'
     }
 
-    string += '</select></div>';
+    string += '</select>';
     return string;
 }

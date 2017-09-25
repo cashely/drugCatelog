@@ -77,12 +77,12 @@ function loadChemistryTableFn(params,type){
       $parent.find('.table-diff .loading-wrap').hide();
       params.data.diffData.ydata = res.content.rows;
       $parent.find('.table-diff').html(params.tableDiffTel(params.data.diffData));
+      resizeFn(params);//从新计算表格的高度
       if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
         $('.table-diff-header .scroll-loading').show();
       }else{
         $('.table-diff-header .scroll-loading').hide();
       }
-      resizeFn(params);//从新计算表格的高度
       tableDiffScrollFn($parent,params);
     }
   });
@@ -103,12 +103,21 @@ function tableDiffRequest(params) {
           var data = {};
           data.ydata = res.content.rows;
           data.tableNum = params.loadData.firstResult + 1;
+          var divWidthArr=[];
+          $(params.parent).find('.table-diff-data-content table tr:first td').each(function(i,e){
+            divWidthArr.push($(e).find('div').width());
+          })
+          console.log(divWidthArr)
+          data.divWidthArr = divWidthArr;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
           if( $(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= res.total){
             params.loadingType = 0;
             $('.table-diff-header .scroll-loading').hide();
           }
+          //if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= params.loadData.maxResult){
+          //  $parent.find('.table-diff-right .table-diff-data').scroll()
+          //}
         } else {
           $('.table-diff-header .scroll-loading').hide();
         }
@@ -199,7 +208,8 @@ function tableDiffScrollFn($parent,params){
       if(trHeight*trLength <=  _t.scrollTop()+ _t.height()){
         tableDiffRequest(params);
       }
-    })
+    });
+  $parent.find('.table-diff-right .table-diff-data').scroll()
 }
 //显示操作条
 function showDiffBarFn(params){
