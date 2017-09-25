@@ -49,6 +49,6 @@ module.exports = {
       {text:'规格:',inputClass:'add-spec'},
       {text:'生产企业:',inputClass: 'add-manufacturer-name'}
     ],
-    thead:['(19+7)位药品编码','药品名称','商品名', '规格','生产企业','批准文号/注册证号','操作']
+    thead:['(19+7)位药品编码','药品名称','商品名', '规格','生产企业','批准文号/注册证号']
   }
 };

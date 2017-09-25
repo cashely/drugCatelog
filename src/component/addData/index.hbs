@@ -17,8 +17,13 @@
                 <table class="table">
                     <tr class="thead">
                         {{#each thead}}
-                            <td><div class="table-text">{{this}}</div></td>
+                            <td>
+                                <div class="table-text">{{this}}</div>
+                            </td>
                         {{/each}}
+                        <td>
+                            <div style="width: 30px;text-align: center">操作</div>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -39,7 +44,7 @@
                                 {{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}
                             </div>
                         </td>
-                        <td><div class="table-text add-than-info">新增</div></td>
+                        <td><div style="width:30px;" class="table-text add-than-info">新增</div></td>
                     </tr>
                 {{/each}}
             </table>

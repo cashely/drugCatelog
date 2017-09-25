@@ -314,7 +314,8 @@ a {
         overflow: hidden; }
       .content .add-than-table .table .add-than-info {
         color: #2D8CC0;
-        cursor: pointer; }
+        cursor: pointer;
+        text-align: center; }
   .content #slicesStandardData .than-table .table .table-text {
     width: 157px; }
   .content .add-data {

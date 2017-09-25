@@ -107,7 +107,6 @@ function tableDiffRequest(params) {
           $(params.parent).find('.table-diff-data-content table tr:first td').each(function(i,e){
             divWidthArr.push($(e).find('div').width());
           })
-          console.log(divWidthArr)
           data.divWidthArr = divWidthArr;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
@@ -320,55 +319,58 @@ function addThanInfo(params,loadObj,$this) {
     }
   };
   ajaxFn({
-    url: 'dataDictionary/getDataDictionaryListByCode',
-    data: {
-      code: 1
-    },
+    url: 'dataDictionary/getDataDictionaryListByCode?code=1',
+    type: 'GET',
     callback: function (res) {
       data.minUseUnit = res.content;
       ajaxFn({
-        url: 'dataDictionary/getDataDictionaryListByCode',
-        data: {
-          code: 2
-        },
+        url: 'dataDictionary/getDataDictionaryListByCode?code=2',
+        type: 'GET',
         callback: function (res) {
           data.packUnit = res.content;
-          $('.popup').html(addDataPopupTel(data)).show().find('.popup-shade').show();
-          var popupHeight = $('.popup-add-info').height();
-          $('.popup-add-info .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
-          $('.popup-add-info .popup-close').on('click', function () {
-            //$('.popup-add-info').hide()
-            $('.popup ').hide().find('.popup-iframe').remove()
-          });
-          $('.popup-add-info .saveOrUpdate').on('click', function () {
-            var  drugId = $('.than-content').attr('data-id');
-            ajaxFn({
-              url: 'mcdProduct30Ues/saveOrUpdate',
-              data: {
-                productId: $('.popup-add-info').data('id'),
-                minUseUnit: $('.popup-add-info .minUseUnit').val(),
-                packUnit: $('.popup-add-info .packUnit').val(),
-                convert: $('.popup-add-info .convert').val()
-              },
-              callback: function (res) {
+          ajaxFn({
+            url: 'dataDictionary/WARP_NAME?code=WARP_NAME',
+            type: 'GET',
+            callback: function (res) {
+              data.warpName = res.content;
+              $('.popup').html(addDataPopupTel(data)).show().find('.popup-shade').show();
+              var popupHeight = $('.popup-add-info').height();
+              $('.popup-add-info .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
+              $('.popup-add-info .popup-close').on('click', function () {
+                //$('.popup-add-info').hide()
+                $('.popup ').hide().find('.popup-iframe').remove()
+              });
+              $('.popup-add-info .saveOrUpdate').on('click', function () {
+                var  drugId = $('.than-content').attr('data-id');
                 ajaxFn({
-                  url: 'mcdProduct30/saveMatch',
+                  url: 'mcdProduct30Ues/saveOrUpdate',
                   data: {
-                    drugId: drugId,
-                    proId: res.content.proId
+                    productId: $('.popup-add-info').data('id'),
+                    minUseUnit: $('.popup-add-info .minUseUnit').val(),
+                    packUnit: $('.popup-add-info .packUnit').val(),
+                    warpName: $('.popup-add-info .warpName').val(),
+                    convert: $('.popup-add-info .convert').val()
                   },
                   callback: function (res) {
-                    $('.popup ').hide().find('.popup-iframe').remove();
-                    $('.content .add-data').hide();
-                    $('.content  .content-box-main').show();
-                    var _index = $(params.parent).find('.table-diff-data-content [data-id='+drugId+']').index();
-                    reloadsearchClassifyTel(loadObj);
-                    $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
+                    ajaxFn({
+                      url: 'mcdProduct30/saveMatch',
+                      data: {
+                        drugId: drugId,
+                        proId: res.content.proId
+                      },
+                      callback: function (res) {
+                        $('.popup ').hide().find('.popup-iframe').remove();
+                        $('.content .add-data').hide();
+                        $('.content  .content-box-main').show();
+                        var _index = $(params.parent).find('.table-diff-data-content [data-id='+drugId+']').index();
+                        reloadsearchClassifyTel(loadObj);
+                        $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
+                      }
+                    })
                   }
                 })
-              }
-            })
-          });
+              });
+            }});
         }
       });
     }
