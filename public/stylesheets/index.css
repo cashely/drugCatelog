@@ -195,7 +195,7 @@ a {
     position: absolute;
     top: 0;
     z-index: 9999;
-    width: 100%;
+    _width: 100%;
     left: 22px;
     right: 22px;
     background: #FAFAFA;
@@ -293,10 +293,12 @@ a {
       overflow: hidden; }
     .content .add-than-table .than-tbody {
       height: 350px;
-      width: 100%;
       overflow: auto;
-      _overflow: scroll; }
+      *padding-right: 16px;
+      _overflow: scroll;
+      overflow-x: hidden; }
     .content .add-than-table .table {
+      width: 100%;
       text-align: left;
       border-collapse: collapse;
       border-spacing: 0; }
@@ -304,13 +306,11 @@ a {
         color: #fff;
         background: #4EAADC; }
       .content .add-than-table .table tr td {
-        white-space: nowrap;
         overflow: hidden;
         border: 1px solid #D8D8D8; }
         .content .add-than-table .table tr td div {
           padding: 9px 7px; }
       .content .add-than-table .table .table-text {
-        width: 168px;
         overflow: hidden; }
       .content .add-than-table .table .add-than-info {
         color: #2D8CC0;
@@ -706,12 +706,13 @@ a {
         line-height: 1.4;
         background: #F0FAFF;
         border: 1px solid #D8D8D8;
-        padding: 10px 10px 0; }
+        padding: 0 10px 0; }
         .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box {
           width: 100%;
           overflow-y: scroll;
           _overflow: scroll;
-          height: 260px; }
+          height: 260px;
+          margin-top: 10px; }
           .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list {
             display: block;
             overflow: hidden; }
@@ -731,28 +732,35 @@ a {
             .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .table-details-content-box .content-list .adminRouteExclude {
               display: inline-block;
               overflow: hidden; }
-        .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool {
-          position: relative;
-          text-align: center;
-          height: 28px;
-          padding: 10px 0; }
-          .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool .btn-toggle {
-            float: left;
-            padding-top: 8px;
-            color: #2D8CC0; }
-          .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool .btn-record {
-            float: right;
-            padding-top: 8px;
-            color: #2D8CC0; }
-          .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .tool .btn-cancel {
-            position: absolute;
-            left: 50%;
-            margin-left: -42px; }
-        .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .pagination {
-          text-align: center;
-          padding: 7px 0; }
-          .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .pagination .pagination-prev {
-            margin-right: 30px; }
+        .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .details-tool {
+          position: absolute;
+          left: 10px;
+          right: 10px;
+          bottom: 0;
+          z-index: 9;
+          background: #F0FAFF; }
+          .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .details-tool .tool {
+            position: relative;
+            text-align: center;
+            height: 28px;
+            padding: 10px 0; }
+            .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .details-tool .tool .btn-toggle {
+              float: left;
+              padding-top: 8px;
+              color: #2D8CC0; }
+            .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .details-tool .tool .btn-record {
+              float: right;
+              padding-top: 8px;
+              color: #2D8CC0; }
+            .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .details-tool .tool .btn-cancel {
+              position: absolute;
+              left: 50%;
+              margin-left: -42px; }
+          .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .details-tool .pagination {
+            text-align: center;
+            padding: 7px 0; }
+            .table-diff .table-diff-right .table-diff-right-single .table-diff-single-content .details-tool .pagination .pagination-prev {
+              margin-right: 30px; }
     .table-diff .table-diff-right .table-diff-right-all {
       display: none; }
       .table-diff .table-diff-right .table-diff-right-all.active {

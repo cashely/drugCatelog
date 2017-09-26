@@ -1173,13 +1173,14 @@ function ieJson(){
 }
 
 function resizeFn(params){
-  var $parent = $(params.parent),
-    _height = $(window).height();
+  var $parent = $(params.parent);
+  var _height = $(window).height();
   var tableHeight = _height - $parent.find('.table-diff').offset().top - $('.footer').height() - 10;
   $('.table-diff').css({height:tableHeight});
   $parent.find('.table-diff-left .table-diff-data').height(tableHeight-28);
   $parent.find('.table-diff-right .table-diff-data').height(tableHeight-28);
   $parent.find('.table-diff-single-content').height(tableHeight-28);
+  $parent.find('.table-diff-single-content .table-details-content-box').height(tableHeight-108);
   closeShade()
 }
 
@@ -1267,7 +1268,14 @@ module.exports = {
       }); //查看详情页面下一条
     }
     $(window).on('resize',function () {
-      resizeFn(params)
+      if($('.content .add-data').is(':hidden')){
+        resizeFn(params)
+      }else{
+        $('.add-than-table .add-than-tbody tr:first td').each(function(i,e){
+          $('.add-than-table .than-thead tr:first td').eq(i).width($(e).width())
+        });
+        $('.add-than-table .add-than-tbody').height($(window).height()-$('.add-than-table').offset().top- $('.add-than-table .than-thead').height()-$('.footer').height() - 10);
+      }
     });
     $(document).on('click','.tabs .tabs-item',function(){
       resizeFn(params)

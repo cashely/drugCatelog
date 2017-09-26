@@ -27,8 +27,15 @@ function addDataFn(drugName){
     data:listProductData,
     callback: function (res) {
       data.addData.tbody = res.content;
-      var _table=  $('.add-than-tbody')[0];
-      _table.innerHTML = tbodyTel(data.addData);
+      var _table= $('.add-than-tbody')[0];
+     _table.innerHTML = tbodyTel(data.addData);
+      $('.add-than-table .add-than-tbody tr:first td').each(function(i,e){
+        $('.add-than-table .than-thead tr:first td').eq(i).width($(e).width())
+      });
+
+      var _height = $(window).height();
+      $('.add-than-tbody').height(_height-$('.add-than-table').offset().top- $('.add-than-table .than-thead').height()-$('.footer').height() - 10);
+
       if($('.add-than-tbody tr').length >=  listProductData.maxResult){
         $('.add-than-tbody .scroll-loading').show();
       }else{
@@ -60,7 +67,6 @@ function addDataFn(drugName){
                   var trData = {};
                   trData.tbody = res.content;
                   $('.add-than-tbody .table tbody').append(tr(trData));
-                  console.log($('.add-than-tbody tr').length , res.total);
                   if($('.add-than-tbody tr').length >= res.total){
                     loadingType = 0;
                     $('.add-than-tbody .scroll-loading').hide();

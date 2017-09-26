@@ -221,7 +221,7 @@ a{
         position: absolute;
         top: 0;
         z-index: 9999;
-        width: 100%;
+        _width: 100%;
         left: 22px;
         right: 22px;
         background: #FAFAFA;
@@ -358,12 +358,14 @@ a{
         }
         .than-tbody{
             height: 350px;
-            width: 100%;
+            //width: 100%;
             overflow: auto;
+            *padding-right:16px;
             _overflow: scroll;
+            overflow-x:hidden;
         }
         .table{
-            //width: 100%;
+            width: 100%;
             text-align: left;
             border-collapse: collapse;
             border-spacing: 0;
@@ -373,7 +375,7 @@ a{
             }
             tr{
                 td{
-                    white-space: nowrap;
+                    //white-space: nowrap;
                     overflow: hidden;
                     border: 1px solid #D8D8D8;
                     div{
@@ -382,7 +384,7 @@ a{
                 }
             }
             .table-text{
-                width: 168px;
+               //width: 168px;
                 overflow: hidden;
             }
             .add-than-info{
@@ -888,12 +890,13 @@ a{
                 line-height: 1.4;
                 background: #F0FAFF;
                 border: 1px solid #D8D8D8;
-                padding: 10px 10px 0;
+                padding: 0 10px 0;
                 .table-details-content-box{
                     width: 100%;
                     overflow-y: scroll;
                     _overflow: scroll;
                     height: 260px;
+                    margin-top: 10px;
                     .content-list{
                         display: block;
                         overflow: hidden;
@@ -920,32 +923,40 @@ a{
                         }
                     }
                 }
-                .tool{
-                    position: relative;
-                    text-align: center;
-                    height: 28px;
-                    padding: 10px 0;
-                    .btn-toggle{
-                        float: left;
-                        padding-top: 8px;
-                        color: #2D8CC0;
+                .details-tool{
+                    position: absolute;
+                    left: 10px;
+                    right: 10px;
+                    bottom: 0;
+                    z-index: 9;
+                    background: #F0FAFF;
+                    .tool{
+                        position: relative;
+                        text-align: center;
+                        height: 28px;
+                        padding: 10px 0;
+                        .btn-toggle{
+                            float: left;
+                            padding-top: 8px;
+                            color: #2D8CC0;
+                        }
+                        .btn-record{
+                            float: right;
+                            padding-top: 8px;
+                            color: #2D8CC0;
+                        }
+                        .btn-cancel{
+                            position: absolute;
+                            left: 50%;
+                            margin-left: -42px;
+                        }
                     }
-                    .btn-record{
-                        float: right;
-                        padding-top: 8px;
-                        color: #2D8CC0;
-                    }
-                    .btn-cancel{
-                        position: absolute;
-                        left: 50%;
-                        margin-left: -42px;
-                    }
-                }
-                .pagination{
-                    text-align: center;
-                    padding: 7px 0;
-                    .pagination-prev{
-                        margin-right: 30px;
+                    .pagination{
+                        text-align: center;
+                        padding: 7px 0;
+                        .pagination-prev{
+                            margin-right: 30px;
+                        }
                     }
                 }
             }
