@@ -752,6 +752,7 @@ function loadsearchClassifyTel(params, res) {
   params.data.searchDate.wbdCount = res.content.wbdCount;
   params.data.searchDate.ybdCount = res.content.ybdCount;
   params.data.searchDate.wtsjCount = res.content.wtsjCount;
+  params.data.searchDate.ytyCount = res.content.ytyCount;
   $(params.parent).find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
 }
 
@@ -899,6 +900,9 @@ function bindGeneralSearch(params) {
   });
   $(document).on('click', _parent + '.search-data .wtsj', function () {
     generalSearch(params, $(this), 'wtsj');
+  });
+  $(document).on('click', _parent + '.search-data .yty', function () {
+    generalSearch(params, $(this), 'yty');
   });
 }
 //比对表格滚动事件
@@ -1748,6 +1752,7 @@ function downloadFn(params) {
   downloadUrl += '&ybd=' + isNull(downloadData.ybd);
   downloadUrl += '&wbd=' + isNull(downloadData.wbd);
   downloadUrl += '&wtsj=' + isNull(downloadData.wtsj);
+  downloadUrl += '&yty=' + isNull(downloadData.yty);
   window.location.href = downloadUrl;
   window.event.returnValue = false;
   return false;
@@ -2569,9 +2574,11 @@ var ajaxFn = __webpack_require__(18);
 var data = __webpack_require__(11); //化学药数据
 var parent = '.' + data.name;
 var firstResult = 0,
-    maxResult = 16;loading = false;
+    maxResult = 16;
 var listProductData = {},
     addTableRightLeft = 0;
+var loadingType = 1,
+    loading = false;
 function addDataFn(drugName) {
   $('.add-data').html(addData(data.addData));
   $('.add-search-than .add-drug-name').val(drugName);
@@ -2604,11 +2611,11 @@ function addDataFn(drugName) {
           return;
         }
         if (_t.children('table').height() <= _t.scrollTop() + _t.height()) {
-          $('.add-than-table .loading-wrap').show();
-          listProductData.firstResult = (firstResult + 1) * maxResult;
-          listProductData.maxResult = maxResult;
-          if (loading == false) {
+          if (loading == false && loadingType) {
             loading = true;
+            $('.add-than-table .loading-wrap').show();
+            listProductData.firstResult = (firstResult + 1) * maxResult;
+            listProductData.maxResult = maxResult;
             ajaxFn({
               url: 'product/listProduct',
               data: listProductData,
@@ -2618,6 +2625,11 @@ function addDataFn(drugName) {
                   var trData = {};
                   trData.tbody = res.content;
                   $('.add-than-tbody .table tbody').append(tr(trData));
+                  console.log($('.add-than-tbody tr').length, res.total);
+                  if ($('.add-than-tbody tr').length >= res.total) {
+                    loadingType = 0;
+                    $('.add-than-tbody .scroll-loading').hide();
+                  }
                 } else {
                   $('.add-than-tbody .scroll-loading').hide();
                 }
@@ -2636,7 +2648,7 @@ module.exports = {
     addDataFn(drugName);
     $(document).on('click', '.find-add-than', function () {
       $('.add-than-table .loading-wrap').show();
-      firstResult = 0;maxResult = 16;
+      firstResult = 0;maxResult = 16;loadingType = 1;
       listProductData = {
         drugName: $('.add-drug-name').val(),
         spec: $('.add-spec').val(),
@@ -2654,6 +2666,7 @@ module.exports = {
             data.addData.tbody = res.content;
             var _table = $('.add-than-tbody')[0];
             _table.innerHTML = tbodyTel(data.addData);
+            $('.add-than-table .add-than-tbody').scrollTop(0);
             if ($('.add-than-tbody tr').length >= listProductData.maxResult) {
               $('.add-than-tbody .scroll-loading').show();
             } else {
@@ -2749,6 +2762,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     var helper;
 
   return container.escapeExpression(((helper = (helper = helpers.wtsjCount || (depth0 != null ? depth0.wtsjCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"wtsjCount","hash":{},"data":data}) : helper)));
+},"38":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return container.escapeExpression(((helper = (helper = helpers.ytyCount || (depth0 != null ? depth0.ytyCount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"ytyCount","hash":{},"data":data}) : helper)));
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
@@ -2788,6 +2805,8 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.wbdCount : depth0),{"name":"if","hash":{},"fn":container.program(34, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"wtsj\"><span class=\"text\">问题数据</span>(<span class=\"color-red\">"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.wtsjCount : depth0),{"name":"if","hash":{},"fn":container.program(36, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + "</span>)</a>&nbsp;\r\n    <a href=\"javaScript:void(0)\" class=\"yty\"><span class=\"text\">已停用</span>(<span class=\"color-red\">"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.ytyCount : depth0),{"name":"if","hash":{},"fn":container.program(38, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
     + "</span>)</a>&nbsp;\r\n</div>";
 },"useData":true});
 

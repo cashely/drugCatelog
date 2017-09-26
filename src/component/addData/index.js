@@ -11,8 +11,9 @@ var tr = require('./tr.hbs');
 var ajaxFn = require('../ajax');
 var data = require('../../page/index/indexData');//化学药数据
 var parent = '.'+data.name;
-var firstResult =0,maxResult= 16;loading = false;
+var firstResult =0,maxResult= 16;
 var listProductData ={},addTableRightLeft=0;
+var loadingType = 1,loading = false;
 function addDataFn(drugName){
   $('.add-data').html(addData(data.addData));
   $('.add-search-than .add-drug-name').val(drugName);
@@ -45,11 +46,11 @@ function addDataFn(drugName){
           return;
         }
         if(_t.children('table').height() <= _t.scrollTop()+ _t.height()){
-          $('.add-than-table .loading-wrap').show();
-          listProductData.firstResult =(firstResult+1)*maxResult;
-          listProductData.maxResult = maxResult;
-          if(loading == false){
+          if(loading == false && loadingType){
             loading = true;
+            $('.add-than-table .loading-wrap').show();
+            listProductData.firstResult =(firstResult+1)*maxResult;
+            listProductData.maxResult = maxResult;
             ajaxFn({
               url:'product/listProduct',
               data:listProductData,
@@ -59,6 +60,11 @@ function addDataFn(drugName){
                   var trData = {};
                   trData.tbody = res.content;
                   $('.add-than-tbody .table tbody').append(tr(trData));
+                  console.log($('.add-than-tbody tr').length , res.total);
+                  if($('.add-than-tbody tr').length >= res.total){
+                    loadingType = 0;
+                    $('.add-than-tbody .scroll-loading').hide();
+                  }
                 }else{
                   $('.add-than-tbody .scroll-loading').hide();
                 }
@@ -77,7 +83,7 @@ module.exports = {
     addDataFn(drugName);
     $(document).on('click','.find-add-than', function () {
       $('.add-than-table .loading-wrap').show();
-      firstResult=0 ;maxResult=16;
+      firstResult=0 ;maxResult=16;loadingType=1;
       listProductData = {
         drugName: $('.add-drug-name').val(),
         spec: $('.add-spec').val(),
@@ -95,6 +101,7 @@ module.exports = {
             data.addData.tbody = res.content;
             var _table=  $('.add-than-tbody')[0];
             _table.innerHTML = tbodyTel(data.addData);
+            $('.add-than-table .add-than-tbody').scrollTop(0);
             if($('.add-than-tbody tr').length >=  listProductData.maxResult){
               $('.add-than-tbody .scroll-loading').show();
             }else{

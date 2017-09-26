@@ -33,6 +33,7 @@ function loadsearchClassifyTel(params,res){
   params.data.searchDate.wbdCount = res.content.wbdCount;
   params.data.searchDate.ybdCount = res.content.ybdCount;
   params.data.searchDate.wtsjCount = res.content.wtsjCount;
+  params.data.searchDate.ytyCount = res.content.ytyCount;
   $(params.parent).find('.search-box .search-data').html(params.searchClassifyTel(params.data.searchDate));
 }
 
@@ -106,11 +107,11 @@ function tableDiffRequest(params) {
           var divWidthArr=[];
           $(params.parent).find('.table-diff-data-content table tr:first td').each(function(i,e){
             divWidthArr.push($(e).find('div').width());
-          })
+          });
           data.divWidthArr = divWidthArr;
           $(params.parent).find('.table-diff-left .table-diff-data table tbody').append(params.tableDiffLeft(data));
           $(params.parent).find('.table-diff-right .table-diff-data table tbody').append(params.tableDiffRight(data));
-          if( $(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= res.total){
+          if($(params.parent).find('.table-diff-left .table-diff-data-content tr').length >= res.total){
             params.loadingType = 0;
             $('.table-diff-header .scroll-loading').hide();
           }
@@ -180,6 +181,9 @@ function bindGeneralSearch(params){
   });
   $(document).on('click',_parent+'.search-data .wtsj',function(){
     generalSearch(params,$(this),'wtsj')
+  });
+  $(document).on('click',_parent+'.search-data .yty',function(){
+    generalSearch(params,$(this),'yty')
   });
 }
 //比对表格滚动事件
@@ -987,6 +991,7 @@ function downloadFn(params){
   downloadUrl+='&ybd='+isNull(downloadData.ybd);
   downloadUrl+='&wbd='+isNull(downloadData.wbd);
   downloadUrl+='&wtsj='+isNull(downloadData.wtsj);
+  downloadUrl+='&yty='+isNull(downloadData.yty);
   window.location.href=downloadUrl;
   window.event.returnValue = false;
   return false;
