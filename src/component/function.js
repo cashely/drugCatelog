@@ -302,8 +302,10 @@ function selectThanFn(params,$this,loadObj){
       $(params.parent).find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
       $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
       $(document).scrollTop(0);
-      $('.prompt').text('比对成功');
-      setTimeout(function () {$('.prompt').hide().text(promptText)}, 800);
+      if($('.shade').is(':visible')){
+        $('.prompt').text('比对成功');
+        setTimeout(function () {$('.prompt').hide().text(promptText)}, 800);
+      }
     },
     error:function(res){
       alert(res.message);
@@ -398,7 +400,10 @@ function addThan(params,loadObj){
 }
 function closeShade(){
   $('.shade').hide();
-  $('.standard-than').hide().find('.than-content').css({height:'auto'});
+  $('.prompt').hide().text('保存成功');
+  $('.standard-than').hide()
+    .find('.than-content').css({height:'auto'})
+    .find('.search-than .input-group .input').val('');
 }
 function closePopup(){
   $('.popup-shade').hide();
@@ -495,8 +500,11 @@ function showThan(params){
       params.data.thanData.tbody = res.content;
       $parent.find('.than-content').attr('data-id',singleDataId);
       $parent.find('.standard-than .than-tbody').html(params.standardThanTbody(params.data.thanData));
-      $('.prompt').text('加载成功');
-      setTimeout(function () {$('.prompt').hide().text(promptText)}, 800);
+      if ($('.shade').is(':visible')) {
+        $('.prompt').hide().text(promptText);
+      }
+      //$('.prompt').text('加载成功');
+      //setTimeout(function () {$('.prompt').hide().text(promptText)}, 800);
       if($(params.parent).find('.standard-than .than-tbody tr').length >=  params.findThanData.maxResult){
         $(params.parent).find('.standard-than .scroll-loading').show();
       }else{
@@ -568,6 +576,14 @@ function hideDetail($parent){
   $('.popup .popup-record').hide();
   $('.popup .popup-cancel-than').hide();
  }
+function promptFn(){
+    $('.prompt').show();
+    setTimeout(function () {
+      if ($('.shade').is(':hidden')) {
+        $('.prompt').hide();
+      }
+    }, 800);
+}
 
 //更新转换比
 function upInputFn(params) {
@@ -582,10 +598,7 @@ function upInputFn(params) {
         aftValue: $(this).val()
       },
       callback: function (res) {
-        $('.prompt').show();
-        setTimeout(function () {
-          $('.prompt').hide();
-        }, 800);
+        promptFn();
       }
     });
   });
@@ -631,12 +644,12 @@ function upSelect(params){
           }
         }
         reloadsearchClassifyTel(params);
-        $('.prompt').show();
-        setTimeout(function () { $('.prompt').hide(); }, 800);
+        promptFn();
       }
     })
   });
 }
+
 //更新修改表格字段的值
 function updateValueFn(params){
   $(document).on('blur',params.parent+' .updateValueFn',function(){
@@ -685,11 +698,11 @@ function updateValueFn(params){
           $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(params.tableDiffRightTr(res.content));
         }
         reloadsearchClassifyTel(params);
-        $('.prompt').show();
-        setTimeout(function () { $('.prompt').hide(); }, 800);
+        promptFn();
       }
     })
   });
+
   $(params.parent).find('.upInputFn').on('blur',function(){
     var colView = $(this).prev().text();
     colView = colView.substring(0,colView.length-1);
@@ -708,12 +721,12 @@ function updateValueFn(params){
         var _index = $('.table-diff-data-content').find('[data-id='+drugId+']').index();
         $(params.parent).find('.table-diff-right .table-diff-data tr').eq(_index).html(loadObj.tableDiffRightTr(res.content));
         reloadsearchClassifyTel(loadObj);
-        $('.prompt').show();
-        setTimeout(function () { $('.prompt').hide(); }, 800);
+        promptFn()
       }
     })
   });
 }
+
 //请求详情数据
 function loadDetails(params,url,data,drugId){
   ajaxFn({
@@ -921,8 +934,7 @@ function saveChannelFn(params,$this,_drugId){
     contentType: "application/json",
     callback:function(res){
       $('.popup').hide();
-      $('.prompt').show();
-      setTimeout(function () {$('.prompt').hide();}, 800);
+      promptFn();
     }
   })
 }
@@ -1029,7 +1041,7 @@ function resetTableFn(params){
     }
 
     return mendingLeft;
-  };
+  }
   function getTop(obj) {
     if (obj == null)
       return null;
@@ -1040,7 +1052,7 @@ function resetTableFn(params){
       mendingObj = mendingObj.offsetParent;
     }
     return mendingTop;
-  };
+  }
 //获取鼠标的位置
   function getMousePosition(event) {
     var position = {
@@ -1271,9 +1283,10 @@ module.exports = {
       if($('.content .add-data').is(':hidden')){
         resizeFn(params)
       }else{
-        $('.add-than-table .add-than-tbody tr:first td').each(function(i,e){
-          $('.add-than-table .than-thead tr:first td').eq(i).width($(e).width())
+        $('.add-than-table .add-than-tbody tr:first td>div').each(function(i,e){
+          $('.add-than-table .than-thead tr:first td>div').eq(i).width($(e).width())
         });
+        $('.add-than-table .than-thead tr:first td:last').width($('.add-than-table .add-than-tbody tr:first td:last').width());
         $('.add-than-table .add-than-tbody').height($(window).height()-$('.add-than-table').offset().top- $('.add-than-table .than-thead').height()-$('.footer').height() - 10);
       }
     });
