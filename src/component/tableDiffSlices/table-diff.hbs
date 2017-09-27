@@ -66,8 +66,7 @@
                         <table cellspacing="0" border="0">
                             <tbody>
                             {{#each ydata}}
-                                <tr>
-                                    <td class="codePro" title="{{codePro}}"><div>{{codePro}}</div></td>
+                                <tr><td class="codePro" title="{{codePro}}"><div>{{codePro}}</div></td>
                                     <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
                                         {{{ypTypeSelect ypType}}}
                                     </td>
@@ -83,8 +82,6 @@
                                     <td title="{{pzName}}"><div>{{pzName}}</div></td>
                                     <td title="{{proName}}"><div>{{proName}}</div></td>
                                     <td title="{{pxName}}"><div>{{pxName}}</div></td>
-                                    <td class="instruction {{#if instruction}}has-instruction{{/if}}" title="{{instruction}}"><div>{{isNull instruction}}</div></td>
-                                    <td title="{{smsDate}}"><div>{{smsDate}}</div></td>
                                     <td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
                                         {{{flag4Select flag4}}}
                                     </td>
@@ -93,8 +90,7 @@
                                     </td>
                                     <td class="icon-triangle table-diff-data-td-select" title="{{ybbh}}">
                                         <div><input class="upInput" value="{{ybbh}}" data-name="ybbh"></div>
-                                    </td>
-                                </tr>
+                                    </td></tr>
                             {{/each}}
                             </tbody>
                         </table>

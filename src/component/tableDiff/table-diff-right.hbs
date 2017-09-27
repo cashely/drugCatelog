@@ -1,6 +1,5 @@
 {{#each ydata}}
-    <tr>
-        <td class="codePro" title="{{codePro}}"><div>{{codePro}}</div></td>
+    <tr><td class="codePro" title="{{codePro}}"><div>{{codePro}}</div></td>
         <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
             {{{ypTypeSelect ypType}}}
         </td>
@@ -28,9 +27,6 @@
         </td>
         <td class="icon-triangle table-diff-data-td-select" title="{{kjywTypeSelect kjywType 0}}">
             {{{kjywTypeSelect kjywType}}}
-        </td>
-        <td class="icon-triangle table-diff-data-td-select" title="{{ygyyKjywTypeSelect ygyy_kjyw_type 0}}">
-            {{{ygyyKjywTypeSelect ygyy_kjyw_type}}}
         </td>
         <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot isCalcKjyw 'isCalcKjyw'}}}</div></td>
         <td class="icon-triangle adminRouteExclude" title="{{adminRouteExclude}}"><div>{{adminRouteExclude}}</div></td>
@@ -60,6 +56,5 @@
             <div><input class="upInput" value="{{pzCode}}" data-name="pzCode"></div>
         </td>
         <td title="{{rbflName}}"><div>{{rbflName}}</div></td>
-        <td title="{{ylflName}}"><div>{{ylflName}}</div></td>
-    </tr>
+        <td title="{{ylflName}}"><div>{{ylflName}}</div></td></tr>
 {{/each}}
