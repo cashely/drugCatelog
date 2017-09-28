@@ -858,7 +858,7 @@ function recordFn(params){
         }
       });
       recordData.content= res.content;
-      $('.popup').html(popupRecordTal(recordData)).show().find('.popup-shade').show();;
+      $('.popup').html(popupRecordTal(recordData)).show().find('.popup-shade').show();
       var popupHeight = $('.popup-record').height();
       $('.popup-record .iframe')[0].innerHTML = '<iframe class="popup-iframe" height="'+popupHeight+'px"></iframe>';
       $('.popup-close').on('click',function(){$('.popup ').hide().find('.popup-iframe').remove()});

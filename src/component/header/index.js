@@ -15,11 +15,11 @@ $('.header .login-out').click(function(){
    ajaxFn({
      url:'logout',
      callback:function(){
-       $('.login').hide();
+       $('.login-box').hide();
        $('.header .login-out').removeClass('active').text('登录');
      }
    })
  }else{
-   $('.login').show();
+   $('.login-box').show();
  }
 });

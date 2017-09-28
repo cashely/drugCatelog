@@ -1084,69 +1084,82 @@ a{
     z-index: 9999;
 }
 //登录框
-.login{
+.login-box{
     display: none;
-    position: absolute;
-    top: 200px;
-    left: 50%;
-    margin-left: -190px;
-    background: #fff;
-    color: #666;
-    width: 380px;
-    font-size: 14px;
-    z-index: 2147483647;
-    border: 1px solid #FFFFFF;
-    box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
-    .login-title{
-        padding: 12px;
-        background-color: #4EAADC;
-        color: #fff;
-    }
-    .login-input{
-        display: block;
-        color: #747474;
-        padding: 20px 20px 0 20px;
-        line-height: 25px;
-        .input{
-            border: 1px solid #e3e3e3;
-            line-height: 1.5;
-            padding: 5px 10px;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            border-radius: 3px;
-            box-sizing: content-box;
-            width: 308px;
-            margin-top: 5px
-        }
-    }
-    .login-btn{
-        float: left;
-        background-color: #2d8cc0;
-        margin: 20px 30px;
-        border: 0;
-        padding: 7px 15px;
-        border-radius: 3px;
-        font-size: 14px;
-        color: #fff;
-    }
-    .popup-close{
+    .login{
         position: absolute;
-        width: 16px;
-        height: 16px;
-        top: 11px;
-        right: 10px;
-        img{
-            width: 100%;
+        top: 200px;
+        left: 50%;
+        margin-left: -190px;
+        background: #fff;
+        color: #666;
+        width: 380px;
+        font-size: 14px;
+        z-index: 2147483647;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0 0 9px 0 rgba(148,148,148,0.50);
+        .login-title{
+            padding: 12px;
+            background-color: #4EAADC;
+            color: #fff;
+        }
+        .login-input{
+            display: block;
+            color: #747474;
+            padding: 20px 20px 0 20px;
+            line-height: 25px;
+            .input{
+                border: 1px solid #e3e3e3;
+                line-height: 1.5;
+                padding: 5px 10px;
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+                border-radius: 3px;
+                box-sizing: content-box;
+                width: 308px;
+                margin-top: 5px
+            }
+        }
+        .login-btn{
+            float: left;
+            background-color: #2d8cc0;
+            margin: 20px 30px;
+            border: 0;
+            padding: 7px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            color: #fff;
+        }
+        .popup-close{
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 11px;
+            right: 10px;
+            img{
+                width: 100%;
+            }
+        }
+        .login-cancel{
+            float: right;
+            margin: 20px 30px;
+            border: 0;
+            padding: 7px 15px;
+            border-radius: 3px;
+            font-size: 14px;
+            background: #BCBCBC;
         }
     }
-    .login-cancel{
-        float: right;
-        margin: 20px 30px;
-        border: 0;
-        padding: 7px 15px;
-        border-radius: 3px;
-        font-size: 14px;
-        background: #BCBCBC;
+    .login-shade{
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 2147483646;
+        bottom: 0;
+        background: black;
+        opacity:0.1;
+        filter:Alpha(opacity=10);
     }
 }
 .shade{

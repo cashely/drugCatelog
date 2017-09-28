@@ -13,7 +13,7 @@ $('.login .login-btn').click(function(){
       password:$('.login .password').val()
     },
     callback:function(){
-      $('.login').hide();
+      $('.login-box').hide();
       location.reload();
       $('.header .login-out').addClass('active').text('注销');
     }
@@ -21,9 +21,13 @@ $('.login .login-btn').click(function(){
 });
 
 $('.login .popup-close').click(function(){
-  $('.login').hide()
+  $('.login-box').hide()
 });
 
 $('.login .login-cancel').click(function(){
-  $('.login').hide();
+  $('.login-box').hide();
+});
+
+$('.login-box .login-shade').click(function(){
+  $('.login-box').hide()
 });

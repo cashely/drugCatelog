@@ -25,15 +25,16 @@
                         <table width="100%" cellspacing="0" border="0">
                             <tbody>
                                 {{#each ydata}}
+                                    <!--为了解决ie9下的bug ，</td>与<td>间有空行时会发生错位-->
                                     <tr data-id="{{id}}" data-name="{{drugNameFormat}}"  data-fncName="{{manufacturerName}}">
-                                        <td class="table-num"><div>{{add @index 1}}</div></td>
-                                        <td class="table-diff-drugId" title="{{id}}"><div>{{id}}</div></td>
-                                        <td title="{{drugName}}"><div>{{drugName}}</div></td>
-                                        <td title="{{specName}} {{manufacturerName}}"><div>{{specName}} {{manufacturerName}}</div></td>
-                                        <td title="{{convertRatio}}"><div><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div></td>
-                                        <td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}"><div>{{{unitInput unitName unitOps}}}</div></td>
-                                        <!--最后两个td不能换行，为了解决ie9下的bug-->
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot isStop "isStop"}}}</div></td><td title="{{timeFn updateDate}}"><div>{{timeFn updateDate}}</div></td>
+                                        <td class="table-num"><div>{{add @index 1}}</div></td><td class="table-diff-drugId" title="{{id}}">
+                                        <div>{{id}}</div></td><td title="{{drugName}}">
+                                        <div>{{drugName}}</div></td><td title="{{specName}} {{manufacturerName}}">
+                                        <div>{{specName}} {{manufacturerName}}</div></td><td title="{{convertRatio}}">
+                                        <div><input class="upInput {{convertRatioFn convertRatio fConvertRatio}}" value="{{convertRatio}}" data-name="convertRatio"></div></td><td class="icon-triangle ymzzy" data-minUseUnit="{{minUseUnit}}">
+                                        <div>{{{unitInput unitName unitOps}}}</div></td><td class="icon-triangle table-diff-data-td-select">
+                                        <div class="value showValue">{{{isStopOrNot isStop "isStop"}}}</div></td><td title="{{timeFn updateDate}}">
+                                        <div>{{timeFn updateDate}}</div></td>
                                     </tr>
                                 {{/each}}
                             </tbody>
@@ -60,64 +61,78 @@
                         <table cellspacing="0" border="0">
                             <tbody>
                                 {{#each ydata}}
-                                    <tr><td class="codePro" title="{{codePro}}"><div>{{codePro}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
+                                    <tr>
+                                        <td class="codePro" title="{{codePro}}">
+                                            <div>{{codePro}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{ypTypeSelect ypType 0}}">
                                             {{{ypTypeSelect ypType}}}
-                                        </td>
-                                        <td title="{{proName}}"><div>{{proName}}</div></td>
-                                        <td title="{{prepName}}"><div>{{prepName}}</div></td>
-                                        <td title="{{spec}}"><div>{{spec}}</div></td>
-                                        <td title="{{warpNameF}}"><div>{{warpNameF}}</div></td>
-                                        <td title="{{fConvertRatio}}"><div>{{fConvertRatio}}</div></td>
-                                        <td title="{{facAbbrF}}"><div>{{facAbbrF}}</div></td>
-                                        <td title="{{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}">
+                                        </td><td title="{{proName}}">
+                                            <div>{{proName}}</div>
+                                        </td><td title="{{prepName}}">
+                                            <div>{{prepName}}</div>
+                                        </td><td title="{{spec}}">
+                                            <div>{{spec}}</div>
+                                        </td><td title="{{warpNameF}}">
+                                            <div>{{warpNameF}}</div>
+                                        </td><td title="{{fConvertRatio}}">
+                                            <div>{{fConvertRatio}}</div>
+                                        </td><td title="{{facAbbrF}}">
+                                            <div>{{facAbbrF}}</div>
+                                        </td><td title="{{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}">
                                             <div>
                                                 {{prodPzwhF}}{{prodSwitchFn prodPzwhF prodZczhF "/"}}{{prodZczhF}}
                                             </div>
-                                        </td>
-                                        <td class="instruction {{#if instruction}}has-instruction{{/if}}" title="{{instruction}}"><div>{{isNull instruction}}</div></td>
-                                        <td title="{{smsDate}}"><div>{{smsDate}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
+                                        </td><td class="instruction {{#if instruction}}has-instruction{{/if}}" title="{{instruction}}">
+                                            <div>{{isNull instruction}}</div>
+                                        </td><td title="{{smsDate}}">
+                                            <div>{{smsDate}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{flag4Select flag4 0}}">
                                             {{{flag4Select flag4}}}
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{flag1Select flag1 0}}">
+                                        </td><td class="icon-triangle table-diff-data-td-select"
+                                            title="{{flag1Select flag1 0}}">
                                             {{{flag1Select flag1}}}
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select">
+                                        </td><td class="icon-triangle table-diff-data-td-select">
                                             <div><input class="upInput" value="{{ddd}}" data-name="ddd" {{#if dddUnit}}style="width: 60%"{{/if}}>{{#if dddUnit}}<span style="margin-left: 10px">{{dddUnit}}</span>{{/if}}</div>
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{kjywTypeSelect kjywType 0}}">
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{kjywTypeSelect kjywType 0}}">
                                             {{{kjywTypeSelect kjywType}}}
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot isCalcKjyw 'isCalcKjyw'}}}</div></td>
-                                        <td class="icon-triangle adminRouteExclude" title="{{adminRouteExclude}}"><div>{{adminRouteExclude}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot isZcyzsj 'isZcyzsj'}}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select">
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{ygyyKjywType}}">
+                                            {{{ygyyKjywTypeSelect ygyyKjywType}}}
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot isCalcKjyw 'isCalcKjyw'}}}</div>
+                                        </td><td class="icon-triangle adminRouteExclude" title="{{adminRouteExclude}}">
+                                            <div>{{adminRouteExclude}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot isZcyzsj 'isZcyzsj'}}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select">
                                             {{{pregnancyLevelSelect pregnancyLevel}}}
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot bloodPro 'bloodPro'}}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot tpzjs 'tpzjs'}}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot energy 'energy'}}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot yyyy 'yyyy'}}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot flag5 'flag5'}}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{jmdfSelect jmdf 0}}">
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot bloodPro 'bloodPro'}}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot tpzjs 'tpzjs'}}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot energy 'energy'}}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot yyyy 'yyyy'}}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot flag5 'flag5'}}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{jmdfSelect jmdf 0}}">
                                             {{{jmdfSelect jmdf}}}
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select"><div class="value showValue">{{{isStopOrNot jkyw 'jkyw'}}}</div></td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{yblbSelect yblb 0}}">
+                                        </td><td class="icon-triangle table-diff-data-td-select">
+                                            <div class="value showValue">{{{isStopOrNot jkyw 'jkyw'}}}</div>
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{yblbSelect yblb 0}}">
                                             {{{yblbSelect yblb}}}
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{ybbh}}">
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{ybbh}}">
                                             <div><input class="upInput" value="{{ybbh}}" data-name="ybbh"></div>
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{ypid}}">
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{ypid}}">
                                             <div><input class="upInput" value="{{ypid}}" data-name="ypid"></div>
-                                        </td>
-                                        <td class="icon-triangle table-diff-data-td-select" title="{{pzCode}}">
+                                        </td><td class="icon-triangle table-diff-data-td-select" title="{{pzCode}}">
                                             <div><input class="upInput" value="{{pzCode}}" data-name="pzCode"></div>
+                                        </td><td title="{{rbflName}}">
+                                            <div>{{rbflName}}</div>
+                                        </td><td title="{{ylflName}}">
+                                            <div>{{ylflName}}</div>
                                         </td>
-                                        <td title="{{rbflName}}"><div>{{rbflName}}</div></td>
-                                        <td title="{{ylflName}}"><div>{{ylflName}}</div></td></tr>
+                                    </tr>
                                 {{/each}}
                             </tbody>
                         </table>

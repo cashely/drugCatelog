@@ -11,7 +11,7 @@ function ajaxFn(params){
         if(res.flag == "S"){
           callback(res);
         }else if(res.flag == "N"){
-          $('.login').show();
+          $('.login-box').show();
           $('.header .login-out').removeClass('active').text('登录');
         }else{
           //console.log(res.message);
