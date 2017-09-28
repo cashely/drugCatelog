@@ -529,7 +529,7 @@ module.exports = function (value, type) {
     data.value = value;
     data.text = text;
     data.name = 'kjywType';
-    data.option = [{ optionName: '无', optionValue: '0' }, { optionName: '四环素类', optionValue: '1' }, { optionName: '氯霉素类', optionValue: '2' }, { optionName: '广谱青霉素', optionValue: '3' }, { optionName: '对青霉素酶不稳定的青霉素类', optionValue: '4' }, { optionName: '对青霉素酶稳定的青霉素类', optionValue: '5' }, { optionName: 'β-内酰胺酶抑制剂', optionValue: '6' }, { optionName: '青霉素类复方制剂（β-内酰胺酶抑制剂）', optionValue: '7' }, { optionName: '第一代头孢菌素类', optionValue: '8' }, { optionName: '第二代头孢菌素类', optionValue: '9' }, { optionName: '第三（四）代头孢菌素类', optionValue: '10' }, { optionName: '其他β内酰胺类', optionValue: '11' }, { optionName: '碳青霉烯类', optionValue: '12' }, { optionName: '磺胺类和甲氧苄啶', optionValue: '13' }, { optionName: '大环内酯类', optionValue: '14' }, { optionName: '林可酰胺类', optionValue: '15' }, { optionName: '氨基糖苷类', optionValue: '16' }, { optionName: '喹诺酮类', optionValue: '17' }, { optionName: '糖肽类', optionValue: '18' }, { optionName: '多粘菌素类', optionValue: '19' }, { optionName: '咪唑衍生物', optionValue: '20' }, { optionName: '硝基呋喃衍生物', optionValue: '21' }, { optionName: '其它抗菌药物', optionValue: '22' }, { optionName: '抗真菌药N', optionValue: '23' }];
+    data.option = [{ optionName: '无', optionValue: '0' }, { optionName: '四环素类', optionValue: '1' }, { optionName: '氯霉素类', optionValue: '2' }, { optionName: '广谱青霉素', optionValue: '3' }, { optionName: '对青霉素酶不稳定的青霉素类', optionValue: '4' }, { optionName: '对青霉素酶稳定的青霉素类', optionValue: '5' }, { optionName: 'β-内酰胺酶抑制剂', optionValue: '6' }, { optionName: '青霉素类复方制剂（β-内酰胺酶抑制剂）', optionValue: '7' }, { optionName: '第一代头孢菌素类', optionValue: '8' }, { optionName: '第二代头孢菌素类', optionValue: '9' }, { optionName: '第三（四）代头孢菌素类', optionValue: '10' }, { optionName: '其他β内酰胺类', optionValue: '11' }, { optionName: '碳青霉烯类', optionValue: '12' }, { optionName: '磺胺类和甲氧苄啶', optionValue: '13' }, { optionName: '大环内酯类', optionValue: '14' }, { optionName: '林可酰胺类', optionValue: '15' }, { optionName: '氨基糖苷类', optionValue: '16' }, { optionName: '喹诺酮类', optionValue: '17' }, { optionName: '糖肽类', optionValue: '18' }, { optionName: '多粘菌素类', optionValue: '19' }, { optionName: '咪唑衍生物', optionValue: '20' }, { optionName: '硝基呋喃衍生物', optionValue: '21' }, { optionName: '其它抗菌药物', optionValue: '22' }, { optionName: '抗真菌药', optionValue: '23' }];
     string += opction(data);
     return string;
   } else {
@@ -585,7 +585,7 @@ function textFn(_this) {
   } else if (_this == 22) {
     return '其它抗菌药物';
   } else if (_this == 23) {
-    return '抗真菌药N';
+    return '抗真菌药';
   } else {
     return _this;
   }
@@ -707,8 +707,7 @@ function ajaxFn(params) {
       } else if (res.flag == "N") {
         $('.login-box').show();
         $('.header .login-out').removeClass('active').text('登录');
-      } else {
-        //console.log(res.message);
+      } else if (res.flag == "F") {
         error(res);
       }
     }
@@ -2624,6 +2623,7 @@ function addDataFn(drugName) {
       data.addData.tbody = res.content;
       var _table = $('.add-than-tbody')[0];
       _table.innerHTML = tbodyTel(data.addData);
+
       $('.add-than-table .add-than-tbody tr:first td>div').each(function (i, e) {
         $('.add-than-table .than-thead table').css({ width: 'auto' });
         $('.add-than-table .than-thead tr:first td>div').eq(i).width($(e).width());
@@ -2949,23 +2949,30 @@ $('.login .login-btn').click(function () {
       password: $('.login .password').val()
     },
     callback: function () {
-      $('.login-box').hide();
+      hideLogin();
       location.reload();
       $('.header .login-out').addClass('active').text('注销');
+    },
+    error: function (res) {
+      $('.login .msg-error .msg-error-text').text(res.message);
+      $('.login .msg-error').show();
     }
   });
 });
-
-$('.login .popup-close').click(function () {
+function hideLogin() {
   $('.login-box').hide();
+  $('.login .msg-error').hide();
+}
+$('.login .popup-close').click(function () {
+  hideLogin();
 });
 
 $('.login .login-cancel').click(function () {
-  $('.login-box').hide();
+  hideLogin();
 });
 
 $('.login-box .login-shade').click(function () {
-  $('.login-box').hide();
+  hideLogin();
 });
 
 /***/ }),
@@ -2975,7 +2982,7 @@ $('.login-box .login-shade').click(function () {
 var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"login\">\r\n    <div class=\"login-title\">欢迎登录医院药事管理软件\r\n        <span class=\"popup-close\">\r\n            <img src=\"./images/icon-close.jpg\" alt=\"\">\r\n        </span>\r\n    </div>\r\n    <label class=\"login-input\">\r\n        用户名：<br>\r\n        <input type=\"text\" class=\"input userName\">\r\n    </label>\r\n    <label class=\"login-input\">\r\n        密码：<br>\r\n        <input type=\"password\" class=\"input password\">\r\n    </label>\r\n    <div>\r\n        <button class=\"login-btn\">登录</button>\r\n        <button class=\"login-cancel\">取消</button>\r\n    </div>\r\n</div>\r\n<div class=\"login-shade\"></div>\r\n";
+    return "<div class=\"login\">\r\n    <div class=\"login-title\">欢迎登录医院药事管理软件\r\n        <span class=\"popup-close\">\r\n            <img src=\"./images/icon-close.jpg\" alt=\"\">\r\n        </span>\r\n    </div>\r\n    <label class=\"login-input\">\r\n        用户名：<br>\r\n        <input type=\"text\" class=\"input userName\">\r\n    </label>\r\n    <label class=\"login-input\">\r\n        密码：<br>\r\n        <input type=\"password\" class=\"input password\">\r\n    </label>\r\n    <div class=\"login-btns\">\r\n        <button class=\"login-btn\">登录</button>\r\n        <button class=\"login-cancel\">取消</button>\r\n    </div>\r\n    <div class=\"msg-error\">\r\n        <img class=\"msg-error-img\" src=\"./images/icon-login-error.png\">\r\n        <span class=\"msg-error-text\"></span>\r\n    </div>\r\n</div>\r\n<div class=\"login-shade\"></div>\r\n";
 },"useData":true});
 
 /***/ }),
@@ -3937,11 +3944,13 @@ $('.header .login-out').click(function () {
       url: 'logout',
       callback: function () {
         $('.login-box').hide();
+        $('.login .msg-error').hide();
         $('.header .login-out').removeClass('active').text('登录');
       }
     });
   } else {
     $('.login-box').show();
+    $('.login .msg-error').hide();
   }
 });
 
@@ -5591,7 +5600,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"22",{"name":"isTrue","hash":{},"data":data}))
     + ">其它抗菌药物</option>\r\n                <option value=\"23\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.kjywType : depth0),"23",{"name":"isTrue","hash":{},"data":data}))
-    + ">抗真菌药N</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isCalcKjyw\">是否计算强度:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
+    + ">抗真菌药</option>\r\n            </select>\r\n        </li>\r\n        <li class=\"input-group\">\r\n            <span class=\"isCalcKjyw\">是否计算强度:</span>\r\n            <select class=\"select updateValueFn\">\r\n                <option value=\"0\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"0",{"name":"isTrue","hash":{},"data":data}))
     + ">否</option>\r\n                <option value=\"1\" "
     + alias2(__default(__webpack_require__(0)).call(alias3,(depth0 != null ? depth0.isCalcKjyw : depth0),"1",{"name":"isTrue","hash":{},"data":data}))

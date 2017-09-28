@@ -29,6 +29,7 @@ function addDataFn(drugName){
       data.addData.tbody = res.content;
       var _table= $('.add-than-tbody')[0];
      _table.innerHTML = tbodyTel(data.addData);
+
       $('.add-than-table .add-than-tbody tr:first td>div').each(function(i,e){
         $('.add-than-table .than-thead table').css({ width: 'auto'});
         $('.add-than-table .than-thead tr:first td>div').eq(i).width($(e).width())

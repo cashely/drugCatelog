@@ -16,10 +16,12 @@ $('.header .login-out').click(function(){
      url:'logout',
      callback:function(){
        $('.login-box').hide();
+       $('.login .msg-error').hide();
        $('.header .login-out').removeClass('active').text('登录');
      }
    })
  }else{
    $('.login-box').show();
+   $('.login .msg-error').hide();
  }
 });

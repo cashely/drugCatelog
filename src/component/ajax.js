@@ -13,8 +13,7 @@ function ajaxFn(params){
         }else if(res.flag == "N"){
           $('.login-box').show();
           $('.header .login-out').removeClass('active').text('登录');
-        }else{
-          //console.log(res.message);
+        }else if(res.flag == "F"){
           error(res);
         }
       }

@@ -280,6 +280,7 @@ a{
             //margin-top: 10px;
             position: relative;
             //width: 100%;
+            _position: static;
             margin: 0 10px;
             overflow: hidden;
             .than-thead-wrap{
@@ -295,10 +296,10 @@ a{
                 //position: relative;
                 height: 168px;
                 overflow: scroll;
-                width: 100%;
+                //width: 100%;
                 background: #fff;
-                tr:nth-child(odd){
-                    background: #fff;
+                tr:nth-child(even){
+                    background: #fafafa;
                 }
             }
             .table{
@@ -375,7 +376,7 @@ a{
             }
             tr{
                 td{
-                    //white-space: nowrap;
+                    white-space: nowrap;
                     overflow: hidden;
                     border: 1px solid #D8D8D8;
                     div{
@@ -1048,7 +1049,9 @@ a{
     top: 0;
     z-index: 99;
     width: 100%;
-    background: rgba(0,0,0,0.1);
+    background: black;
+    opacity:0.1;
+    filter:Alpha(opacity=10);
 }
 .loading{
     margin-top: -6px;
@@ -1120,10 +1123,13 @@ a{
                 margin-top: 5px
             }
         }
+        .login-btns{
+            overflow: hidden;
+            margin: 20px 30px 20px;
+        }
         .login-btn{
             float: left;
             background-color: #2d8cc0;
-            margin: 20px 30px;
             border: 0;
             padding: 7px 15px;
             border-radius: 3px;
@@ -1142,12 +1148,23 @@ a{
         }
         .login-cancel{
             float: right;
-            margin: 20px 30px;
             border: 0;
             padding: 7px 15px;
             border-radius: 3px;
             font-size: 14px;
             background: #BCBCBC;
+        }
+        .msg-error{
+            display: none;
+            padding: 0 20px 10px;
+            line-height: 1.4;
+            .msg-error-img{
+                vertical-align: middle;
+            }
+            .msg-error-text{
+                font-size: 12px;
+                color: #e4393c;
+            }
         }
     }
     .login-shade{

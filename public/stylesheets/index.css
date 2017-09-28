@@ -235,6 +235,7 @@ a {
         vertical-align: middle; }
     .content .standard-than .than-table {
       position: relative;
+      _position: static;
       margin: 0 10px;
       overflow: hidden; }
       .content .standard-than .than-table .than-thead-wrap {
@@ -247,10 +248,9 @@ a {
       .content .standard-than .than-table .than-tbody {
         height: 168px;
         overflow: scroll;
-        width: 100%;
         background: #fff; }
-        .content .standard-than .than-table .than-tbody tr:nth-child(odd) {
-          background: #fff; }
+        .content .standard-than .than-table .than-tbody tr:nth-child(even) {
+          background: #fafafa; }
       .content .standard-than .than-table .table {
         width: 100%;
         text-align: left;
@@ -306,10 +306,13 @@ a {
         color: #fff;
         background: #4EAADC; }
       .content .add-than-table .table tr td {
+        white-space: nowrap;
         overflow: hidden;
         border: 1px solid #D8D8D8; }
         .content .add-than-table .table tr td div {
-          padding: 9px 7px; }
+          padding: 9px 7px;
+          min-width: 30px;
+          _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<30?"30px":"auto"); }
       .content .add-than-table .table .table-text {
         overflow: hidden; }
       .content .add-than-table .table .add-than-info {
@@ -820,7 +823,9 @@ a {
   top: 0;
   z-index: 99;
   width: 100%;
-  background: rgba(0, 0, 0, 0.1); }
+  background: black;
+  opacity: 0.1;
+  filter: Alpha(opacity=10); }
 
 .loading {
   margin-top: -6px;
@@ -884,10 +889,12 @@ a {
         box-sizing: content-box;
         width: 308px;
         margin-top: 5px; }
+    .login-box .login .login-btns {
+      overflow: hidden;
+      margin: 20px 30px 20px; }
     .login-box .login .login-btn {
       float: left;
       background-color: #2d8cc0;
-      margin: 20px 30px;
       border: 0;
       padding: 7px 15px;
       border-radius: 3px;
@@ -903,12 +910,20 @@ a {
         width: 100%; }
     .login-box .login .login-cancel {
       float: right;
-      margin: 20px 30px;
       border: 0;
       padding: 7px 15px;
       border-radius: 3px;
       font-size: 14px;
       background: #BCBCBC; }
+    .login-box .login .msg-error {
+      display: none;
+      padding: 0 20px 10px;
+      line-height: 1.4; }
+      .login-box .login .msg-error .msg-error-img {
+        vertical-align: middle; }
+      .login-box .login .msg-error .msg-error-text {
+        font-size: 12px;
+        color: #e4393c; }
   .login-box .login-shade {
     position: absolute;
     top: 0;

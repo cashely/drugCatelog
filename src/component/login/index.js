@@ -13,21 +13,28 @@ $('.login .login-btn').click(function(){
       password:$('.login .password').val()
     },
     callback:function(){
-      $('.login-box').hide();
+      hideLogin();
       location.reload();
       $('.header .login-out').addClass('active').text('注销');
+    },
+    error:function(res){
+      $('.login .msg-error .msg-error-text').text(res.message);
+      $('.login .msg-error').show();
     }
   })
 });
-
+function hideLogin(){
+  $('.login-box').hide();
+  $('.login .msg-error').hide();
+}
 $('.login .popup-close').click(function(){
-  $('.login-box').hide()
+  hideLogin();
 });
 
 $('.login .login-cancel').click(function(){
-  $('.login-box').hide();
+  hideLogin();
 });
 
 $('.login-box .login-shade').click(function(){
-  $('.login-box').hide()
+  hideLogin();
 });

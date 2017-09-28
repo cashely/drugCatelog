@@ -31,7 +31,7 @@ module.exports = function(value,type){
    {optionName:'咪唑衍生物',optionValue:'20'},
    {optionName:'硝基呋喃衍生物',optionValue:'21'},
    {optionName:'其它抗菌药物',optionValue:'22'},
-   {optionName:'抗真菌药N',optionValue:'23'}
+   {optionName:'抗真菌药',optionValue:'23'}
   ];
   string += opction(data);
   return string;
@@ -88,7 +88,7 @@ function textFn(_this){
  }else if (_this == 22) {
   return '其它抗菌药物'
  }else if (_this == 23) {
-  return '抗真菌药N'
+  return '抗真菌药'
  }else {
   return _this
  }
