@@ -78,8 +78,15 @@ function addDataFn(drugName){
                   firstResult = firstResult + 1;
                   var trData = {};
                   trData.tbody = res.content;
+
+                  var divWidthArr=[];
+                  $('.add-than-table .add-than-tbody tr:first td').each(function(i,e){
+                    divWidthArr.push($(e).find('div').width());
+                  });
+                  trData.divWidthArr = divWidthArr;
+
                   $('.add-than-tbody .table tbody').append(tr(trData));
-                  upTableWidthFn();
+
                   if($('.add-than-tbody tr').length >= res.total){
                     loadingType = 0;
                     $('.add-than-tbody .scroll-loading').hide();

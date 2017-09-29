@@ -2676,8 +2676,15 @@ function addDataFn(drugName) {
                   firstResult = firstResult + 1;
                   var trData = {};
                   trData.tbody = res.content;
+
+                  var divWidthArr = [];
+                  $('.add-than-table .add-than-tbody tr:first td').each(function (i, e) {
+                    divWidthArr.push($(e).find('div').width());
+                  });
+                  trData.divWidthArr = divWidthArr;
+
                   $('.add-than-tbody .table tbody').append(tr(trData));
-                  upTableWidthFn();
+
                   if ($('.add-than-tbody tr').length >= res.total) {
                     loadingType = 0;
                     $('.add-than-tbody .scroll-loading').hide();
@@ -4325,49 +4332,67 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
 var Handlebars = __webpack_require__(1);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
 
   return "    <tr data-id=\""
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
     + "\">\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text codePro\">"
-    + alias4(((helper = (helper = helpers.codePro || (depth0 != null ? depth0.codePro : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"codePro","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
+    + "\"><div  style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),0,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text codePro\">"
+    + alias2(alias1((depth0 != null ? depth0.codePro : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.name19 || (depth0 != null ? depth0.name19 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name19","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text name\">"
-    + alias4(((helper = (helper = helpers.name19 || (depth0 != null ? depth0.name19 : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name19","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.name19 : depth0), depth0))
+    + "\"><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),1,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text name\">"
+    + alias2(alias1((depth0 != null ? depth0.name19 : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.nameCnF || (depth0 != null ? depth0.nameCnF : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"nameCnF","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.nameCnF || (depth0 != null ? depth0.nameCnF : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"nameCnF","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.nameCnF : depth0), depth0))
+    + "\"><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),2,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.nameCnF : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.prepMin || (depth0 != null ? depth0.prepMin : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"prepMin","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text\">"
-    + alias4(((helper = (helper = helpers.prepMin || (depth0 != null ? depth0.prepMin : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"prepMin","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.prepMin : depth0), depth0))
+    + "\"><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),3,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text\">"
+    + alias2(alias1((depth0 != null ? depth0.prepMin : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text spec\">"
-    + alias4(((helper = (helper = helpers.spec || (depth0 != null ? depth0.spec : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"spec","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
+    + "\"><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),4,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text spec\">"
+    + alias2(alias1((depth0 != null ? depth0.spec : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.specProperty || (depth0 != null ? depth0.specProperty : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"specProperty","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text spec\">"
-    + alias4(((helper = (helper = helpers.specProperty || (depth0 != null ? depth0.specProperty : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"specProperty","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
+    + "\"><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),5,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text spec\">"
+    + alias2(alias1((depth0 != null ? depth0.specProperty : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text manufacturerName\">"
-    + alias4(((helper = (helper = helpers.manufacturerName || (depth0 != null ? depth0.manufacturerName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"manufacturerName","hash":{},"data":data}) : helper)))
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
+    + "\"><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),6,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text manufacturerName\">"
+    + alias2(alias1((depth0 != null ? depth0.manufacturerName : depth0), depth0))
     + "</div></td>\r\n        <td title=\""
-    + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "\"><div class=\"table-text pzwh\">"
-    + alias4(((helper = (helper = helpers.pzwh || (depth0 != null ? depth0.pzwh : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"pzwh","hash":{},"data":data}) : helper)))
-    + "</div></td>\r\n        <td><div style=\"width:30px;\" class=\"table-text add-than-info\">新增</div></td>\r\n    </tr>\r\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
+    + "\"><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),7,{"name":"divWidth","hash":{},"data":data}))
+    + "px\" class=\"table-text pzwh\">"
+    + alias2(alias1((depth0 != null ? depth0.pzwh : depth0), depth0))
+    + "</div></td>\r\n        <td><div style=\"width:"
+    + alias2(__default(__webpack_require__(4)).call(alias3,(depths[1] != null ? depths[1].divWidthArr : depths[1]),8,{"name":"divWidth","hash":{},"data":data}))
+    + "px\"  class=\"table-text add-than-info\">新增</div></td>\r\n    </tr>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
-  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"useData":true});
+  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.tbody : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"useData":true,"useDepths":true});
 
 /***/ }),
 /* 70 */
