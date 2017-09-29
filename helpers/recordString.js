@@ -49,7 +49,7 @@ function flag4Fn(value){
         case 0:
             return "否";
         case 1:
-            return "国家";
+            return "国基";
         case 2:
             return "省基";
         case 3:
@@ -119,7 +119,7 @@ function kjywFn(value){
         case 22:
             return "其它抗菌药物";
         case 23:
-            return "抗真菌药N";
+            return "抗真菌药";
     }
 }
 

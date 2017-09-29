@@ -18,7 +18,7 @@ module.exports = function(value,type){
  }else{
   return text;
  }
-}
+};
 
 function textFn(_this){
  if (_this == 0) {

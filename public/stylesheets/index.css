@@ -281,8 +281,6 @@ a {
         text-decoration: underline; }
   .content .add-than-table {
     margin-top: 26px; }
-    .content .add-than-table .than-thead-wrap {
-      margin-right: 16px; }
     .content .add-than-table .than-thead {
       background: #4EAADC;
       overflow: hidden;
@@ -310,9 +308,7 @@ a {
         overflow: hidden;
         border: 1px solid #D8D8D8; }
         .content .add-than-table .table tr td div {
-          padding: 9px 7px;
-          min-width: 30px;
-          _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<30?"30px":"auto"); }
+          padding: 9px 7px; }
       .content .add-than-table .table .table-text {
         overflow: hidden; }
       .content .add-than-table .table .add-than-info {
