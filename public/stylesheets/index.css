@@ -285,6 +285,8 @@ a {
       background: #4EAADC;
       overflow: hidden;
       width: 100%; }
+      .content .add-than-table .than-thead tr td div {
+        white-space: nowrap; }
     .content .add-than-table .than-tbody-wrap {
       position: relative;
       width: 100%;
@@ -304,11 +306,11 @@ a {
         color: #fff;
         background: #4EAADC; }
       .content .add-than-table .table tr td {
-        white-space: nowrap;
         overflow: hidden;
         border: 1px solid #D8D8D8; }
         .content .add-than-table .table tr td div {
-          padding: 9px 7px; }
+          padding: 6px 7px;
+          line-height: 1.4; }
       .content .add-than-table .table .table-text {
         overflow: hidden; }
       .content .add-than-table .table .add-than-info {
@@ -414,6 +416,7 @@ a {
       margin-bottom: 0; }
     .popup-add-info .popup-content .input-group .select {
       width: 100px;
+      margin-bottom: 0;
       *float: left; }
     .popup-add-info .popup-content .popup-btn {
       float: left;

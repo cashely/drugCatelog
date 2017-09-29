@@ -8,7 +8,7 @@ module.exports = function(value){
  data.option=[
   {optionName:'无',optionValue:'无'},
   {optionName:'氟喹诺酮类抗菌药物口服剂型',optionValue:'氟喹诺酮类抗菌药物口服剂型'},
-  {optionName:'深部抗真菌类抗菌药物',optionValue:'深部抗真菌类抗菌药物'},
+  {optionName:'抗真菌药',optionValue:'抗真菌药'},
   {optionName:'头霉素类抗菌药物',optionValue:'头霉素类抗菌药物'},
   {optionName:'碳青霉烯类抗菌药物注射剂型',optionValue:'碳青霉烯类抗菌药物注射剂型'},
   {optionName:'三代及四代头孢菌素（含复方制剂）类抗菌药物注射剂型',optionValue:'三代及四代头孢菌素（含复方制剂）类抗菌药物注射剂型'},

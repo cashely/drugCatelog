@@ -386,17 +386,11 @@ function addThanInfo(params,loadObj,$this) {
 //显示19位标准数据
 function addThan(params,loadObj){
   $('.popup').hide();
-  closeShade();
   $(params.parent).find('.content-box-main').hide();
   $(params.parent).find('.add-data').show();
   var prodName = $(params.parent).find('.search-than .prodName').val();
+  closeShade();
   addFn.loadAddData(prodName);
-  $(document).on('click','.add-data .goback', function () {
-    $('.content .add-data').hide();
-    $('.content  .content-box-main').show();
-    $('.popup').hide();
-    resizeFn(params)
-  });
 }
 function closeShade(){
   $('.shade').hide();
@@ -1318,6 +1312,14 @@ module.exports = {
       $(document).on('click', parent + '.add-than', function () {
         addThan(params, loadObj)
       });//查找19位标准数据
+      $(document).on('click','.add-data .goback', function () {
+        $('.content .add-data').hide();
+        $('.content  .content-box-main').show();
+        $('.add-search-than .add-drug-name').val('');
+        $('.add-than-tbody').empty();
+        $('.popup').hide();
+        resizeFn(params)
+      });
     }
     $(document).on('click', '.standard-than .toggle-text', closeShade);
 

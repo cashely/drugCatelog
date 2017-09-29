@@ -342,6 +342,7 @@ a{
             }
         }
     }
+
     .add-than-table{
         margin-top: 26px;
         .than-thead-wrap{
@@ -351,6 +352,13 @@ a{
             background: #4EAADC;
             overflow: hidden;
             width: 100%;
+            tr{
+                td{
+                    div{
+                        white-space: nowrap;
+                    }
+                }
+            }
         }
         .than-tbody-wrap{
             position: relative;
@@ -376,11 +384,12 @@ a{
             }
             tr{
                 td{
-                    white-space: nowrap;
+                    //white-space: nowrap;
                     overflow: hidden;
                     border: 1px solid #D8D8D8;
                     div{
-                        padding: 9px 7px;
+                        padding: 6px 7px;
+                        line-height: 1.4;
                     }
                 }
             }
@@ -521,6 +530,7 @@ a{
             }
             .select{
                 width: 100px;
+                margin-bottom: 0;
                 *float:left;
             }
         }
