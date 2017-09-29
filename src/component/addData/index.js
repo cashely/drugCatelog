@@ -79,6 +79,7 @@ function addDataFn(drugName){
                   var trData = {};
                   trData.tbody = res.content;
                   $('.add-than-tbody .table tbody').append(tr(trData));
+                  upTableWidthFn();
                   if($('.add-than-tbody tr').length >= res.total){
                     loadingType = 0;
                     $('.add-than-tbody .scroll-loading').hide();
@@ -99,6 +100,7 @@ function addDataFn(drugName){
 }
 module.exports = {
   loadAddData:function(drugName){
+    loadingType = 1; firstResult=0 ;maxResult=16;
     addDataFn(drugName);
     $(document).on('click','.find-add-than', function () {
       $('.add-than-table .loading-wrap').show();
