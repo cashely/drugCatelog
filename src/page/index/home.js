@@ -48,7 +48,7 @@ $(function(){
     parent: parent,
     url: 'mcdProduct30/listMcdProduct',
     homeProdName:'prodName',
-    homeFncName:'fncName',
+    //homeFncName:'fncName',
     findThanData:findThanData,
     findThanDataName:['ypid','yjId','prodName','fncName','prodPzwh','spec'],
     inputName:'prodName',

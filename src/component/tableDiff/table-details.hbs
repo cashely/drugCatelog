@@ -80,6 +80,26 @@
             </select>
         </li>
         <li class="input-group">
+            <span class="ygyyKjywType">阳光直报抗菌药物类别:</span>
+            <select class="select updateValueFn">
+                <option value="无" {{isTrue ygyyKjywType "无"}}>无</option>
+                <option value="氟喹诺酮类抗菌药物口服剂型" {{isTrue ygyyKjywType "氟喹诺酮类抗菌药物口服剂型"}}>氟喹诺酮类抗菌药物口服剂型</option>
+                <option value="抗真菌药" {{isTrue ygyyKjywType "抗真菌药"}}>抗真菌药</option>
+                <option value="头霉素类抗菌药物" {{isTrue ygyyKjywType "头霉素类抗菌药物"}}>头霉素类抗菌药物</option>
+                <option value="碳青霉烯类抗菌药物注射剂型" {{isTrue ygyyKjywType "碳青霉烯类抗菌药物注射剂型"}}>碳青霉烯类抗菌药物注射剂型</option>
+                <option value="三代及四代头孢菌素（含复方制剂）类抗菌药物注射剂型" {{isTrue ygyyKjywType "三代及四代头孢菌素（含复方制剂）类抗菌药物注射剂型"}}>三代及四代头孢菌素（含复方制剂）类抗菌药物注射剂型</option>
+                <option value="氟喹诺酮类抗菌药物注射剂型" {{isTrue ygyyKjywType "氟喹诺酮类抗菌药物注射剂型"}}>氟喹诺酮类抗菌药物注射剂型</option>
+                <option value="三代及四代头孢菌素（含复方制剂）类抗菌药物口服剂型" {{isTrue ygyyKjywType "三代及四代头孢菌素（含复方制剂）类抗菌药物口服剂型"}}>三代及四代头孢菌素（含复方制剂）类抗菌药物口服剂型</option>
+            </select>
+        </li>
+        <li class="input-group">
+            <span class="ygyyFlag">阳光直报是否计算:</span>
+            <select class="select updateValueFn">
+                <option value="1" {{isTrue ygyyFlag "1"}}>是</option>
+                <option value="0" {{isTrue ygyyFlag "0"}}>否</option>
+            </select>
+        </li>
+        <li class="input-group">
             <span class="isCalcKjyw">是否计算强度:</span>
             <select class="select updateValueFn">
                 <option value="0" {{isTrue isCalcKjyw "0"}}>否</option>

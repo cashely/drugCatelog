@@ -85,6 +85,8 @@ function addDataFn(drugName){
                   });
                   trData.divWidthArr = divWidthArr;
 
+                  $('.add-than-tbody .table').css({width:'auto'});
+
                   $('.add-than-tbody .table tbody').append(tr(trData));
 
                   if($('.add-than-tbody tr').length >= res.total){

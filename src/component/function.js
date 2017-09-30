@@ -389,28 +389,36 @@ function addThan(params,loadObj){
   $(params.parent).find('.content-box-main').hide();
   $(params.parent).find('.add-data').show();
   var prodName = $(params.parent).find('.search-than .prodName').val();
-  closeShade();
+  closeShade(params);
   addFn.loadAddData(prodName);
 }
-function closeShade(){
+function closeShade(params){
   $('.shade').hide();
   $('.prompt').hide().text('保存成功');
   $('.standard-than').hide()
     .find('.than-content').css({height:'auto'})
     .find('.search-than .input-group .input').val('');
+  resetThanData(params);
 }
 function closePopup(){
   $('.popup-shade').hide();
   $('.popup').hide();
 }
-//查找标准比对数据
-function findThanFn(params){
-  var $parent = $(params.parent);
+function resetThanData(params, noEmpty) {
   params.loadingThanType = 1;
   params.firstResultThan = 0;
   params.maxResultThan = 16;
-  params.findThanData.firstResult =  params.firstResultThan;
-  params.findThanData.maxResult =  params.maxResultThan;
+  params.findThanData = {};
+  params.findThanData.firstResult = params.firstResultThan;
+  params.findThanData.maxResult = params.maxResultThan;
+  if (!noEmpty) {
+    $(params.parent).find('.standard-than .than-tbody').empty();
+  }
+}
+//查找标准比对数据
+function findThanFn(params){
+  var $parent = $(params.parent);
+  resetThanData(params,1);
    $(params.findThanDataName).each(function(i,e){
      params.findThanData[e] = $parent.find('.'+e).val()
   });
@@ -433,6 +441,7 @@ function findThanFn(params){
     }
   })
 }
+
 function upThanHeightFn(params,id) {
   if (!id) {return;}
   var $parent = $(params.parent);
@@ -473,12 +482,12 @@ function showThan(params){
   $parent.find('.table-diff-data-content table tr').eq(_index).addClass('active').siblings().removeClass('active');
   $parent.find('.table-diff-right .table-diff-data table tr').eq(_index).addClass('active').siblings().removeClass('active');
   if(!!params.homeProdName){//西药
-    var _homeFncName = $parent.find('.table-diff-data-content [data-id='+singleDataId+']').attr('data-fncName');
+    //var _homeFncName = $parent.find('.table-diff-data-content [data-id='+singleDataId+']').attr('data-fncName');
     $parent.find('.search-than .'+params.homeProdName).val(_prodName);
     params.findThanData[params.homeProdName] = _prodName;
-    $parent.find('.search-than .'+params.homeFncName).val(_homeFncName);
-    params.findThanData[params.homeFncName] = _homeFncName;
-    $parent.find('.search-than .spec').val('');
+    //$parent.find('.search-than .'+params.homeFncName).val(_homeFncName);
+    //params.findThanData[params.homeFncName] = _homeFncName;
+    //$parent.find('.search-than .spec').val('');
   }
   if(!!params.slicesName){//中药饮片
     $parent.find('.search-than .'+params.slicesName).val(_prodName);
@@ -497,6 +506,9 @@ function showThan(params){
       if ($('.shade').is(':visible')) {
         $('.prompt').hide().text(promptText);
       }
+      if($(params.parent).find('.standard-than .than-tbody tr').length >= res.total){
+        params.loadingThanType = 0;
+      }
       //$('.prompt').text('加载成功');
       //setTimeout(function () {$('.prompt').hide().text(promptText)}, 800);
       if($(params.parent).find('.standard-than .than-tbody tr').length >=  params.findThanData.maxResult){
@@ -506,7 +518,7 @@ function showThan(params){
       }
       if(!!params.homeProdName){//西药
         $parent.find('.search-than .'+params.homeProdName).val(_prodName);
-        $parent.find('.search-than .'+params.homeFncName).val(_homeFncName);
+        //$parent.find('.search-than .'+params.homeFncName).val(_homeFncName);
       }
       if(!!params.slicesName){//中药饮片
         $parent.find('.search-than .'+params.slicesName).val(_prodName);
@@ -1187,7 +1199,7 @@ function resizeFn(params){
   $parent.find('.table-diff-right .table-diff-data').height(tableHeight-28);
   $parent.find('.table-diff-single-content').height(tableHeight-28);
   $parent.find('.table-diff-single-content .table-details-content-box').height(tableHeight-108);
-  closeShade()
+  closeShade(params)
 }
 
 var  paramsAll=[],paramsType=[];
@@ -1277,11 +1289,21 @@ module.exports = {
       if($('.content .add-data').is(':hidden')){
         resizeFn(params)
       }else{
+        $('.add-than-table .add-than-tbody tr td>div').css({width:'auto'});
+        $('.add-than-tbody .table').css({width:'100%'});
+
         $('.add-than-table .add-than-tbody tr:first td>div').each(function(i,e){
+          $('.add-than-table .than-thead table').css({ width: 'auto'});
           $('.add-than-table .than-thead tr:first td>div').eq(i).width($(e).width())
         });
+
+        var $addThanTbody = $('.add-than-table .add-than-tbody');
         $('.add-than-table .than-thead tr:first td:last').width($('.add-than-table .add-than-tbody tr:first td:last').width());
-        $('.add-than-table .add-than-tbody').height($(window).height()-$('.add-than-table').offset().top- $('.add-than-table .than-thead').height()-$('.footer').height() - 10);
+        $addThanTbody.height($(window).height()-$('.add-than-table').offset().top- $('.add-than-table .than-thead').height()-$('.footer').height() - 10);
+
+        if ($addThanTbody.find('table').height() <= $addThanTbody.scrollTop() + $addThanTbody.height()) {
+          $addThanTbody.scroll();
+        }
       }
     });
     $(document).on('click','.tabs .tabs-item',function(){
@@ -1321,13 +1343,17 @@ module.exports = {
         resizeFn(params)
       });
     }
-    $(document).on('click', '.standard-than .toggle-text', closeShade);
+    $(document).on('click', '.standard-than .toggle-text', function(){
+      closeShade(params)
+    });
 
     $(document).on('click', '.add-than-info', function () {
       addThanInfo(params, loadObj, $(this))
     });
 
-    $('.shade').on('click',closeShade);
+    $('.shade').on('click', function(){
+      closeShade(params)
+    });
   },
   popupFn:function(params){
     var parent = params.parent + ' ';
